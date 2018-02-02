@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 136);
+/******/ 	return __webpack_require__(__webpack_require__.s = 134);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -73,7 +73,7 @@
 "use strict";
 
 
-module.exports = __webpack_require__(34).default;
+module.exports = __webpack_require__(32).default;
 module.exports.default = module.exports;
 
 /***/ }),
@@ -154,7 +154,7 @@ exports.mapToCssModules = mapToCssModules;
 exports.omit = omit;
 exports.getTarget = getTarget;
 
-var _infernoShared = __webpack_require__(26);
+var _infernoShared = __webpack_require__(21);
 
 // https://github.com/twbs/bootstrap/blob/v4.0.0-alpha.4/js/src/modal#L436-L443
 function getScrollbarWidth() {
@@ -237,7 +237,7 @@ function getTarget(target) {
 "use strict";
 
 
-module.exports = __webpack_require__(32).default;
+module.exports = __webpack_require__(30).default;
 module.exports.default = module.exports;
 
 /***/ }),
@@ -266,9 +266,9 @@ var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _infernoRouter = __webpack_require__(35);
+var _infernoRouter = __webpack_require__(33);
 
-var _prismjs = __webpack_require__(108);
+var _prismjs = __webpack_require__(107);
 
 var _prismjs2 = _interopRequireDefault(_prismjs);
 
@@ -282,7 +282,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-__webpack_require__(107);
+__webpack_require__(106);
 
 var Section = exports.Section = function (_Component) {
   _inherits(Section, _Component);
@@ -780,7 +780,7 @@ process.umask = function () {
 "use strict";
 
 
-module.exports = __webpack_require__(148).default;
+module.exports = __webpack_require__(146).default;
 module.exports.default = module.exports;
 
 /***/ }),
@@ -791,11 +791,11 @@ module.exports.default = module.exports;
 
 
 module.exports = {
-  Arrow: __webpack_require__(138),
-  Manager: __webpack_require__(139),
-  Popper: __webpack_require__(140),
-  Target: __webpack_require__(141),
-  Travel: __webpack_require__(142),
+  Arrow: __webpack_require__(136),
+  Manager: __webpack_require__(137),
+  Popper: __webpack_require__(138),
+  Target: __webpack_require__(139),
+  Travel: __webpack_require__(140),
   placements: __webpack_require__(52).placements
 };
 
@@ -806,7 +806,7 @@ module.exports = {
 "use strict";
 
 
-module.exports = __webpack_require__(144).default;
+module.exports = __webpack_require__(142).default;
 module.exports.default = module.exports;
 
 /***/ }),
@@ -834,7 +834,7 @@ var _classnames2 = _interopRequireDefault(_classnames);
 
 var _utils = __webpack_require__(2);
 
-var _infernoShared = __webpack_require__(26);
+var _infernoShared = __webpack_require__(21);
 
 var _infernoPopper = __webpack_require__(8);
 
@@ -1601,7 +1601,7 @@ module.exports = exports['default'];
 "use strict";
 
 
-module.exports = __webpack_require__(145).default;
+module.exports = __webpack_require__(143).default;
 module.exports.default = module.exports;
 
 /***/ }),
@@ -1611,7 +1611,7 @@ module.exports.default = module.exports;
 "use strict";
 
 
-module.exports = __webpack_require__(33);
+module.exports = __webpack_require__(31);
 module.exports.default = module.exports;
 
 /***/ }),
@@ -1850,6 +1850,16 @@ module.exports.default = module.exports;
 "use strict";
 
 
+module.exports = __webpack_require__(102);
+module.exports.default = module.exports;
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1896,7 +1906,159 @@ exports.default = ButtonGroup;
 module.exports = exports['default'];
 
 /***/ }),
-/* 22 */
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _inferno = __webpack_require__(0);
+
+var _inferno2 = _interopRequireDefault(_inferno);
+
+var _classnames = __webpack_require__(1);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _utils = __webpack_require__(2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var defaultProps = {
+  tag: 'div'
+};
+
+var Card = function Card(props) {
+  var className = props.className,
+      cssModule = props.cssModule,
+      color = props.color,
+      block = props.block,
+      body = props.body,
+      inverse = props.inverse,
+      outline = props.outline,
+      Tag = props.tag,
+      attributes = _objectWithoutProperties(props, ['className', 'cssModule', 'color', 'block', 'body', 'inverse', 'outline', 'tag']);
+
+  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'card', inverse ? 'text-white' : false, block || body ? 'card-body' : false, color ? (outline ? 'border' : 'bg') + '-' + color : false), cssModule);
+
+  return (0, _inferno.createVNode)(16, Tag, null, null, _extends({}, attributes, {
+    'className': classes
+  }));
+};
+
+Card.defaultProps = defaultProps;
+
+exports.default = Card;
+module.exports = exports['default'];
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _inferno = __webpack_require__(0);
+
+var _inferno2 = _interopRequireDefault(_inferno);
+
+var _classnames = __webpack_require__(1);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _utils = __webpack_require__(2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var defaultProps = {
+  tag: 'p'
+};
+
+var CardText = function CardText(props) {
+  var className = props.className,
+      cssModule = props.cssModule,
+      Tag = props.tag,
+      attributes = _objectWithoutProperties(props, ['className', 'cssModule', 'tag']);
+
+  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'card-text'), cssModule);
+
+  return (0, _inferno.createVNode)(16, Tag, null, null, _extends({}, attributes, {
+    'className': classes
+  }));
+};
+
+CardText.defaultProps = defaultProps;
+
+exports.default = CardText;
+module.exports = exports['default'];
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _inferno = __webpack_require__(0);
+
+var _inferno2 = _interopRequireDefault(_inferno);
+
+var _classnames = __webpack_require__(1);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _utils = __webpack_require__(2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var defaultProps = {
+  tag: 'h4'
+};
+
+var CardTitle = function CardTitle(props) {
+  var className = props.className,
+      cssModule = props.cssModule,
+      Tag = props.tag,
+      attributes = _objectWithoutProperties(props, ['className', 'cssModule', 'tag']);
+
+  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'card-title'), cssModule);
+
+  return (0, _inferno.createVNode)(16, Tag, null, null, _extends({}, attributes, {
+    'className': classes
+  }));
+};
+
+CardTitle.defaultProps = defaultProps;
+
+exports.default = CardTitle;
+module.exports = exports['default'];
+
+/***/ }),
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1952,7 +2114,7 @@ exports.default = Form;
 module.exports = exports['default'];
 
 /***/ }),
-/* 23 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2004,7 +2166,7 @@ exports.default = FormGroup;
 module.exports = exports['default'];
 
 /***/ }),
-/* 24 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2114,7 +2276,7 @@ exports.default = Input;
 module.exports = exports['default'];
 
 /***/ }),
-/* 25 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2177,289 +2339,7 @@ exports.default = Label;
 module.exports = exports['default'];
 
 /***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = __webpack_require__(103);
-module.exports.default = module.exports;
-
-/***/ }),
-/* 27 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _inferno = __webpack_require__(0);
-
-var _inferno2 = _interopRequireDefault(_inferno);
-
-var _classnames = __webpack_require__(1);
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _utils = __webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-var defaultProps = {
-  tag: 'div'
-};
-
-var Card = function Card(props) {
-  var className = props.className,
-      cssModule = props.cssModule,
-      color = props.color,
-      block = props.block,
-      body = props.body,
-      inverse = props.inverse,
-      outline = props.outline,
-      Tag = props.tag,
-      attributes = _objectWithoutProperties(props, ['className', 'cssModule', 'color', 'block', 'body', 'inverse', 'outline', 'tag']);
-
-  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'card', inverse ? 'text-white' : false, block || body ? 'card-body' : false, color ? (outline ? 'border' : 'bg') + '-' + color : false), cssModule);
-
-  return (0, _inferno.createVNode)(16, Tag, null, null, _extends({}, attributes, {
-    'className': classes
-  }));
-};
-
-Card.defaultProps = defaultProps;
-
-exports.default = Card;
-module.exports = exports['default'];
-
-/***/ }),
-/* 28 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _inferno = __webpack_require__(0);
-
-var _inferno2 = _interopRequireDefault(_inferno);
-
-var _classnames = __webpack_require__(1);
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _utils = __webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-var defaultProps = {
-  tag: 'p'
-};
-
-var CardText = function CardText(props) {
-  var className = props.className,
-      cssModule = props.cssModule,
-      Tag = props.tag,
-      attributes = _objectWithoutProperties(props, ['className', 'cssModule', 'tag']);
-
-  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'card-text'), cssModule);
-
-  return (0, _inferno.createVNode)(16, Tag, null, null, _extends({}, attributes, {
-    'className': classes
-  }));
-};
-
-CardText.defaultProps = defaultProps;
-
-exports.default = CardText;
-module.exports = exports['default'];
-
-/***/ }),
-/* 29 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _inferno = __webpack_require__(0);
-
-var _inferno2 = _interopRequireDefault(_inferno);
-
-var _classnames = __webpack_require__(1);
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _utils = __webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-var defaultProps = {
-  tag: 'h4'
-};
-
-var CardTitle = function CardTitle(props) {
-  var className = props.className,
-      cssModule = props.cssModule,
-      Tag = props.tag,
-      attributes = _objectWithoutProperties(props, ['className', 'cssModule', 'tag']);
-
-  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'card-title'), cssModule);
-
-  return (0, _inferno.createVNode)(16, Tag, null, null, _extends({}, attributes, {
-    'className': classes
-  }));
-};
-
-CardTitle.defaultProps = defaultProps;
-
-exports.default = CardTitle;
-module.exports = exports['default'];
-
-/***/ }),
 /* 30 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _inferno = __webpack_require__(0);
-
-var _inferno2 = _interopRequireDefault(_inferno);
-
-var _classnames = __webpack_require__(1);
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _utils = __webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-var defaultProps = {
-  tag: 'div'
-};
-
-var InputGroup = function InputGroup(props) {
-  var className = props.className,
-      cssModule = props.cssModule,
-      Tag = props.tag,
-      size = props.size,
-      attributes = _objectWithoutProperties(props, ['className', 'cssModule', 'tag', 'size']);
-
-  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'input-group', size ? 'input-group-' + size : null), cssModule);
-
-  return (0, _inferno.createVNode)(16, Tag, null, null, _extends({}, attributes, {
-    'className': classes
-  }));
-};
-
-InputGroup.defaultProps = defaultProps;
-
-exports.default = InputGroup;
-module.exports = exports['default'];
-
-/***/ }),
-/* 31 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _inferno = __webpack_require__(0);
-
-var _inferno2 = _interopRequireDefault(_inferno);
-
-var _classnames = __webpack_require__(1);
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _utils = __webpack_require__(2);
-
-var _Button = __webpack_require__(5);
-
-var _Button2 = _interopRequireDefault(_Button);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-var defaultProps = {
-  tag: 'div'
-};
-
-var InputGroupButton = function InputGroupButton(props) {
-  var className = props.className,
-      cssModule = props.cssModule,
-      Tag = props.tag,
-      addonType = props.addonType,
-      children = props.children,
-      groupClassName = props.groupClassName,
-      groupAttributes = props.groupAttributes,
-      attributes = _objectWithoutProperties(props, ['className', 'cssModule', 'tag', 'addonType', 'children', 'groupClassName', 'groupAttributes']);
-
-  if (typeof children === 'string') {
-    var groupClasses = (0, _utils.mapToCssModules)((0, _classnames2.default)(groupClassName, 'input-group-' + addonType), cssModule);
-
-    return (0, _inferno.createVNode)(16, Tag, null, null, _extends({}, groupAttributes, {
-      'className': groupClasses,
-      children: (0, _inferno.createVNode)(16, _Button2.default, null, null, _extends({}, attributes, {
-        'className': className,
-        'children': children
-      }))
-    }));
-  }
-
-  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'input-group-' + addonType), cssModule);
-
-  return (0, _inferno.createVNode)(16, Tag, null, null, _extends({}, attributes, {
-    'className': classes,
-    'children': children
-  }));
-};
-
-InputGroupButton.defaultProps = defaultProps;
-
-exports.default = InputGroupButton;
-module.exports = exports['default'];
-
-/***/ }),
-/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2766,7 +2646,7 @@ exports['default'] = Component;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }),
-/* 33 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3286,7 +3166,7 @@ function initDevTools() {
 initDevTools();
 
 /***/ }),
-/* 34 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5914,17 +5794,17 @@ exports.version = version;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }),
-/* 35 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-module.exports = __webpack_require__(100).default;
+module.exports = __webpack_require__(99).default;
 module.exports.default = module.exports;
 
 /***/ }),
-/* 36 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5938,7 +5818,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 37 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5948,7 +5828,7 @@ module.exports = __webpack_require__(62).default;
 module.exports.default = module.exports;
 
 /***/ }),
-/* 38 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5958,7 +5838,7 @@ module.exports = __webpack_require__(63).default;
 module.exports.default = module.exports;
 
 /***/ }),
-/* 39 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6011,7 +5891,7 @@ exports.default = Badge;
 module.exports = exports['default'];
 
 /***/ }),
-/* 40 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6041,7 +5921,7 @@ exports.default = ButtonDropdown;
 module.exports = exports['default'];
 
 /***/ }),
-/* 41 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6090,7 +5970,7 @@ exports.default = CardBody;
 module.exports = exports['default'];
 
 /***/ }),
-/* 42 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6112,7 +5992,7 @@ var _classnames2 = _interopRequireDefault(_classnames);
 
 var _utils = __webpack_require__(2);
 
-var _lodash = __webpack_require__(105);
+var _lodash = __webpack_require__(104);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -6190,6 +6070,122 @@ exports.default = Col;
 module.exports = exports['default'];
 
 /***/ }),
+/* 41 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _inferno = __webpack_require__(0);
+
+var _inferno2 = _interopRequireDefault(_inferno);
+
+var _classnames = __webpack_require__(1);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _utils = __webpack_require__(2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var defaultProps = {
+  tag: 'div'
+};
+
+var InputGroup = function InputGroup(props) {
+  var className = props.className,
+      cssModule = props.cssModule,
+      Tag = props.tag,
+      size = props.size,
+      attributes = _objectWithoutProperties(props, ['className', 'cssModule', 'tag', 'size']);
+
+  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'input-group', size ? 'input-group-' + size : null), cssModule);
+
+  return (0, _inferno.createVNode)(16, Tag, null, null, _extends({}, attributes, {
+    'className': classes
+  }));
+};
+
+InputGroup.defaultProps = defaultProps;
+
+exports.default = InputGroup;
+module.exports = exports['default'];
+
+/***/ }),
+/* 42 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _inferno = __webpack_require__(0);
+
+var _inferno2 = _interopRequireDefault(_inferno);
+
+var _classnames = __webpack_require__(1);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _utils = __webpack_require__(2);
+
+var _InputGroupText = __webpack_require__(76);
+
+var _InputGroupText2 = _interopRequireDefault(_InputGroupText);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var defaultProps = {
+  tag: 'div'
+};
+
+var InputGroupAddon = function InputGroupAddon(props) {
+  var className = props.className,
+      cssModule = props.cssModule,
+      Tag = props.tag,
+      addonType = props.addonType,
+      children = props.children,
+      attributes = _objectWithoutProperties(props, ['className', 'cssModule', 'tag', 'addonType', 'children']);
+
+  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'input-group-' + addonType), cssModule);
+
+  // Convenience to assist with transition
+  if (typeof children === 'string') {
+    return (0, _inferno.createVNode)(16, Tag, null, null, _extends({}, attributes, {
+      'className': classes,
+      children: (0, _inferno.createVNode)(16, _InputGroupText2.default, null, null, {
+        'children': children
+      })
+    }));
+  }
+
+  return (0, _inferno.createVNode)(16, Tag, null, null, _extends({}, attributes, {
+    'className': classes,
+    'children': children
+  }));
+};
+
+InputGroupAddon.defaultProps = defaultProps;
+
+exports.default = InputGroupAddon;
+module.exports = exports['default'];
+
+/***/ }),
 /* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6216,11 +6212,11 @@ var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _infernoAnimation = __webpack_require__(36);
+var _infernoAnimation = __webpack_require__(34);
 
 var _utils = __webpack_require__(2);
 
-var _compat = __webpack_require__(94);
+var _compat = __webpack_require__(93);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -9419,19 +9415,19 @@ var _warning = __webpack_require__(50);
 
 var _warning2 = _interopRequireDefault(_warning);
 
-var _invariant = __webpack_require__(104);
+var _invariant = __webpack_require__(103);
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
-var _LocationUtils = __webpack_require__(96);
+var _LocationUtils = __webpack_require__(95);
 
 var _PathUtils = __webpack_require__(49);
 
-var _createTransitionManager = __webpack_require__(97);
+var _createTransitionManager = __webpack_require__(96);
 
 var _createTransitionManager2 = _interopRequireDefault(_createTransitionManager);
 
-var _DOMUtils = __webpack_require__(95);
+var _DOMUtils = __webpack_require__(94);
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : { default: obj };
@@ -9728,55 +9724,55 @@ exports.default = BasicPage;
 
 var _components = __webpack_require__(4);
 
-var _Alert = __webpack_require__(111);
+var _Alert = __webpack_require__(110);
 
 var _Alert2 = _interopRequireDefault(_Alert);
 
-var _Badge = __webpack_require__(112);
+var _Badge = __webpack_require__(111);
 
 var _Badge2 = _interopRequireDefault(_Badge);
 
-var _Breadcrumb = __webpack_require__(113);
+var _Breadcrumb = __webpack_require__(112);
 
 var _Breadcrumb2 = _interopRequireDefault(_Breadcrumb);
 
-var _Button = __webpack_require__(114);
+var _Button = __webpack_require__(113);
 
 var _Button2 = _interopRequireDefault(_Button);
 
-var _Dropdown = __webpack_require__(116);
+var _Dropdown = __webpack_require__(115);
 
 var _Dropdown2 = _interopRequireDefault(_Dropdown);
 
-var _Jumbotron = __webpack_require__(117);
+var _Jumbotron = __webpack_require__(116);
 
 var _Jumbotron2 = _interopRequireDefault(_Jumbotron);
 
-var _Progress = __webpack_require__(122);
+var _Progress = __webpack_require__(121);
 
 var _Progress2 = _interopRequireDefault(_Progress);
 
-var _Collapse = __webpack_require__(115);
+var _Collapse = __webpack_require__(114);
 
 var _Collapse2 = _interopRequireDefault(_Collapse);
 
-var _Layout = __webpack_require__(118);
+var _Layout = __webpack_require__(117);
 
 var _Layout2 = _interopRequireDefault(_Layout);
 
-var _Tabs = __webpack_require__(123);
+var _Tabs = __webpack_require__(122);
 
 var _Tabs2 = _interopRequireDefault(_Tabs);
 
-var _Popovers = __webpack_require__(121);
+var _Popovers = __webpack_require__(120);
 
 var _Popovers2 = _interopRequireDefault(_Popovers);
 
-var _Pagination = __webpack_require__(120);
+var _Pagination = __webpack_require__(119);
 
 var _Pagination2 = _interopRequireDefault(_Pagination);
 
-var _List = __webpack_require__(119);
+var _List = __webpack_require__(118);
 
 var _List2 = _interopRequireDefault(_List);
 
@@ -9806,11 +9802,11 @@ exports.default = CardPage;
 
 var _components = __webpack_require__(4);
 
-var _TextCard = __webpack_require__(125);
+var _TextCard = __webpack_require__(124);
 
 var _TextCard2 = _interopRequireDefault(_TextCard);
 
-var _HeaderCard = __webpack_require__(124);
+var _HeaderCard = __webpack_require__(123);
 
 var _HeaderCard2 = _interopRequireDefault(_HeaderCard);
 
@@ -9839,21 +9835,17 @@ exports.default = FormPage;
 
 var _components = __webpack_require__(4);
 
-var _Input = __webpack_require__(127);
+var _Input = __webpack_require__(125);
 
 var _Input2 = _interopRequireDefault(_Input);
 
-var _InputGroup = __webpack_require__(128);
+var _InputGroup = __webpack_require__(126);
 
 var _InputGroup2 = _interopRequireDefault(_InputGroup);
 
-var _InputWithButton = __webpack_require__(129);
+var _InputWithButton = __webpack_require__(127);
 
 var _InputWithButton2 = _interopRequireDefault(_InputWithButton);
-
-var _ButtonShorthand = __webpack_require__(126);
-
-var _ButtonShorthand2 = _interopRequireDefault(_ButtonShorthand);
 
 var _inferno = __webpack_require__(0);
 
@@ -9861,7 +9853,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function FormPage(props) {
   return (0, _inferno.createVNode)(16, _components.Page, null, null, {
-    children: [(0, _inferno.createVNode)(16, _Input2.default), (0, _inferno.createVNode)(16, _InputGroup2.default), (0, _inferno.createVNode)(16, _InputWithButton2.default), (0, _inferno.createVNode)(16, _ButtonShorthand2.default)]
+    children: [(0, _inferno.createVNode)(16, _Input2.default), (0, _inferno.createVNode)(16, _InputGroup2.default), (0, _inferno.createVNode)(16, _InputWithButton2.default)]
   });
 }
 module.exports = exports['default'];
@@ -9880,11 +9872,11 @@ exports.default = BasicPage;
 
 var _components = __webpack_require__(4);
 
-var _BasicModal = __webpack_require__(131);
+var _BasicModal = __webpack_require__(129);
 
 var _BasicModal2 = _interopRequireDefault(_BasicModal);
 
-var _Animations = __webpack_require__(130);
+var _Animations = __webpack_require__(128);
 
 var _Animations2 = _interopRequireDefault(_Animations);
 
@@ -9913,19 +9905,19 @@ exports.default = NavigationPage;
 
 var _components = __webpack_require__(4);
 
-var _Horizontal = __webpack_require__(132);
+var _Horizontal = __webpack_require__(130);
 
 var _Horizontal2 = _interopRequireDefault(_Horizontal);
 
-var _Vertical = __webpack_require__(135);
+var _Vertical = __webpack_require__(133);
 
 var _Vertical2 = _interopRequireDefault(_Vertical);
 
-var _Tabbed = __webpack_require__(134);
+var _Tabbed = __webpack_require__(132);
 
 var _Tabbed2 = _interopRequireDefault(_Tabbed);
 
-var _Pills = __webpack_require__(133);
+var _Pills = __webpack_require__(131);
 
 var _Pills2 = _interopRequireDefault(_Pills);
 
@@ -9965,11 +9957,11 @@ var _createClass = function () {
   };
 }();
 
-var _infernoComponent = __webpack_require__(37);
+var _infernoComponent = __webpack_require__(35);
 
 var _infernoComponent2 = _interopRequireDefault(_infernoComponent);
 
-var _infernoCreateElement = __webpack_require__(38);
+var _infernoCreateElement = __webpack_require__(36);
 
 var _infernoCreateElement2 = _interopRequireDefault(_infernoCreateElement);
 
@@ -10063,11 +10055,11 @@ var _createClass = function () {
   };
 }();
 
-var _infernoComponent = __webpack_require__(37);
+var _infernoComponent = __webpack_require__(35);
 
 var _infernoComponent2 = _interopRequireDefault(_infernoComponent);
 
-var _infernoCreateElement = __webpack_require__(38);
+var _infernoCreateElement = __webpack_require__(36);
 
 var _infernoCreateElement2 = _interopRequireDefault(_infernoCreateElement);
 
@@ -13856,7 +13848,7 @@ var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _infernoAnimation = __webpack_require__(36);
+var _infernoAnimation = __webpack_require__(34);
 
 var _utils = __webpack_require__(2);
 
@@ -14005,72 +13997,6 @@ var _classnames2 = _interopRequireDefault(_classnames);
 
 var _utils = __webpack_require__(2);
 
-var _InputGroupText = __webpack_require__(77);
-
-var _InputGroupText2 = _interopRequireDefault(_InputGroupText);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-var defaultProps = {
-  tag: 'div'
-};
-
-var InputGroupAddon = function InputGroupAddon(props) {
-  var className = props.className,
-      cssModule = props.cssModule,
-      Tag = props.tag,
-      addonType = props.addonType,
-      children = props.children,
-      attributes = _objectWithoutProperties(props, ['className', 'cssModule', 'tag', 'addonType', 'children']);
-
-  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'input-group-' + addonType), cssModule);
-
-  // Convenience to assist with transition
-  if (typeof children === 'string') {
-    return (0, _inferno.createVNode)(16, Tag, null, null, _extends({}, attributes, {
-      'className': classes,
-      children: (0, _inferno.createVNode)(16, _InputGroupText2.default, null, null, {
-        'children': children
-      })
-    }));
-  }
-
-  return (0, _inferno.createVNode)(16, Tag, null, null, _extends({}, attributes, {
-    'className': classes,
-    'children': children
-  }));
-};
-
-InputGroupAddon.defaultProps = defaultProps;
-
-exports.default = InputGroupAddon;
-module.exports = exports['default'];
-
-/***/ }),
-/* 77 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _inferno = __webpack_require__(0);
-
-var _inferno2 = _interopRequireDefault(_inferno);
-
-var _classnames = __webpack_require__(1);
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _utils = __webpack_require__(2);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
@@ -14098,7 +14024,7 @@ exports.default = InputGroupText;
 module.exports = exports['default'];
 
 /***/ }),
-/* 78 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14148,7 +14074,7 @@ exports.default = Jumbotron;
 module.exports = exports['default'];
 
 /***/ }),
-/* 79 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14198,7 +14124,7 @@ exports.default = ListGroup;
 module.exports = exports['default'];
 
 /***/ }),
-/* 80 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14258,7 +14184,7 @@ exports.default = ListGroupItem;
 module.exports = exports['default'];
 
 /***/ }),
-/* 81 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14306,7 +14232,7 @@ exports.default = ListGroupItemHeading;
 module.exports = exports['default'];
 
 /***/ }),
-/* 82 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14354,7 +14280,7 @@ exports.default = ListGroupItemText;
 module.exports = exports['default'];
 
 /***/ }),
-/* 83 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14404,7 +14330,7 @@ exports.default = Pagination;
 module.exports = exports['default'];
 
 /***/ }),
-/* 84 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14456,7 +14382,7 @@ exports.default = PaginationItem;
 module.exports = exports['default'];
 
 /***/ }),
-/* 85 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14529,7 +14455,7 @@ exports.default = PaginationLink;
 module.exports = exports['default'];
 
 /***/ }),
-/* 86 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14555,13 +14481,13 @@ var _classnames2 = _interopRequireDefault(_classnames);
 
 var _infernoPopper = __webpack_require__(8);
 
-var _PopperContent = __webpack_require__(89);
+var _PopperContent = __webpack_require__(88);
 
 var _PopperContent2 = _interopRequireDefault(_PopperContent);
 
 var _utils = __webpack_require__(2);
 
-var _infernoShared = __webpack_require__(26);
+var _infernoShared = __webpack_require__(21);
 
 var _inferno = __webpack_require__(0);
 
@@ -14738,7 +14664,7 @@ exports.default = Popover;
 module.exports = exports['default'];
 
 /***/ }),
-/* 87 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14787,7 +14713,7 @@ exports.default = PopoverBody;
 module.exports = exports['default'];
 
 /***/ }),
-/* 88 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14836,7 +14762,7 @@ exports.default = PopoverHeader;
 module.exports = exports['default'];
 
 /***/ }),
-/* 89 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14862,7 +14788,7 @@ var _classnames2 = _interopRequireDefault(_classnames);
 
 var _infernoPopper = __webpack_require__(8);
 
-var _PopperTargetHelper = __webpack_require__(90);
+var _PopperTargetHelper = __webpack_require__(89);
 
 var _PopperTargetHelper2 = _interopRequireDefault(_PopperTargetHelper);
 
@@ -14968,7 +14894,7 @@ exports.default = PopperContent;
 module.exports = exports['default'];
 
 /***/ }),
-/* 90 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14989,7 +14915,7 @@ exports.default = PopperTargetHelper;
 module.exports = exports['default'];
 
 /***/ }),
-/* 91 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15009,7 +14935,7 @@ var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _lodash = __webpack_require__(106);
+var _lodash = __webpack_require__(105);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -15071,7 +14997,7 @@ exports.default = Progress;
 module.exports = exports['default'];
 
 /***/ }),
-/* 92 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15253,7 +15179,7 @@ TabContent.defaultProps = defaultProps;
 module.exports = exports['default'];
 
 /***/ }),
-/* 93 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15301,7 +15227,7 @@ TabPane.defaultProps = defaultProps;
 module.exports = exports['default'];
 
 /***/ }),
-/* 94 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15323,7 +15249,7 @@ var _infernoComponent2 = _interopRequireDefault(_infernoComponent);
 
 var _inferno = __webpack_require__(0);
 
-var _infernoShared = __webpack_require__(26);
+var _infernoShared = __webpack_require__(21);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15431,7 +15357,7 @@ var Children = exports.Children = {
 /* /COMPATIBILITY */
 
 /***/ }),
-/* 95 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15492,7 +15418,7 @@ var isExtraneousPopstateEvent = exports.isExtraneousPopstateEvent = function isE
 };
 
 /***/ }),
-/* 96 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15511,11 +15437,11 @@ var _extends = Object.assign || function (target) {
   }return target;
 };
 
-var _resolvePathname = __webpack_require__(109);
+var _resolvePathname = __webpack_require__(108);
 
 var _resolvePathname2 = _interopRequireDefault(_resolvePathname);
 
-var _valueEqual = __webpack_require__(110);
+var _valueEqual = __webpack_require__(109);
 
 var _valueEqual2 = _interopRequireDefault(_valueEqual);
 
@@ -15586,7 +15512,7 @@ var locationsAreEqual = exports.locationsAreEqual = function locationsAreEqual(a
 };
 
 /***/ }),
-/* 97 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15679,7 +15605,7 @@ var createTransitionManager = function createTransitionManager() {
 exports.default = createTransitionManager;
 
 /***/ }),
-/* 98 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15817,17 +15743,17 @@ function createElement(type, props) {
 exports['default'] = createElement;
 
 /***/ }),
-/* 99 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-module.exports = __webpack_require__(98).default;
+module.exports = __webpack_require__(97).default;
 module.exports.default = module.exports;
 
 /***/ }),
-/* 100 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15841,11 +15767,11 @@ function _interopDefault(ex) {
     return ex && (typeof ex === 'undefined' ? 'undefined' : _typeof(ex)) === 'object' && 'default' in ex ? ex['default'] : ex;
 }
 
-var createElement = _interopDefault(__webpack_require__(99));
+var createElement = _interopDefault(__webpack_require__(98));
 var Component = _interopDefault(__webpack_require__(3));
 var Inferno = __webpack_require__(0);
 var Inferno__default = _interopDefault(Inferno);
-var pathToRegexp = _interopDefault(__webpack_require__(102));
+var pathToRegexp = _interopDefault(__webpack_require__(101));
 
 /**
  * @module Inferno-Shared
@@ -16575,7 +16501,7 @@ exports['default'] = index;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }),
-/* 101 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16586,7 +16512,7 @@ module.exports = Array.isArray || function (arr) {
 };
 
 /***/ }),
-/* 102 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16594,7 +16520,7 @@ module.exports = Array.isArray || function (arr) {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var isarray = __webpack_require__(101);
+var isarray = __webpack_require__(100);
 
 /**
  * Expose `pathToRegexp`.
@@ -17021,7 +16947,7 @@ function pathToRegexp(path, keys, options) {
 }
 
 /***/ }),
-/* 103 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17139,7 +17065,7 @@ exports.combineFrom = combineFrom;
 exports.Lifecycle = Lifecycle;
 
 /***/ }),
-/* 104 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17194,7 +17120,7 @@ module.exports = invariant;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }),
-/* 105 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17241,7 +17167,7 @@ function isObject(value) {
 module.exports = isObject;
 
 /***/ }),
-/* 106 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17413,7 +17339,7 @@ function toNumber(value) {
 module.exports = toNumber;
 
 /***/ }),
-/* 107 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17457,7 +17383,7 @@ module.exports = toNumber;
 })(Prism);
 
 /***/ }),
-/* 108 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18283,7 +18209,7 @@ Prism.languages.js = Prism.languages.javascript;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(51)))
 
 /***/ }),
-/* 109 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18365,7 +18291,7 @@ exports.default = resolvePathname;
 module.exports = exports['default'];
 
 /***/ }),
-/* 110 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18422,7 +18348,7 @@ exports.default = valueEqual;
 module.exports = exports["default"];
 
 /***/ }),
-/* 111 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18476,7 +18402,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 112 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18521,7 +18447,7 @@ exports.default = function () {
 
 var _components = __webpack_require__(4);
 
-var _Badge = __webpack_require__(39);
+var _Badge = __webpack_require__(37);
 
 var _Badge2 = _interopRequireDefault(_Badge);
 
@@ -18532,7 +18458,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 113 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18591,7 +18517,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 114 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18821,7 +18747,7 @@ var _Button = __webpack_require__(5);
 
 var _Button2 = _interopRequireDefault(_Button);
 
-var _ButtonGroup = __webpack_require__(21);
+var _ButtonGroup = __webpack_require__(22);
 
 var _ButtonGroup2 = _interopRequireDefault(_ButtonGroup);
 
@@ -18829,7 +18755,7 @@ var _ButtonToolbar = __webpack_require__(68);
 
 var _ButtonToolbar2 = _interopRequireDefault(_ButtonToolbar);
 
-var _ButtonDropdown = __webpack_require__(40);
+var _ButtonDropdown = __webpack_require__(38);
 
 var _ButtonDropdown2 = _interopRequireDefault(_ButtonDropdown);
 
@@ -19011,7 +18937,7 @@ var SampleDropdownButton = function (_Component2) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 115 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19118,7 +19044,7 @@ var ToggleCollapse = function (_Component) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 116 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19233,7 +19159,7 @@ var DropdownExample = function (_Component) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 117 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19265,7 +19191,7 @@ exports.default = function () {
 
 var _components = __webpack_require__(4);
 
-var _Jumbotron = __webpack_require__(78);
+var _Jumbotron = __webpack_require__(77);
 
 var _Jumbotron2 = _interopRequireDefault(_Jumbotron);
 
@@ -19280,7 +19206,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 118 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19383,7 +19309,7 @@ var _Row = __webpack_require__(48);
 
 var _Row2 = _interopRequireDefault(_Row);
 
-var _Col = __webpack_require__(42);
+var _Col = __webpack_require__(40);
 
 var _Col2 = _interopRequireDefault(_Col);
 
@@ -19394,7 +19320,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 119 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19485,23 +19411,23 @@ exports.default = function () {
 
 var _components = __webpack_require__(4);
 
-var _ListGroup = __webpack_require__(79);
+var _ListGroup = __webpack_require__(78);
 
 var _ListGroup2 = _interopRequireDefault(_ListGroup);
 
-var _ListGroupItem = __webpack_require__(80);
+var _ListGroupItem = __webpack_require__(79);
 
 var _ListGroupItem2 = _interopRequireDefault(_ListGroupItem);
 
-var _ListGroupItemHeading = __webpack_require__(81);
+var _ListGroupItemHeading = __webpack_require__(80);
 
 var _ListGroupItemHeading2 = _interopRequireDefault(_ListGroupItemHeading);
 
-var _ListGroupItemText = __webpack_require__(82);
+var _ListGroupItemText = __webpack_require__(81);
 
 var _ListGroupItemText2 = _interopRequireDefault(_ListGroupItemText);
 
-var _Badge = __webpack_require__(39);
+var _Badge = __webpack_require__(37);
 
 var _Badge2 = _interopRequireDefault(_Badge);
 
@@ -19512,7 +19438,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 120 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19649,15 +19575,15 @@ exports.default = function () {
 
 var _components = __webpack_require__(4);
 
-var _Pagination = __webpack_require__(83);
+var _Pagination = __webpack_require__(82);
 
 var _Pagination2 = _interopRequireDefault(_Pagination);
 
-var _PaginationItem = __webpack_require__(84);
+var _PaginationItem = __webpack_require__(83);
 
 var _PaginationItem2 = _interopRequireDefault(_PaginationItem);
 
-var _PaginationLink = __webpack_require__(85);
+var _PaginationLink = __webpack_require__(84);
 
 var _PaginationLink2 = _interopRequireDefault(_PaginationLink);
 
@@ -19668,7 +19594,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 121 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19709,15 +19635,15 @@ var _Button = __webpack_require__(5);
 
 var _Button2 = _interopRequireDefault(_Button);
 
-var _Popover = __webpack_require__(86);
+var _Popover = __webpack_require__(85);
 
 var _Popover2 = _interopRequireDefault(_Popover);
 
-var _PopoverHeader = __webpack_require__(88);
+var _PopoverHeader = __webpack_require__(87);
 
 var _PopoverHeader2 = _interopRequireDefault(_PopoverHeader);
 
-var _PopoverBody = __webpack_require__(87);
+var _PopoverBody = __webpack_require__(86);
 
 var _PopoverBody2 = _interopRequireDefault(_PopoverBody);
 
@@ -19786,7 +19712,7 @@ var ExamplePopover = function (_Component) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 122 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19843,7 +19769,7 @@ exports.default = function () {
 
 var _components = __webpack_require__(4);
 
-var _Progress = __webpack_require__(91);
+var _Progress = __webpack_require__(90);
 
 var _Progress2 = _interopRequireDefault(_Progress);
 
@@ -19858,7 +19784,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 123 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19907,11 +19833,11 @@ var _NavLink = __webpack_require__(16);
 
 var _NavLink2 = _interopRequireDefault(_NavLink);
 
-var _TabContent = __webpack_require__(92);
+var _TabContent = __webpack_require__(91);
 
 var _TabContent2 = _interopRequireDefault(_TabContent);
 
-var _TabPane = __webpack_require__(93);
+var _TabPane = __webpack_require__(92);
 
 var _TabPane2 = _interopRequireDefault(_TabPane);
 
@@ -19919,19 +19845,19 @@ var _Row = __webpack_require__(48);
 
 var _Row2 = _interopRequireDefault(_Row);
 
-var _Col = __webpack_require__(42);
+var _Col = __webpack_require__(40);
 
 var _Col2 = _interopRequireDefault(_Col);
 
-var _Card = __webpack_require__(27);
+var _Card = __webpack_require__(23);
 
 var _Card2 = _interopRequireDefault(_Card);
 
-var _CardTitle = __webpack_require__(29);
+var _CardTitle = __webpack_require__(25);
 
 var _CardTitle2 = _interopRequireDefault(_CardTitle);
 
-var _CardText = __webpack_require__(28);
+var _CardText = __webpack_require__(24);
 
 var _CardText2 = _interopRequireDefault(_CardText);
 
@@ -20049,7 +19975,7 @@ var TabExample = function (_Component) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 124 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20092,11 +20018,11 @@ exports.default = function () {
 
 var _components = __webpack_require__(4);
 
-var _Card = __webpack_require__(27);
+var _Card = __webpack_require__(23);
 
 var _Card2 = _interopRequireDefault(_Card);
 
-var _CardBody = __webpack_require__(41);
+var _CardBody = __webpack_require__(39);
 
 var _CardBody2 = _interopRequireDefault(_CardBody);
 
@@ -20108,11 +20034,11 @@ var _CardFooter = __webpack_require__(69);
 
 var _CardFooter2 = _interopRequireDefault(_CardFooter);
 
-var _CardText = __webpack_require__(28);
+var _CardText = __webpack_require__(24);
 
 var _CardText2 = _interopRequireDefault(_CardText);
 
-var _CardTitle = __webpack_require__(29);
+var _CardTitle = __webpack_require__(25);
 
 var _CardTitle2 = _interopRequireDefault(_CardTitle);
 
@@ -20127,7 +20053,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 125 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20195,7 +20121,7 @@ exports.default = function () {
 
 var _components = __webpack_require__(4);
 
-var _Card = __webpack_require__(27);
+var _Card = __webpack_require__(23);
 
 var _Card2 = _interopRequireDefault(_Card);
 
@@ -20203,7 +20129,7 @@ var _CardImg = __webpack_require__(71);
 
 var _CardImg2 = _interopRequireDefault(_CardImg);
 
-var _CardBody = __webpack_require__(41);
+var _CardBody = __webpack_require__(39);
 
 var _CardBody2 = _interopRequireDefault(_CardBody);
 
@@ -20215,11 +20141,11 @@ var _CardSubtitle = __webpack_require__(73);
 
 var _CardSubtitle2 = _interopRequireDefault(_CardSubtitle);
 
-var _CardText = __webpack_require__(28);
+var _CardText = __webpack_require__(24);
 
 var _CardText2 = _interopRequireDefault(_CardText);
 
-var _CardTitle = __webpack_require__(29);
+var _CardTitle = __webpack_require__(25);
 
 var _CardTitle2 = _interopRequireDefault(_CardTitle);
 
@@ -20234,90 +20160,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 126 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-exports.default = function () {
-  return (0, _inferno.createVNode)(16, _components.Section, null, null, {
-    'title': 'Button Shorthand',
-    children: [(0, _inferno.createVNode)(16, _components.Narrative, null, null, {
-      children: (0, _inferno.createVNode)(2, 'p', null, ['Button shorthand is a convenience method for adding just a button. It is triggered when only a single string is the child. A Button will be created and all of the props will be passed to it with the exception of', (0, _inferno.createVNode)(2, 'code', null, 'groupClassName'), ' and ', (0, _inferno.createVNode)(2, 'code', null, 'groupAttributes'), ', which are used to added classes and attributes to the wrapping container. This means you can add your ', (0, _inferno.createVNode)(2, 'code', null, 'onClick'), ' and other handlers directly to', (0, _inferno.createVNode)(2, 'code', null, 'InputGroupButton'), '. If you want your string to not be wrapped in a button, then you really want to use ', (0, _inferno.createVNode)(2, 'code', null, 'InputGroupAddon'), ' (see Addons above for that).'])
-    }), (0, _inferno.createVNode)(16, _components.Stage, null, null, {
-      children: (0, _inferno.createVNode)(16, _components.Scene, null, null, {
-        children: [(0, _inferno.createVNode)(16, _Form2.default, null, null, {
-          children: [(0, _inferno.createVNode)(16, _InputGroup2.default, null, null, {
-            children: [(0, _inferno.createVNode)(16, _InputGroupButton2.default, null, null, {
-              children: 'To the Left!'
-            }), (0, _inferno.createVNode)(16, _Input2.default)]
-          }), (0, _inferno.createVNode)(2, 'br'), (0, _inferno.createVNode)(16, _InputGroup2.default, null, null, {
-            children: [(0, _inferno.createVNode)(16, _Input2.default), (0, _inferno.createVNode)(16, _InputGroupButton2.default, null, null, {
-              'color': 'secondary',
-              children: 'To the Right!'
-            })]
-          }), (0, _inferno.createVNode)(2, 'br'), (0, _inferno.createVNode)(16, _InputGroup2.default, null, null, {
-            children: [(0, _inferno.createVNode)(16, _InputGroupButton2.default, null, null, {
-              'color': 'danger',
-              children: 'To the Left!'
-            }), (0, _inferno.createVNode)(16, _Input2.default, null, null, {
-              'placeholder': 'and...'
-            }), (0, _inferno.createVNode)(16, _InputGroupButton2.default, null, null, {
-              'color': 'success',
-              children: 'To the Right!'
-            })]
-          })]
-        }), (0, _inferno.createVNode)(16, _components.Code, null, null, {
-          children: '<Form>\n  <InputGroup>\n    <InputGroupButton>To the Left!</InputGroupButton>\n    <Input />\n  </InputGroup>\n  <br />\n  <InputGroup>\n    <Input />\n    <InputGroupButton color="secondary">To the Right!</InputGroupButton>\n  </InputGroup>\n  <br />\n  <InputGroup>\n    <InputGroupButton color="danger">To the Left!</InputGroupButton>\n    <Input placeholder="and..." />\n    <InputGroupButton color="success">To the Right!</InputGroupButton>\n  </InputGroup>\n</Form>'
-        })]
-      })
-    })]
-  });
-};
-
-var _infernoComponent = __webpack_require__(3);
-
-var _infernoComponent2 = _interopRequireDefault(_infernoComponent);
-
-var _components = __webpack_require__(4);
-
-var _Form = __webpack_require__(22);
-
-var _Form2 = _interopRequireDefault(_Form);
-
-var _FormGroup = __webpack_require__(23);
-
-var _FormGroup2 = _interopRequireDefault(_FormGroup);
-
-var _Input = __webpack_require__(24);
-
-var _Input2 = _interopRequireDefault(_Input);
-
-var _InputGroup = __webpack_require__(30);
-
-var _InputGroup2 = _interopRequireDefault(_InputGroup);
-
-var _InputGroupButton = __webpack_require__(31);
-
-var _InputGroupButton2 = _interopRequireDefault(_InputGroupButton);
-
-var _Label = __webpack_require__(25);
-
-var _Label2 = _interopRequireDefault(_Label);
-
-var _inferno = __webpack_require__(0);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-module.exports = exports['default'];
-
-/***/ }),
-/* 127 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20374,19 +20217,19 @@ exports.default = function () {
 
 var _components = __webpack_require__(4);
 
-var _Form = __webpack_require__(22);
+var _Form = __webpack_require__(26);
 
 var _Form2 = _interopRequireDefault(_Form);
 
-var _FormGroup = __webpack_require__(23);
+var _FormGroup = __webpack_require__(27);
 
 var _FormGroup2 = _interopRequireDefault(_FormGroup);
 
-var _Label = __webpack_require__(25);
+var _Label = __webpack_require__(29);
 
 var _Label2 = _interopRequireDefault(_Label);
 
-var _Input = __webpack_require__(24);
+var _Input = __webpack_require__(28);
 
 var _Input2 = _interopRequireDefault(_Input);
 
@@ -20397,7 +20240,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 128 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20418,6 +20261,7 @@ exports.default = function () {
               children: 'Email:'
             }), (0, _inferno.createVNode)(16, _InputGroup2.default, null, null, {
               children: [(0, _inferno.createVNode)(16, _InputGroupAddon2.default, null, null, {
+                'addonType': 'prepend',
                 children: '@'
               }), (0, _inferno.createVNode)(16, _Input2.default, null, null, {
                 'type': 'email',
@@ -20433,12 +20277,13 @@ exports.default = function () {
                 'type': 'number',
                 'name': 'Age'
               }), (0, _inferno.createVNode)(16, _InputGroupAddon2.default, null, null, {
+                'addonType': 'append',
                 children: 'SEK'
               })]
             })]
           })]
         }), (0, _inferno.createVNode)(16, _components.Code, null, null, {
-          children: '<Form>\n  <FormGroup>\n    <Label>Email:</Label>\n    <InputGroup>\n      <InputGroupAddon>@</InputGroupAddon>\n      <Input type="email" name="email" placeholder="example@email.com" />\n    </InputGroup>\n  </FormGroup>\n  <FormGroup>\n    <Label>Price:</Label>\n    <InputGroup>\n      <Input type="number" name="Age" />\n      <InputGroupAddon>SEK</InputGroupAddon>\n    </InputGroup>\n  </FormGroup>\n</Form>'
+          children: '<Form>\n  <FormGroup>\n    <Label>Email:</Label>\n    <InputGroup>\n      <InputGroupAddon addonType="prepend">@</InputGroupAddon>\n      <Input type="email" name="email" placeholder="example@email.com" />\n    </InputGroup>\n  </FormGroup>\n  <FormGroup>\n    <Label>Price:</Label>\n    <InputGroup>\n      <Input type="number" name="Age" />\n      <InputGroupAddon addonType="append">SEK</InputGroupAddon>\n    </InputGroup>\n  </FormGroup>\n</Form>'
         })]
       })
     })
@@ -20447,31 +20292,27 @@ exports.default = function () {
 
 var _components = __webpack_require__(4);
 
-var _Form = __webpack_require__(22);
+var _Form = __webpack_require__(26);
 
 var _Form2 = _interopRequireDefault(_Form);
 
-var _FormGroup = __webpack_require__(23);
+var _FormGroup = __webpack_require__(27);
 
 var _FormGroup2 = _interopRequireDefault(_FormGroup);
 
-var _Input = __webpack_require__(24);
+var _Input = __webpack_require__(28);
 
 var _Input2 = _interopRequireDefault(_Input);
 
-var _InputGroup = __webpack_require__(30);
+var _InputGroup = __webpack_require__(41);
 
 var _InputGroup2 = _interopRequireDefault(_InputGroup);
 
-var _InputGroupAddon = __webpack_require__(76);
+var _InputGroupAddon = __webpack_require__(42);
 
 var _InputGroupAddon2 = _interopRequireDefault(_InputGroupAddon);
 
-var _InputGroupButton = __webpack_require__(31);
-
-var _InputGroupButton2 = _interopRequireDefault(_InputGroupButton);
-
-var _Label = __webpack_require__(25);
+var _Label = __webpack_require__(29);
 
 var _Label2 = _interopRequireDefault(_Label);
 
@@ -20482,7 +20323,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 129 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20506,7 +20347,8 @@ exports.default = function () {
             children: [(0, _inferno.createVNode)(16, _Label2.default, null, null, {
               children: 'Email:'
             }), (0, _inferno.createVNode)(16, _InputGroup2.default, null, null, {
-              children: [(0, _inferno.createVNode)(16, _InputGroupButton2.default, null, null, {
+              children: [(0, _inferno.createVNode)(16, _InputGroupAddon2.default, null, null, {
+                'addonType': 'prepend',
                 children: (0, _inferno.createVNode)(16, _Button2.default, null, null, {
                   children: 'I\'m a button'
                 })
@@ -20520,23 +20362,27 @@ exports.default = function () {
             children: [(0, _inferno.createVNode)(16, _Label2.default, null, null, {
               children: 'Price:'
             }), (0, _inferno.createVNode)(16, _InputGroup2.default, null, null, {
-              children: [(0, _inferno.createVNode)(16, _InputGroupButton2.default, null, null, {
+              children: [(0, _inferno.createVNode)(16, _InputGroupAddon2.default, null, null, {
+                'addonType': 'prepend',
                 children: (0, _inferno.createVNode)(16, _Button2.default, null, null, {
                   children: 'Button life'
                 })
               }), (0, _inferno.createVNode)(16, _Input2.default, null, null, {
                 'type': 'number',
                 'name': 'Age'
-              }), (0, _inferno.createVNode)(16, _InputGroupButton2.default, null, null, {
-                children: (0, _inferno.createVNode)(16, SampleDropdownButton, null, null, {
-                  'color': 'primary',
-                  'split': true
-                })
+              }), (0, _inferno.createVNode)(16, SampleDropdownAddonButton, null, null, {
+                'addonType': 'append',
+                'color': 'primary',
+                'split': true
               })]
             })]
           })]
         }), (0, _inferno.createVNode)(16, _components.Code, null, null, {
-          children: '<Form>\n  <FormGroup>\n    <Label>Email:</Label>\n    <InputGroup>\n      <InputGroupButton><Button>I\'m a button</Button></InputGroupButton>\n      <Input type="email" name="email" placeholder="example@email.com" />\n    </InputGroup>\n  </FormGroup>\n  <FormGroup>\n    <Label>Price:</Label>\n    <InputGroup>\n      <InputGroupButton><Button>Button life</Button></InputGroupButton>  \n      <Input type="number" name="Age" />\n      <InputGroupButton>\n        <SampleDropdownButton color="primary" split/>\n      </InputGroupButton>\n    </InputGroup>\n  </FormGroup>\n</Form>'
+          children: '<Form>\n  <FormGroup>\n    <Label>Email:</Label>\n    <InputGroup>\n      <InputGroupAddon addonType="prepend"><Button>I\'m a button</Button></InputGroupAddon>\n      <Input type="email" name="email" placeholder="example@email.com" />\n    </InputGroup>\n  </FormGroup>\n  <FormGroup>\n    <Label>Price:</Label>\n    <InputGroup>\n      <InputGroupAddon addonType="prepend"><Button>Button life</Button></InputGroupAddon>\n      <Input type="number" name="Age" />\n      <SampleDropdownAddonButton addonType="append" color="primary" split/>\n    </InputGroup>\n  </FormGroup>\n</Form>'
+        }), (0, _inferno.createVNode)(16, _components.Narrative, null, null, {
+          children: 'This is what the SampleDropdownAddonButton looks like:'
+        }), (0, _inferno.createVNode)(16, _components.Code, null, null, {
+          children: 'class SampleDropdownAddonButton extends Component {\n  constructor(props) {\n    super(props)\n    this.state = {\n      isOpen: false\n    }\n\n    this.doToggle = this.doToggle.bind(this)\n  }\n\n  doToggle() {\n    this.setState({\n      isOpen: !this.state.isOpen\n    })\n  }\n\n  render({ children, addonType, ...props }) {\n    return (\n      <InputGroupButtonDropdown addonType={addonType} isOpen={this.state.isOpen} toggle={this.doToggle}>\n        <DropdownToggle {...props}>{children}</DropdownToggle>\n        <DropdownMenu>\n          <DropdownItem>Item 1</DropdownItem>\n          <DropdownItem>Item 2</DropdownItem>\n          <DropdownItem>Item 3</DropdownItem>\n        </DropdownMenu>\n      </InputGroupButtonDropdown>\n    )\n  }\n}'
         })]
       })
     })
@@ -20549,27 +20395,31 @@ var _infernoComponent2 = _interopRequireDefault(_infernoComponent);
 
 var _components = __webpack_require__(4);
 
-var _Form = __webpack_require__(22);
+var _Form = __webpack_require__(26);
 
 var _Form2 = _interopRequireDefault(_Form);
 
-var _FormGroup = __webpack_require__(23);
+var _FormGroup = __webpack_require__(27);
 
 var _FormGroup2 = _interopRequireDefault(_FormGroup);
 
-var _Input = __webpack_require__(24);
+var _Input = __webpack_require__(28);
 
 var _Input2 = _interopRequireDefault(_Input);
 
-var _InputGroup = __webpack_require__(30);
+var _InputGroup = __webpack_require__(41);
 
 var _InputGroup2 = _interopRequireDefault(_InputGroup);
 
-var _InputGroupButton = __webpack_require__(31);
+var _InputGroupAddon = __webpack_require__(42);
 
-var _InputGroupButton2 = _interopRequireDefault(_InputGroupButton);
+var _InputGroupAddon2 = _interopRequireDefault(_InputGroupAddon);
 
-var _Label = __webpack_require__(25);
+var _InputGroupButtonDropdown = __webpack_require__(149);
+
+var _InputGroupButtonDropdown2 = _interopRequireDefault(_InputGroupButtonDropdown);
+
+var _Label = __webpack_require__(29);
 
 var _Label2 = _interopRequireDefault(_Label);
 
@@ -20577,11 +20427,7 @@ var _Button = __webpack_require__(5);
 
 var _Button2 = _interopRequireDefault(_Button);
 
-var _ButtonGroup = __webpack_require__(21);
-
-var _ButtonGroup2 = _interopRequireDefault(_ButtonGroup);
-
-var _ButtonDropdown = __webpack_require__(40);
+var _ButtonDropdown = __webpack_require__(38);
 
 var _ButtonDropdown2 = _interopRequireDefault(_ButtonDropdown);
 
@@ -20609,13 +20455,13 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var SampleDropdownButton = function (_Component) {
-  _inherits(SampleDropdownButton, _Component);
+var SampleDropdownAddonButton = function (_Component) {
+  _inherits(SampleDropdownAddonButton, _Component);
 
-  function SampleDropdownButton(props) {
-    _classCallCheck(this, SampleDropdownButton);
+  function SampleDropdownAddonButton(props) {
+    _classCallCheck(this, SampleDropdownAddonButton);
 
-    var _this = _possibleConstructorReturn(this, (SampleDropdownButton.__proto__ || Object.getPrototypeOf(SampleDropdownButton)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (SampleDropdownAddonButton.__proto__ || Object.getPrototypeOf(SampleDropdownAddonButton)).call(this, props));
 
     _this.state = {
       isOpen: false
@@ -20625,7 +20471,7 @@ var SampleDropdownButton = function (_Component) {
     return _this;
   }
 
-  _createClass(SampleDropdownButton, [{
+  _createClass(SampleDropdownAddonButton, [{
     key: 'doToggle',
     value: function doToggle() {
       this.setState({
@@ -20636,9 +20482,11 @@ var SampleDropdownButton = function (_Component) {
     key: 'render',
     value: function render(_ref) {
       var children = _ref.children,
-          props = _objectWithoutProperties(_ref, ['children']);
+          addonType = _ref.addonType,
+          props = _objectWithoutProperties(_ref, ['children', 'addonType']);
 
-      return (0, _inferno.createVNode)(16, _ButtonDropdown2.default, null, null, {
+      return (0, _inferno.createVNode)(16, _InputGroupButtonDropdown2.default, null, null, {
+        'addonType': addonType,
         'isOpen': this.state.isOpen,
         'toggle': this.doToggle,
         children: [(0, _inferno.createVNode)(16, _DropdownToggle2.default, null, null, _extends({}, props, {
@@ -20656,13 +20504,13 @@ var SampleDropdownButton = function (_Component) {
     }
   }]);
 
-  return SampleDropdownButton;
+  return SampleDropdownAddonButton;
 }(_infernoComponent2.default);
 
 module.exports = exports['default'];
 
 /***/ }),
-/* 130 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20704,7 +20552,7 @@ var _Button = __webpack_require__(5);
 
 var _Button2 = _interopRequireDefault(_Button);
 
-var _ButtonGroup = __webpack_require__(21);
+var _ButtonGroup = __webpack_require__(22);
 
 var _ButtonGroup2 = _interopRequireDefault(_ButtonGroup);
 
@@ -20731,7 +20579,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 131 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20784,7 +20632,7 @@ var _Button = __webpack_require__(5);
 
 var _Button2 = _interopRequireDefault(_Button);
 
-var _ButtonGroup = __webpack_require__(21);
+var _ButtonGroup = __webpack_require__(22);
 
 var _ButtonGroup2 = _interopRequireDefault(_ButtonGroup);
 
@@ -20875,7 +20723,7 @@ var ModalExample = function (_Component) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 132 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20961,7 +20809,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 133 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21117,7 +20965,7 @@ var TabbedNavbar = function (_Component) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 134 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21273,7 +21121,7 @@ var TabbedNavbar = function (_Component) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 135 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21361,7 +21209,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 136 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21377,7 +21225,7 @@ var _infernoComponent = __webpack_require__(3);
 
 var _infernoComponent2 = _interopRequireDefault(_infernoComponent);
 
-var _infernoRouter = __webpack_require__(35);
+var _infernoRouter = __webpack_require__(33);
 
 var _createBrowserHistory = __webpack_require__(54);
 
@@ -21474,8 +21322,8 @@ if (typeof window !== 'undefined') {
 }
 
 /***/ }),
-/* 137 */,
-/* 138 */
+/* 135 */,
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21560,7 +21408,7 @@ module.exports = exports['default'];
 //# sourceMappingURL=Arrow.js.map
 
 /***/ }),
-/* 139 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21674,7 +21522,7 @@ module.exports = exports['default'];
 //# sourceMappingURL=Manager.js.map
 
 /***/ }),
-/* 140 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21722,7 +21570,7 @@ var _popper = __webpack_require__(52);
 
 var _popper2 = _interopRequireDefault(_popper);
 
-var _isEqualShallow = __webpack_require__(149);
+var _isEqualShallow = __webpack_require__(147);
 
 var _isEqualShallow2 = _interopRequireDefault(_isEqualShallow);
 
@@ -21980,7 +21828,7 @@ module.exports = exports['default'];
 //# sourceMappingURL=Popper.js.map
 
 /***/ }),
-/* 141 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22059,7 +21907,7 @@ module.exports = exports['default'];
 //# sourceMappingURL=Target.js.map
 
 /***/ }),
-/* 142 */
+/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22093,7 +21941,7 @@ var _infernoCreateElement = __webpack_require__(17);
 
 var _infernoCreateElement2 = _interopRequireDefault(_infernoCreateElement);
 
-var _compat = __webpack_require__(143);
+var _compat = __webpack_require__(141);
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : { default: obj };
@@ -22276,7 +22124,7 @@ module.exports = exports['default'];
 //# sourceMappingURL=Travel.js.map
 
 /***/ }),
-/* 143 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22308,7 +22156,7 @@ var _infernoComponent2 = _interopRequireDefault(_infernoComponent);
 
 var _inferno = __webpack_require__(7);
 
-var _infernoShared = __webpack_require__(147);
+var _infernoShared = __webpack_require__(145);
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : { default: obj };
@@ -22431,7 +22279,7 @@ var Children = exports.Children = {
 //# sourceMappingURL=compat.js.map
 
 /***/ }),
-/* 144 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22738,7 +22586,7 @@ exports['default'] = Component;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }),
-/* 145 */
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22876,7 +22724,7 @@ function createElement(type, props) {
 exports['default'] = createElement;
 
 /***/ }),
-/* 146 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22994,17 +22842,17 @@ exports.combineFrom = combineFrom;
 exports.Lifecycle = Lifecycle;
 
 /***/ }),
-/* 147 */
+/* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-module.exports = __webpack_require__(146);
+module.exports = __webpack_require__(144);
 module.exports.default = module.exports;
 
 /***/ }),
-/* 148 */
+/* 146 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25632,7 +25480,7 @@ exports.version = version;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }),
-/* 149 */
+/* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25645,7 +25493,7 @@ exports.version = version;
 
 
 
-var isPrimitive = __webpack_require__(150);
+var isPrimitive = __webpack_require__(148);
 
 module.exports = function isEqual(a, b) {
   if (!a && !b) {
@@ -25671,7 +25519,7 @@ module.exports = function isEqual(a, b) {
 };
 
 /***/ }),
-/* 150 */
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25691,6 +25539,36 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 module.exports = function isPrimitive(value) {
   return value == null || typeof value !== 'function' && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) !== 'object';
 };
+
+/***/ }),
+/* 149 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _inferno = __webpack_require__(0);
+
+var _inferno2 = _interopRequireDefault(_inferno);
+
+var _Dropdown = __webpack_require__(10);
+
+var _Dropdown2 = _interopRequireDefault(_Dropdown);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var InputGroupButtonDropdown = function InputGroupButtonDropdown(props) {
+  return (0, _inferno.createVNode)(16, _Dropdown2.default, null, null, _extends({}, props));
+};
+
+exports.default = InputGroupButtonDropdown;
+module.exports = exports['default'];
 
 /***/ })
 /******/ ]);
