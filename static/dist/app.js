@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 131);
+/******/ 	return __webpack_require__(__webpack_require__.s = 136);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -73,7 +73,7 @@
 "use strict";
 
 
-module.exports = __webpack_require__(33).default;
+module.exports = __webpack_require__(34).default;
 module.exports.default = module.exports;
 
 /***/ }),
@@ -124,7 +124,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 	if (typeof module !== 'undefined' && module.exports) {
 		module.exports = classNames;
-	} else if ("function" === 'function' && _typeof(__webpack_require__(50)) === 'object' && __webpack_require__(50)) {
+	} else if ("function" === 'function' && _typeof(__webpack_require__(53)) === 'object' && __webpack_require__(53)) {
 		// register as 'classnames', consistent with npm package name
 		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
 			return classNames;
@@ -154,7 +154,7 @@ exports.mapToCssModules = mapToCssModules;
 exports.omit = omit;
 exports.getTarget = getTarget;
 
-var _infernoShared = __webpack_require__(25);
+var _infernoShared = __webpack_require__(26);
 
 // https://github.com/twbs/bootstrap/blob/v4.0.0-alpha.4/js/src/modal#L436-L443
 function getScrollbarWidth() {
@@ -237,7 +237,7 @@ function getTarget(target) {
 "use strict";
 
 
-module.exports = __webpack_require__(31).default;
+module.exports = __webpack_require__(32).default;
 module.exports.default = module.exports;
 
 /***/ }),
@@ -268,7 +268,7 @@ var _classnames2 = _interopRequireDefault(_classnames);
 
 var _infernoRouter = __webpack_require__(35);
 
-var _prismjs = __webpack_require__(103);
+var _prismjs = __webpack_require__(108);
 
 var _prismjs2 = _interopRequireDefault(_prismjs);
 
@@ -282,7 +282,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-__webpack_require__(102);
+__webpack_require__(107);
 
 var Section = exports.Section = function (_Component) {
   _inherits(Section, _Component);
@@ -780,7 +780,7 @@ process.umask = function () {
 "use strict";
 
 
-module.exports = __webpack_require__(143).default;
+module.exports = __webpack_require__(148).default;
 module.exports.default = module.exports;
 
 /***/ }),
@@ -790,11 +790,27 @@ module.exports.default = module.exports;
 "use strict";
 
 
-module.exports = __webpack_require__(139).default;
-module.exports.default = module.exports;
+module.exports = {
+  Arrow: __webpack_require__(138),
+  Manager: __webpack_require__(139),
+  Popper: __webpack_require__(140),
+  Target: __webpack_require__(141),
+  Travel: __webpack_require__(142),
+  placements: __webpack_require__(52).placements
+};
 
 /***/ }),
 /* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = __webpack_require__(144).default;
+module.exports.default = module.exports;
+
+/***/ }),
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -818,9 +834,9 @@ var _classnames2 = _interopRequireDefault(_classnames);
 
 var _utils = __webpack_require__(2);
 
-var _infernoShared = __webpack_require__(25);
+var _infernoShared = __webpack_require__(26);
 
-var _infernoPopper = __webpack_require__(16);
+var _infernoPopper = __webpack_require__(8);
 
 var _inferno = __webpack_require__(0);
 
@@ -840,7 +856,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var defaultProps = {
   isOpen: false,
   dropup: false,
-  tag: 'div'
+  nav: false,
+  addonType: false,
+  inNavbar: false
 };
 
 var Dropdown = function (_Component) {
@@ -853,6 +871,7 @@ var Dropdown = function (_Component) {
 
     _this.addEvents = _this.addEvents.bind(_this);
     _this.handleDocumentClick = _this.handleDocumentClick.bind(_this);
+    _this.handleKeyDown = _this.handleKeyDown.bind(_this);
     _this.removeEvents = _this.removeEvents.bind(_this);
     _this.toggle = _this.toggle.bind(_this);
     return _this;
@@ -864,7 +883,8 @@ var Dropdown = function (_Component) {
       return {
         toggle: this.props.toggle,
         isOpen: this.props.isOpen,
-        dropup: this.props.dropup
+        dropup: this.props.dropup,
+        inNavbar: this.props.inNavbar
       };
     }
   }, {
@@ -885,25 +905,91 @@ var Dropdown = function (_Component) {
       this.removeEvents();
     }
   }, {
+    key: 'getContainer',
+    value: function getContainer() {
+      return this._vNode.dom;
+    }
+  }, {
     key: 'addEvents',
     value: function addEvents() {
-      document.addEventListener('click', this.handleDocumentClick, true);
+      var _this2 = this;
+
+      ['click', 'touchstart', 'keyup'].forEach(function (event) {
+        return document.addEventListener(event, _this2.handleDocumentClick, true);
+      });
     }
   }, {
     key: 'removeEvents',
     value: function removeEvents() {
-      document.removeEventListener('click', this.handleDocumentClick, true);
+      var _this3 = this;
+
+      ['click', 'touchstart', 'keyup'].forEach(function (event) {
+        return document.removeEventListener(event, _this3.handleDocumentClick, true);
+      });
     }
   }, {
     key: 'handleDocumentClick',
     value: function handleDocumentClick(e) {
-      var container = this._vNode.dom;
+      if (e && (e.which === 3 || e.type === 'keyup' && e.which !== keyCodes.tab)) return;
+      var container = this.getContainer();
 
-      if (container.contains(e.target) && container !== e.target) {
+      if (container.contains(e.target) && container !== e.target && (e.type !== 'keyup' || e.which === keyCodes.tab)) {
         return;
       }
 
-      this.toggle();
+      this.toggle(e);
+    }
+  }, {
+    key: 'handleKeyDown',
+    value: function handleKeyDown(e) {
+      if ([keyCodes.esc, keyCodes.up, keyCodes.down, keyCodes.space].indexOf(e.which) === -1 || /button/i.test(e.target.tagName) && e.which === keyCodes.space || /input|textarea/i.test(e.target.tagName)) {
+        return;
+      }
+
+      e.preventDefault();
+      if (this.props.disabled) return;
+
+      var container = this.getContainer();
+
+      if (e.which === keyCodes.space && this.props.isOpen && container !== e.target) {
+        e.target.click();
+      }
+
+      if (e.which === keyCodes.esc || !this.props.isOpen) {
+        this.toggle(e);
+        container.querySelector('[aria-expanded]').focus();
+        return;
+      }
+
+      var menuClass = (0, _utils.mapToCssModules)('dropdown-menu', this.props.cssModule);
+      var itemClass = (0, _utils.mapToCssModules)('dropdown-item', this.props.cssModule);
+      var disabledClass = (0, _utils.mapToCssModules)('disabled', this.props.cssModule);
+
+      var items = container.querySelectorAll('.' + menuClass + ' .' + itemClass + ':not(.' + disabledClass + ')');
+
+      if (!items.length) return;
+
+      var index = -1;
+      for (var i = 0; i < items.length; i += 1) {
+        if (items[i] === e.target) {
+          index = i;
+          break;
+        }
+      }
+
+      if (e.which === keyCodes.up && index > 0) {
+        index -= 1;
+      }
+
+      if (e.which === keyCodes.down && index < items.length - 1) {
+        index += 1;
+      }
+
+      if (index < 0) {
+        index = 0;
+      }
+
+      items[index].focus();
     }
   }, {
     key: 'handleProps',
@@ -928,20 +1014,23 @@ var Dropdown = function (_Component) {
     value: function render() {
       var _classNames;
 
-      var _omit = (0, _utils.omit)(this.props, ['toggle', 'disabled']),
+      var _omit = (0, _utils.omit)(this.props, ['toggle', 'disabled', 'inNavbar']),
           className = _omit.className,
           cssModule = _omit.cssModule,
           dropup = _omit.dropup,
           isOpen = _omit.isOpen,
           group = _omit.group,
           size = _omit.size,
-          attrs = _objectWithoutProperties(_omit, ['className', 'cssModule', 'dropup', 'isOpen', 'group', 'size']);
+          nav = _omit.nav,
+          addonType = _omit.addonType,
+          attrs = _objectWithoutProperties(_omit, ['className', 'cssModule', 'dropup', 'isOpen', 'group', 'size', 'nav', 'addonType']);
 
-      var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, (_classNames = {
-        'btn-group': group
-      }, _defineProperty(_classNames, 'btn-group-' + size, !!size), _defineProperty(_classNames, 'dropdown', !group), _defineProperty(_classNames, 'show', isOpen), _defineProperty(_classNames, 'dropup', dropup), _classNames)), cssModule);
+      attrs.tag = attrs.tag || (nav ? 'li' : 'div');
+
+      var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, (_classNames = {}, _defineProperty(_classNames, 'input-group-' + addonType, addonType), _defineProperty(_classNames, 'btn-group', group), _defineProperty(_classNames, 'btn-group-' + size, !!size), _defineProperty(_classNames, 'dropdown', !group && !addonType), _defineProperty(_classNames, 'show', isOpen), _defineProperty(_classNames, 'dropup', dropup), _defineProperty(_classNames, 'nav-item', nav), _classNames)), cssModule);
       return (0, _inferno.createVNode)(16, _infernoPopper.Manager, null, null, _extends({}, attrs, {
-        'className': classes
+        'className': classes,
+        'onKeyDown': this.handleKeyDown
       }));
     }
   }]);
@@ -955,7 +1044,7 @@ exports.default = Dropdown;
 module.exports = exports['default'];
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1085,7 +1174,7 @@ exports.default = DropdownItem;
 module.exports = exports['default'];
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1107,7 +1196,7 @@ var _classnames2 = _interopRequireDefault(_classnames);
 
 var _utils = __webpack_require__(2);
 
-var _infernoPopper = __webpack_require__(16);
+var _infernoPopper = __webpack_require__(8);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1154,7 +1243,7 @@ exports.default = DropdownMenu;
 module.exports = exports['default'];
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1178,7 +1267,7 @@ var _classnames2 = _interopRequireDefault(_classnames);
 
 var _utils = __webpack_require__(2);
 
-var _infernoPopper = __webpack_require__(16);
+var _infernoPopper = __webpack_require__(8);
 
 var _Button = __webpack_require__(5);
 
@@ -1286,7 +1375,7 @@ exports.default = DropdownToggle;
 module.exports = exports['default'];
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1359,7 +1448,7 @@ exports.default = Nav;
 module.exports = exports['default'];
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1406,7 +1495,7 @@ exports.default = NavItem;
 module.exports = exports['default'];
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1506,28 +1595,13 @@ exports.default = NavLink;
 module.exports = exports['default'];
 
 /***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = {
-  Arrow: __webpack_require__(133),
-  Manager: __webpack_require__(134),
-  Popper: __webpack_require__(135),
-  Target: __webpack_require__(136),
-  Travel: __webpack_require__(137)
-};
-
-/***/ }),
 /* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-module.exports = __webpack_require__(140).default;
+module.exports = __webpack_require__(145).default;
 module.exports.default = module.exports;
 
 /***/ }),
@@ -1537,345 +1611,11 @@ module.exports.default = module.exports;
 "use strict";
 
 
-module.exports = __webpack_require__(32);
+module.exports = __webpack_require__(33);
 module.exports.default = module.exports;
 
 /***/ }),
 /* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _inferno = __webpack_require__(0);
-
-var _inferno2 = _interopRequireDefault(_inferno);
-
-var _classnames = __webpack_require__(1);
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _utils = __webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-var defaultProps = {
-  tag: 'div',
-  role: 'group'
-};
-
-var ButtonGroup = function ButtonGroup(props) {
-  var className = props.className,
-      cssModule = props.cssModule,
-      size = props.size,
-      vertical = props.vertical,
-      Tag = props.tag,
-      attributes = _objectWithoutProperties(props, ['className', 'cssModule', 'size', 'vertical', 'tag']);
-
-  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, size ? 'btn-group-' + size : false, vertical ? 'btn-group-vertical' : 'btn-group'), cssModule);
-
-  return (0, _inferno.createVNode)(16, Tag, null, null, _extends({}, attributes, {
-    'className': classes
-  }));
-};
-
-ButtonGroup.defaultProps = defaultProps;
-
-exports.default = ButtonGroup;
-module.exports = exports['default'];
-
-/***/ }),
-/* 20 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _inferno = __webpack_require__(0);
-
-var _inferno2 = _interopRequireDefault(_inferno);
-
-var _classnames = __webpack_require__(1);
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _utils = __webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-var defaultProps = {
-  tag: 'form'
-};
-
-/**
- * 
- * NOTE: I have removed the `inline`-attribute, this can be done with CSS
- * which gives cleaner code and better separation of semantics and styling.
- */
-
-var Form = function Form(props) {
-  var className = props.className,
-      cssModule = props.cssModule,
-      Tag = props.tag,
-      innerRef = props.innerRef,
-      attributes = _objectWithoutProperties(props, ['className', 'cssModule', 'tag', 'innerRef']);
-
-  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className), cssModule);
-
-  return (0, _inferno.createVNode)(16, Tag, null, null, _extends({}, attributes, {
-    'className': classes
-  }), null, innerRef);
-};
-
-Form.defaultProps = defaultProps;
-
-exports.default = Form;
-module.exports = exports['default'];
-
-/***/ }),
-/* 21 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _inferno = __webpack_require__(0);
-
-var _inferno2 = _interopRequireDefault(_inferno);
-
-var _classnames = __webpack_require__(1);
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _utils = __webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-var defaultProps = {
-  tag: 'div'
-};
-
-var FormGroup = function FormGroup(props) {
-  var className = props.className,
-      cssModule = props.cssModule,
-      row = props.row,
-      disabled = props.disabled,
-      color = props.color,
-      check = props.check,
-      Tag = props.tag,
-      attributes = _objectWithoutProperties(props, ['className', 'cssModule', 'row', 'disabled', 'color', 'check', 'tag']);
-
-  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, color ? 'has-' + color : false, row ? 'row' : false, check ? 'form-check' : 'form-group', check && disabled ? 'disabled' : false), cssModule);
-
-  return (0, _inferno.createVNode)(16, Tag, null, null, _extends({}, attributes, {
-    'className': classes
-  }));
-};
-
-FormGroup.defaultProps = defaultProps;
-
-exports.default = FormGroup;
-module.exports = exports['default'];
-
-/***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _inferno = __webpack_require__(0);
-
-var _inferno2 = _interopRequireDefault(_inferno);
-
-var _infernoComponent = __webpack_require__(3);
-
-var _infernoComponent2 = _interopRequireDefault(_infernoComponent);
-
-var _classnames = __webpack_require__(1);
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _utils = __webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* eslint react/prefer-stateless-function: 0 */
-
-var defaultProps = {
-  tag: 'p',
-  type: 'text'
-};
-
-var Input = function (_Component) {
-  _inherits(Input, _Component);
-
-  function Input() {
-    _classCallCheck(this, Input);
-
-    return _possibleConstructorReturn(this, (Input.__proto__ || Object.getPrototypeOf(Input)).apply(this, arguments));
-  }
-
-  _createClass(Input, [{
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          className = _props.className,
-          cssModule = _props.cssModule,
-          type = _props.type,
-          size = _props.size,
-          state = _props.state,
-          tag = _props.tag,
-          addon = _props.addon,
-          staticInput = _props.static,
-          innerRef = _props.innerRef,
-          attributes = _objectWithoutProperties(_props, ['className', 'cssModule', 'type', 'size', 'state', 'tag', 'addon', 'static', 'innerRef']);
-
-      var checkInput = ['radio', 'checkbox'].indexOf(type) > -1;
-
-      var fileInput = type === 'file';
-      var textareaInput = type === 'textarea';
-      var selectInput = type === 'select';
-      var Tag = selectInput || textareaInput ? type : 'input';
-
-      var formControlClass = 'form-control';
-
-      if (staticInput) {
-        formControlClass = formControlClass + '-static';
-        Tag = tag;
-      } else if (fileInput) {
-        formControlClass = formControlClass + '-file';
-      } else if (checkInput) {
-        if (addon) {
-          formControlClass = null;
-        } else {
-          formControlClass = 'form-check-input';
-        }
-      }
-
-      var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, state ? 'form-control-' + state : false, size ? 'form-control-' + size : false, formControlClass), cssModule);
-
-      if (Tag === 'input') {
-        attributes.type = type;
-      }
-
-      return (0, _inferno.createVNode)(16, Tag, null, null, _extends({}, attributes, {
-        'className': classes
-      }), null, innerRef);
-    }
-  }]);
-
-  return Input;
-}(_infernoComponent2.default);
-
-Input.defaultProps = defaultProps;
-
-exports.default = Input;
-module.exports = exports['default'];
-
-/***/ }),
-/* 23 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _inferno = __webpack_require__(0);
-
-var _inferno2 = _interopRequireDefault(_inferno);
-
-var _classnames = __webpack_require__(1);
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _utils = __webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-var defaultProps = {
-  tag: 'label'
-};
-
-/**
- * 
- * NOTE: I have removed the `inline`-attribute, this can be done with CSS
- * which gives cleaner code and better separation of semantics and styling.
- * 
- * This affects widths property
- */
-
-var Label = function Label(props) {
-  var className = props.className,
-      cssModule = props.cssModule,
-      hidden = props.hidden,
-      Tag = props.tag,
-      check = props.check,
-      disabled = props.disabled,
-      htmlFor = props.htmlFor,
-      attributes = _objectWithoutProperties(props, ['className', 'cssModule', 'hidden', 'tag', 'check', 'disabled', 'htmlFor']);
-
-  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, hidden ? 'sr-only' : false, check ? 'form-check-label' : 'form-control-label', check && disabled ? 'disabled' : false), cssModule);
-
-  return (0, _inferno.createVNode)(16, Tag, null, null, _extends({
-    'htmlFor': htmlFor
-  }, attributes, {
-    'className': classes
-  }));
-};
-
-Label.defaultProps = defaultProps;
-
-exports.default = Label;
-module.exports = exports['default'];
-
-/***/ }),
-/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1894,7 +1634,7 @@ var _typeof = typeof Symbol === "function" && _typeof2(Symbol.iterator) === "sym
   return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof2(obj);
 };
 
-var _inferno = __webpack_require__(0);
+var _inferno = __webpack_require__(20);
 
 function _addClassName(node, className) {
   if (className) {
@@ -1933,8 +1673,9 @@ var animateOnRemove = exports.animateOnRemove = function animateOnRemove(compone
   // 1. Clone DOM node, inject it and hide original
   var clone = domEl.cloneNode(true);
 
-  var height = domEl.offsetHeight;
-  var width = domEl.offsetWidth;
+  var _domEl$getBoundingCli = domEl.getBoundingClientRect(),
+      width = _domEl$getBoundingCli.width,
+      height = _domEl$getBoundingCli.height;
 
   clone.style.height = height + 'px';
   clone.style.width = width + 'px';
@@ -2023,8 +1764,11 @@ var animateOnAdd = exports.animateOnAdd = function animateOnAdd(component, anima
   var isDisplayNone = window.getComputedStyle(node).getPropertyValue('display') === 'none';
 
   // 1. Get height and set start of animation
-  var height = node.offsetHeight;
-  var width = node.offsetWidth;
+
+  var _node$getBoundingClie = node.getBoundingClientRect(),
+      width = _node$getBoundingClie.width,
+      height = _node$getBoundingClie.height;
+
   _addClassName(node, animCls.start);
 
   // 2. Set an animation listener, code at end
@@ -2090,17 +1834,360 @@ var animateOnAdd = exports.animateOnAdd = function animateOnAdd(component, anima
 //# sourceMappingURL=animatedComponent.js.map
 
 /***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = __webpack_require__(64).default;
+module.exports.default = module.exports;
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _inferno = __webpack_require__(0);
+
+var _inferno2 = _interopRequireDefault(_inferno);
+
+var _classnames = __webpack_require__(1);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _utils = __webpack_require__(2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var defaultProps = {
+  tag: 'div',
+  role: 'group'
+};
+
+var ButtonGroup = function ButtonGroup(props) {
+  var className = props.className,
+      cssModule = props.cssModule,
+      size = props.size,
+      vertical = props.vertical,
+      Tag = props.tag,
+      attributes = _objectWithoutProperties(props, ['className', 'cssModule', 'size', 'vertical', 'tag']);
+
+  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, size ? 'btn-group-' + size : false, vertical ? 'btn-group-vertical' : 'btn-group'), cssModule);
+
+  return (0, _inferno.createVNode)(16, Tag, null, null, _extends({}, attributes, {
+    'className': classes
+  }));
+};
+
+ButtonGroup.defaultProps = defaultProps;
+
+exports.default = ButtonGroup;
+module.exports = exports['default'];
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _inferno = __webpack_require__(0);
+
+var _inferno2 = _interopRequireDefault(_inferno);
+
+var _classnames = __webpack_require__(1);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _utils = __webpack_require__(2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var defaultProps = {
+  tag: 'form'
+};
+
+/**
+ * 
+ * NOTE: I have removed the `inline`-attribute, this can be done with CSS
+ * which gives cleaner code and better separation of semantics and styling.
+ */
+
+var Form = function Form(props) {
+  var className = props.className,
+      cssModule = props.cssModule,
+      Tag = props.tag,
+      innerRef = props.innerRef,
+      attributes = _objectWithoutProperties(props, ['className', 'cssModule', 'tag', 'innerRef']);
+
+  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className), cssModule);
+
+  return (0, _inferno.createVNode)(16, Tag, null, null, _extends({}, attributes, {
+    'className': classes
+  }), null, innerRef);
+};
+
+Form.defaultProps = defaultProps;
+
+exports.default = Form;
+module.exports = exports['default'];
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _inferno = __webpack_require__(0);
+
+var _inferno2 = _interopRequireDefault(_inferno);
+
+var _classnames = __webpack_require__(1);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _utils = __webpack_require__(2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var defaultProps = {
+  tag: 'div'
+};
+
+var FormGroup = function FormGroup(props) {
+  var className = props.className,
+      cssModule = props.cssModule,
+      row = props.row,
+      disabled = props.disabled,
+      check = props.check,
+      Tag = props.tag,
+      attributes = _objectWithoutProperties(props, ['className', 'cssModule', 'row', 'disabled', 'check', 'tag']);
+
+  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, row ? 'row' : false, check ? 'form-check' : 'form-group', check && disabled ? 'disabled' : false), cssModule);
+
+  return (0, _inferno.createVNode)(16, Tag, null, null, _extends({}, attributes, {
+    'className': classes
+  }));
+};
+
+FormGroup.defaultProps = defaultProps;
+
+exports.default = FormGroup;
+module.exports = exports['default'];
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _inferno = __webpack_require__(0);
+
+var _inferno2 = _interopRequireDefault(_inferno);
+
+var _infernoComponent = __webpack_require__(3);
+
+var _infernoComponent2 = _interopRequireDefault(_infernoComponent);
+
+var _classnames = __webpack_require__(1);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _utils = __webpack_require__(2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* eslint react/prefer-stateless-function: 0 */
+
+var defaultProps = {
+  tag: 'p',
+  type: 'text'
+};
+
+var Input = function (_Component) {
+  _inherits(Input, _Component);
+
+  function Input() {
+    _classCallCheck(this, Input);
+
+    return _possibleConstructorReturn(this, (Input.__proto__ || Object.getPrototypeOf(Input)).apply(this, arguments));
+  }
+
+  _createClass(Input, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          className = _props.className,
+          cssModule = _props.cssModule,
+          type = _props.type,
+          bsSize = _props.bsSize,
+          tag = _props.tag,
+          valid = _props.valid,
+          addon = _props.addon,
+          plaintext = _props.plaintext,
+          innerRef = _props.innerRef,
+          attributes = _objectWithoutProperties(_props, ['className', 'cssModule', 'type', 'bsSize', 'tag', 'valid', 'addon', 'plaintext', 'innerRef']);
+
+      var checkInput = ['radio', 'checkbox'].indexOf(type) > -1;
+
+      var fileInput = type === 'file';
+      var textareaInput = type === 'textarea';
+      var selectInput = type === 'select';
+      var Tag = selectInput || textareaInput ? type : 'input';
+
+      var formControlClass = 'form-control';
+
+      if (plaintext) {
+        formControlClass = formControlClass + '-plaintext';
+        Tag = tag;
+      } else if (fileInput) {
+        formControlClass = formControlClass + '-file';
+      } else if (checkInput) {
+        if (addon) {
+          formControlClass = null;
+        } else {
+          formControlClass = 'form-check-input';
+        }
+      }
+
+      var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, valid === false && 'is-invalid', valid && 'is-valid', bsSize ? 'form-control-' + bsSize : false, formControlClass), cssModule);
+
+      if (Tag === 'input') {
+        attributes.type = type;
+      }
+
+      return (0, _inferno.createVNode)(16, Tag, null, null, _extends({}, attributes, {
+        'className': classes
+      }), null, innerRef);
+    }
+  }]);
+
+  return Input;
+}(_infernoComponent2.default);
+
+Input.defaultProps = defaultProps;
+
+exports.default = Input;
+module.exports = exports['default'];
+
+/***/ }),
 /* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-module.exports = __webpack_require__(97);
-module.exports.default = module.exports;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _inferno = __webpack_require__(0);
+
+var _inferno2 = _interopRequireDefault(_inferno);
+
+var _classnames = __webpack_require__(1);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _utils = __webpack_require__(2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var defaultProps = {
+  tag: 'label'
+};
+
+/**
+ * 
+ * NOTE: I have removed the `inline`-attribute, this can be done with CSS
+ * which gives cleaner code and better separation of semantics and styling.
+ * 
+ * This affects widths property
+ */
+
+var Label = function Label(props) {
+  var className = props.className,
+      cssModule = props.cssModule,
+      hidden = props.hidden,
+      Tag = props.tag,
+      check = props.check,
+      disabled = props.disabled,
+      htmlFor = props.htmlFor,
+      attributes = _objectWithoutProperties(props, ['className', 'cssModule', 'hidden', 'tag', 'check', 'disabled', 'htmlFor']);
+
+  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, hidden ? 'sr-only' : false, check ? 'form-check-label' : 'form-control-label', check && disabled ? 'disabled' : false), cssModule);
+
+  return (0, _inferno.createVNode)(16, Tag, null, null, _extends({
+    'htmlFor': htmlFor
+  }, attributes, {
+    'className': classes
+  }));
+};
+
+Label.defaultProps = defaultProps;
+
+exports.default = Label;
+module.exports = exports['default'];
 
 /***/ }),
 /* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = __webpack_require__(103);
+module.exports.default = module.exports;
+
+/***/ }),
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2154,7 +2241,7 @@ exports.default = Card;
 module.exports = exports['default'];
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2203,7 +2290,7 @@ exports.default = CardText;
 module.exports = exports['default'];
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2252,7 +2339,7 @@ exports.default = CardTitle;
 module.exports = exports['default'];
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2302,7 +2389,7 @@ exports.default = InputGroup;
 module.exports = exports['default'];
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2340,13 +2427,14 @@ var InputGroupButton = function InputGroupButton(props) {
   var className = props.className,
       cssModule = props.cssModule,
       Tag = props.tag,
+      addonType = props.addonType,
       children = props.children,
       groupClassName = props.groupClassName,
       groupAttributes = props.groupAttributes,
-      attributes = _objectWithoutProperties(props, ['className', 'cssModule', 'tag', 'children', 'groupClassName', 'groupAttributes']);
+      attributes = _objectWithoutProperties(props, ['className', 'cssModule', 'tag', 'addonType', 'children', 'groupClassName', 'groupAttributes']);
 
   if (typeof children === 'string') {
-    var groupClasses = (0, _utils.mapToCssModules)((0, _classnames2.default)(groupClassName, 'input-group-btn'), cssModule);
+    var groupClasses = (0, _utils.mapToCssModules)((0, _classnames2.default)(groupClassName, 'input-group-' + addonType), cssModule);
 
     return (0, _inferno.createVNode)(16, Tag, null, null, _extends({}, groupAttributes, {
       'className': groupClasses,
@@ -2357,7 +2445,7 @@ var InputGroupButton = function InputGroupButton(props) {
     }));
   }
 
-  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'input-group-btn'), cssModule);
+  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'input-group-' + addonType), cssModule);
 
   return (0, _inferno.createVNode)(16, Tag, null, null, _extends({}, attributes, {
     'className': classes,
@@ -2371,7 +2459,7 @@ exports.default = InputGroupButton;
 module.exports = exports['default'];
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2388,8 +2476,6 @@ var inferno = __webpack_require__(0);
  */ /** TypeDoc Comment */
 var NO_OP = "$NO_OP";
 var ERROR_MSG = "a runtime error occured! Use Inferno in development environment to find the error.";
-// This should be boolean and not reference to window.document
-var isBrowser = !!(typeof window !== "undefined" && window.document);
 // this is MUCH faster than .constructor === Array and instanceof Array
 // in Node 7 and the later versions of V8, slower in older versions though
 var isArray = Array.isArray;
@@ -2435,6 +2521,20 @@ function combineFrom(first, second) {
     }
     return out;
 }
+function Lifecycle() {
+    this.listeners = [];
+}
+Lifecycle.prototype.addListener = function addListener(callback) {
+    this.listeners.push(callback);
+};
+Lifecycle.prototype.trigger = function trigger() {
+    var listeners = this.listeners;
+    var listener;
+    // We need to remove current listener from array when calling it, because more listeners might be added
+    while (listener = listeners.shift()) {
+        listener();
+    }
+};
 
 /**
  * @module Inferno-Component
@@ -2445,17 +2545,6 @@ if (process.env.NODE_ENV !== "production") {
     noOp = "Inferno Error: Can only update a mounted or mounting component. This usually means you called setState() or forceUpdate() on an unmounted component. This is a no-op.";
 }
 var componentCallbackQueue = new Map();
-// when a components root VNode is also a component, we can run into issues
-// this will recursively look for vNode.parentNode if the VNode is a component
-function updateParentComponentVNodes(vNode, dom) {
-    if (vNode.flags & 28 /* Component */) {
-            var parentVNode = vNode.parentVNode;
-            if (parentVNode) {
-                parentVNode.dom = dom;
-                updateParentComponentVNodes(parentVNode, dom);
-            }
-        }
-}
 var resolvedPromise = Promise.resolve();
 function addToQueue(component, force, callback) {
     var queue = componentCallbackQueue.get(component);
@@ -2483,13 +2572,13 @@ function queueStateChanges(component, newState, callback) {
     }
     var pending = component._pendingState;
     if (isNullOrUndef(pending)) {
-        component._pendingState = pending = newState;
+        component._pendingState = newState;
     } else {
         for (var stateKey in newState) {
             pending[stateKey] = newState[stateKey];
         }
     }
-    if (isBrowser && !component._pendingSetState && !component._blockRender) {
+    if (!component._pendingSetState && !component._blockRender) {
         if (!component._updating) {
             component._pendingSetState = true;
             component._updating = true;
@@ -2499,16 +2588,8 @@ function queueStateChanges(component, newState, callback) {
             addToQueue(component, false, callback);
         }
     } else {
-        var state = component.state;
-        if (state === null) {
-            component.state = pending;
-        } else {
-            for (var key in pending) {
-                state[key] = pending[key];
-            }
-        }
-        component._pendingState = null;
-        if (!isNullOrUndef(callback) && component._blockRender) {
+        component._pendingSetState = true;
+        if (isFunction(callback) && component._blockRender) {
             component._lifecycle.addListener(callback.bind(component));
         }
     }
@@ -2525,24 +2606,30 @@ function applyState(component, force, callback) {
         var props = component.props;
         var context = component.context;
         component._pendingState = null;
-        var nextInput = component._updateComponent(prevState, nextState, props, props, context, force, true);
+        var nextInput;
+        var renderOutput = component._updateComponent(prevState, nextState, props, props, context, force, true);
         var didUpdate = true;
-        if (isInvalid(nextInput)) {
+        if (isInvalid(renderOutput)) {
             nextInput = inferno.createVNode(4096 /* Void */, null);
-        } else if (nextInput === NO_OP) {
+        } else if (renderOutput === NO_OP) {
             nextInput = component._lastInput;
             didUpdate = false;
-        } else if (isStringOrNumber(nextInput)) {
-            nextInput = inferno.createVNode(1 /* Text */, null, null, nextInput);
-        } else if (isArray(nextInput)) {
+        } else if (isStringOrNumber(renderOutput)) {
+            nextInput = inferno.createVNode(1 /* Text */, null, null, renderOutput);
+        } else if (isArray(renderOutput)) {
             if (process.env.NODE_ENV !== "production") {
                 throwError("a valid Inferno VNode (or null) must be returned from a component render. You may have returned an array or an invalid object.");
             }
-            throwError();
+            return throwError();
+        } else {
+            nextInput = renderOutput;
         }
         var lastInput = component._lastInput;
         var vNode = component._vNode;
         var parentDom = lastInput.dom && lastInput.dom.parentNode || (lastInput.dom = vNode.dom);
+        if (nextInput.flags & 28 /* Component */) {
+                nextInput.parentVNode = vNode;
+            }
         component._lastInput = nextInput;
         if (didUpdate) {
             var childContext;
@@ -2556,6 +2643,10 @@ function applyState(component, force, callback) {
             }
             var lifeCycle = component._lifecycle;
             inferno.internal_patch(lastInput, nextInput, parentDom, lifeCycle, childContext, component._isSVG, false);
+            // If this component was unmounted by its parent, do nothing. This is no-op
+            if (component._unmounted) {
+                return;
+            }
             lifeCycle.trigger();
             if (!isNullOrUndef(component.componentDidUpdate)) {
                 component.componentDidUpdate(props, prevState, context);
@@ -2568,12 +2659,16 @@ function applyState(component, force, callback) {
         if (inferno.options.findDOMNodeEnabled) {
             inferno.internal_DOMNodeMap.set(component, nextInput.dom);
         }
-        updateParentComponentVNodes(vNode, dom);
+        while (!isNullOrUndef(vNode = vNode.parentVNode)) {
+            if ((vNode.flags & 28 /* Component */) > 0) {
+                vNode.dom = dom;
+            }
+        }
     } else {
         component.state = component._pendingState;
         component._pendingState = null;
     }
-    if (!isNullOrUndef(callback)) {
+    if (isFunction(callback)) {
         callback.call(component);
     }
 }
@@ -2596,7 +2691,7 @@ var Component = function Component(props, context) {
     this.context = context || inferno.EMPTY_OBJ; // context should not be mutable
 };
 Component.prototype.forceUpdate = function forceUpdate(callback) {
-    if (this._unmounted || !isBrowser) {
+    if (this._unmounted) {
         return;
     }
     applyState(this, true, callback);
@@ -2624,19 +2719,13 @@ Component.prototype._updateComponent = function _updateComponent(prevState, next
     if (prevProps !== nextProps || nextProps === inferno.EMPTY_OBJ || prevState !== nextState || force) {
         if (prevProps !== nextProps || nextProps === inferno.EMPTY_OBJ) {
             if (!isNullOrUndef(this.componentWillReceiveProps) && !fromSetState) {
-                // keep a copy of state before componentWillReceiveProps
-                var beforeState = combineFrom(this.state);
                 this._blockRender = true;
                 this.componentWillReceiveProps(nextProps, context);
-                this._blockRender = false;
-                var afterState = this.state;
-                if (beforeState !== afterState) {
-                    // if state changed in componentWillReceiveProps, reassign the beforeState
-                    this.state = beforeState;
-                    // set the afterState as pending state so the change gets picked up below
-                    this._pendingSetState = true;
-                    this._pendingState = afterState;
+                // If this component was removed during its own update do nothing...
+                if (this._unmounted) {
+                    return NO_OP;
                 }
+                this._blockRender = false;
             }
             if (this._pendingSetState) {
                 nextState = combineFrom(nextState, this._pendingState);
@@ -2677,7 +2766,7 @@ exports['default'] = Component;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2722,6 +2811,20 @@ function isUndefined(o) {
 function isObject(o) {
     return (typeof o === 'undefined' ? 'undefined' : _typeof(o)) === "object";
 }
+function Lifecycle() {
+    this.listeners = [];
+}
+Lifecycle.prototype.addListener = function addListener(callback) {
+    this.listeners.push(callback);
+};
+Lifecycle.prototype.trigger = function trigger() {
+    var listeners = this.listeners;
+    var listener;
+    // We need to remove current listener from array when calling it, because more listeners might be added
+    while (listener = listeners.shift()) {
+        listener();
+    }
+};
 
 /**
  * @module Inferno-Devtools
@@ -3183,7 +3286,7 @@ function initDevTools() {
 initDevTools();
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3419,6 +3522,9 @@ function handleEvent(name, lastEvent, nextEvent, dom) {
 function dispatchEvents(event, target, items, count, isClick, eventData) {
     var dom = target;
     while (count > 0) {
+        if (isClick && dom.disabled) {
+            return;
+        }
         var eventsToTrigger = items.get(dom);
         if (eventsToTrigger) {
             count--;
@@ -3437,7 +3543,7 @@ function dispatchEvents(event, target, items, count, isClick, eventData) {
         // Html Nodes can be nested fe: span inside button in that scenario browser does not handle disabled attribute on parent,
         // because the event listener is on document.body
         // Don't process clicks on disabled elements
-        if (dom === null || isClick && dom.disabled) {
+        if (dom === null) {
             return;
         }
     }
@@ -3771,15 +3877,13 @@ function applyValue$2(nextPropsOrEmpty, dom, mounting) {
  * Currently user must choose either controlled or non-controlled and stick with that
  */
 function processElement(flags, vNode, dom, nextPropsOrEmpty, mounting, isControlled) {
-    if (flags & 512 /* InputElement */) {
-            processInput(vNode, dom, nextPropsOrEmpty, mounting, isControlled);
-        }
-    if (flags & 2048 /* SelectElement */) {
-            processSelect(vNode, dom, nextPropsOrEmpty, mounting, isControlled);
-        }
-    if (flags & 1024 /* TextareaElement */) {
-            processTextarea(vNode, dom, nextPropsOrEmpty, mounting, isControlled);
-        }
+    if ((flags & 512 /* InputElement */) > 0) {
+        processInput(vNode, dom, nextPropsOrEmpty, mounting, isControlled);
+    } else if ((flags & 2048 /* SelectElement */) > 0) {
+        processSelect(vNode, dom, nextPropsOrEmpty, mounting, isControlled);
+    } else if ((flags & 1024 /* TextareaElement */) > 0) {
+        processTextarea(vNode, dom, nextPropsOrEmpty, mounting, isControlled);
+    }
 }
 function isControlledFormElement(nextPropsOrEmpty) {
     return nextPropsOrEmpty.type && isCheckedType(nextPropsOrEmpty.type) ? !isNullOrUndef(nextPropsOrEmpty.checked) : !isNullOrUndef(nextPropsOrEmpty.value);
@@ -4074,111 +4178,77 @@ function poolComponent(vNode) {
  */ /** TypeDoc Comment */
 function unmount(vNode, parentDom, lifecycle, canRecycle, isRecycling) {
     var flags = vNode.flags;
+    var dom = vNode.dom;
     if (flags & 28 /* Component */) {
-            unmountComponent(vNode, parentDom, lifecycle, canRecycle, isRecycling);
+            var instance = vNode.children;
+            var isStatefulComponent$$1 = (flags & 4 /* ComponentClass */) > 0;
+            var props = vNode.props || EMPTY_OBJ;
+            var ref = vNode.ref;
+            if (!isRecycling) {
+                if (isStatefulComponent$$1) {
+                    if (!instance._unmounted) {
+                        if (!isNull(options.beforeUnmount)) {
+                            options.beforeUnmount(vNode);
+                        }
+                        if (!isUndefined(instance.componentWillUnmount)) {
+                            instance.componentWillUnmount();
+                        }
+                        if (ref && !isRecycling) {
+                            ref(null);
+                        }
+                        instance._unmounted = true;
+                        if (options.findDOMNodeEnabled) {
+                            componentToDOMNodeMap.delete(instance);
+                        }
+                        unmount(instance._lastInput, null, instance._lifecycle, false, isRecycling);
+                    }
+                } else {
+                    if (!isNullOrUndef(ref)) {
+                        if (!isNullOrUndef(ref.onComponentWillUnmount)) {
+                            ref.onComponentWillUnmount(dom, props);
+                        }
+                    }
+                    unmount(instance, null, lifecycle, false, isRecycling);
+                }
+            }
+            if (options.recyclingEnabled && !isStatefulComponent$$1 && (parentDom || canRecycle)) {
+                poolComponent(vNode);
+            }
         } else if (flags & 3970 /* Element */) {
-            unmountElement(vNode, parentDom, lifecycle, canRecycle, isRecycling);
-        } else if (flags & (1 /* Text */ | 4096 /* Void */)) {
-        unmountVoidOrText(vNode, parentDom);
-    }
-}
-function unmountVoidOrText(vNode, parentDom) {
-    if (!isNull(parentDom)) {
-        removeChild(parentDom, vNode.dom);
-    }
-}
-function unmountComponent(vNode, parentDom, lifecycle, canRecycle, isRecycling) {
-    var instance = vNode.children;
-    var flags = vNode.flags;
-    var isStatefulComponent$$1 = flags & 4;
-    var props = vNode.props || EMPTY_OBJ;
-    var ref = vNode.ref;
-    var dom = vNode.dom;
-    if (!isRecycling) {
-        if (isStatefulComponent$$1) {
-            if (!instance._unmounted) {
-                if (!isNull(options.beforeUnmount)) {
-                    options.beforeUnmount(vNode);
-                }
-                if (!isUndefined(instance.componentWillUnmount)) {
-                    instance.componentWillUnmount();
-                }
-                if (ref && !isRecycling) {
-                    ref(null);
-                }
-                instance._unmounted = true;
-                if (options.findDOMNodeEnabled) {
-                    componentToDOMNodeMap.delete(instance);
-                }
-                unmount(instance._lastInput, null, instance._lifecycle, false, isRecycling);
+            var ref$1 = vNode.ref;
+            var props$1 = vNode.props;
+            if (!isRecycling && isFunction(ref$1)) {
+                ref$1(null);
             }
-        } else {
-            if (!isNullOrUndef(ref)) {
-                if (!isNullOrUndef(ref.onComponentWillUnmount)) {
-                    ref.onComponentWillUnmount(dom, props);
+            var children = vNode.children;
+            if (!isNullOrUndef(children)) {
+                if (isArray(children)) {
+                    for (var i = 0, len = children.length; i < len; i++) {
+                        var child = children[i];
+                        if (!isInvalid(child) && isObject(child)) {
+                            unmount(child, null, lifecycle, false, isRecycling);
+                        }
+                    }
+                } else if (isObject(children)) {
+                    unmount(children, null, lifecycle, false, isRecycling);
                 }
             }
-            unmount(instance, null, lifecycle, false, isRecycling);
-        }
-    }
-    if (parentDom) {
-        removeChild(parentDom, dom);
-    }
-    if (options.recyclingEnabled && !isStatefulComponent$$1 && (parentDom || canRecycle)) {
-        poolComponent(vNode);
-    }
-}
-function unmountElement(vNode, parentDom, lifecycle, canRecycle, isRecycling) {
-    var dom = vNode.dom;
-    var ref = vNode.ref;
-    var props = vNode.props;
-    if (ref && !isRecycling) {
-        unmountRef(ref);
-    }
-    var children = vNode.children;
-    if (!isNullOrUndef(children)) {
-        unmountChildren$1(children, lifecycle, isRecycling);
-    }
-    if (!isNull(props)) {
-        for (var name in props) {
-            // do not add a hasOwnProperty check here, it affects performance
-            if (props[name] !== null && isAttrAnEvent(name)) {
-                patchEvent(name, props[name], null, dom);
-                // We need to set this null, because same props otherwise come back if SCU returns false and we are recyling
-                props[name] = null;
+            if (!isNull(props$1)) {
+                for (var name in props$1) {
+                    // do not add a hasOwnProperty check here, it affects performance
+                    if (props$1[name] !== null && isAttrAnEvent(name)) {
+                        patchEvent(name, props$1[name], null, dom);
+                        // We need to set this null, because same props otherwise come back if SCU returns false and we are recyling
+                        props$1[name] = null;
+                    }
+                }
+            }
+            if (options.recyclingEnabled && (parentDom || canRecycle)) {
+                poolElement(vNode);
             }
         }
-    }
     if (!isNull(parentDom)) {
         removeChild(parentDom, dom);
-    }
-    if (options.recyclingEnabled && (parentDom || canRecycle)) {
-        poolElement(vNode);
-    }
-}
-function unmountChildren$1(children, lifecycle, isRecycling) {
-    if (isArray(children)) {
-        for (var i = 0, len = children.length; i < len; i++) {
-            var child = children[i];
-            if (!isInvalid(child) && isObject(child)) {
-                unmount(child, null, lifecycle, false, isRecycling);
-            }
-        }
-    } else if (isObject(children)) {
-        unmount(children, null, lifecycle, false, isRecycling);
-    }
-}
-function unmountRef(ref) {
-    if (isFunction(ref)) {
-        ref(null);
-    } else {
-        if (isInvalid(ref)) {
-            return;
-        }
-        if (process.env.NODE_ENV !== "production") {
-            throwError('string "refs" are not supported in Inferno 1.0. Use callback "refs" instead.');
-        }
-        throwError();
     }
 }
 
@@ -4464,10 +4534,19 @@ function patchChildren(lastFlags, nextFlags, lastChildren, nextChildren, dom, li
         }
     }
     if (patchArray) {
-        if (patchKeyed) {
-            patchKeyedChildren(lastChildren, nextChildren, dom, lifecycle, context, isSVG, isRecycling);
+        var lastLength = lastChildren.length;
+        var nextLength = nextChildren.length;
+        // Fast path's for both algorithms
+        if (lastLength === 0) {
+            if (nextLength > 0) {
+                mountArrayChildren(nextChildren, dom, lifecycle, context, isSVG);
+            }
+        } else if (nextLength === 0) {
+            removeAllChildren(dom, lastChildren, lifecycle, isRecycling);
+        } else if (patchKeyed) {
+            patchKeyedChildren(lastChildren, nextChildren, dom, lifecycle, context, isSVG, isRecycling, lastLength, nextLength);
         } else {
-            patchNonKeyedChildren(lastChildren, nextChildren, dom, lifecycle, context, isSVG, isRecycling);
+            patchNonKeyedChildren(lastChildren, nextChildren, dom, lifecycle, context, isSVG, isRecycling, lastLength, nextLength);
         }
     }
 }
@@ -4499,6 +4578,11 @@ function patchComponent(lastVNode, nextVNode, parentDom, lifecycle, context, isS
                 instance._isSVG = isSVG;
                 var lastInput = instance._lastInput;
                 var nextInput = instance._updateComponent(lastState, nextState, lastProps, nextProps, context, false, false);
+                // If this component was destroyed by its parent do nothing, this is no-op
+                // It can happen by using external callback etc during render / update
+                if (instance._unmounted) {
+                    return false;
+                }
                 var didUpdate = true;
                 // Update component before getting child context
                 var childContext;
@@ -4614,9 +4698,7 @@ function patchText(lastVNode, nextVNode) {
 function patchVoid(lastVNode, nextVNode) {
     nextVNode.dom = lastVNode.dom;
 }
-function patchNonKeyedChildren(lastChildren, nextChildren, dom, lifecycle, context, isSVG, isRecycling) {
-    var lastChildrenLength = lastChildren.length;
-    var nextChildrenLength = nextChildren.length;
+function patchNonKeyedChildren(lastChildren, nextChildren, dom, lifecycle, context, isSVG, isRecycling, lastChildrenLength, nextChildrenLength) {
     var commonLength = lastChildrenLength > nextChildrenLength ? nextChildrenLength : lastChildrenLength;
     var i = 0;
     for (; i < commonLength; i++) {
@@ -4634,17 +4716,13 @@ function patchNonKeyedChildren(lastChildren, nextChildren, dom, lifecycle, conte
             }
             appendChild(dom, mount(nextChild$1, null, lifecycle, context, isSVG));
         }
-    } else if (nextChildrenLength === 0) {
-        removeAllChildren(dom, lastChildren, lifecycle, isRecycling);
     } else if (lastChildrenLength > nextChildrenLength) {
         for (i = commonLength; i < lastChildrenLength; i++) {
             unmount(lastChildren[i], dom, lifecycle, false, isRecycling);
         }
     }
 }
-function patchKeyedChildren(a, b, dom, lifecycle, context, isSVG, isRecycling) {
-    var aLength = a.length;
-    var bLength = b.length;
+function patchKeyedChildren(a, b, dom, lifecycle, context, isSVG, isRecycling, aLength, bLength) {
     var aEnd = aLength - 1;
     var bEnd = bLength - 1;
     var aStart = 0;
@@ -4656,15 +4734,6 @@ function patchKeyedChildren(a, b, dom, lifecycle, context, isSVG, isRecycling) {
     var nextNode;
     var nextPos;
     var node;
-    if (aLength === 0) {
-        if (bLength > 0) {
-            mountArrayChildren(b, dom, lifecycle, context, isSVG);
-        }
-        return;
-    } else if (bLength === 0) {
-        removeAllChildren(dom, a, lifecycle, isRecycling);
-        return;
-    }
     var aStartNode = a[aStart];
     var bStartNode = b[bStart];
     var aEndNode = a[aEnd];
@@ -4676,8 +4745,8 @@ function patchKeyedChildren(a, b, dom, lifecycle, context, isSVG, isRecycling) {
         b[bEnd] = bEndNode = directClone(bEndNode);
     }
     // Step 1
-    /* eslint no-constant-condition: 0 */
-    outer: while (true) {
+    // tslint:disable-next-line
+    outer: {
         // Sync nodes with the same key at the beginning.
         while (aStartNode.key === bStartNode.key) {
             patch(aStartNode, bStartNode, dom, lifecycle, context, isSVG, isRecycling);
@@ -4706,40 +4775,11 @@ function patchKeyedChildren(a, b, dom, lifecycle, context, isSVG, isRecycling) {
                 b[bEnd] = bEndNode = directClone(bEndNode);
             }
         }
-        // Move and sync nodes from right to left.
-        if (aEndNode.key === bStartNode.key) {
-            patch(aEndNode, bStartNode, dom, lifecycle, context, isSVG, isRecycling);
-            insertOrAppend(dom, bStartNode.dom, aStartNode.dom);
-            aEnd--;
-            bStart++;
-            aEndNode = a[aEnd];
-            bStartNode = b[bStart];
-            if (bStartNode.dom) {
-                b[bStart] = bStartNode = directClone(bStartNode);
-            }
-            continue;
-        }
-        // Move and sync nodes from left to right.
-        if (aStartNode.key === bEndNode.key) {
-            patch(aStartNode, bEndNode, dom, lifecycle, context, isSVG, isRecycling);
-            nextPos = bEnd + 1;
-            nextNode = nextPos < b.length ? b[nextPos].dom : null;
-            insertOrAppend(dom, bEndNode.dom, nextNode);
-            aStart++;
-            bEnd--;
-            aStartNode = a[aStart];
-            bEndNode = b[bEnd];
-            if (bEndNode.dom) {
-                b[bEnd] = bEndNode = directClone(bEndNode);
-            }
-            continue;
-        }
-        break;
     }
     if (aStart > aEnd) {
         if (bStart <= bEnd) {
             nextPos = bEnd + 1;
-            nextNode = nextPos < b.length ? b[nextPos].dom : null;
+            nextNode = nextPos < bLength ? b[nextPos].dom : null;
             while (bStart <= bEnd) {
                 node = b[bStart];
                 if (node.dom) {
@@ -4754,21 +4794,21 @@ function patchKeyedChildren(a, b, dom, lifecycle, context, isSVG, isRecycling) {
             unmount(a[aStart++], dom, lifecycle, false, isRecycling);
         }
     } else {
-        aLength = aEnd - aStart + 1;
-        bLength = bEnd - bStart + 1;
-        var sources = new Array(bLength);
+        var aLeft = aEnd - aStart + 1;
+        var bLeft = bEnd - bStart + 1;
+        var sources = new Array(bLeft);
         // Mark all nodes as inserted.
-        for (i = 0; i < bLength; i++) {
+        for (i = 0; i < bLeft; i++) {
             sources[i] = -1;
         }
         var moved = false;
         var pos = 0;
         var patched = 0;
         // When sizes are small, just loop them through
-        if (bLength <= 4 || aLength * bLength <= 16) {
+        if (bLeft <= 4 || aLeft * bLeft <= 16) {
             for (i = aStart; i <= aEnd; i++) {
                 aNode = a[i];
-                if (patched < bLength) {
+                if (patched < bLeft) {
                     for (j = bStart; j <= bEnd; j++) {
                         bNode = b[j];
                         if (aNode.key === bNode.key) {
@@ -4798,7 +4838,7 @@ function patchKeyedChildren(a, b, dom, lifecycle, context, isSVG, isRecycling) {
             // Try to patch same keys
             for (i = aStart; i <= aEnd; i++) {
                 aNode = a[i];
-                if (patched < bLength) {
+                if (patched < bLeft) {
                     j = keyIndex.get(aNode.key);
                     if (!isUndefined(j)) {
                         bNode = b[j];
@@ -4819,9 +4859,9 @@ function patchKeyedChildren(a, b, dom, lifecycle, context, isSVG, isRecycling) {
             }
         }
         // fast-path: if nothing patched remove all old and add all new
-        if (aLength === a.length && patched === 0) {
+        if (aLeft === aLength && patched === 0) {
             removeAllChildren(dom, a, lifecycle, isRecycling);
-            while (bStart < bLength) {
+            while (bStart < bLeft) {
                 node = b[bStart];
                 if (node.dom) {
                     b[bStart] = node = directClone(node);
@@ -4830,7 +4870,7 @@ function patchKeyedChildren(a, b, dom, lifecycle, context, isSVG, isRecycling) {
                 insertOrAppend(dom, mount(node, null, lifecycle, context, isSVG), null);
             }
         } else {
-            i = aLength - patched;
+            i = aLeft - patched;
             while (i > 0) {
                 aNode = a[aStart++];
                 if (!isNull(aNode)) {
@@ -4841,7 +4881,7 @@ function patchKeyedChildren(a, b, dom, lifecycle, context, isSVG, isRecycling) {
             if (moved) {
                 var seq = lis_algorithm(sources);
                 j = seq.length - 1;
-                for (i = bLength - 1; i >= 0; i--) {
+                for (i = bLeft - 1; i >= 0; i--) {
                     if (sources[i] === -1) {
                         pos = i + bStart;
                         node = b[pos];
@@ -4849,24 +4889,22 @@ function patchKeyedChildren(a, b, dom, lifecycle, context, isSVG, isRecycling) {
                             b[pos] = node = directClone(node);
                         }
                         nextPos = pos + 1;
-                        nextNode = nextPos < b.length ? b[nextPos].dom : null;
-                        insertOrAppend(dom, mount(node, null, lifecycle, context, isSVG), nextNode);
+                        insertOrAppend(dom, mount(node, null, lifecycle, context, isSVG), nextPos < bLength ? b[nextPos].dom : null);
                     } else {
                         if (j < 0 || i !== seq[j]) {
                             pos = i + bStart;
                             node = b[pos];
                             nextPos = pos + 1;
-                            nextNode = nextPos < b.length ? b[nextPos].dom : null;
-                            insertOrAppend(dom, node.dom, nextNode);
+                            insertOrAppend(dom, node.dom, nextPos < bLength ? b[nextPos].dom : null);
                         } else {
                             j--;
                         }
                     }
                 }
-            } else if (patched !== bLength) {
+            } else if (patched !== bLeft) {
                 // when patched count doesn't match b length we need to insert those new ones
                 // loop backwards so we can use insertBefore
-                for (i = bLength - 1; i >= 0; i--) {
+                for (i = bLeft - 1; i >= 0; i--) {
                     if (sources[i] === -1) {
                         pos = i + bStart;
                         node = b[pos];
@@ -4874,8 +4912,7 @@ function patchKeyedChildren(a, b, dom, lifecycle, context, isSVG, isRecycling) {
                             b[pos] = node = directClone(node);
                         }
                         nextPos = pos + 1;
-                        nextNode = nextPos < b.length ? b[nextPos].dom : null;
-                        insertOrAppend(dom, mount(node, null, lifecycle, context, isSVG), nextNode);
+                        insertOrAppend(dom, mount(node, null, lifecycle, context, isSVG), nextPos < bLength ? b[nextPos].dom : null);
                     }
                 }
             }
@@ -4894,30 +4931,29 @@ function lis_algorithm(arr) {
     var len = arr.length;
     for (i = 0; i < len; i++) {
         var arrI = arr[i];
-        if (arrI === -1) {
-            continue;
-        }
-        j = result[result.length - 1];
-        if (arr[j] < arrI) {
-            p[i] = j;
-            result.push(i);
-            continue;
-        }
-        u = 0;
-        v = result.length - 1;
-        while (u < v) {
-            c = (u + v) / 2 | 0;
-            if (arr[result[c]] < arrI) {
-                u = c + 1;
-            } else {
-                v = c;
+        if (arrI !== -1) {
+            j = result[result.length - 1];
+            if (arr[j] < arrI) {
+                p[i] = j;
+                result.push(i);
+                continue;
             }
-        }
-        if (arrI < arr[result[u]]) {
-            if (u > 0) {
-                p[i] = result[u - 1];
+            u = 0;
+            v = result.length - 1;
+            while (u < v) {
+                c = (u + v) / 2 | 0;
+                if (arr[result[c]] < arrI) {
+                    u = c + 1;
+                } else {
+                    v = c;
+                }
             }
-            result[u] = i;
+            if (arrI < arr[result[u]]) {
+                if (u > 0) {
+                    p[i] = result[u - 1];
+                }
+                result[u] = i;
+            }
         }
     }
     u = result.length;
@@ -5274,11 +5310,23 @@ function createClassComponentInstance(vNode, Component, props, context, isSVG, l
     // setState callbacks must fire after render is done when called from componentWillReceiveProps or componentWillMount
     instance._lifecycle = lifecycle;
     instance._unmounted = false;
-    instance._pendingSetState = true;
     instance._isSVG = isSVG;
     if (!isNullOrUndef(instance.componentWillMount)) {
         instance._blockRender = true;
         instance.componentWillMount();
+        if (instance._pendingSetState) {
+            var state = instance.state;
+            var pending = instance._pendingState;
+            if (state === null) {
+                instance.state = pending;
+            } else {
+                for (var key in pending) {
+                    state[key] = pending[key];
+                }
+            }
+            instance._pendingSetState = false;
+            instance._pendingState = null;
+        }
         instance._blockRender = false;
     }
     var childContext;
@@ -5318,7 +5366,6 @@ function createClassComponentInstance(vNode, Component, props, context, isSVG, l
                 input.parentVNode = vNode;
             }
     }
-    instance._pendingSetState = false;
     instance._lastInput = input;
     return instance;
 }
@@ -5362,7 +5409,13 @@ function setTextContent(dom, text) {
     }
 }
 function updateTextContent(dom, text) {
-    dom.firstChild.nodeValue = text;
+    var textNode = dom.firstChild;
+    // Guard against external change on DOM node.
+    if (isNull(textNode)) {
+        setTextContent(dom, text);
+    } else {
+        textNode.nodeValue = text;
+    }
 }
 function appendChild(parentDom, dom) {
     parentDom.appendChild(dom);
@@ -5387,11 +5440,11 @@ function replaceWithNewNode(lastNode, nextNode, parentDom, lifecycle, context, i
     nextNode.dom = dom;
     replaceChild(parentDom, dom, lastNode.dom);
 }
-function replaceChild(parentDom, nextDom, lastDom) {
+function replaceChild(parentDom, newDom, lastDom) {
     if (!parentDom) {
         parentDom = lastDom.parentNode;
     }
-    parentDom.replaceChild(nextDom, lastDom);
+    parentDom.replaceChild(newDom, lastDom);
 }
 function removeChild(parentDom, dom) {
     parentDom.removeChild(dom);
@@ -5425,16 +5478,6 @@ function isSamePropsInnerHTML(dom, props) {
 /**
  * @module Inferno
  */ /** TypeDoc Comment */
-function VNode(children, className, flags, key, props, ref, type) {
-    this.children = children;
-    this.className = className;
-    this.dom = null;
-    this.flags = flags;
-    this.key = key;
-    this.props = props;
-    this.ref = ref;
-    this.type = type;
-}
 /**
  * Creates virtual node
  * @param {number} flags
@@ -5452,7 +5495,16 @@ function createVNode(flags, type, className, children, props, key, ref, noNormal
             flags = isStatefulComponent(type) ? 4 /* ComponentClass */
             : 8 /* ComponentFunction */;
         }
-    var vNode = new VNode(children === void 0 ? null : children, className === void 0 ? null : className, flags, key === void 0 ? null : key, props === void 0 ? null : props, ref === void 0 ? null : ref, type);
+    var vNode = {
+        children: children === void 0 ? null : children,
+        className: className === void 0 ? null : className,
+        dom: null,
+        flags: flags,
+        key: key === void 0 ? null : key,
+        props: props === void 0 ? null : props,
+        ref: ref === void 0 ? null : ref,
+        type: type
+    };
     if (noNormalise !== true) {
         normalize(vNode);
     }
@@ -5823,7 +5875,7 @@ if (process.env.NODE_ENV !== "production") {
         warning("It looks like you're using a minified copy of the development build " + "of Inferno. When deploying Inferno apps to production, make sure to use " + "the production build which skips development warnings and is faster. " + "See http://infernojs.org for more details.");
     }
 }
-var version = "3.8.0";
+var version = "3.10.1";
 // we duplicate it so it plays nicely with different module loading systems
 var index = {
     EMPTY_OBJ: EMPTY_OBJ,
@@ -5862,47 +5914,51 @@ exports.version = version;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }),
-/* 34 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var g;
-
-// This works in non-strict mode
-g = function () {
-	return this;
-}();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1, eval)("this");
-} catch (e) {
-	// This works if the window reference is available
-	if ((typeof window === "undefined" ? "undefined" : _typeof(window)) === "object") g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-/***/ }),
 /* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-module.exports = __webpack_require__(92).default;
+module.exports = __webpack_require__(100).default;
 module.exports.default = module.exports;
 
 /***/ }),
 /* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = {
+  animateOnAdd: __webpack_require__(19).animateOnAdd,
+  animateOnRemove: __webpack_require__(19).animateOnRemove,
+  Animated: __webpack_require__(60).default,
+  CrossFade: __webpack_require__(61).default
+};
+
+/***/ }),
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = __webpack_require__(62).default;
+module.exports.default = module.exports;
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = __webpack_require__(63).default;
+module.exports.default = module.exports;
+
+/***/ }),
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5929,7 +5985,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 var defaultProps = {
-  color: 'default',
+  color: 'secondary',
   pill: false,
   tag: 'span'
 };
@@ -5955,7 +6011,7 @@ exports.default = Badge;
 module.exports = exports['default'];
 
 /***/ }),
-/* 37 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5967,7 +6023,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _Dropdown = __webpack_require__(9);
+var _Dropdown = __webpack_require__(10);
 
 var _Dropdown2 = _interopRequireDefault(_Dropdown);
 
@@ -5985,7 +6041,7 @@ exports.default = ButtonDropdown;
 module.exports = exports['default'];
 
 /***/ }),
-/* 38 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6034,7 +6090,7 @@ exports.default = CardBody;
 module.exports = exports['default'];
 
 /***/ }),
-/* 39 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6056,7 +6112,7 @@ var _classnames2 = _interopRequireDefault(_classnames);
 
 var _utils = __webpack_require__(2);
 
-var _lodash = __webpack_require__(99);
+var _lodash = __webpack_require__(105);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -6134,7 +6190,7 @@ exports.default = Col;
 module.exports = exports['default'];
 
 /***/ }),
-/* 40 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6160,11 +6216,11 @@ var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _infernoAnimation = __webpack_require__(47);
+var _infernoAnimation = __webpack_require__(36);
 
 var _utils = __webpack_require__(2);
 
-var _compat = __webpack_require__(85);
+var _compat = __webpack_require__(94);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6452,7 +6508,7 @@ exports.default = Modal;
 module.exports = exports['default'];
 
 /***/ }),
-/* 41 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6501,7 +6557,7 @@ exports.default = ModalBody;
 module.exports = exports['default'];
 
 /***/ }),
-/* 42 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6550,7 +6606,7 @@ exports.default = ModalFooter;
 module.exports = exports['default'];
 
 /***/ }),
-/* 43 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6621,7 +6677,7 @@ exports.default = ModalHeader;
 module.exports = exports['default'];
 
 /***/ }),
-/* 44 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6639,7 +6695,7 @@ var _classnames2 = _interopRequireDefault(_classnames);
 
 var _utils = __webpack_require__(2);
 
-var _Dropdown = __webpack_require__(9);
+var _Dropdown = __webpack_require__(10);
 
 var _Dropdown2 = _interopRequireDefault(_Dropdown);
 
@@ -6673,7 +6729,7 @@ exports.default = NavDropdown;
 module.exports = exports['default'];
 
 /***/ }),
-/* 45 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6723,7 +6779,7 @@ exports.default = Row;
 module.exports = exports['default'];
 
 /***/ }),
-/* 46 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6789,31 +6845,7 @@ var createPath = exports.createPath = function createPath(location) {
 };
 
 /***/ }),
-/* 47 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = {
-  animateOnAdd: __webpack_require__(24).animateOnAdd,
-  animateOnRemove: __webpack_require__(24).animateOnRemove,
-  Animated: __webpack_require__(89).default,
-  CrossFade: __webpack_require__(90).default
-};
-
-/***/ }),
-/* 48 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = __webpack_require__(91).default;
-module.exports.default = module.exports;
-
-/***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6873,7 +6905,2482 @@ module.exports = warning;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }),
-/* 50 */
+/* 51 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var g;
+
+// This works in non-strict mode
+g = function () {
+	return this;
+}();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1, eval)("this");
+} catch (e) {
+	// This works if the window reference is available
+	if ((typeof window === "undefined" ? "undefined" : _typeof(window)) === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+/***/ }),
+/* 52 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(global) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/**!
+ * @fileOverview Kickass library to create and place poppers near their reference elements.
+ * @version 1.12.9
+ * @license
+ * Copyright (c) 2016 Federico Zivolo and contributors
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+var isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined';
+var longerTimeoutBrowsers = ['Edge', 'Trident', 'Firefox'];
+var timeoutDuration = 0;
+for (var i = 0; i < longerTimeoutBrowsers.length; i += 1) {
+  if (isBrowser && navigator.userAgent.indexOf(longerTimeoutBrowsers[i]) >= 0) {
+    timeoutDuration = 1;
+    break;
+  }
+}
+
+function microtaskDebounce(fn) {
+  var called = false;
+  return function () {
+    if (called) {
+      return;
+    }
+    called = true;
+    window.Promise.resolve().then(function () {
+      called = false;
+      fn();
+    });
+  };
+}
+
+function taskDebounce(fn) {
+  var scheduled = false;
+  return function () {
+    if (!scheduled) {
+      scheduled = true;
+      setTimeout(function () {
+        scheduled = false;
+        fn();
+      }, timeoutDuration);
+    }
+  };
+}
+
+var supportsMicroTasks = isBrowser && window.Promise;
+
+/**
+* Create a debounced version of a method, that's asynchronously deferred
+* but called in the minimum time possible.
+*
+* @method
+* @memberof Popper.Utils
+* @argument {Function} fn
+* @returns {Function}
+*/
+var debounce = supportsMicroTasks ? microtaskDebounce : taskDebounce;
+
+/**
+ * Check if the given variable is a function
+ * @method
+ * @memberof Popper.Utils
+ * @argument {Any} functionToCheck - variable to check
+ * @returns {Boolean} answer to: is a function?
+ */
+function isFunction(functionToCheck) {
+  var getType = {};
+  return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
+}
+
+/**
+ * Get CSS computed property of the given element
+ * @method
+ * @memberof Popper.Utils
+ * @argument {Eement} element
+ * @argument {String} property
+ */
+function getStyleComputedProperty(element, property) {
+  if (element.nodeType !== 1) {
+    return [];
+  }
+  // NOTE: 1 DOM access here
+  var css = getComputedStyle(element, null);
+  return property ? css[property] : css;
+}
+
+/**
+ * Returns the parentNode or the host of the element
+ * @method
+ * @memberof Popper.Utils
+ * @argument {Element} element
+ * @returns {Element} parent
+ */
+function getParentNode(element) {
+  if (element.nodeName === 'HTML') {
+    return element;
+  }
+  return element.parentNode || element.host;
+}
+
+/**
+ * Returns the scrolling parent of the given element
+ * @method
+ * @memberof Popper.Utils
+ * @argument {Element} element
+ * @returns {Element} scroll parent
+ */
+function getScrollParent(element) {
+  // Return body, `getScroll` will take care to get the correct `scrollTop` from it
+  if (!element) {
+    return document.body;
+  }
+
+  switch (element.nodeName) {
+    case 'HTML':
+    case 'BODY':
+      return element.ownerDocument.body;
+    case '#document':
+      return element.body;
+  }
+
+  // Firefox want us to check `-x` and `-y` variations as well
+
+  var _getStyleComputedProp = getStyleComputedProperty(element),
+      overflow = _getStyleComputedProp.overflow,
+      overflowX = _getStyleComputedProp.overflowX,
+      overflowY = _getStyleComputedProp.overflowY;
+
+  if (/(auto|scroll)/.test(overflow + overflowY + overflowX)) {
+    return element;
+  }
+
+  return getScrollParent(getParentNode(element));
+}
+
+/**
+ * Returns the offset parent of the given element
+ * @method
+ * @memberof Popper.Utils
+ * @argument {Element} element
+ * @returns {Element} offset parent
+ */
+function getOffsetParent(element) {
+  // NOTE: 1 DOM access here
+  var offsetParent = element && element.offsetParent;
+  var nodeName = offsetParent && offsetParent.nodeName;
+
+  if (!nodeName || nodeName === 'BODY' || nodeName === 'HTML') {
+    if (element) {
+      return element.ownerDocument.documentElement;
+    }
+
+    return document.documentElement;
+  }
+
+  // .offsetParent will return the closest TD or TABLE in case
+  // no offsetParent is present, I hate this job...
+  if (['TD', 'TABLE'].indexOf(offsetParent.nodeName) !== -1 && getStyleComputedProperty(offsetParent, 'position') === 'static') {
+    return getOffsetParent(offsetParent);
+  }
+
+  return offsetParent;
+}
+
+function isOffsetContainer(element) {
+  var nodeName = element.nodeName;
+
+  if (nodeName === 'BODY') {
+    return false;
+  }
+  return nodeName === 'HTML' || getOffsetParent(element.firstElementChild) === element;
+}
+
+/**
+ * Finds the root node (document, shadowDOM root) of the given element
+ * @method
+ * @memberof Popper.Utils
+ * @argument {Element} node
+ * @returns {Element} root node
+ */
+function getRoot(node) {
+  if (node.parentNode !== null) {
+    return getRoot(node.parentNode);
+  }
+
+  return node;
+}
+
+/**
+ * Finds the offset parent common to the two provided nodes
+ * @method
+ * @memberof Popper.Utils
+ * @argument {Element} element1
+ * @argument {Element} element2
+ * @returns {Element} common offset parent
+ */
+function findCommonOffsetParent(element1, element2) {
+  // This check is needed to avoid errors in case one of the elements isn't defined for any reason
+  if (!element1 || !element1.nodeType || !element2 || !element2.nodeType) {
+    return document.documentElement;
+  }
+
+  // Here we make sure to give as "start" the element that comes first in the DOM
+  var order = element1.compareDocumentPosition(element2) & Node.DOCUMENT_POSITION_FOLLOWING;
+  var start = order ? element1 : element2;
+  var end = order ? element2 : element1;
+
+  // Get common ancestor container
+  var range = document.createRange();
+  range.setStart(start, 0);
+  range.setEnd(end, 0);
+  var commonAncestorContainer = range.commonAncestorContainer;
+
+  // Both nodes are inside #document
+
+  if (element1 !== commonAncestorContainer && element2 !== commonAncestorContainer || start.contains(end)) {
+    if (isOffsetContainer(commonAncestorContainer)) {
+      return commonAncestorContainer;
+    }
+
+    return getOffsetParent(commonAncestorContainer);
+  }
+
+  // one of the nodes is inside shadowDOM, find which one
+  var element1root = getRoot(element1);
+  if (element1root.host) {
+    return findCommonOffsetParent(element1root.host, element2);
+  } else {
+    return findCommonOffsetParent(element1, getRoot(element2).host);
+  }
+}
+
+/**
+ * Gets the scroll value of the given element in the given side (top and left)
+ * @method
+ * @memberof Popper.Utils
+ * @argument {Element} element
+ * @argument {String} side `top` or `left`
+ * @returns {number} amount of scrolled pixels
+ */
+function getScroll(element) {
+  var side = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'top';
+
+  var upperSide = side === 'top' ? 'scrollTop' : 'scrollLeft';
+  var nodeName = element.nodeName;
+
+  if (nodeName === 'BODY' || nodeName === 'HTML') {
+    var html = element.ownerDocument.documentElement;
+    var scrollingElement = element.ownerDocument.scrollingElement || html;
+    return scrollingElement[upperSide];
+  }
+
+  return element[upperSide];
+}
+
+/*
+ * Sum or subtract the element scroll values (left and top) from a given rect object
+ * @method
+ * @memberof Popper.Utils
+ * @param {Object} rect - Rect object you want to change
+ * @param {HTMLElement} element - The element from the function reads the scroll values
+ * @param {Boolean} subtract - set to true if you want to subtract the scroll values
+ * @return {Object} rect - The modifier rect object
+ */
+function includeScroll(rect, element) {
+  var subtract = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+  var scrollTop = getScroll(element, 'top');
+  var scrollLeft = getScroll(element, 'left');
+  var modifier = subtract ? -1 : 1;
+  rect.top += scrollTop * modifier;
+  rect.bottom += scrollTop * modifier;
+  rect.left += scrollLeft * modifier;
+  rect.right += scrollLeft * modifier;
+  return rect;
+}
+
+/*
+ * Helper to detect borders of a given element
+ * @method
+ * @memberof Popper.Utils
+ * @param {CSSStyleDeclaration} styles
+ * Result of `getStyleComputedProperty` on the given element
+ * @param {String} axis - `x` or `y`
+ * @return {number} borders - The borders size of the given axis
+ */
+
+function getBordersSize(styles, axis) {
+  var sideA = axis === 'x' ? 'Left' : 'Top';
+  var sideB = sideA === 'Left' ? 'Right' : 'Bottom';
+
+  return parseFloat(styles['border' + sideA + 'Width'], 10) + parseFloat(styles['border' + sideB + 'Width'], 10);
+}
+
+/**
+ * Tells if you are running Internet Explorer 10
+ * @method
+ * @memberof Popper.Utils
+ * @returns {Boolean} isIE10
+ */
+var isIE10 = undefined;
+
+var isIE10$1 = function isIE10$1() {
+  if (isIE10 === undefined) {
+    isIE10 = navigator.appVersion.indexOf('MSIE 10') !== -1;
+  }
+  return isIE10;
+};
+
+function getSize(axis, body, html, computedStyle) {
+  return Math.max(body['offset' + axis], body['scroll' + axis], html['client' + axis], html['offset' + axis], html['scroll' + axis], isIE10$1() ? html['offset' + axis] + computedStyle['margin' + (axis === 'Height' ? 'Top' : 'Left')] + computedStyle['margin' + (axis === 'Height' ? 'Bottom' : 'Right')] : 0);
+}
+
+function getWindowSizes() {
+  var body = document.body;
+  var html = document.documentElement;
+  var computedStyle = isIE10$1() && getComputedStyle(html);
+
+  return {
+    height: getSize('Height', body, html, computedStyle),
+    width: getSize('Width', body, html, computedStyle)
+  };
+}
+
+var classCallCheck = function classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+};
+
+var createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+
+  return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
+
+var defineProperty = function defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+};
+
+var _extends = Object.assign || function (target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i];
+
+    for (var key in source) {
+      if (Object.prototype.hasOwnProperty.call(source, key)) {
+        target[key] = source[key];
+      }
+    }
+  }
+
+  return target;
+};
+
+/**
+ * Given element offsets, generate an output similar to getBoundingClientRect
+ * @method
+ * @memberof Popper.Utils
+ * @argument {Object} offsets
+ * @returns {Object} ClientRect like output
+ */
+function getClientRect(offsets) {
+  return _extends({}, offsets, {
+    right: offsets.left + offsets.width,
+    bottom: offsets.top + offsets.height
+  });
+}
+
+/**
+ * Get bounding client rect of given element
+ * @method
+ * @memberof Popper.Utils
+ * @param {HTMLElement} element
+ * @return {Object} client rect
+ */
+function getBoundingClientRect(element) {
+  var rect = {};
+
+  // IE10 10 FIX: Please, don't ask, the element isn't
+  // considered in DOM in some circumstances...
+  // This isn't reproducible in IE10 compatibility mode of IE11
+  if (isIE10$1()) {
+    try {
+      rect = element.getBoundingClientRect();
+      var scrollTop = getScroll(element, 'top');
+      var scrollLeft = getScroll(element, 'left');
+      rect.top += scrollTop;
+      rect.left += scrollLeft;
+      rect.bottom += scrollTop;
+      rect.right += scrollLeft;
+    } catch (err) {}
+  } else {
+    rect = element.getBoundingClientRect();
+  }
+
+  var result = {
+    left: rect.left,
+    top: rect.top,
+    width: rect.right - rect.left,
+    height: rect.bottom - rect.top
+  };
+
+  // subtract scrollbar size from sizes
+  var sizes = element.nodeName === 'HTML' ? getWindowSizes() : {};
+  var width = sizes.width || element.clientWidth || result.right - result.left;
+  var height = sizes.height || element.clientHeight || result.bottom - result.top;
+
+  var horizScrollbar = element.offsetWidth - width;
+  var vertScrollbar = element.offsetHeight - height;
+
+  // if an hypothetical scrollbar is detected, we must be sure it's not a `border`
+  // we make this check conditional for performance reasons
+  if (horizScrollbar || vertScrollbar) {
+    var styles = getStyleComputedProperty(element);
+    horizScrollbar -= getBordersSize(styles, 'x');
+    vertScrollbar -= getBordersSize(styles, 'y');
+
+    result.width -= horizScrollbar;
+    result.height -= vertScrollbar;
+  }
+
+  return getClientRect(result);
+}
+
+function getOffsetRectRelativeToArbitraryNode(children, parent) {
+  var isIE10 = isIE10$1();
+  var isHTML = parent.nodeName === 'HTML';
+  var childrenRect = getBoundingClientRect(children);
+  var parentRect = getBoundingClientRect(parent);
+  var scrollParent = getScrollParent(children);
+
+  var styles = getStyleComputedProperty(parent);
+  var borderTopWidth = parseFloat(styles.borderTopWidth, 10);
+  var borderLeftWidth = parseFloat(styles.borderLeftWidth, 10);
+
+  var offsets = getClientRect({
+    top: childrenRect.top - parentRect.top - borderTopWidth,
+    left: childrenRect.left - parentRect.left - borderLeftWidth,
+    width: childrenRect.width,
+    height: childrenRect.height
+  });
+  offsets.marginTop = 0;
+  offsets.marginLeft = 0;
+
+  // Subtract margins of documentElement in case it's being used as parent
+  // we do this only on HTML because it's the only element that behaves
+  // differently when margins are applied to it. The margins are included in
+  // the box of the documentElement, in the other cases not.
+  if (!isIE10 && isHTML) {
+    var marginTop = parseFloat(styles.marginTop, 10);
+    var marginLeft = parseFloat(styles.marginLeft, 10);
+
+    offsets.top -= borderTopWidth - marginTop;
+    offsets.bottom -= borderTopWidth - marginTop;
+    offsets.left -= borderLeftWidth - marginLeft;
+    offsets.right -= borderLeftWidth - marginLeft;
+
+    // Attach marginTop and marginLeft because in some circumstances we may need them
+    offsets.marginTop = marginTop;
+    offsets.marginLeft = marginLeft;
+  }
+
+  if (isIE10 ? parent.contains(scrollParent) : parent === scrollParent && scrollParent.nodeName !== 'BODY') {
+    offsets = includeScroll(offsets, parent);
+  }
+
+  return offsets;
+}
+
+function getViewportOffsetRectRelativeToArtbitraryNode(element) {
+  var html = element.ownerDocument.documentElement;
+  var relativeOffset = getOffsetRectRelativeToArbitraryNode(element, html);
+  var width = Math.max(html.clientWidth, window.innerWidth || 0);
+  var height = Math.max(html.clientHeight, window.innerHeight || 0);
+
+  var scrollTop = getScroll(html);
+  var scrollLeft = getScroll(html, 'left');
+
+  var offset = {
+    top: scrollTop - relativeOffset.top + relativeOffset.marginTop,
+    left: scrollLeft - relativeOffset.left + relativeOffset.marginLeft,
+    width: width,
+    height: height
+  };
+
+  return getClientRect(offset);
+}
+
+/**
+ * Check if the given element is fixed or is inside a fixed parent
+ * @method
+ * @memberof Popper.Utils
+ * @argument {Element} element
+ * @argument {Element} customContainer
+ * @returns {Boolean} answer to "isFixed?"
+ */
+function isFixed(element) {
+  var nodeName = element.nodeName;
+  if (nodeName === 'BODY' || nodeName === 'HTML') {
+    return false;
+  }
+  if (getStyleComputedProperty(element, 'position') === 'fixed') {
+    return true;
+  }
+  return isFixed(getParentNode(element));
+}
+
+/**
+ * Computed the boundaries limits and return them
+ * @method
+ * @memberof Popper.Utils
+ * @param {HTMLElement} popper
+ * @param {HTMLElement} reference
+ * @param {number} padding
+ * @param {HTMLElement} boundariesElement - Element used to define the boundaries
+ * @returns {Object} Coordinates of the boundaries
+ */
+function getBoundaries(popper, reference, padding, boundariesElement) {
+  // NOTE: 1 DOM access here
+  var boundaries = { top: 0, left: 0 };
+  var offsetParent = findCommonOffsetParent(popper, reference);
+
+  // Handle viewport case
+  if (boundariesElement === 'viewport') {
+    boundaries = getViewportOffsetRectRelativeToArtbitraryNode(offsetParent);
+  } else {
+    // Handle other cases based on DOM element used as boundaries
+    var boundariesNode = void 0;
+    if (boundariesElement === 'scrollParent') {
+      boundariesNode = getScrollParent(getParentNode(reference));
+      if (boundariesNode.nodeName === 'BODY') {
+        boundariesNode = popper.ownerDocument.documentElement;
+      }
+    } else if (boundariesElement === 'window') {
+      boundariesNode = popper.ownerDocument.documentElement;
+    } else {
+      boundariesNode = boundariesElement;
+    }
+
+    var offsets = getOffsetRectRelativeToArbitraryNode(boundariesNode, offsetParent);
+
+    // In case of HTML, we need a different computation
+    if (boundariesNode.nodeName === 'HTML' && !isFixed(offsetParent)) {
+      var _getWindowSizes = getWindowSizes(),
+          height = _getWindowSizes.height,
+          width = _getWindowSizes.width;
+
+      boundaries.top += offsets.top - offsets.marginTop;
+      boundaries.bottom = height + offsets.top;
+      boundaries.left += offsets.left - offsets.marginLeft;
+      boundaries.right = width + offsets.left;
+    } else {
+      // for all the other DOM elements, this one is good
+      boundaries = offsets;
+    }
+  }
+
+  // Add paddings
+  boundaries.left += padding;
+  boundaries.top += padding;
+  boundaries.right -= padding;
+  boundaries.bottom -= padding;
+
+  return boundaries;
+}
+
+function getArea(_ref) {
+  var width = _ref.width,
+      height = _ref.height;
+
+  return width * height;
+}
+
+/**
+ * Utility used to transform the `auto` placement to the placement with more
+ * available space.
+ * @method
+ * @memberof Popper.Utils
+ * @argument {Object} data - The data object generated by update method
+ * @argument {Object} options - Modifiers configuration and options
+ * @returns {Object} The data object, properly modified
+ */
+function computeAutoPlacement(placement, refRect, popper, reference, boundariesElement) {
+  var padding = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0;
+
+  if (placement.indexOf('auto') === -1) {
+    return placement;
+  }
+
+  var boundaries = getBoundaries(popper, reference, padding, boundariesElement);
+
+  var rects = {
+    top: {
+      width: boundaries.width,
+      height: refRect.top - boundaries.top
+    },
+    right: {
+      width: boundaries.right - refRect.right,
+      height: boundaries.height
+    },
+    bottom: {
+      width: boundaries.width,
+      height: boundaries.bottom - refRect.bottom
+    },
+    left: {
+      width: refRect.left - boundaries.left,
+      height: boundaries.height
+    }
+  };
+
+  var sortedAreas = Object.keys(rects).map(function (key) {
+    return _extends({
+      key: key
+    }, rects[key], {
+      area: getArea(rects[key])
+    });
+  }).sort(function (a, b) {
+    return b.area - a.area;
+  });
+
+  var filteredAreas = sortedAreas.filter(function (_ref2) {
+    var width = _ref2.width,
+        height = _ref2.height;
+    return width >= popper.clientWidth && height >= popper.clientHeight;
+  });
+
+  var computedPlacement = filteredAreas.length > 0 ? filteredAreas[0].key : sortedAreas[0].key;
+
+  var variation = placement.split('-')[1];
+
+  return computedPlacement + (variation ? '-' + variation : '');
+}
+
+/**
+ * Get offsets to the reference element
+ * @method
+ * @memberof Popper.Utils
+ * @param {Object} state
+ * @param {Element} popper - the popper element
+ * @param {Element} reference - the reference element (the popper will be relative to this)
+ * @returns {Object} An object containing the offsets which will be applied to the popper
+ */
+function getReferenceOffsets(state, popper, reference) {
+  var commonOffsetParent = findCommonOffsetParent(popper, reference);
+  return getOffsetRectRelativeToArbitraryNode(reference, commonOffsetParent);
+}
+
+/**
+ * Get the outer sizes of the given element (offset size + margins)
+ * @method
+ * @memberof Popper.Utils
+ * @argument {Element} element
+ * @returns {Object} object containing width and height properties
+ */
+function getOuterSizes(element) {
+  var styles = getComputedStyle(element);
+  var x = parseFloat(styles.marginTop) + parseFloat(styles.marginBottom);
+  var y = parseFloat(styles.marginLeft) + parseFloat(styles.marginRight);
+  var result = {
+    width: element.offsetWidth + y,
+    height: element.offsetHeight + x
+  };
+  return result;
+}
+
+/**
+ * Get the opposite placement of the given one
+ * @method
+ * @memberof Popper.Utils
+ * @argument {String} placement
+ * @returns {String} flipped placement
+ */
+function getOppositePlacement(placement) {
+  var hash = { left: 'right', right: 'left', bottom: 'top', top: 'bottom' };
+  return placement.replace(/left|right|bottom|top/g, function (matched) {
+    return hash[matched];
+  });
+}
+
+/**
+ * Get offsets to the popper
+ * @method
+ * @memberof Popper.Utils
+ * @param {Object} position - CSS position the Popper will get applied
+ * @param {HTMLElement} popper - the popper element
+ * @param {Object} referenceOffsets - the reference offsets (the popper will be relative to this)
+ * @param {String} placement - one of the valid placement options
+ * @returns {Object} popperOffsets - An object containing the offsets which will be applied to the popper
+ */
+function getPopperOffsets(popper, referenceOffsets, placement) {
+  placement = placement.split('-')[0];
+
+  // Get popper node sizes
+  var popperRect = getOuterSizes(popper);
+
+  // Add position, width and height to our offsets object
+  var popperOffsets = {
+    width: popperRect.width,
+    height: popperRect.height
+  };
+
+  // depending by the popper placement we have to compute its offsets slightly differently
+  var isHoriz = ['right', 'left'].indexOf(placement) !== -1;
+  var mainSide = isHoriz ? 'top' : 'left';
+  var secondarySide = isHoriz ? 'left' : 'top';
+  var measurement = isHoriz ? 'height' : 'width';
+  var secondaryMeasurement = !isHoriz ? 'height' : 'width';
+
+  popperOffsets[mainSide] = referenceOffsets[mainSide] + referenceOffsets[measurement] / 2 - popperRect[measurement] / 2;
+  if (placement === secondarySide) {
+    popperOffsets[secondarySide] = referenceOffsets[secondarySide] - popperRect[secondaryMeasurement];
+  } else {
+    popperOffsets[secondarySide] = referenceOffsets[getOppositePlacement(secondarySide)];
+  }
+
+  return popperOffsets;
+}
+
+/**
+ * Mimics the `find` method of Array
+ * @method
+ * @memberof Popper.Utils
+ * @argument {Array} arr
+ * @argument prop
+ * @argument value
+ * @returns index or -1
+ */
+function find(arr, check) {
+  // use native find if supported
+  if (Array.prototype.find) {
+    return arr.find(check);
+  }
+
+  // use `filter` to obtain the same behavior of `find`
+  return arr.filter(check)[0];
+}
+
+/**
+ * Return the index of the matching object
+ * @method
+ * @memberof Popper.Utils
+ * @argument {Array} arr
+ * @argument prop
+ * @argument value
+ * @returns index or -1
+ */
+function findIndex(arr, prop, value) {
+  // use native findIndex if supported
+  if (Array.prototype.findIndex) {
+    return arr.findIndex(function (cur) {
+      return cur[prop] === value;
+    });
+  }
+
+  // use `find` + `indexOf` if `findIndex` isn't supported
+  var match = find(arr, function (obj) {
+    return obj[prop] === value;
+  });
+  return arr.indexOf(match);
+}
+
+/**
+ * Loop trough the list of modifiers and run them in order,
+ * each of them will then edit the data object.
+ * @method
+ * @memberof Popper.Utils
+ * @param {dataObject} data
+ * @param {Array} modifiers
+ * @param {String} ends - Optional modifier name used as stopper
+ * @returns {dataObject}
+ */
+function runModifiers(modifiers, data, ends) {
+  var modifiersToRun = ends === undefined ? modifiers : modifiers.slice(0, findIndex(modifiers, 'name', ends));
+
+  modifiersToRun.forEach(function (modifier) {
+    if (modifier['function']) {
+      // eslint-disable-line dot-notation
+      console.warn('`modifier.function` is deprecated, use `modifier.fn`!');
+    }
+    var fn = modifier['function'] || modifier.fn; // eslint-disable-line dot-notation
+    if (modifier.enabled && isFunction(fn)) {
+      // Add properties to offsets to make them a complete clientRect object
+      // we do this before each modifier to make sure the previous one doesn't
+      // mess with these values
+      data.offsets.popper = getClientRect(data.offsets.popper);
+      data.offsets.reference = getClientRect(data.offsets.reference);
+
+      data = fn(data, modifier);
+    }
+  });
+
+  return data;
+}
+
+/**
+ * Updates the position of the popper, computing the new offsets and applying
+ * the new style.<br />
+ * Prefer `scheduleUpdate` over `update` because of performance reasons.
+ * @method
+ * @memberof Popper
+ */
+function update() {
+  // if popper is destroyed, don't perform any further update
+  if (this.state.isDestroyed) {
+    return;
+  }
+
+  var data = {
+    instance: this,
+    styles: {},
+    arrowStyles: {},
+    attributes: {},
+    flipped: false,
+    offsets: {}
+  };
+
+  // compute reference element offsets
+  data.offsets.reference = getReferenceOffsets(this.state, this.popper, this.reference);
+
+  // compute auto placement, store placement inside the data object,
+  // modifiers will be able to edit `placement` if needed
+  // and refer to originalPlacement to know the original value
+  data.placement = computeAutoPlacement(this.options.placement, data.offsets.reference, this.popper, this.reference, this.options.modifiers.flip.boundariesElement, this.options.modifiers.flip.padding);
+
+  // store the computed placement inside `originalPlacement`
+  data.originalPlacement = data.placement;
+
+  // compute the popper offsets
+  data.offsets.popper = getPopperOffsets(this.popper, data.offsets.reference, data.placement);
+  data.offsets.popper.position = 'absolute';
+
+  // run the modifiers
+  data = runModifiers(this.modifiers, data);
+
+  // the first `update` will call `onCreate` callback
+  // the other ones will call `onUpdate` callback
+  if (!this.state.isCreated) {
+    this.state.isCreated = true;
+    this.options.onCreate(data);
+  } else {
+    this.options.onUpdate(data);
+  }
+}
+
+/**
+ * Helper used to know if the given modifier is enabled.
+ * @method
+ * @memberof Popper.Utils
+ * @returns {Boolean}
+ */
+function isModifierEnabled(modifiers, modifierName) {
+  return modifiers.some(function (_ref) {
+    var name = _ref.name,
+        enabled = _ref.enabled;
+    return enabled && name === modifierName;
+  });
+}
+
+/**
+ * Get the prefixed supported property name
+ * @method
+ * @memberof Popper.Utils
+ * @argument {String} property (camelCase)
+ * @returns {String} prefixed property (camelCase or PascalCase, depending on the vendor prefix)
+ */
+function getSupportedPropertyName(property) {
+  var prefixes = [false, 'ms', 'Webkit', 'Moz', 'O'];
+  var upperProp = property.charAt(0).toUpperCase() + property.slice(1);
+
+  for (var i = 0; i < prefixes.length - 1; i++) {
+    var prefix = prefixes[i];
+    var toCheck = prefix ? '' + prefix + upperProp : property;
+    if (typeof document.body.style[toCheck] !== 'undefined') {
+      return toCheck;
+    }
+  }
+  return null;
+}
+
+/**
+ * Destroy the popper
+ * @method
+ * @memberof Popper
+ */
+function destroy() {
+  this.state.isDestroyed = true;
+
+  // touch DOM only if `applyStyle` modifier is enabled
+  if (isModifierEnabled(this.modifiers, 'applyStyle')) {
+    this.popper.removeAttribute('x-placement');
+    this.popper.style.left = '';
+    this.popper.style.position = '';
+    this.popper.style.top = '';
+    this.popper.style[getSupportedPropertyName('transform')] = '';
+  }
+
+  this.disableEventListeners();
+
+  // remove the popper if user explicity asked for the deletion on destroy
+  // do not use `remove` because IE11 doesn't support it
+  if (this.options.removeOnDestroy) {
+    this.popper.parentNode.removeChild(this.popper);
+  }
+  return this;
+}
+
+/**
+ * Get the window associated with the element
+ * @argument {Element} element
+ * @returns {Window}
+ */
+function getWindow(element) {
+  var ownerDocument = element.ownerDocument;
+  return ownerDocument ? ownerDocument.defaultView : window;
+}
+
+function attachToScrollParents(scrollParent, event, callback, scrollParents) {
+  var isBody = scrollParent.nodeName === 'BODY';
+  var target = isBody ? scrollParent.ownerDocument.defaultView : scrollParent;
+  target.addEventListener(event, callback, { passive: true });
+
+  if (!isBody) {
+    attachToScrollParents(getScrollParent(target.parentNode), event, callback, scrollParents);
+  }
+  scrollParents.push(target);
+}
+
+/**
+ * Setup needed event listeners used to update the popper position
+ * @method
+ * @memberof Popper.Utils
+ * @private
+ */
+function setupEventListeners(reference, options, state, updateBound) {
+  // Resize event listener on window
+  state.updateBound = updateBound;
+  getWindow(reference).addEventListener('resize', state.updateBound, { passive: true });
+
+  // Scroll event listener on scroll parents
+  var scrollElement = getScrollParent(reference);
+  attachToScrollParents(scrollElement, 'scroll', state.updateBound, state.scrollParents);
+  state.scrollElement = scrollElement;
+  state.eventsEnabled = true;
+
+  return state;
+}
+
+/**
+ * It will add resize/scroll events and start recalculating
+ * position of the popper element when they are triggered.
+ * @method
+ * @memberof Popper
+ */
+function enableEventListeners() {
+  if (!this.state.eventsEnabled) {
+    this.state = setupEventListeners(this.reference, this.options, this.state, this.scheduleUpdate);
+  }
+}
+
+/**
+ * Remove event listeners used to update the popper position
+ * @method
+ * @memberof Popper.Utils
+ * @private
+ */
+function removeEventListeners(reference, state) {
+  // Remove resize event listener on window
+  getWindow(reference).removeEventListener('resize', state.updateBound);
+
+  // Remove scroll event listener on scroll parents
+  state.scrollParents.forEach(function (target) {
+    target.removeEventListener('scroll', state.updateBound);
+  });
+
+  // Reset state
+  state.updateBound = null;
+  state.scrollParents = [];
+  state.scrollElement = null;
+  state.eventsEnabled = false;
+  return state;
+}
+
+/**
+ * It will remove resize/scroll events and won't recalculate popper position
+ * when they are triggered. It also won't trigger onUpdate callback anymore,
+ * unless you call `update` method manually.
+ * @method
+ * @memberof Popper
+ */
+function disableEventListeners() {
+  if (this.state.eventsEnabled) {
+    cancelAnimationFrame(this.scheduleUpdate);
+    this.state = removeEventListeners(this.reference, this.state);
+  }
+}
+
+/**
+ * Tells if a given input is a number
+ * @method
+ * @memberof Popper.Utils
+ * @param {*} input to check
+ * @return {Boolean}
+ */
+function isNumeric(n) {
+  return n !== '' && !isNaN(parseFloat(n)) && isFinite(n);
+}
+
+/**
+ * Set the style to the given popper
+ * @method
+ * @memberof Popper.Utils
+ * @argument {Element} element - Element to apply the style to
+ * @argument {Object} styles
+ * Object with a list of properties and values which will be applied to the element
+ */
+function setStyles(element, styles) {
+  Object.keys(styles).forEach(function (prop) {
+    var unit = '';
+    // add unit if the value is numeric and is one of the following
+    if (['width', 'height', 'top', 'right', 'bottom', 'left'].indexOf(prop) !== -1 && isNumeric(styles[prop])) {
+      unit = 'px';
+    }
+    element.style[prop] = styles[prop] + unit;
+  });
+}
+
+/**
+ * Set the attributes to the given popper
+ * @method
+ * @memberof Popper.Utils
+ * @argument {Element} element - Element to apply the attributes to
+ * @argument {Object} styles
+ * Object with a list of properties and values which will be applied to the element
+ */
+function setAttributes(element, attributes) {
+  Object.keys(attributes).forEach(function (prop) {
+    var value = attributes[prop];
+    if (value !== false) {
+      element.setAttribute(prop, attributes[prop]);
+    } else {
+      element.removeAttribute(prop);
+    }
+  });
+}
+
+/**
+ * @function
+ * @memberof Modifiers
+ * @argument {Object} data - The data object generated by `update` method
+ * @argument {Object} data.styles - List of style properties - values to apply to popper element
+ * @argument {Object} data.attributes - List of attribute properties - values to apply to popper element
+ * @argument {Object} options - Modifiers configuration and options
+ * @returns {Object} The same data object
+ */
+function applyStyle(data) {
+  // any property present in `data.styles` will be applied to the popper,
+  // in this way we can make the 3rd party modifiers add custom styles to it
+  // Be aware, modifiers could override the properties defined in the previous
+  // lines of this modifier!
+  setStyles(data.instance.popper, data.styles);
+
+  // any property present in `data.attributes` will be applied to the popper,
+  // they will be set as HTML attributes of the element
+  setAttributes(data.instance.popper, data.attributes);
+
+  // if arrowElement is defined and arrowStyles has some properties
+  if (data.arrowElement && Object.keys(data.arrowStyles).length) {
+    setStyles(data.arrowElement, data.arrowStyles);
+  }
+
+  return data;
+}
+
+/**
+ * Set the x-placement attribute before everything else because it could be used
+ * to add margins to the popper margins needs to be calculated to get the
+ * correct popper offsets.
+ * @method
+ * @memberof Popper.modifiers
+ * @param {HTMLElement} reference - The reference element used to position the popper
+ * @param {HTMLElement} popper - The HTML element used as popper.
+ * @param {Object} options - Popper.js options
+ */
+function applyStyleOnLoad(reference, popper, options, modifierOptions, state) {
+  // compute reference element offsets
+  var referenceOffsets = getReferenceOffsets(state, popper, reference);
+
+  // compute auto placement, store placement inside the data object,
+  // modifiers will be able to edit `placement` if needed
+  // and refer to originalPlacement to know the original value
+  var placement = computeAutoPlacement(options.placement, referenceOffsets, popper, reference, options.modifiers.flip.boundariesElement, options.modifiers.flip.padding);
+
+  popper.setAttribute('x-placement', placement);
+
+  // Apply `position` to popper before anything else because
+  // without the position applied we can't guarantee correct computations
+  setStyles(popper, { position: 'absolute' });
+
+  return options;
+}
+
+/**
+ * @function
+ * @memberof Modifiers
+ * @argument {Object} data - The data object generated by `update` method
+ * @argument {Object} options - Modifiers configuration and options
+ * @returns {Object} The data object, properly modified
+ */
+function computeStyle(data, options) {
+  var x = options.x,
+      y = options.y;
+  var popper = data.offsets.popper;
+
+  // Remove this legacy support in Popper.js v2
+
+  var legacyGpuAccelerationOption = find(data.instance.modifiers, function (modifier) {
+    return modifier.name === 'applyStyle';
+  }).gpuAcceleration;
+  if (legacyGpuAccelerationOption !== undefined) {
+    console.warn('WARNING: `gpuAcceleration` option moved to `computeStyle` modifier and will not be supported in future versions of Popper.js!');
+  }
+  var gpuAcceleration = legacyGpuAccelerationOption !== undefined ? legacyGpuAccelerationOption : options.gpuAcceleration;
+
+  var offsetParent = getOffsetParent(data.instance.popper);
+  var offsetParentRect = getBoundingClientRect(offsetParent);
+
+  // Styles
+  var styles = {
+    position: popper.position
+  };
+
+  // floor sides to avoid blurry text
+  var offsets = {
+    left: Math.floor(popper.left),
+    top: Math.floor(popper.top),
+    bottom: Math.floor(popper.bottom),
+    right: Math.floor(popper.right)
+  };
+
+  var sideA = x === 'bottom' ? 'top' : 'bottom';
+  var sideB = y === 'right' ? 'left' : 'right';
+
+  // if gpuAcceleration is set to `true` and transform is supported,
+  //  we use `translate3d` to apply the position to the popper we
+  // automatically use the supported prefixed version if needed
+  var prefixedProperty = getSupportedPropertyName('transform');
+
+  // now, let's make a step back and look at this code closely (wtf?)
+  // If the content of the popper grows once it's been positioned, it
+  // may happen that the popper gets misplaced because of the new content
+  // overflowing its reference element
+  // To avoid this problem, we provide two options (x and y), which allow
+  // the consumer to define the offset origin.
+  // If we position a popper on top of a reference element, we can set
+  // `x` to `top` to make the popper grow towards its top instead of
+  // its bottom.
+  var left = void 0,
+      top = void 0;
+  if (sideA === 'bottom') {
+    top = -offsetParentRect.height + offsets.bottom;
+  } else {
+    top = offsets.top;
+  }
+  if (sideB === 'right') {
+    left = -offsetParentRect.width + offsets.right;
+  } else {
+    left = offsets.left;
+  }
+  if (gpuAcceleration && prefixedProperty) {
+    styles[prefixedProperty] = 'translate3d(' + left + 'px, ' + top + 'px, 0)';
+    styles[sideA] = 0;
+    styles[sideB] = 0;
+    styles.willChange = 'transform';
+  } else {
+    // othwerise, we use the standard `top`, `left`, `bottom` and `right` properties
+    var invertTop = sideA === 'bottom' ? -1 : 1;
+    var invertLeft = sideB === 'right' ? -1 : 1;
+    styles[sideA] = top * invertTop;
+    styles[sideB] = left * invertLeft;
+    styles.willChange = sideA + ', ' + sideB;
+  }
+
+  // Attributes
+  var attributes = {
+    'x-placement': data.placement
+  };
+
+  // Update `data` attributes, styles and arrowStyles
+  data.attributes = _extends({}, attributes, data.attributes);
+  data.styles = _extends({}, styles, data.styles);
+  data.arrowStyles = _extends({}, data.offsets.arrow, data.arrowStyles);
+
+  return data;
+}
+
+/**
+ * Helper used to know if the given modifier depends from another one.<br />
+ * It checks if the needed modifier is listed and enabled.
+ * @method
+ * @memberof Popper.Utils
+ * @param {Array} modifiers - list of modifiers
+ * @param {String} requestingName - name of requesting modifier
+ * @param {String} requestedName - name of requested modifier
+ * @returns {Boolean}
+ */
+function isModifierRequired(modifiers, requestingName, requestedName) {
+  var requesting = find(modifiers, function (_ref) {
+    var name = _ref.name;
+    return name === requestingName;
+  });
+
+  var isRequired = !!requesting && modifiers.some(function (modifier) {
+    return modifier.name === requestedName && modifier.enabled && modifier.order < requesting.order;
+  });
+
+  if (!isRequired) {
+    var _requesting = '`' + requestingName + '`';
+    var requested = '`' + requestedName + '`';
+    console.warn(requested + ' modifier is required by ' + _requesting + ' modifier in order to work, be sure to include it before ' + _requesting + '!');
+  }
+  return isRequired;
+}
+
+/**
+ * @function
+ * @memberof Modifiers
+ * @argument {Object} data - The data object generated by update method
+ * @argument {Object} options - Modifiers configuration and options
+ * @returns {Object} The data object, properly modified
+ */
+function arrow(data, options) {
+  var _data$offsets$arrow;
+
+  // arrow depends on keepTogether in order to work
+  if (!isModifierRequired(data.instance.modifiers, 'arrow', 'keepTogether')) {
+    return data;
+  }
+
+  var arrowElement = options.element;
+
+  // if arrowElement is a string, suppose it's a CSS selector
+  if (typeof arrowElement === 'string') {
+    arrowElement = data.instance.popper.querySelector(arrowElement);
+
+    // if arrowElement is not found, don't run the modifier
+    if (!arrowElement) {
+      return data;
+    }
+  } else {
+    // if the arrowElement isn't a query selector we must check that the
+    // provided DOM node is child of its popper node
+    if (!data.instance.popper.contains(arrowElement)) {
+      console.warn('WARNING: `arrow.element` must be child of its popper element!');
+      return data;
+    }
+  }
+
+  var placement = data.placement.split('-')[0];
+  var _data$offsets = data.offsets,
+      popper = _data$offsets.popper,
+      reference = _data$offsets.reference;
+
+  var isVertical = ['left', 'right'].indexOf(placement) !== -1;
+
+  var len = isVertical ? 'height' : 'width';
+  var sideCapitalized = isVertical ? 'Top' : 'Left';
+  var side = sideCapitalized.toLowerCase();
+  var altSide = isVertical ? 'left' : 'top';
+  var opSide = isVertical ? 'bottom' : 'right';
+  var arrowElementSize = getOuterSizes(arrowElement)[len];
+
+  //
+  // extends keepTogether behavior making sure the popper and its
+  // reference have enough pixels in conjuction
+  //
+
+  // top/left side
+  if (reference[opSide] - arrowElementSize < popper[side]) {
+    data.offsets.popper[side] -= popper[side] - (reference[opSide] - arrowElementSize);
+  }
+  // bottom/right side
+  if (reference[side] + arrowElementSize > popper[opSide]) {
+    data.offsets.popper[side] += reference[side] + arrowElementSize - popper[opSide];
+  }
+  data.offsets.popper = getClientRect(data.offsets.popper);
+
+  // compute center of the popper
+  var center = reference[side] + reference[len] / 2 - arrowElementSize / 2;
+
+  // Compute the sideValue using the updated popper offsets
+  // take popper margin in account because we don't have this info available
+  var css = getStyleComputedProperty(data.instance.popper);
+  var popperMarginSide = parseFloat(css['margin' + sideCapitalized], 10);
+  var popperBorderSide = parseFloat(css['border' + sideCapitalized + 'Width'], 10);
+  var sideValue = center - data.offsets.popper[side] - popperMarginSide - popperBorderSide;
+
+  // prevent arrowElement from being placed not contiguously to its popper
+  sideValue = Math.max(Math.min(popper[len] - arrowElementSize, sideValue), 0);
+
+  data.arrowElement = arrowElement;
+  data.offsets.arrow = (_data$offsets$arrow = {}, defineProperty(_data$offsets$arrow, side, Math.round(sideValue)), defineProperty(_data$offsets$arrow, altSide, ''), _data$offsets$arrow);
+
+  return data;
+}
+
+/**
+ * Get the opposite placement variation of the given one
+ * @method
+ * @memberof Popper.Utils
+ * @argument {String} placement variation
+ * @returns {String} flipped placement variation
+ */
+function getOppositeVariation(variation) {
+  if (variation === 'end') {
+    return 'start';
+  } else if (variation === 'start') {
+    return 'end';
+  }
+  return variation;
+}
+
+/**
+ * List of accepted placements to use as values of the `placement` option.<br />
+ * Valid placements are:
+ * - `auto`
+ * - `top`
+ * - `right`
+ * - `bottom`
+ * - `left`
+ *
+ * Each placement can have a variation from this list:
+ * - `-start`
+ * - `-end`
+ *
+ * Variations are interpreted easily if you think of them as the left to right
+ * written languages. Horizontally (`top` and `bottom`), `start` is left and `end`
+ * is right.<br />
+ * Vertically (`left` and `right`), `start` is top and `end` is bottom.
+ *
+ * Some valid examples are:
+ * - `top-end` (on top of reference, right aligned)
+ * - `right-start` (on right of reference, top aligned)
+ * - `bottom` (on bottom, centered)
+ * - `auto-right` (on the side with more space available, alignment depends by placement)
+ *
+ * @static
+ * @type {Array}
+ * @enum {String}
+ * @readonly
+ * @method placements
+ * @memberof Popper
+ */
+var placements = ['auto-start', 'auto', 'auto-end', 'top-start', 'top', 'top-end', 'right-start', 'right', 'right-end', 'bottom-end', 'bottom', 'bottom-start', 'left-end', 'left', 'left-start'];
+
+// Get rid of `auto` `auto-start` and `auto-end`
+var validPlacements = placements.slice(3);
+
+/**
+ * Given an initial placement, returns all the subsequent placements
+ * clockwise (or counter-clockwise).
+ *
+ * @method
+ * @memberof Popper.Utils
+ * @argument {String} placement - A valid placement (it accepts variations)
+ * @argument {Boolean} counter - Set to true to walk the placements counterclockwise
+ * @returns {Array} placements including their variations
+ */
+function clockwise(placement) {
+  var counter = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+  var index = validPlacements.indexOf(placement);
+  var arr = validPlacements.slice(index + 1).concat(validPlacements.slice(0, index));
+  return counter ? arr.reverse() : arr;
+}
+
+var BEHAVIORS = {
+  FLIP: 'flip',
+  CLOCKWISE: 'clockwise',
+  COUNTERCLOCKWISE: 'counterclockwise'
+};
+
+/**
+ * @function
+ * @memberof Modifiers
+ * @argument {Object} data - The data object generated by update method
+ * @argument {Object} options - Modifiers configuration and options
+ * @returns {Object} The data object, properly modified
+ */
+function flip(data, options) {
+  // if `inner` modifier is enabled, we can't use the `flip` modifier
+  if (isModifierEnabled(data.instance.modifiers, 'inner')) {
+    return data;
+  }
+
+  if (data.flipped && data.placement === data.originalPlacement) {
+    // seems like flip is trying to loop, probably there's not enough space on any of the flippable sides
+    return data;
+  }
+
+  var boundaries = getBoundaries(data.instance.popper, data.instance.reference, options.padding, options.boundariesElement);
+
+  var placement = data.placement.split('-')[0];
+  var placementOpposite = getOppositePlacement(placement);
+  var variation = data.placement.split('-')[1] || '';
+
+  var flipOrder = [];
+
+  switch (options.behavior) {
+    case BEHAVIORS.FLIP:
+      flipOrder = [placement, placementOpposite];
+      break;
+    case BEHAVIORS.CLOCKWISE:
+      flipOrder = clockwise(placement);
+      break;
+    case BEHAVIORS.COUNTERCLOCKWISE:
+      flipOrder = clockwise(placement, true);
+      break;
+    default:
+      flipOrder = options.behavior;
+  }
+
+  flipOrder.forEach(function (step, index) {
+    if (placement !== step || flipOrder.length === index + 1) {
+      return data;
+    }
+
+    placement = data.placement.split('-')[0];
+    placementOpposite = getOppositePlacement(placement);
+
+    var popperOffsets = data.offsets.popper;
+    var refOffsets = data.offsets.reference;
+
+    // using floor because the reference offsets may contain decimals we are not going to consider here
+    var floor = Math.floor;
+    var overlapsRef = placement === 'left' && floor(popperOffsets.right) > floor(refOffsets.left) || placement === 'right' && floor(popperOffsets.left) < floor(refOffsets.right) || placement === 'top' && floor(popperOffsets.bottom) > floor(refOffsets.top) || placement === 'bottom' && floor(popperOffsets.top) < floor(refOffsets.bottom);
+
+    var overflowsLeft = floor(popperOffsets.left) < floor(boundaries.left);
+    var overflowsRight = floor(popperOffsets.right) > floor(boundaries.right);
+    var overflowsTop = floor(popperOffsets.top) < floor(boundaries.top);
+    var overflowsBottom = floor(popperOffsets.bottom) > floor(boundaries.bottom);
+
+    var overflowsBoundaries = placement === 'left' && overflowsLeft || placement === 'right' && overflowsRight || placement === 'top' && overflowsTop || placement === 'bottom' && overflowsBottom;
+
+    // flip the variation if required
+    var isVertical = ['top', 'bottom'].indexOf(placement) !== -1;
+    var flippedVariation = !!options.flipVariations && (isVertical && variation === 'start' && overflowsLeft || isVertical && variation === 'end' && overflowsRight || !isVertical && variation === 'start' && overflowsTop || !isVertical && variation === 'end' && overflowsBottom);
+
+    if (overlapsRef || overflowsBoundaries || flippedVariation) {
+      // this boolean to detect any flip loop
+      data.flipped = true;
+
+      if (overlapsRef || overflowsBoundaries) {
+        placement = flipOrder[index + 1];
+      }
+
+      if (flippedVariation) {
+        variation = getOppositeVariation(variation);
+      }
+
+      data.placement = placement + (variation ? '-' + variation : '');
+
+      // this object contains `position`, we want to preserve it along with
+      // any additional property we may add in the future
+      data.offsets.popper = _extends({}, data.offsets.popper, getPopperOffsets(data.instance.popper, data.offsets.reference, data.placement));
+
+      data = runModifiers(data.instance.modifiers, data, 'flip');
+    }
+  });
+  return data;
+}
+
+/**
+ * @function
+ * @memberof Modifiers
+ * @argument {Object} data - The data object generated by update method
+ * @argument {Object} options - Modifiers configuration and options
+ * @returns {Object} The data object, properly modified
+ */
+function keepTogether(data) {
+  var _data$offsets = data.offsets,
+      popper = _data$offsets.popper,
+      reference = _data$offsets.reference;
+
+  var placement = data.placement.split('-')[0];
+  var floor = Math.floor;
+  var isVertical = ['top', 'bottom'].indexOf(placement) !== -1;
+  var side = isVertical ? 'right' : 'bottom';
+  var opSide = isVertical ? 'left' : 'top';
+  var measurement = isVertical ? 'width' : 'height';
+
+  if (popper[side] < floor(reference[opSide])) {
+    data.offsets.popper[opSide] = floor(reference[opSide]) - popper[measurement];
+  }
+  if (popper[opSide] > floor(reference[side])) {
+    data.offsets.popper[opSide] = floor(reference[side]);
+  }
+
+  return data;
+}
+
+/**
+ * Converts a string containing value + unit into a px value number
+ * @function
+ * @memberof {modifiers~offset}
+ * @private
+ * @argument {String} str - Value + unit string
+ * @argument {String} measurement - `height` or `width`
+ * @argument {Object} popperOffsets
+ * @argument {Object} referenceOffsets
+ * @returns {Number|String}
+ * Value in pixels, or original string if no values were extracted
+ */
+function toValue(str, measurement, popperOffsets, referenceOffsets) {
+  // separate value from unit
+  var split = str.match(/((?:\-|\+)?\d*\.?\d*)(.*)/);
+  var value = +split[1];
+  var unit = split[2];
+
+  // If it's not a number it's an operator, I guess
+  if (!value) {
+    return str;
+  }
+
+  if (unit.indexOf('%') === 0) {
+    var element = void 0;
+    switch (unit) {
+      case '%p':
+        element = popperOffsets;
+        break;
+      case '%':
+      case '%r':
+      default:
+        element = referenceOffsets;
+    }
+
+    var rect = getClientRect(element);
+    return rect[measurement] / 100 * value;
+  } else if (unit === 'vh' || unit === 'vw') {
+    // if is a vh or vw, we calculate the size based on the viewport
+    var size = void 0;
+    if (unit === 'vh') {
+      size = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    } else {
+      size = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    }
+    return size / 100 * value;
+  } else {
+    // if is an explicit pixel unit, we get rid of the unit and keep the value
+    // if is an implicit unit, it's px, and we return just the value
+    return value;
+  }
+}
+
+/**
+ * Parse an `offset` string to extrapolate `x` and `y` numeric offsets.
+ * @function
+ * @memberof {modifiers~offset}
+ * @private
+ * @argument {String} offset
+ * @argument {Object} popperOffsets
+ * @argument {Object} referenceOffsets
+ * @argument {String} basePlacement
+ * @returns {Array} a two cells array with x and y offsets in numbers
+ */
+function parseOffset(offset, popperOffsets, referenceOffsets, basePlacement) {
+  var offsets = [0, 0];
+
+  // Use height if placement is left or right and index is 0 otherwise use width
+  // in this way the first offset will use an axis and the second one
+  // will use the other one
+  var useHeight = ['right', 'left'].indexOf(basePlacement) !== -1;
+
+  // Split the offset string to obtain a list of values and operands
+  // The regex addresses values with the plus or minus sign in front (+10, -20, etc)
+  var fragments = offset.split(/(\+|\-)/).map(function (frag) {
+    return frag.trim();
+  });
+
+  // Detect if the offset string contains a pair of values or a single one
+  // they could be separated by comma or space
+  var divider = fragments.indexOf(find(fragments, function (frag) {
+    return frag.search(/,|\s/) !== -1;
+  }));
+
+  if (fragments[divider] && fragments[divider].indexOf(',') === -1) {
+    console.warn('Offsets separated by white space(s) are deprecated, use a comma (,) instead.');
+  }
+
+  // If divider is found, we divide the list of values and operands to divide
+  // them by ofset X and Y.
+  var splitRegex = /\s*,\s*|\s+/;
+  var ops = divider !== -1 ? [fragments.slice(0, divider).concat([fragments[divider].split(splitRegex)[0]]), [fragments[divider].split(splitRegex)[1]].concat(fragments.slice(divider + 1))] : [fragments];
+
+  // Convert the values with units to absolute pixels to allow our computations
+  ops = ops.map(function (op, index) {
+    // Most of the units rely on the orientation of the popper
+    var measurement = (index === 1 ? !useHeight : useHeight) ? 'height' : 'width';
+    var mergeWithPrevious = false;
+    return op
+    // This aggregates any `+` or `-` sign that aren't considered operators
+    // e.g.: 10 + +5 => [10, +, +5]
+    .reduce(function (a, b) {
+      if (a[a.length - 1] === '' && ['+', '-'].indexOf(b) !== -1) {
+        a[a.length - 1] = b;
+        mergeWithPrevious = true;
+        return a;
+      } else if (mergeWithPrevious) {
+        a[a.length - 1] += b;
+        mergeWithPrevious = false;
+        return a;
+      } else {
+        return a.concat(b);
+      }
+    }, [])
+    // Here we convert the string values into number values (in px)
+    .map(function (str) {
+      return toValue(str, measurement, popperOffsets, referenceOffsets);
+    });
+  });
+
+  // Loop trough the offsets arrays and execute the operations
+  ops.forEach(function (op, index) {
+    op.forEach(function (frag, index2) {
+      if (isNumeric(frag)) {
+        offsets[index] += frag * (op[index2 - 1] === '-' ? -1 : 1);
+      }
+    });
+  });
+  return offsets;
+}
+
+/**
+ * @function
+ * @memberof Modifiers
+ * @argument {Object} data - The data object generated by update method
+ * @argument {Object} options - Modifiers configuration and options
+ * @argument {Number|String} options.offset=0
+ * The offset value as described in the modifier description
+ * @returns {Object} The data object, properly modified
+ */
+function offset(data, _ref) {
+  var offset = _ref.offset;
+  var placement = data.placement,
+      _data$offsets = data.offsets,
+      popper = _data$offsets.popper,
+      reference = _data$offsets.reference;
+
+  var basePlacement = placement.split('-')[0];
+
+  var offsets = void 0;
+  if (isNumeric(+offset)) {
+    offsets = [+offset, 0];
+  } else {
+    offsets = parseOffset(offset, popper, reference, basePlacement);
+  }
+
+  if (basePlacement === 'left') {
+    popper.top += offsets[0];
+    popper.left -= offsets[1];
+  } else if (basePlacement === 'right') {
+    popper.top += offsets[0];
+    popper.left += offsets[1];
+  } else if (basePlacement === 'top') {
+    popper.left += offsets[0];
+    popper.top -= offsets[1];
+  } else if (basePlacement === 'bottom') {
+    popper.left += offsets[0];
+    popper.top += offsets[1];
+  }
+
+  data.popper = popper;
+  return data;
+}
+
+/**
+ * @function
+ * @memberof Modifiers
+ * @argument {Object} data - The data object generated by `update` method
+ * @argument {Object} options - Modifiers configuration and options
+ * @returns {Object} The data object, properly modified
+ */
+function preventOverflow(data, options) {
+  var boundariesElement = options.boundariesElement || getOffsetParent(data.instance.popper);
+
+  // If offsetParent is the reference element, we really want to
+  // go one step up and use the next offsetParent as reference to
+  // avoid to make this modifier completely useless and look like broken
+  if (data.instance.reference === boundariesElement) {
+    boundariesElement = getOffsetParent(boundariesElement);
+  }
+
+  var boundaries = getBoundaries(data.instance.popper, data.instance.reference, options.padding, boundariesElement);
+  options.boundaries = boundaries;
+
+  var order = options.priority;
+  var popper = data.offsets.popper;
+
+  var check = {
+    primary: function primary(placement) {
+      var value = popper[placement];
+      if (popper[placement] < boundaries[placement] && !options.escapeWithReference) {
+        value = Math.max(popper[placement], boundaries[placement]);
+      }
+      return defineProperty({}, placement, value);
+    },
+    secondary: function secondary(placement) {
+      var mainSide = placement === 'right' ? 'left' : 'top';
+      var value = popper[mainSide];
+      if (popper[placement] > boundaries[placement] && !options.escapeWithReference) {
+        value = Math.min(popper[mainSide], boundaries[placement] - (placement === 'right' ? popper.width : popper.height));
+      }
+      return defineProperty({}, mainSide, value);
+    }
+  };
+
+  order.forEach(function (placement) {
+    var side = ['left', 'top'].indexOf(placement) !== -1 ? 'primary' : 'secondary';
+    popper = _extends({}, popper, check[side](placement));
+  });
+
+  data.offsets.popper = popper;
+
+  return data;
+}
+
+/**
+ * @function
+ * @memberof Modifiers
+ * @argument {Object} data - The data object generated by `update` method
+ * @argument {Object} options - Modifiers configuration and options
+ * @returns {Object} The data object, properly modified
+ */
+function shift(data) {
+  var placement = data.placement;
+  var basePlacement = placement.split('-')[0];
+  var shiftvariation = placement.split('-')[1];
+
+  // if shift shiftvariation is specified, run the modifier
+  if (shiftvariation) {
+    var _data$offsets = data.offsets,
+        reference = _data$offsets.reference,
+        popper = _data$offsets.popper;
+
+    var isVertical = ['bottom', 'top'].indexOf(basePlacement) !== -1;
+    var side = isVertical ? 'left' : 'top';
+    var measurement = isVertical ? 'width' : 'height';
+
+    var shiftOffsets = {
+      start: defineProperty({}, side, reference[side]),
+      end: defineProperty({}, side, reference[side] + reference[measurement] - popper[measurement])
+    };
+
+    data.offsets.popper = _extends({}, popper, shiftOffsets[shiftvariation]);
+  }
+
+  return data;
+}
+
+/**
+ * @function
+ * @memberof Modifiers
+ * @argument {Object} data - The data object generated by update method
+ * @argument {Object} options - Modifiers configuration and options
+ * @returns {Object} The data object, properly modified
+ */
+function hide(data) {
+  if (!isModifierRequired(data.instance.modifiers, 'hide', 'preventOverflow')) {
+    return data;
+  }
+
+  var refRect = data.offsets.reference;
+  var bound = find(data.instance.modifiers, function (modifier) {
+    return modifier.name === 'preventOverflow';
+  }).boundaries;
+
+  if (refRect.bottom < bound.top || refRect.left > bound.right || refRect.top > bound.bottom || refRect.right < bound.left) {
+    // Avoid unnecessary DOM access if visibility hasn't changed
+    if (data.hide === true) {
+      return data;
+    }
+
+    data.hide = true;
+    data.attributes['x-out-of-boundaries'] = '';
+  } else {
+    // Avoid unnecessary DOM access if visibility hasn't changed
+    if (data.hide === false) {
+      return data;
+    }
+
+    data.hide = false;
+    data.attributes['x-out-of-boundaries'] = false;
+  }
+
+  return data;
+}
+
+/**
+ * @function
+ * @memberof Modifiers
+ * @argument {Object} data - The data object generated by `update` method
+ * @argument {Object} options - Modifiers configuration and options
+ * @returns {Object} The data object, properly modified
+ */
+function inner(data) {
+  var placement = data.placement;
+  var basePlacement = placement.split('-')[0];
+  var _data$offsets = data.offsets,
+      popper = _data$offsets.popper,
+      reference = _data$offsets.reference;
+
+  var isHoriz = ['left', 'right'].indexOf(basePlacement) !== -1;
+
+  var subtractLength = ['top', 'left'].indexOf(basePlacement) === -1;
+
+  popper[isHoriz ? 'left' : 'top'] = reference[basePlacement] - (subtractLength ? popper[isHoriz ? 'width' : 'height'] : 0);
+
+  data.placement = getOppositePlacement(placement);
+  data.offsets.popper = getClientRect(popper);
+
+  return data;
+}
+
+/**
+ * Modifier function, each modifier can have a function of this type assigned
+ * to its `fn` property.<br />
+ * These functions will be called on each update, this means that you must
+ * make sure they are performant enough to avoid performance bottlenecks.
+ *
+ * @function ModifierFn
+ * @argument {dataObject} data - The data object generated by `update` method
+ * @argument {Object} options - Modifiers configuration and options
+ * @returns {dataObject} The data object, properly modified
+ */
+
+/**
+ * Modifiers are plugins used to alter the behavior of your poppers.<br />
+ * Popper.js uses a set of 9 modifiers to provide all the basic functionalities
+ * needed by the library.
+ *
+ * Usually you don't want to override the `order`, `fn` and `onLoad` props.
+ * All the other properties are configurations that could be tweaked.
+ * @namespace modifiers
+ */
+var modifiers = {
+  /**
+   * Modifier used to shift the popper on the start or end of its reference
+   * element.<br />
+   * It will read the variation of the `placement` property.<br />
+   * It can be one either `-end` or `-start`.
+   * @memberof modifiers
+   * @inner
+   */
+  shift: {
+    /** @prop {number} order=100 - Index used to define the order of execution */
+    order: 100,
+    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
+    enabled: true,
+    /** @prop {ModifierFn} */
+    fn: shift
+  },
+
+  /**
+   * The `offset` modifier can shift your popper on both its axis.
+   *
+   * It accepts the following units:
+   * - `px` or unitless, interpreted as pixels
+   * - `%` or `%r`, percentage relative to the length of the reference element
+   * - `%p`, percentage relative to the length of the popper element
+   * - `vw`, CSS viewport width unit
+   * - `vh`, CSS viewport height unit
+   *
+   * For length is intended the main axis relative to the placement of the popper.<br />
+   * This means that if the placement is `top` or `bottom`, the length will be the
+   * `width`. In case of `left` or `right`, it will be the height.
+   *
+   * You can provide a single value (as `Number` or `String`), or a pair of values
+   * as `String` divided by a comma or one (or more) white spaces.<br />
+   * The latter is a deprecated method because it leads to confusion and will be
+   * removed in v2.<br />
+   * Additionally, it accepts additions and subtractions between different units.
+   * Note that multiplications and divisions aren't supported.
+   *
+   * Valid examples are:
+   * ```
+   * 10
+   * '10%'
+   * '10, 10'
+   * '10%, 10'
+   * '10 + 10%'
+   * '10 - 5vh + 3%'
+   * '-10px + 5vh, 5px - 6%'
+   * ```
+   * > **NB**: If you desire to apply offsets to your poppers in a way that may make them overlap
+   * > with their reference element, unfortunately, you will have to disable the `flip` modifier.
+   * > More on this [reading this issue](https://github.com/FezVrasta/popper.js/issues/373)
+   *
+   * @memberof modifiers
+   * @inner
+   */
+  offset: {
+    /** @prop {number} order=200 - Index used to define the order of execution */
+    order: 200,
+    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
+    enabled: true,
+    /** @prop {ModifierFn} */
+    fn: offset,
+    /** @prop {Number|String} offset=0
+     * The offset value as described in the modifier description
+     */
+    offset: 0
+  },
+
+  /**
+   * Modifier used to prevent the popper from being positioned outside the boundary.
+   *
+   * An scenario exists where the reference itself is not within the boundaries.<br />
+   * We can say it has "escaped the boundaries" — or just "escaped".<br />
+   * In this case we need to decide whether the popper should either:
+   *
+   * - detach from the reference and remain "trapped" in the boundaries, or
+   * - if it should ignore the boundary and "escape with its reference"
+   *
+   * When `escapeWithReference` is set to`true` and reference is completely
+   * outside its boundaries, the popper will overflow (or completely leave)
+   * the boundaries in order to remain attached to the edge of the reference.
+   *
+   * @memberof modifiers
+   * @inner
+   */
+  preventOverflow: {
+    /** @prop {number} order=300 - Index used to define the order of execution */
+    order: 300,
+    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
+    enabled: true,
+    /** @prop {ModifierFn} */
+    fn: preventOverflow,
+    /**
+     * @prop {Array} [priority=['left','right','top','bottom']]
+     * Popper will try to prevent overflow following these priorities by default,
+     * then, it could overflow on the left and on top of the `boundariesElement`
+     */
+    priority: ['left', 'right', 'top', 'bottom'],
+    /**
+     * @prop {number} padding=5
+     * Amount of pixel used to define a minimum distance between the boundaries
+     * and the popper this makes sure the popper has always a little padding
+     * between the edges of its container
+     */
+    padding: 5,
+    /**
+     * @prop {String|HTMLElement} boundariesElement='scrollParent'
+     * Boundaries used by the modifier, can be `scrollParent`, `window`,
+     * `viewport` or any DOM element.
+     */
+    boundariesElement: 'scrollParent'
+  },
+
+  /**
+   * Modifier used to make sure the reference and its popper stay near eachothers
+   * without leaving any gap between the two. Expecially useful when the arrow is
+   * enabled and you want to assure it to point to its reference element.
+   * It cares only about the first axis, you can still have poppers with margin
+   * between the popper and its reference element.
+   * @memberof modifiers
+   * @inner
+   */
+  keepTogether: {
+    /** @prop {number} order=400 - Index used to define the order of execution */
+    order: 400,
+    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
+    enabled: true,
+    /** @prop {ModifierFn} */
+    fn: keepTogether
+  },
+
+  /**
+   * This modifier is used to move the `arrowElement` of the popper to make
+   * sure it is positioned between the reference element and its popper element.
+   * It will read the outer size of the `arrowElement` node to detect how many
+   * pixels of conjuction are needed.
+   *
+   * It has no effect if no `arrowElement` is provided.
+   * @memberof modifiers
+   * @inner
+   */
+  arrow: {
+    /** @prop {number} order=500 - Index used to define the order of execution */
+    order: 500,
+    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
+    enabled: true,
+    /** @prop {ModifierFn} */
+    fn: arrow,
+    /** @prop {String|HTMLElement} element='[x-arrow]' - Selector or node used as arrow */
+    element: '[x-arrow]'
+  },
+
+  /**
+   * Modifier used to flip the popper's placement when it starts to overlap its
+   * reference element.
+   *
+   * Requires the `preventOverflow` modifier before it in order to work.
+   *
+   * **NOTE:** this modifier will interrupt the current update cycle and will
+   * restart it if it detects the need to flip the placement.
+   * @memberof modifiers
+   * @inner
+   */
+  flip: {
+    /** @prop {number} order=600 - Index used to define the order of execution */
+    order: 600,
+    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
+    enabled: true,
+    /** @prop {ModifierFn} */
+    fn: flip,
+    /**
+     * @prop {String|Array} behavior='flip'
+     * The behavior used to change the popper's placement. It can be one of
+     * `flip`, `clockwise`, `counterclockwise` or an array with a list of valid
+     * placements (with optional variations).
+     */
+    behavior: 'flip',
+    /**
+     * @prop {number} padding=5
+     * The popper will flip if it hits the edges of the `boundariesElement`
+     */
+    padding: 5,
+    /**
+     * @prop {String|HTMLElement} boundariesElement='viewport'
+     * The element which will define the boundaries of the popper position,
+     * the popper will never be placed outside of the defined boundaries
+     * (except if keepTogether is enabled)
+     */
+    boundariesElement: 'viewport'
+  },
+
+  /**
+   * Modifier used to make the popper flow toward the inner of the reference element.
+   * By default, when this modifier is disabled, the popper will be placed outside
+   * the reference element.
+   * @memberof modifiers
+   * @inner
+   */
+  inner: {
+    /** @prop {number} order=700 - Index used to define the order of execution */
+    order: 700,
+    /** @prop {Boolean} enabled=false - Whether the modifier is enabled or not */
+    enabled: false,
+    /** @prop {ModifierFn} */
+    fn: inner
+  },
+
+  /**
+   * Modifier used to hide the popper when its reference element is outside of the
+   * popper boundaries. It will set a `x-out-of-boundaries` attribute which can
+   * be used to hide with a CSS selector the popper when its reference is
+   * out of boundaries.
+   *
+   * Requires the `preventOverflow` modifier before it in order to work.
+   * @memberof modifiers
+   * @inner
+   */
+  hide: {
+    /** @prop {number} order=800 - Index used to define the order of execution */
+    order: 800,
+    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
+    enabled: true,
+    /** @prop {ModifierFn} */
+    fn: hide
+  },
+
+  /**
+   * Computes the style that will be applied to the popper element to gets
+   * properly positioned.
+   *
+   * Note that this modifier will not touch the DOM, it just prepares the styles
+   * so that `applyStyle` modifier can apply it. This separation is useful
+   * in case you need to replace `applyStyle` with a custom implementation.
+   *
+   * This modifier has `850` as `order` value to maintain backward compatibility
+   * with previous versions of Popper.js. Expect the modifiers ordering method
+   * to change in future major versions of the library.
+   *
+   * @memberof modifiers
+   * @inner
+   */
+  computeStyle: {
+    /** @prop {number} order=850 - Index used to define the order of execution */
+    order: 850,
+    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
+    enabled: true,
+    /** @prop {ModifierFn} */
+    fn: computeStyle,
+    /**
+     * @prop {Boolean} gpuAcceleration=true
+     * If true, it uses the CSS 3d transformation to position the popper.
+     * Otherwise, it will use the `top` and `left` properties.
+     */
+    gpuAcceleration: true,
+    /**
+     * @prop {string} [x='bottom']
+     * Where to anchor the X axis (`bottom` or `top`). AKA X offset origin.
+     * Change this if your popper should grow in a direction different from `bottom`
+     */
+    x: 'bottom',
+    /**
+     * @prop {string} [x='left']
+     * Where to anchor the Y axis (`left` or `right`). AKA Y offset origin.
+     * Change this if your popper should grow in a direction different from `right`
+     */
+    y: 'right'
+  },
+
+  /**
+   * Applies the computed styles to the popper element.
+   *
+   * All the DOM manipulations are limited to this modifier. This is useful in case
+   * you want to integrate Popper.js inside a framework or view library and you
+   * want to delegate all the DOM manipulations to it.
+   *
+   * Note that if you disable this modifier, you must make sure the popper element
+   * has its position set to `absolute` before Popper.js can do its work!
+   *
+   * Just disable this modifier and define you own to achieve the desired effect.
+   *
+   * @memberof modifiers
+   * @inner
+   */
+  applyStyle: {
+    /** @prop {number} order=900 - Index used to define the order of execution */
+    order: 900,
+    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
+    enabled: true,
+    /** @prop {ModifierFn} */
+    fn: applyStyle,
+    /** @prop {Function} */
+    onLoad: applyStyleOnLoad,
+    /**
+     * @deprecated since version 1.10.0, the property moved to `computeStyle` modifier
+     * @prop {Boolean} gpuAcceleration=true
+     * If true, it uses the CSS 3d transformation to position the popper.
+     * Otherwise, it will use the `top` and `left` properties.
+     */
+    gpuAcceleration: undefined
+  }
+};
+
+/**
+ * The `dataObject` is an object containing all the informations used by Popper.js
+ * this object get passed to modifiers and to the `onCreate` and `onUpdate` callbacks.
+ * @name dataObject
+ * @property {Object} data.instance The Popper.js instance
+ * @property {String} data.placement Placement applied to popper
+ * @property {String} data.originalPlacement Placement originally defined on init
+ * @property {Boolean} data.flipped True if popper has been flipped by flip modifier
+ * @property {Boolean} data.hide True if the reference element is out of boundaries, useful to know when to hide the popper.
+ * @property {HTMLElement} data.arrowElement Node used as arrow by arrow modifier
+ * @property {Object} data.styles Any CSS property defined here will be applied to the popper, it expects the JavaScript nomenclature (eg. `marginBottom`)
+ * @property {Object} data.arrowStyles Any CSS property defined here will be applied to the popper arrow, it expects the JavaScript nomenclature (eg. `marginBottom`)
+ * @property {Object} data.boundaries Offsets of the popper boundaries
+ * @property {Object} data.offsets The measurements of popper, reference and arrow elements.
+ * @property {Object} data.offsets.popper `top`, `left`, `width`, `height` values
+ * @property {Object} data.offsets.reference `top`, `left`, `width`, `height` values
+ * @property {Object} data.offsets.arrow] `top` and `left` offsets, only one of them will be different from 0
+ */
+
+/**
+ * Default options provided to Popper.js constructor.<br />
+ * These can be overriden using the `options` argument of Popper.js.<br />
+ * To override an option, simply pass as 3rd argument an object with the same
+ * structure of this object, example:
+ * ```
+ * new Popper(ref, pop, {
+ *   modifiers: {
+ *     preventOverflow: { enabled: false }
+ *   }
+ * })
+ * ```
+ * @type {Object}
+ * @static
+ * @memberof Popper
+ */
+var Defaults = {
+  /**
+   * Popper's placement
+   * @prop {Popper.placements} placement='bottom'
+   */
+  placement: 'bottom',
+
+  /**
+   * Whether events (resize, scroll) are initially enabled
+   * @prop {Boolean} eventsEnabled=true
+   */
+  eventsEnabled: true,
+
+  /**
+   * Set to true if you want to automatically remove the popper when
+   * you call the `destroy` method.
+   * @prop {Boolean} removeOnDestroy=false
+   */
+  removeOnDestroy: false,
+
+  /**
+   * Callback called when the popper is created.<br />
+   * By default, is set to no-op.<br />
+   * Access Popper.js instance with `data.instance`.
+   * @prop {onCreate}
+   */
+  onCreate: function onCreate() {},
+
+  /**
+   * Callback called when the popper is updated, this callback is not called
+   * on the initialization/creation of the popper, but only on subsequent
+   * updates.<br />
+   * By default, is set to no-op.<br />
+   * Access Popper.js instance with `data.instance`.
+   * @prop {onUpdate}
+   */
+  onUpdate: function onUpdate() {},
+
+  /**
+   * List of modifiers used to modify the offsets before they are applied to the popper.
+   * They provide most of the functionalities of Popper.js
+   * @prop {modifiers}
+   */
+  modifiers: modifiers
+};
+
+/**
+ * @callback onCreate
+ * @param {dataObject} data
+ */
+
+/**
+ * @callback onUpdate
+ * @param {dataObject} data
+ */
+
+// Utils
+// Methods
+var Popper = function () {
+  /**
+   * Create a new Popper.js instance
+   * @class Popper
+   * @param {HTMLElement|referenceObject} reference - The reference element used to position the popper
+   * @param {HTMLElement} popper - The HTML element used as popper.
+   * @param {Object} options - Your custom options to override the ones defined in [Defaults](#defaults)
+   * @return {Object} instance - The generated Popper.js instance
+   */
+  function Popper(reference, popper) {
+    var _this = this;
+
+    var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+    classCallCheck(this, Popper);
+
+    this.scheduleUpdate = function () {
+      return requestAnimationFrame(_this.update);
+    };
+
+    // make update() debounced, so that it only runs at most once-per-tick
+    this.update = debounce(this.update.bind(this));
+
+    // with {} we create a new object with the options inside it
+    this.options = _extends({}, Popper.Defaults, options);
+
+    // init state
+    this.state = {
+      isDestroyed: false,
+      isCreated: false,
+      scrollParents: []
+    };
+
+    // get reference and popper elements (allow jQuery wrappers)
+    this.reference = reference && reference.jquery ? reference[0] : reference;
+    this.popper = popper && popper.jquery ? popper[0] : popper;
+
+    // Deep merge modifiers options
+    this.options.modifiers = {};
+    Object.keys(_extends({}, Popper.Defaults.modifiers, options.modifiers)).forEach(function (name) {
+      _this.options.modifiers[name] = _extends({}, Popper.Defaults.modifiers[name] || {}, options.modifiers ? options.modifiers[name] : {});
+    });
+
+    // Refactoring modifiers' list (Object => Array)
+    this.modifiers = Object.keys(this.options.modifiers).map(function (name) {
+      return _extends({
+        name: name
+      }, _this.options.modifiers[name]);
+    })
+    // sort the modifiers by order
+    .sort(function (a, b) {
+      return a.order - b.order;
+    });
+
+    // modifiers have the ability to execute arbitrary code when Popper.js get inited
+    // such code is executed in the same order of its modifier
+    // they could add new properties to their options configuration
+    // BE AWARE: don't add options to `options.modifiers.name` but to `modifierOptions`!
+    this.modifiers.forEach(function (modifierOptions) {
+      if (modifierOptions.enabled && isFunction(modifierOptions.onLoad)) {
+        modifierOptions.onLoad(_this.reference, _this.popper, _this.options, modifierOptions, _this.state);
+      }
+    });
+
+    // fire the first update to position the popper in the right place
+    this.update();
+
+    var eventsEnabled = this.options.eventsEnabled;
+    if (eventsEnabled) {
+      // setup event listeners, they will take care of update the position in specific situations
+      this.enableEventListeners();
+    }
+
+    this.state.eventsEnabled = eventsEnabled;
+  }
+
+  // We can't use class properties because they don't get listed in the
+  // class prototype and break stuff like Sinon stubs
+
+
+  createClass(Popper, [{
+    key: 'update',
+    value: function update$$1() {
+      return update.call(this);
+    }
+  }, {
+    key: 'destroy',
+    value: function destroy$$1() {
+      return destroy.call(this);
+    }
+  }, {
+    key: 'enableEventListeners',
+    value: function enableEventListeners$$1() {
+      return enableEventListeners.call(this);
+    }
+  }, {
+    key: 'disableEventListeners',
+    value: function disableEventListeners$$1() {
+      return disableEventListeners.call(this);
+    }
+
+    /**
+     * Schedule an update, it will run on the next UI update available
+     * @method scheduleUpdate
+     * @memberof Popper
+     */
+
+    /**
+     * Collection of utilities useful when writing custom modifiers.
+     * Starting from version 1.7, this method is available only if you
+     * include `popper-utils.js` before `popper.js`.
+     *
+     * **DEPRECATION**: This way to access PopperUtils is deprecated
+     * and will be removed in v2! Use the PopperUtils module directly instead.
+     * Due to the high instability of the methods contained in Utils, we can't
+     * guarantee them to follow semver. Use them at your own risk!
+     * @static
+     * @private
+     * @type {Object}
+     * @deprecated since version 1.8
+     * @member Utils
+     * @memberof Popper
+     */
+
+  }]);
+  return Popper;
+}();
+
+/**
+ * The `referenceObject` is an object that provides an interface compatible with Popper.js
+ * and lets you use it as replacement of a real DOM node.<br />
+ * You can use this method to position a popper relatively to a set of coordinates
+ * in case you don't have a DOM node to use as reference.
+ *
+ * ```
+ * new Popper(referenceObject, popperNode);
+ * ```
+ *
+ * NB: This feature isn't supported in Internet Explorer 10
+ * @name referenceObject
+ * @property {Function} data.getBoundingClientRect
+ * A function that returns a set of coordinates compatible with the native `getBoundingClientRect` method.
+ * @property {number} data.clientWidth
+ * An ES6 getter that will return the width of the virtual reference element.
+ * @property {number} data.clientHeight
+ * An ES6 getter that will return the height of the virtual reference element.
+ */
+
+Popper.Utils = (typeof window !== 'undefined' ? window : global).PopperUtils;
+Popper.placements = placements;
+Popper.Defaults = Defaults;
+
+exports.default = Popper;
+//# sourceMappingURL=popper.js.map
+
+module.exports = exports['default'];
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(51)))
+
+/***/ }),
+/* 53 */
 /***/ (function(module, exports) {
 
 /* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {/* globals __webpack_amd_options__ */
@@ -6882,7 +9389,7 @@ module.exports = __webpack_amd_options__;
 /* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ }),
-/* 51 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6908,23 +9415,23 @@ var _extends = Object.assign || function (target) {
   }return target;
 };
 
-var _warning = __webpack_require__(49);
+var _warning = __webpack_require__(50);
 
 var _warning2 = _interopRequireDefault(_warning);
 
-var _invariant = __webpack_require__(98);
+var _invariant = __webpack_require__(104);
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
-var _LocationUtils = __webpack_require__(87);
+var _LocationUtils = __webpack_require__(96);
 
-var _PathUtils = __webpack_require__(46);
+var _PathUtils = __webpack_require__(49);
 
-var _createTransitionManager = __webpack_require__(88);
+var _createTransitionManager = __webpack_require__(97);
 
 var _createTransitionManager2 = _interopRequireDefault(_createTransitionManager);
 
-var _DOMUtils = __webpack_require__(86);
+var _DOMUtils = __webpack_require__(95);
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : { default: obj };
@@ -7208,7 +9715,7 @@ var createBrowserHistory = function createBrowserHistory() {
 exports.default = createBrowserHistory;
 
 /***/ }),
-/* 52 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7221,55 +9728,55 @@ exports.default = BasicPage;
 
 var _components = __webpack_require__(4);
 
-var _Alert = __webpack_require__(106);
+var _Alert = __webpack_require__(111);
 
 var _Alert2 = _interopRequireDefault(_Alert);
 
-var _Badge = __webpack_require__(107);
+var _Badge = __webpack_require__(112);
 
 var _Badge2 = _interopRequireDefault(_Badge);
 
-var _Breadcrumb = __webpack_require__(108);
+var _Breadcrumb = __webpack_require__(113);
 
 var _Breadcrumb2 = _interopRequireDefault(_Breadcrumb);
 
-var _Button = __webpack_require__(109);
+var _Button = __webpack_require__(114);
 
 var _Button2 = _interopRequireDefault(_Button);
 
-var _Dropdown = __webpack_require__(111);
+var _Dropdown = __webpack_require__(116);
 
 var _Dropdown2 = _interopRequireDefault(_Dropdown);
 
-var _Jumbotron = __webpack_require__(112);
+var _Jumbotron = __webpack_require__(117);
 
 var _Jumbotron2 = _interopRequireDefault(_Jumbotron);
 
-var _Progress = __webpack_require__(117);
+var _Progress = __webpack_require__(122);
 
 var _Progress2 = _interopRequireDefault(_Progress);
 
-var _Collapse = __webpack_require__(110);
+var _Collapse = __webpack_require__(115);
 
 var _Collapse2 = _interopRequireDefault(_Collapse);
 
-var _Layout = __webpack_require__(113);
+var _Layout = __webpack_require__(118);
 
 var _Layout2 = _interopRequireDefault(_Layout);
 
-var _Tabs = __webpack_require__(118);
+var _Tabs = __webpack_require__(123);
 
 var _Tabs2 = _interopRequireDefault(_Tabs);
 
-var _Popovers = __webpack_require__(116);
+var _Popovers = __webpack_require__(121);
 
 var _Popovers2 = _interopRequireDefault(_Popovers);
 
-var _Pagination = __webpack_require__(115);
+var _Pagination = __webpack_require__(120);
 
 var _Pagination2 = _interopRequireDefault(_Pagination);
 
-var _List = __webpack_require__(114);
+var _List = __webpack_require__(119);
 
 var _List2 = _interopRequireDefault(_List);
 
@@ -7286,7 +9793,7 @@ function BasicPage(props) {
 }module.exports = exports['default'];
 
 /***/ }),
-/* 53 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7299,11 +9806,11 @@ exports.default = CardPage;
 
 var _components = __webpack_require__(4);
 
-var _TextCard = __webpack_require__(120);
+var _TextCard = __webpack_require__(125);
 
 var _TextCard2 = _interopRequireDefault(_TextCard);
 
-var _HeaderCard = __webpack_require__(119);
+var _HeaderCard = __webpack_require__(124);
 
 var _HeaderCard2 = _interopRequireDefault(_HeaderCard);
 
@@ -7319,7 +9826,7 @@ function CardPage(props) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 54 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7332,19 +9839,19 @@ exports.default = FormPage;
 
 var _components = __webpack_require__(4);
 
-var _Input = __webpack_require__(122);
+var _Input = __webpack_require__(127);
 
 var _Input2 = _interopRequireDefault(_Input);
 
-var _InputGroup = __webpack_require__(123);
+var _InputGroup = __webpack_require__(128);
 
 var _InputGroup2 = _interopRequireDefault(_InputGroup);
 
-var _InputWithButton = __webpack_require__(124);
+var _InputWithButton = __webpack_require__(129);
 
 var _InputWithButton2 = _interopRequireDefault(_InputWithButton);
 
-var _ButtonShorthand = __webpack_require__(121);
+var _ButtonShorthand = __webpack_require__(126);
 
 var _ButtonShorthand2 = _interopRequireDefault(_ButtonShorthand);
 
@@ -7360,7 +9867,7 @@ function FormPage(props) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 55 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7373,11 +9880,11 @@ exports.default = BasicPage;
 
 var _components = __webpack_require__(4);
 
-var _BasicModal = __webpack_require__(126);
+var _BasicModal = __webpack_require__(131);
 
 var _BasicModal2 = _interopRequireDefault(_BasicModal);
 
-var _Animations = __webpack_require__(125);
+var _Animations = __webpack_require__(130);
 
 var _Animations2 = _interopRequireDefault(_Animations);
 
@@ -7393,7 +9900,7 @@ function BasicPage(props) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 56 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7406,19 +9913,19 @@ exports.default = NavigationPage;
 
 var _components = __webpack_require__(4);
 
-var _Horizontal = __webpack_require__(127);
+var _Horizontal = __webpack_require__(132);
 
 var _Horizontal2 = _interopRequireDefault(_Horizontal);
 
-var _Vertical = __webpack_require__(130);
+var _Vertical = __webpack_require__(135);
 
 var _Vertical2 = _interopRequireDefault(_Vertical);
 
-var _Tabbed = __webpack_require__(129);
+var _Tabbed = __webpack_require__(134);
 
 var _Tabbed2 = _interopRequireDefault(_Tabbed);
 
-var _Pills = __webpack_require__(128);
+var _Pills = __webpack_require__(133);
 
 var _Pills2 = _interopRequireDefault(_Pills);
 
@@ -7436,7 +9943,3430 @@ function NavigationPage(props) {
 }module.exports = exports['default'];
 
 /***/ }),
-/* 57 */
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+  };
+}();
+
+var _infernoComponent = __webpack_require__(37);
+
+var _infernoComponent2 = _interopRequireDefault(_infernoComponent);
+
+var _infernoCreateElement = __webpack_require__(38);
+
+var _infernoCreateElement2 = _interopRequireDefault(_infernoCreateElement);
+
+var _animatedComponent = __webpack_require__(19);
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+}
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+}
+
+var excludeProps = { 'el': true, 'tag': true, 'prefix': true, children: true };
+
+var Animated = function (_Component) {
+  _inherits(Animated, _Component);
+
+  function Animated() {
+    _classCallCheck(this, Animated);
+
+    return _possibleConstructorReturn(this, (Animated.__proto__ || Object.getPrototypeOf(Animated)).apply(this, arguments));
+  }
+
+  _createClass(Animated, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      (0, _animatedComponent.animateOnAdd)(this, this.props.prefix, this.props.onDidEnter);
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      (0, _animatedComponent.animateOnRemove)(this, this.props.prefix, this.props.onDidLeave);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var props = {};
+      var keys = Object.keys(this.props);
+      for (var i = 0; i < keys.length; i++) {
+        var tmpKey = keys[i];
+        if (!excludeProps[tmpKey]) {
+          props[tmpKey] = this.props[tmpKey];
+        }
+      }
+
+      return (0, _infernoCreateElement2.default)(this.props.el || this.props.tag || 'div', props, this.props.children);
+    }
+  }]);
+
+  return Animated;
+}(_infernoComponent2.default);
+
+exports.default = Animated;
+//# sourceMappingURL=Animated.js.map
+
+/***/ }),
+/* 61 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+  };
+}();
+
+var _infernoComponent = __webpack_require__(37);
+
+var _infernoComponent2 = _interopRequireDefault(_infernoComponent);
+
+var _infernoCreateElement = __webpack_require__(38);
+
+var _infernoCreateElement2 = _interopRequireDefault(_infernoCreateElement);
+
+var _animatedComponent = __webpack_require__(19);
+
+var _inferno = __webpack_require__(20);
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+}
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+}
+
+var animateSizeChange = function animateSizeChange(component, animationName, sourceSize, targetSize) {
+  var node = component._vNode.dom;
+  // Do not animate if this class is set (should I do this by passing prop through context?)
+  if (node.closest('.InfernoAnimation--noAnim')) {
+    return;
+  }
+
+  // 1. Get height and set start of animation
+  node.style.height = sourceSize.height + 'px';
+  node.style.width = sourceSize.width + 'px';
+
+  // 2. Set an animation listener, code at end
+  var done = false;
+  var nrofTransitionsLeft;
+  var onTransitionEnd = function onTransitionEnd(event) {
+    // Make sure it isn't a child that is triggering the event
+    if (event && event.target !== node) {
+      return;
+    }
+    if (event !== undefined && nrofTransitionsLeft > 0) {
+      nrofTransitionsLeft--;
+      return;
+    }
+    if (done) return;
+    done = true;
+    // 5. Remove the element
+    // Note: If I don't declare an anonymous function immediately here this callback isn't called!
+    node.style.height = node.style.width = '';
+    node.classList.remove(animationName + '-cross-fade-active');
+  };
+  node.addEventListener("transitionend", onTransitionEnd, false);
+  var dummy = node.clientHeight;
+
+  // 3. Activate transition
+  node.classList.add(animationName + '-cross-fade-active');
+
+  var cs = window.getComputedStyle(node);
+  var dur = cs.getPropertyValue('transition-duration').split(',');
+  var del = cs.getPropertyValue('transition-delay').split(',');
+  var animTimeout = dur.map(function (v, index) {
+    return parseFloat(v) + parseFloat(del[index]);
+  }).reduce(function (prev, curr) {
+    return prev > curr ? prev : curr;
+  }, 0);
+  nrofTransitionsLeft = dur.length - 1;
+  setTimeout(onTransitionEnd, Math.round(animTimeout * 1000) + 50); // Fallback if transitionend fails
+
+  /*
+  console.log('----- transition-duration', cs.getPropertyValue('transition-duration'))
+  console.log('----- transition-delay', cs.getPropertyValue('transition-delay'))
+  console.log('----- animTimeout', Math.round(animTimeout * 1000) + 50)
+  */
+
+  // 4. Activate target state
+  setTimeout(function () {
+    node.style.height = targetSize.height + 'px';
+    node.style.width = targetSize.width + 'px';
+  }, 5);
+};
+
+function _getSizeOfCrossFadeVnode(vNode) {
+  var domEl = vNode.dom.parentElement;
+  domEl.classList.add('InfernoAnimation--getSize');
+
+  var _domEl$getBoundingCli = domEl.getBoundingClientRect(),
+      width = _domEl$getBoundingCli.width,
+      height = _domEl$getBoundingCli.height;
+
+  domEl.classList.remove('InfernoAnimation--getSize');
+  return { width: width, height: height };
+}
+
+var CrossFade = function (_Component) {
+  _inherits(CrossFade, _Component);
+
+  function CrossFade(props) {
+    _classCallCheck(this, CrossFade);
+
+    var _this = _possibleConstructorReturn(this, (CrossFade.__proto__ || Object.getPrototypeOf(CrossFade)).call(this, props));
+
+    _this.state = {
+      active: false
+    };
+
+    _this.setTargetSize = _this.setTargetSize.bind(_this);
+    _this.setSourceSize = _this.setSourceSize.bind(_this);
+    _this._animationCheck = _this._animationCheck.bind(_this);
+    return _this;
+  }
+
+  _createClass(CrossFade, [{
+    key: '_animationCheck',
+    value: function _animationCheck() {
+      if (this.state.active && this.targetSize && this.sourceSize && this._vNode.dom) {
+        animateSizeChange(this, this.props.prefix, this.sourceSize, this.targetSize);
+        this.targetSize = this.sourceSize = undefined;
+      }
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      setTimeout(function () {
+        _this2.targetSize = _this2.sourceSize = undefined;
+        _this2.setState({
+          active: true
+        });
+      }, 10);
+    }
+  }, {
+    key: 'setTargetSize',
+    value: function setTargetSize(vNode) {
+      this.targetSize = _getSizeOfCrossFadeVnode(vNode);
+      this._animationCheck();
+    }
+  }, {
+    key: 'setSourceSize',
+    value: function setSourceSize(vNode) {
+      this.sourceSize = _getSizeOfCrossFadeVnode(vNode);
+      this._animationCheck();
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this3 = this;
+
+      var elProps = {};
+      if (this.props.className) {
+        // Using 'InfernoAnimation--noAnim' to block animations in children
+        elProps['className'] = this.props.className + (!this.state.active ? ' InfernoAnimation--noAnim' : '');
+      } else if (!this.state.active) {
+        elProps['className'] = 'InfernoAnimation--noAnim';
+      }
+
+      var children = !Array.isArray(this.props.children) ? [this.props.children] : this.props.children;
+
+      var childEls = children.map(function (childEl) {
+        return (0, _infernoCreateElement2.default)(CrossFadeItem, {
+          // onComponentDidMount: this.setTargetSize, onComponentWillUnmount: this.setSourceSize, key: childEl.key
+          onEnter: _this3.setTargetSize, onLeave: _this3.setSourceSize, key: childEl && childEl.key, prefix: _this3.props.prefix
+        }, childEl);
+      });
+
+      return (0, _infernoCreateElement2.default)(this.props.el || this.props.tag || 'div', elProps, childEls);
+    }
+  }]);
+
+  return CrossFade;
+}(_infernoComponent2.default);
+
+/*
+function CrossFadeItem (props) {
+  return (
+    <div className="CrossFadeItem">
+      {props.children}
+    </div>
+  )
+}
+*/
+
+var CrossFadeItem = function (_Component2) {
+  _inherits(CrossFadeItem, _Component2);
+
+  function CrossFadeItem() {
+    _classCallCheck(this, CrossFadeItem);
+
+    return _possibleConstructorReturn(this, (CrossFadeItem.__proto__ || Object.getPrototypeOf(CrossFadeItem)).apply(this, arguments));
+  }
+
+  _createClass(CrossFadeItem, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.props.onEnter(this._vNode);
+      (0, _animatedComponent.animateOnAdd)(this, this.props.prefix);
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this.props.onLeave(this._vNode);
+      (0, _animatedComponent.animateOnRemove)(this, this.props.prefix);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return (0, _inferno.createVNode)(2, 'div', 'CrossFadeItem', this.props.children);
+    }
+  }]);
+
+  return CrossFadeItem;
+}(_infernoComponent2.default);
+
+exports.default = CrossFade;
+//# sourceMappingURL=CrossFade.js.map
+
+/***/ }),
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+var inferno = __webpack_require__(20);
+
+/**
+ * @module Inferno-Shared
+ */ /** TypeDoc Comment */
+var NO_OP = "$NO_OP";
+var ERROR_MSG = "a runtime error occured! Use Inferno in development environment to find the error.";
+// this is MUCH faster than .constructor === Array and instanceof Array
+// in Node 7 and the later versions of V8, slower in older versions though
+var isArray = Array.isArray;
+function isStringOrNumber(o) {
+    var type = typeof o === 'undefined' ? 'undefined' : _typeof(o);
+    return type === "string" || type === "number";
+}
+function isNullOrUndef(o) {
+    return isUndefined(o) || isNull(o);
+}
+function isInvalid(o) {
+    return isNull(o) || o === false || isTrue(o) || isUndefined(o);
+}
+function isFunction(o) {
+    return typeof o === "function";
+}
+function isNull(o) {
+    return o === null;
+}
+function isTrue(o) {
+    return o === true;
+}
+function isUndefined(o) {
+    return o === void 0;
+}
+function throwError(message) {
+    if (!message) {
+        message = ERROR_MSG;
+    }
+    throw new Error("Inferno Error: " + message);
+}
+function combineFrom(first, second) {
+    var out = {};
+    if (first) {
+        for (var key in first) {
+            out[key] = first[key];
+        }
+    }
+    if (second) {
+        for (var key$1 in second) {
+            out[key$1] = second[key$1];
+        }
+    }
+    return out;
+}
+function Lifecycle() {
+    this.listeners = [];
+}
+Lifecycle.prototype.addListener = function addListener(callback) {
+    this.listeners.push(callback);
+};
+Lifecycle.prototype.trigger = function trigger() {
+    var listeners = this.listeners;
+    var listener;
+    // We need to remove current listener from array when calling it, because more listeners might be added
+    while (listener = listeners.shift()) {
+        listener();
+    }
+};
+
+/**
+ * @module Inferno-Component
+ */ /** TypeDoc Comment */
+// Make sure u use EMPTY_OBJ from 'inferno', otherwise it'll be a different reference
+var noOp = ERROR_MSG;
+if (process.env.NODE_ENV !== "production") {
+    noOp = "Inferno Error: Can only update a mounted or mounting component. This usually means you called setState() or forceUpdate() on an unmounted component. This is a no-op.";
+}
+var componentCallbackQueue = new Map();
+var resolvedPromise = Promise.resolve();
+function addToQueue(component, force, callback) {
+    var queue = componentCallbackQueue.get(component);
+    if (queue === void 0) {
+        queue = [];
+        componentCallbackQueue.set(component, queue);
+        resolvedPromise.then(function () {
+            componentCallbackQueue.delete(component);
+            component._updating = true;
+            applyState(component, force, function () {
+                for (var i = 0, len = queue.length; i < len; i++) {
+                    queue[i].call(component);
+                }
+            });
+            component._updating = false;
+        });
+    }
+    if (!isNullOrUndef(callback)) {
+        queue.push(callback);
+    }
+}
+function queueStateChanges(component, newState, callback) {
+    if (isFunction(newState)) {
+        newState = newState(component.state, component.props, component.context);
+    }
+    var pending = component._pendingState;
+    if (isNullOrUndef(pending)) {
+        component._pendingState = newState;
+    } else {
+        for (var stateKey in newState) {
+            pending[stateKey] = newState[stateKey];
+        }
+    }
+    if (!component._pendingSetState && !component._blockRender) {
+        if (!component._updating) {
+            component._pendingSetState = true;
+            component._updating = true;
+            applyState(component, false, callback);
+            component._updating = false;
+        } else {
+            addToQueue(component, false, callback);
+        }
+    } else {
+        component._pendingSetState = true;
+        if (isFunction(callback) && component._blockRender) {
+            component._lifecycle.addListener(callback.bind(component));
+        }
+    }
+}
+function applyState(component, force, callback) {
+    if (component._unmounted) {
+        return;
+    }
+    if (force || !component._blockRender) {
+        component._pendingSetState = false;
+        var pendingState = component._pendingState;
+        var prevState = component.state;
+        var nextState = combineFrom(prevState, pendingState);
+        var props = component.props;
+        var context = component.context;
+        component._pendingState = null;
+        var nextInput;
+        var renderOutput = component._updateComponent(prevState, nextState, props, props, context, force, true);
+        var didUpdate = true;
+        if (isInvalid(renderOutput)) {
+            nextInput = inferno.createVNode(4096 /* Void */, null);
+        } else if (renderOutput === NO_OP) {
+            nextInput = component._lastInput;
+            didUpdate = false;
+        } else if (isStringOrNumber(renderOutput)) {
+            nextInput = inferno.createVNode(1 /* Text */, null, null, renderOutput);
+        } else if (isArray(renderOutput)) {
+            if (process.env.NODE_ENV !== "production") {
+                throwError("a valid Inferno VNode (or null) must be returned from a component render. You may have returned an array or an invalid object.");
+            }
+            return throwError();
+        } else {
+            nextInput = renderOutput;
+        }
+        var lastInput = component._lastInput;
+        var vNode = component._vNode;
+        var parentDom = lastInput.dom && lastInput.dom.parentNode || (lastInput.dom = vNode.dom);
+        if (nextInput.flags & 28 /* Component */) {
+                nextInput.parentVNode = vNode;
+            }
+        component._lastInput = nextInput;
+        if (didUpdate) {
+            var childContext;
+            if (!isNullOrUndef(component.getChildContext)) {
+                childContext = component.getChildContext();
+            }
+            if (isNullOrUndef(childContext)) {
+                childContext = component._childContext;
+            } else {
+                childContext = combineFrom(context, childContext);
+            }
+            var lifeCycle = component._lifecycle;
+            inferno.internal_patch(lastInput, nextInput, parentDom, lifeCycle, childContext, component._isSVG, false);
+            // If this component was unmounted by its parent, do nothing. This is no-op
+            if (component._unmounted) {
+                return;
+            }
+            lifeCycle.trigger();
+            if (!isNullOrUndef(component.componentDidUpdate)) {
+                component.componentDidUpdate(props, prevState, context);
+            }
+            if (!isNull(inferno.options.afterUpdate)) {
+                inferno.options.afterUpdate(vNode);
+            }
+        }
+        var dom = vNode.dom = nextInput.dom;
+        if (inferno.options.findDOMNodeEnabled) {
+            inferno.internal_DOMNodeMap.set(component, nextInput.dom);
+        }
+        while (!isNullOrUndef(vNode = vNode.parentVNode)) {
+            if ((vNode.flags & 28 /* Component */) > 0) {
+                vNode.dom = dom;
+            }
+        }
+    } else {
+        component.state = component._pendingState;
+        component._pendingState = null;
+    }
+    if (isFunction(callback)) {
+        callback.call(component);
+    }
+}
+var Component = function Component(props, context) {
+    this.state = null;
+    this._blockRender = false;
+    this._blockSetState = true;
+    this._pendingSetState = false;
+    this._pendingState = null;
+    this._lastInput = null;
+    this._vNode = null;
+    this._unmounted = false;
+    this._lifecycle = null;
+    this._childContext = null;
+    this._isSVG = false;
+    this._updating = true;
+    /** @type {object} */
+    this.props = props || inferno.EMPTY_OBJ;
+    /** @type {object} */
+    this.context = context || inferno.EMPTY_OBJ; // context should not be mutable
+};
+Component.prototype.forceUpdate = function forceUpdate(callback) {
+    if (this._unmounted) {
+        return;
+    }
+    applyState(this, true, callback);
+};
+Component.prototype.setState = function setState(newState, callback) {
+    if (this._unmounted) {
+        return;
+    }
+    if (!this._blockSetState) {
+        queueStateChanges(this, newState, callback);
+    } else {
+        if (process.env.NODE_ENV !== "production") {
+            throwError("cannot update state via setState() in componentWillUpdate() or constructor.");
+        }
+        throwError();
+    }
+};
+Component.prototype._updateComponent = function _updateComponent(prevState, nextState, prevProps, nextProps, context, force, fromSetState) {
+    if (this._unmounted === true) {
+        if (process.env.NODE_ENV !== "production") {
+            throwError(noOp);
+        }
+        throwError();
+    }
+    if (prevProps !== nextProps || nextProps === inferno.EMPTY_OBJ || prevState !== nextState || force) {
+        if (prevProps !== nextProps || nextProps === inferno.EMPTY_OBJ) {
+            if (!isNullOrUndef(this.componentWillReceiveProps) && !fromSetState) {
+                this._blockRender = true;
+                this.componentWillReceiveProps(nextProps, context);
+                // If this component was removed during its own update do nothing...
+                if (this._unmounted) {
+                    return NO_OP;
+                }
+                this._blockRender = false;
+            }
+            if (this._pendingSetState) {
+                nextState = combineFrom(nextState, this._pendingState);
+                this._pendingSetState = false;
+                this._pendingState = null;
+            }
+        }
+        /* Update if scu is not defined, or it returns truthy value or force */
+        if (force || isNullOrUndef(this.shouldComponentUpdate) || this.shouldComponentUpdate && this.shouldComponentUpdate(nextProps, nextState, context)) {
+            if (!isNullOrUndef(this.componentWillUpdate)) {
+                this._blockSetState = true;
+                this.componentWillUpdate(nextProps, nextState, context);
+                this._blockSetState = false;
+            }
+            this.props = nextProps;
+            this.state = nextState;
+            this.context = context;
+            if (inferno.options.beforeRender) {
+                inferno.options.beforeRender(this);
+            }
+            var render = this.render(nextProps, nextState, context);
+            if (inferno.options.afterRender) {
+                inferno.options.afterRender(this);
+            }
+            return render;
+        } else {
+            this.props = nextProps;
+            this.state = nextState;
+            this.context = context;
+        }
+    }
+    return NO_OP;
+};
+// tslint:disable-next-line:no-empty
+Component.prototype.render = function render(nextProps, nextState, nextContext) {};
+
+exports['default'] = Component;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
+
+/***/ }),
+/* 63 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+var inferno = __webpack_require__(20);
+
+/**
+ * @module Inferno-Shared
+ */ /** TypeDoc Comment */
+function isNullOrUndef(o) {
+    return isUndefined(o) || isNull(o);
+}
+function isInvalid(o) {
+    return isNull(o) || o === false || isTrue(o) || isUndefined(o);
+}
+function isString(o) {
+    return typeof o === "string";
+}
+function isNull(o) {
+    return o === null;
+}
+function isTrue(o) {
+    return o === true;
+}
+function isUndefined(o) {
+    return o === void 0;
+}
+function isObject(o) {
+    return (typeof o === 'undefined' ? 'undefined' : _typeof(o)) === "object";
+}
+function Lifecycle() {
+    this.listeners = [];
+}
+Lifecycle.prototype.addListener = function addListener(callback) {
+    this.listeners.push(callback);
+};
+Lifecycle.prototype.trigger = function trigger() {
+    var listeners = this.listeners;
+    var listener;
+    // We need to remove current listener from array when calling it, because more listeners might be added
+    while (listener = listeners.shift()) {
+        listener();
+    }
+};
+
+/**
+ * @module Inferno-Create-Element
+ */ /** TypeDoc Comment */
+var componentHooks = new Set();
+componentHooks.add("onComponentWillMount");
+componentHooks.add("onComponentDidMount");
+componentHooks.add("onComponentWillUnmount");
+componentHooks.add("onComponentShouldUpdate");
+componentHooks.add("onComponentWillUpdate");
+componentHooks.add("onComponentDidUpdate");
+/**
+ * Creates virtual node
+ * @param {string|Function|Component<any, any>} type Type of node
+ * @param {object=} props Optional props for virtual node
+ * @param {...{object}=} _children Optional children for virtual node
+ * @returns {VNode} new virtual ndoe
+ */
+function createElement(type, props) {
+    var _children = [],
+        len = arguments.length - 2;
+    while (len-- > 0) {
+        _children[len] = arguments[len + 2];
+    }if (isInvalid(type) || isObject(type)) {
+        throw new Error("Inferno Error: createElement() name parameter cannot be undefined, null, false or true, It must be a string, class or function.");
+    }
+    var children = _children;
+    var ref = null;
+    var key = null;
+    var className = null;
+    var flags = 0;
+    var newProps;
+    if (_children) {
+        if (_children.length === 1) {
+            children = _children[0];
+        } else if (_children.length === 0) {
+            children = void 0;
+        }
+    }
+    if (isString(type)) {
+        flags = inferno.getFlagsForElementVnode(type);
+        if (!isNullOrUndef(props)) {
+            newProps = {};
+            for (var prop in props) {
+                if (prop === "className" || prop === "class") {
+                    className = props[prop];
+                } else if (prop === "key") {
+                    key = props.key;
+                } else if (prop === "children" && isUndefined(children)) {
+                    children = props.children; // always favour children args, default to props
+                } else if (prop === "ref") {
+                    ref = props.ref;
+                } else {
+                    newProps[prop] = props[prop];
+                }
+            }
+        }
+    } else {
+        flags = 16 /* ComponentUnknown */;
+        if (!isUndefined(children)) {
+            if (!props) {
+                props = {};
+            }
+            props.children = children;
+            children = null;
+        }
+        if (!isNullOrUndef(props)) {
+            newProps = {};
+            for (var prop$1 in props) {
+                if (componentHooks.has(prop$1)) {
+                    if (!ref) {
+                        ref = {};
+                    }
+                    ref[prop$1] = props[prop$1];
+                } else if (prop$1 === "key") {
+                    key = props.key;
+                } else {
+                    newProps[prop$1] = props[prop$1];
+                }
+            }
+        }
+    }
+    return inferno.createVNode(flags, type, className, children, newProps, key, ref);
+}
+
+exports['default'] = createElement;
+
+/***/ }),
+/* 64 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+/**
+ * @module Inferno-Shared
+ */ /** TypeDoc Comment */
+var NO_OP = "$NO_OP";
+var ERROR_MSG = "a runtime error occured! Use Inferno in development environment to find the error.";
+// This should be boolean and not reference to window.document
+var isBrowser = !!(typeof window !== "undefined" && window.document);
+// this is MUCH faster than .constructor === Array and instanceof Array
+// in Node 7 and the later versions of V8, slower in older versions though
+var isArray = Array.isArray;
+function isStatefulComponent(o) {
+    return !isUndefined(o.prototype) && !isUndefined(o.prototype.render);
+}
+function isStringOrNumber(o) {
+    var type = typeof o === 'undefined' ? 'undefined' : _typeof(o);
+    return type === "string" || type === "number";
+}
+function isNullOrUndef(o) {
+    return isUndefined(o) || isNull(o);
+}
+function isInvalid(o) {
+    return isNull(o) || o === false || isTrue(o) || isUndefined(o);
+}
+function isFunction(o) {
+    return typeof o === "function";
+}
+function isString(o) {
+    return typeof o === "string";
+}
+function isNumber(o) {
+    return typeof o === "number";
+}
+function isNull(o) {
+    return o === null;
+}
+function isTrue(o) {
+    return o === true;
+}
+function isUndefined(o) {
+    return o === void 0;
+}
+function isObject(o) {
+    return (typeof o === 'undefined' ? 'undefined' : _typeof(o)) === "object";
+}
+function throwError(message) {
+    if (!message) {
+        message = ERROR_MSG;
+    }
+    throw new Error("Inferno Error: " + message);
+}
+function warning(message) {
+    // tslint:disable-next-line:no-console
+    console.warn(message);
+}
+function combineFrom(first, second) {
+    var out = {};
+    if (first) {
+        for (var key in first) {
+            out[key] = first[key];
+        }
+    }
+    if (second) {
+        for (var key$1 in second) {
+            out[key$1] = second[key$1];
+        }
+    }
+    return out;
+}
+function Lifecycle() {
+    this.listeners = [];
+}
+Lifecycle.prototype.addListener = function addListener(callback) {
+    this.listeners.push(callback);
+};
+Lifecycle.prototype.trigger = function trigger() {
+    var listeners = this.listeners;
+    var listener;
+    // We need to remove current listener from array when calling it, because more listeners might be added
+    while (listener = listeners.shift()) {
+        listener();
+    }
+};
+
+/**
+ * @module Inferno
+ */ /** TypeDoc Comment */
+var options = {
+    afterMount: null,
+    afterRender: null,
+    afterUpdate: null,
+    beforeRender: null,
+    beforeUnmount: null,
+    createVNode: null,
+    findDOMNodeEnabled: false,
+    recyclingEnabled: false,
+    roots: []
+};
+
+/**
+ * @module Inferno
+ */ /** TypeDoc Comment */
+var xlinkNS = "http://www.w3.org/1999/xlink";
+var xmlNS = "http://www.w3.org/XML/1998/namespace";
+var svgNS = "http://www.w3.org/2000/svg";
+var strictProps = new Set();
+strictProps.add("volume");
+strictProps.add("defaultChecked");
+var booleanProps = new Set();
+booleanProps.add("muted");
+booleanProps.add("scoped");
+booleanProps.add("loop");
+booleanProps.add("open");
+booleanProps.add("checked");
+booleanProps.add("default");
+booleanProps.add("capture");
+booleanProps.add("disabled");
+booleanProps.add("readOnly");
+booleanProps.add("required");
+booleanProps.add("autoplay");
+booleanProps.add("controls");
+booleanProps.add("seamless");
+booleanProps.add("reversed");
+booleanProps.add("allowfullscreen");
+booleanProps.add("novalidate");
+booleanProps.add("hidden");
+booleanProps.add("autoFocus");
+booleanProps.add("selected");
+booleanProps.add("indeterminate");
+var namespaces = new Map();
+namespaces.set("xlink:href", xlinkNS);
+namespaces.set("xlink:arcrole", xlinkNS);
+namespaces.set("xlink:actuate", xlinkNS);
+namespaces.set("xlink:show", xlinkNS);
+namespaces.set("xlink:role", xlinkNS);
+namespaces.set("xlink:title", xlinkNS);
+namespaces.set("xlink:type", xlinkNS);
+namespaces.set("xml:base", xmlNS);
+namespaces.set("xml:lang", xmlNS);
+namespaces.set("xml:space", xmlNS);
+var isUnitlessNumber = new Set();
+isUnitlessNumber.add("animationIterationCount");
+isUnitlessNumber.add("borderImageOutset");
+isUnitlessNumber.add("borderImageSlice");
+isUnitlessNumber.add("borderImageWidth");
+isUnitlessNumber.add("boxFlex");
+isUnitlessNumber.add("boxFlexGroup");
+isUnitlessNumber.add("boxOrdinalGroup");
+isUnitlessNumber.add("columnCount");
+isUnitlessNumber.add("flex");
+isUnitlessNumber.add("flexGrow");
+isUnitlessNumber.add("flexPositive");
+isUnitlessNumber.add("flexShrink");
+isUnitlessNumber.add("flexNegative");
+isUnitlessNumber.add("flexOrder");
+isUnitlessNumber.add("gridRow");
+isUnitlessNumber.add("gridColumn");
+isUnitlessNumber.add("fontWeight");
+isUnitlessNumber.add("lineClamp");
+isUnitlessNumber.add("lineHeight");
+isUnitlessNumber.add("opacity");
+isUnitlessNumber.add("order");
+isUnitlessNumber.add("orphans");
+isUnitlessNumber.add("tabSize");
+isUnitlessNumber.add("widows");
+isUnitlessNumber.add("zIndex");
+isUnitlessNumber.add("zoom");
+isUnitlessNumber.add("fillOpacity");
+isUnitlessNumber.add("floodOpacity");
+isUnitlessNumber.add("stopOpacity");
+isUnitlessNumber.add("strokeDasharray");
+isUnitlessNumber.add("strokeDashoffset");
+isUnitlessNumber.add("strokeMiterlimit");
+isUnitlessNumber.add("strokeOpacity");
+isUnitlessNumber.add("strokeWidth");
+var skipProps = new Set();
+skipProps.add("children");
+skipProps.add("childrenType");
+skipProps.add("defaultValue");
+skipProps.add("ref");
+skipProps.add("key");
+skipProps.add("checked");
+skipProps.add("multiple");
+var delegatedEvents = new Set();
+delegatedEvents.add("onClick");
+delegatedEvents.add("onMouseDown");
+delegatedEvents.add("onMouseUp");
+delegatedEvents.add("onMouseMove");
+delegatedEvents.add("onSubmit");
+delegatedEvents.add("onDblClick");
+delegatedEvents.add("onKeyDown");
+delegatedEvents.add("onKeyUp");
+delegatedEvents.add("onKeyPress");
+
+/**
+ * @module Inferno
+ */ /** TypeDoc Comment */
+var isiOS = isBrowser && !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+var delegatedEvents$1 = new Map();
+function handleEvent(name, lastEvent, nextEvent, dom) {
+    var delegatedRoots = delegatedEvents$1.get(name);
+    if (nextEvent) {
+        if (!delegatedRoots) {
+            delegatedRoots = { items: new Map(), docEvent: null };
+            delegatedRoots.docEvent = attachEventToDocument(name, delegatedRoots);
+            delegatedEvents$1.set(name, delegatedRoots);
+        }
+        if (!lastEvent) {
+            if (isiOS && name === "onClick") {
+                trapClickOnNonInteractiveElement(dom);
+            }
+        }
+        delegatedRoots.items.set(dom, nextEvent);
+    } else if (delegatedRoots) {
+        var items = delegatedRoots.items;
+        if (items.delete(dom)) {
+            // If any items were deleted, check if listener need to be removed
+            if (items.size === 0) {
+                document.removeEventListener(normalizeEventName(name), delegatedRoots.docEvent);
+                delegatedEvents$1.delete(name);
+            }
+        }
+    }
+}
+function dispatchEvents(event, target, items, count, isClick, eventData) {
+    var dom = target;
+    while (count > 0) {
+        if (isClick && dom.disabled) {
+            return;
+        }
+        var eventsToTrigger = items.get(dom);
+        if (eventsToTrigger) {
+            count--;
+            // linkEvent object
+            eventData.dom = dom;
+            if (eventsToTrigger.event) {
+                eventsToTrigger.event(eventsToTrigger.data, event);
+            } else {
+                eventsToTrigger(event);
+            }
+            if (event.cancelBubble) {
+                return;
+            }
+        }
+        dom = dom.parentNode;
+        // Html Nodes can be nested fe: span inside button in that scenario browser does not handle disabled attribute on parent,
+        // because the event listener is on document.body
+        // Don't process clicks on disabled elements
+        if (dom === null) {
+            return;
+        }
+    }
+}
+function normalizeEventName(name) {
+    return name.substr(2).toLowerCase();
+}
+function stopPropagation() {
+    this.cancelBubble = true;
+    this.stopImmediatePropagation();
+}
+function attachEventToDocument(name, delegatedRoots) {
+    var docEvent = function docEvent(event) {
+        var count = delegatedRoots.items.size;
+        if (count > 0) {
+            event.stopPropagation = stopPropagation;
+            // Event data needs to be object to save reference to currentTarget getter
+            var eventData = {
+                dom: document
+            };
+            try {
+                Object.defineProperty(event, "currentTarget", {
+                    configurable: true,
+                    get: function get() {
+                        return eventData.dom;
+                    }
+                });
+            } catch (e) {
+                /* safari7 and phantomJS will crash */
+            }
+            dispatchEvents(event, event.target, delegatedRoots.items, count, event.type === "click", eventData);
+        }
+    };
+    document.addEventListener(normalizeEventName(name), docEvent);
+    return docEvent;
+}
+// tslint:disable-next-line:no-empty
+function emptyFn() {}
+function trapClickOnNonInteractiveElement(dom) {
+    // Mobile Safari does not fire properly bubble click events on
+    // non-interactive elements, which means delegated click listeners do not
+    // fire. The workaround for this bug involves attaching an empty click
+    // listener on the target node.
+    // http://www.quirksmode.org/blog/archives/2010/09/click_event_del.html
+    // Just set it using the onclick property so that we don't have to manage any
+    // bookkeeping for it. Not sure if we need to clear it when the listener is
+    // removed.
+    // TODO: Only do this for the relevant Safaris maybe?
+    dom.onclick = emptyFn;
+}
+
+/**
+ * @module Inferno
+ */ /** TypeDoc Comment */
+function isCheckedType(type) {
+    return type === "checkbox" || type === "radio";
+}
+function onTextInputChange(e) {
+    var vNode = this.vNode;
+    var props = vNode.props || EMPTY_OBJ;
+    var dom = vNode.dom;
+    var previousValue = props.value;
+    if (props.onInput) {
+        var event = props.onInput;
+        if (event.event) {
+            event.event(event.data, e);
+        } else {
+            event(e);
+        }
+    } else if (props.oninput) {
+        props.oninput(e);
+    }
+    // the user may have updated the vNode from the above onInput events syncronously
+    // so we need to get it from the context of `this` again
+    var newVNode = this.vNode;
+    var newProps = newVNode.props || EMPTY_OBJ;
+    // If render is going async there is no value change yet, it will come back to process input soon
+    if (previousValue !== newProps.value) {
+        // When this happens we need to store current cursor position and restore it, to avoid jumping
+        applyValue(newProps, dom);
+    }
+}
+function wrappedOnChange(e) {
+    var props = this.vNode.props || EMPTY_OBJ;
+    var event = props.onChange;
+    if (event.event) {
+        event.event(event.data, e);
+    } else {
+        event(e);
+    }
+}
+function onCheckboxChange(e) {
+    e.stopPropagation(); // This click should not propagate its for internal use
+    var vNode = this.vNode;
+    var props = vNode.props || EMPTY_OBJ;
+    var dom = vNode.dom;
+    if (props.onClick) {
+        var event = props.onClick;
+        if (event.event) {
+            event.event(event.data, e);
+        } else {
+            event(e);
+        }
+    } else if (props.onclick) {
+        props.onclick(e);
+    }
+    // the user may have updated the vNode from the above onInput events syncronously
+    // so we need to get it from the context of `this` again
+    var newVNode = this.vNode;
+    var newProps = newVNode.props || EMPTY_OBJ;
+    // If render is going async there is no value change yet, it will come back to process input soon
+    applyValue(newProps, dom);
+}
+function processInput(vNode, dom, nextPropsOrEmpty, mounting, isControlled) {
+    applyValue(nextPropsOrEmpty, dom);
+    if (isControlled) {
+        dom.vNode = vNode; // TODO: Remove this when implementing Fiber's
+        if (mounting) {
+            if (isCheckedType(nextPropsOrEmpty.type)) {
+                dom.onclick = onCheckboxChange;
+                dom.onclick.wrapped = true;
+            } else {
+                dom.oninput = onTextInputChange;
+                dom.oninput.wrapped = true;
+            }
+            if (nextPropsOrEmpty.onChange) {
+                dom.onchange = wrappedOnChange;
+                dom.onchange.wrapped = true;
+            }
+        }
+    }
+}
+function applyValue(nextPropsOrEmpty, dom) {
+    var type = nextPropsOrEmpty.type;
+    var value = nextPropsOrEmpty.value;
+    var checked = nextPropsOrEmpty.checked;
+    var multiple = nextPropsOrEmpty.multiple;
+    var defaultValue = nextPropsOrEmpty.defaultValue;
+    var hasValue = !isNullOrUndef(value);
+    if (type && type !== dom.type) {
+        dom.setAttribute("type", type);
+    }
+    if (multiple && multiple !== dom.multiple) {
+        dom.multiple = multiple;
+    }
+    if (!isNullOrUndef(defaultValue) && !hasValue) {
+        dom.defaultValue = defaultValue + "";
+    }
+    if (isCheckedType(type)) {
+        if (hasValue) {
+            dom.value = value;
+        }
+        if (!isNullOrUndef(checked)) {
+            dom.checked = checked;
+        }
+    } else {
+        if (hasValue && dom.value !== value) {
+            dom.defaultValue = value;
+            dom.value = value;
+        } else if (!isNullOrUndef(checked)) {
+            dom.checked = checked;
+        }
+    }
+}
+
+/**
+ * @module Inferno
+ */ /** TypeDoc Comment */
+function updateChildOptionGroup(vNode, value) {
+    var type = vNode.type;
+    if (type === "optgroup") {
+        var children = vNode.children;
+        if (isArray(children)) {
+            for (var i = 0, len = children.length; i < len; i++) {
+                updateChildOption(children[i], value);
+            }
+        } else if (isVNode(children)) {
+            updateChildOption(children, value);
+        }
+    } else {
+        updateChildOption(vNode, value);
+    }
+}
+function updateChildOption(vNode, value) {
+    var props = vNode.props || EMPTY_OBJ;
+    var dom = vNode.dom;
+    // we do this as multiple may have changed
+    dom.value = props.value;
+    if (isArray(value) && value.indexOf(props.value) !== -1 || props.value === value) {
+        dom.selected = true;
+    } else if (!isNullOrUndef(value) || !isNullOrUndef(props.selected)) {
+        dom.selected = props.selected || false;
+    }
+}
+function onSelectChange(e) {
+    var vNode = this.vNode;
+    var props = vNode.props || EMPTY_OBJ;
+    var dom = vNode.dom;
+    var previousValue = props.value;
+    if (props.onChange) {
+        var event = props.onChange;
+        if (event.event) {
+            event.event(event.data, e);
+        } else {
+            event(e);
+        }
+    } else if (props.onchange) {
+        props.onchange(e);
+    }
+    // the user may have updated the vNode from the above onInput events syncronously
+    // so we need to get it from the context of `this` again
+    var newVNode = this.vNode;
+    var newProps = newVNode.props || EMPTY_OBJ;
+    // If render is going async there is no value change yet, it will come back to process input soon
+    if (previousValue !== newProps.value) {
+        // When this happens we need to store current cursor position and restore it, to avoid jumping
+        applyValue$1(newVNode, dom, newProps, false);
+    }
+}
+function processSelect(vNode, dom, nextPropsOrEmpty, mounting, isControlled) {
+    applyValue$1(vNode, dom, nextPropsOrEmpty, mounting);
+    if (isControlled) {
+        dom.vNode = vNode; // TODO: Remove this when implementing Fiber's
+        if (mounting) {
+            dom.onchange = onSelectChange;
+            dom.onchange.wrapped = true;
+        }
+    }
+}
+function applyValue$1(vNode, dom, nextPropsOrEmpty, mounting) {
+    if (nextPropsOrEmpty.multiple !== dom.multiple) {
+        dom.multiple = nextPropsOrEmpty.multiple;
+    }
+    var children = vNode.children;
+    if (!isInvalid(children)) {
+        var value = nextPropsOrEmpty.value;
+        if (mounting && isNullOrUndef(value)) {
+            value = nextPropsOrEmpty.defaultValue;
+        }
+        if (isArray(children)) {
+            for (var i = 0, len = children.length; i < len; i++) {
+                updateChildOptionGroup(children[i], value);
+            }
+        } else if (isVNode(children)) {
+            updateChildOptionGroup(children, value);
+        }
+    }
+}
+
+/**
+ * @module Inferno
+ */ /** TypeDoc Comment */
+function wrappedOnChange$1(e) {
+    var props = this.vNode.props || EMPTY_OBJ;
+    var event = props.onChange;
+    if (event.event) {
+        event.event(event.data, e);
+    } else {
+        event(e);
+    }
+}
+function onTextareaInputChange(e) {
+    var vNode = this.vNode;
+    var props = vNode.props || EMPTY_OBJ;
+    var previousValue = props.value;
+    if (props.onInput) {
+        var event = props.onInput;
+        if (event.event) {
+            event.event(event.data, e);
+        } else {
+            event(e);
+        }
+    } else if (props.oninput) {
+        props.oninput(e);
+    }
+    // the user may have updated the vNode from the above onInput events syncronously
+    // so we need to get it from the context of `this` again
+    var newVNode = this.vNode;
+    var newProps = newVNode.props || EMPTY_OBJ;
+    // If render is going async there is no value change yet, it will come back to process input soon
+    if (previousValue !== newProps.value) {
+        // When this happens we need to store current cursor position and restore it, to avoid jumping
+        applyValue$2(newVNode, vNode.dom, false);
+    }
+}
+function processTextarea(vNode, dom, nextPropsOrEmpty, mounting, isControlled) {
+    applyValue$2(nextPropsOrEmpty, dom, mounting);
+    if (isControlled) {
+        dom.vNode = vNode; // TODO: Remove this when implementing Fiber's
+        if (mounting) {
+            dom.oninput = onTextareaInputChange;
+            dom.oninput.wrapped = true;
+            if (nextPropsOrEmpty.onChange) {
+                dom.onchange = wrappedOnChange$1;
+                dom.onchange.wrapped = true;
+            }
+        }
+    }
+}
+function applyValue$2(nextPropsOrEmpty, dom, mounting) {
+    var value = nextPropsOrEmpty.value;
+    var domValue = dom.value;
+    if (isNullOrUndef(value)) {
+        if (mounting) {
+            var defaultValue = nextPropsOrEmpty.defaultValue;
+            if (!isNullOrUndef(defaultValue)) {
+                if (defaultValue !== domValue) {
+                    dom.defaultValue = defaultValue;
+                    dom.value = defaultValue;
+                }
+            } else if (domValue !== "") {
+                dom.defaultValue = "";
+                dom.value = "";
+            }
+        }
+    } else {
+        /* There is value so keep it controlled */
+        if (domValue !== value) {
+            dom.defaultValue = value;
+            dom.value = value;
+        }
+    }
+}
+
+/**
+ * @module Inferno
+ */ /** TypeDoc Comment */
+/**
+ * There is currently no support for switching same input between controlled and nonControlled
+ * If that ever becomes a real issue, then re design controlled elements
+ * Currently user must choose either controlled or non-controlled and stick with that
+ */
+function processElement(flags, vNode, dom, nextPropsOrEmpty, mounting, isControlled) {
+    if ((flags & 512 /* InputElement */) > 0) {
+        processInput(vNode, dom, nextPropsOrEmpty, mounting, isControlled);
+    } else if ((flags & 2048 /* SelectElement */) > 0) {
+        processSelect(vNode, dom, nextPropsOrEmpty, mounting, isControlled);
+    } else if ((flags & 1024 /* TextareaElement */) > 0) {
+        processTextarea(vNode, dom, nextPropsOrEmpty, mounting, isControlled);
+    }
+}
+function isControlledFormElement(nextPropsOrEmpty) {
+    return nextPropsOrEmpty.type && isCheckedType(nextPropsOrEmpty.type) ? !isNullOrUndef(nextPropsOrEmpty.checked) : !isNullOrUndef(nextPropsOrEmpty.value);
+}
+
+/**
+ * @module Inferno
+ */ /** TypeDoc Comment */
+function normalizeChildNodes(parentDom) {
+    var dom = parentDom.firstChild;
+    while (dom) {
+        if (dom.nodeType === 8) {
+            if (dom.data === "!") {
+                var placeholder = document.createTextNode("");
+                parentDom.replaceChild(placeholder, dom);
+                dom = dom.nextSibling;
+            } else {
+                var lastDom = dom.previousSibling;
+                parentDom.removeChild(dom);
+                dom = lastDom || parentDom.firstChild;
+            }
+        } else {
+            dom = dom.nextSibling;
+        }
+    }
+}
+function hydrateComponent(vNode, dom, lifecycle, context, isSVG, isClass) {
+    var type = vNode.type;
+    var ref = vNode.ref;
+    var props = vNode.props || EMPTY_OBJ;
+    if (isClass) {
+        var _isSVG = dom.namespaceURI === svgNS;
+        var instance = createClassComponentInstance(vNode, type, props, context, _isSVG, lifecycle);
+        var input = instance._lastInput;
+        instance._vNode = vNode;
+        hydrate(input, dom, lifecycle, instance._childContext, _isSVG);
+        vNode.dom = input.dom;
+        mountClassComponentCallbacks(vNode, ref, instance, lifecycle);
+        instance._updating = false; // Mount finished allow going sync
+        if (options.findDOMNodeEnabled) {
+            componentToDOMNodeMap.set(instance, dom);
+        }
+    } else {
+        var input$1 = createFunctionalComponentInput(vNode, type, props, context);
+        hydrate(input$1, dom, lifecycle, context, isSVG);
+        vNode.children = input$1;
+        vNode.dom = input$1.dom;
+        mountFunctionalComponentCallbacks(props, ref, dom, lifecycle);
+    }
+    return dom;
+}
+function hydrateElement(vNode, dom, lifecycle, context, isSVG) {
+    var children = vNode.children;
+    var props = vNode.props;
+    var className = vNode.className;
+    var flags = vNode.flags;
+    var ref = vNode.ref;
+    isSVG = isSVG || (flags & 128 /* SvgElement */) > 0;
+    if (dom.nodeType !== 1 || dom.tagName.toLowerCase() !== vNode.type) {
+        if (process.env.NODE_ENV !== "production") {
+            warning("Inferno hydration: Server-side markup doesn't match client-side markup or Initial render target is not empty");
+        }
+        var newDom = mountElement(vNode, null, lifecycle, context, isSVG);
+        vNode.dom = newDom;
+        replaceChild(dom.parentNode, newDom, dom);
+        return newDom;
+    }
+    vNode.dom = dom;
+    if (!isInvalid(children)) {
+        hydrateChildren(children, dom, lifecycle, context, isSVG);
+    } else if (dom.firstChild !== null && !isSamePropsInnerHTML(dom, props)) {
+        dom.textContent = ""; // dom has content, but VNode has no children remove everything from DOM
+    }
+    if (props) {
+        var hasControlledValue = false;
+        var isFormElement = (flags & 3584 /* FormElement */) > 0;
+        if (isFormElement) {
+            hasControlledValue = isControlledFormElement(props);
+        }
+        for (var prop in props) {
+            // do not add a hasOwnProperty check here, it affects performance
+            patchProp(prop, null, props[prop], dom, isSVG, hasControlledValue);
+        }
+        if (isFormElement) {
+            processElement(flags, vNode, dom, props, true, hasControlledValue);
+        }
+    }
+    if (!isNullOrUndef(className)) {
+        if (isSVG) {
+            dom.setAttribute("class", className);
+        } else {
+            dom.className = className;
+        }
+    } else {
+        if (dom.className !== "") {
+            dom.removeAttribute("class");
+        }
+    }
+    if (ref) {
+        mountRef(dom, ref, lifecycle);
+    }
+    return dom;
+}
+function hydrateChildren(children, parentDom, lifecycle, context, isSVG) {
+    normalizeChildNodes(parentDom);
+    var dom = parentDom.firstChild;
+    if (isStringOrNumber(children)) {
+        if (!isNull(dom) && dom.nodeType === 3) {
+            if (dom.nodeValue !== children) {
+                dom.nodeValue = children;
+            }
+        } else if (children === "") {
+            parentDom.appendChild(document.createTextNode(""));
+        } else {
+            parentDom.textContent = children;
+        }
+        if (!isNull(dom)) {
+            dom = dom.nextSibling;
+        }
+    } else if (isArray(children)) {
+        for (var i = 0, len = children.length; i < len; i++) {
+            var child = children[i];
+            if (!isNull(child) && isObject(child)) {
+                if (!isNull(dom)) {
+                    var nextSibling = dom.nextSibling;
+                    hydrate(child, dom, lifecycle, context, isSVG);
+                    dom = nextSibling;
+                } else {
+                    mount(child, parentDom, lifecycle, context, isSVG);
+                }
+            }
+        }
+    } else {
+        // It's VNode
+        if (!isNull(dom)) {
+            hydrate(children, dom, lifecycle, context, isSVG);
+            dom = dom.nextSibling;
+        } else {
+            mount(children, parentDom, lifecycle, context, isSVG);
+        }
+    }
+    // clear any other DOM nodes, there should be only a single entry for the root
+    while (dom) {
+        var nextSibling$1 = dom.nextSibling;
+        parentDom.removeChild(dom);
+        dom = nextSibling$1;
+    }
+}
+function hydrateText(vNode, dom) {
+    if (dom.nodeType !== 3) {
+        var newDom = mountText(vNode, null);
+        vNode.dom = newDom;
+        replaceChild(dom.parentNode, newDom, dom);
+        return newDom;
+    }
+    var text = vNode.children;
+    if (dom.nodeValue !== text) {
+        dom.nodeValue = text;
+    }
+    vNode.dom = dom;
+    return dom;
+}
+function hydrateVoid(vNode, dom) {
+    vNode.dom = dom;
+    return dom;
+}
+function hydrate(vNode, dom, lifecycle, context, isSVG) {
+    var flags = vNode.flags;
+    if (flags & 28 /* Component */) {
+            hydrateComponent(vNode, dom, lifecycle, context, isSVG, (flags & 4 /* ComponentClass */) > 0);
+        } else if (flags & 3970 /* Element */) {
+            hydrateElement(vNode, dom, lifecycle, context, isSVG);
+        } else if (flags & 1 /* Text */) {
+            hydrateText(vNode, dom);
+        } else if (flags & 4096 /* Void */) {
+            hydrateVoid(vNode, dom);
+        } else {
+        if (process.env.NODE_ENV !== "production") {
+            throwError("hydrate() expects a valid VNode, instead it received an object with the type \"" + (typeof vNode === 'undefined' ? 'undefined' : _typeof(vNode)) + "\".");
+        }
+        throwError();
+    }
+}
+function hydrateRoot(input, parentDom, lifecycle) {
+    if (!isNull(parentDom)) {
+        var dom = parentDom.firstChild;
+        if (!isNull(dom)) {
+            hydrate(input, dom, lifecycle, EMPTY_OBJ, false);
+            dom = parentDom.firstChild;
+            // clear any other DOM nodes, there should be only a single entry for the root
+            while (dom = dom.nextSibling) {
+                parentDom.removeChild(dom);
+            }
+            return true;
+        }
+    }
+    return false;
+}
+
+/**
+ * @module Inferno
+ */ /** TypeDoc Comment */
+var componentPools = new Map();
+var elementPools = new Map();
+function recycleElement(vNode, lifecycle, context, isSVG) {
+    var tag = vNode.type;
+    var pools = elementPools.get(tag);
+    if (!isUndefined(pools)) {
+        var key = vNode.key;
+        var pool = key === null ? pools.nonKeyed : pools.keyed.get(key);
+        if (!isUndefined(pool)) {
+            var recycledVNode = pool.pop();
+            if (!isUndefined(recycledVNode)) {
+                patchElement(recycledVNode, vNode, null, lifecycle, context, isSVG, true);
+                return vNode.dom;
+            }
+        }
+    }
+    return null;
+}
+function poolElement(vNode) {
+    var tag = vNode.type;
+    var key = vNode.key;
+    var pools = elementPools.get(tag);
+    if (isUndefined(pools)) {
+        pools = {
+            keyed: new Map(),
+            nonKeyed: []
+        };
+        elementPools.set(tag, pools);
+    }
+    if (isNull(key)) {
+        pools.nonKeyed.push(vNode);
+    } else {
+        var pool = pools.keyed.get(key);
+        if (isUndefined(pool)) {
+            pool = [];
+            pools.keyed.set(key, pool);
+        }
+        pool.push(vNode);
+    }
+}
+function recycleComponent(vNode, lifecycle, context, isSVG) {
+    var type = vNode.type;
+    var pools = componentPools.get(type);
+    if (!isUndefined(pools)) {
+        var key = vNode.key;
+        var pool = key === null ? pools.nonKeyed : pools.keyed.get(key);
+        if (!isUndefined(pool)) {
+            var recycledVNode = pool.pop();
+            if (!isUndefined(recycledVNode)) {
+                var flags = vNode.flags;
+                var failed = patchComponent(recycledVNode, vNode, null, lifecycle, context, isSVG, (flags & 4 /* ComponentClass */) > 0, true);
+                if (!failed) {
+                    return vNode.dom;
+                }
+            }
+        }
+    }
+    return null;
+}
+function poolComponent(vNode) {
+    var hooks = vNode.ref;
+    var nonRecycleHooks = hooks && (hooks.onComponentWillMount || hooks.onComponentWillUnmount || hooks.onComponentDidMount || hooks.onComponentWillUpdate || hooks.onComponentDidUpdate);
+    if (nonRecycleHooks) {
+        return;
+    }
+    var type = vNode.type;
+    var key = vNode.key;
+    var pools = componentPools.get(type);
+    if (isUndefined(pools)) {
+        pools = {
+            keyed: new Map(),
+            nonKeyed: []
+        };
+        componentPools.set(type, pools);
+    }
+    if (isNull(key)) {
+        pools.nonKeyed.push(vNode);
+    } else {
+        var pool = pools.keyed.get(key);
+        if (isUndefined(pool)) {
+            pool = [];
+            pools.keyed.set(key, pool);
+        }
+        pool.push(vNode);
+    }
+}
+
+/**
+ * @module Inferno
+ */ /** TypeDoc Comment */
+function unmount(vNode, parentDom, lifecycle, canRecycle, isRecycling) {
+    var flags = vNode.flags;
+    var dom = vNode.dom;
+    if (flags & 28 /* Component */) {
+            var instance = vNode.children;
+            var isStatefulComponent$$1 = (flags & 4 /* ComponentClass */) > 0;
+            var props = vNode.props || EMPTY_OBJ;
+            var ref = vNode.ref;
+            if (!isRecycling) {
+                if (isStatefulComponent$$1) {
+                    if (!instance._unmounted) {
+                        if (!isNull(options.beforeUnmount)) {
+                            options.beforeUnmount(vNode);
+                        }
+                        if (!isUndefined(instance.componentWillUnmount)) {
+                            instance.componentWillUnmount();
+                        }
+                        if (ref && !isRecycling) {
+                            ref(null);
+                        }
+                        instance._unmounted = true;
+                        if (options.findDOMNodeEnabled) {
+                            componentToDOMNodeMap.delete(instance);
+                        }
+                        unmount(instance._lastInput, null, instance._lifecycle, false, isRecycling);
+                    }
+                } else {
+                    if (!isNullOrUndef(ref)) {
+                        if (!isNullOrUndef(ref.onComponentWillUnmount)) {
+                            ref.onComponentWillUnmount(dom, props);
+                        }
+                    }
+                    unmount(instance, null, lifecycle, false, isRecycling);
+                }
+            }
+            if (options.recyclingEnabled && !isStatefulComponent$$1 && (parentDom || canRecycle)) {
+                poolComponent(vNode);
+            }
+        } else if (flags & 3970 /* Element */) {
+            var ref$1 = vNode.ref;
+            var props$1 = vNode.props;
+            if (!isRecycling && isFunction(ref$1)) {
+                ref$1(null);
+            }
+            var children = vNode.children;
+            if (!isNullOrUndef(children)) {
+                if (isArray(children)) {
+                    for (var i = 0, len = children.length; i < len; i++) {
+                        var child = children[i];
+                        if (!isInvalid(child) && isObject(child)) {
+                            unmount(child, null, lifecycle, false, isRecycling);
+                        }
+                    }
+                } else if (isObject(children)) {
+                    unmount(children, null, lifecycle, false, isRecycling);
+                }
+            }
+            if (!isNull(props$1)) {
+                for (var name in props$1) {
+                    // do not add a hasOwnProperty check here, it affects performance
+                    if (props$1[name] !== null && isAttrAnEvent(name)) {
+                        patchEvent(name, props$1[name], null, dom);
+                        // We need to set this null, because same props otherwise come back if SCU returns false and we are recyling
+                        props$1[name] = null;
+                    }
+                }
+            }
+            if (options.recyclingEnabled && (parentDom || canRecycle)) {
+                poolElement(vNode);
+            }
+        }
+    if (!isNull(parentDom)) {
+        removeChild(parentDom, dom);
+    }
+}
+
+/**
+ * @module Inferno
+ */ /** TypeDoc Comment */
+// rather than use a Map, like we did before, we can use an array here
+// given there shouldn't be THAT many roots on the page, the difference
+// in performance is huge: https://esbench.com/bench/5802a691330ab09900a1a2da
+var componentToDOMNodeMap = new Map();
+var roots = options.roots;
+/**
+ * When inferno.options.findDOMNOdeEnabled is true, this function will return DOM Node by component instance
+ * @param ref Component instance
+ * @returns {*|null} returns dom node
+ */
+function findDOMNode(ref) {
+    if (!options.findDOMNodeEnabled) {
+        if (process.env.NODE_ENV !== "production") {
+            throwError("findDOMNode() has been disabled, use Inferno.options.findDOMNodeEnabled = true; enabled findDOMNode(). Warning this can significantly impact performance!");
+        }
+        throwError();
+    }
+    var dom = ref && ref.nodeType ? ref : null;
+    return componentToDOMNodeMap.get(ref) || dom;
+}
+function getRoot(dom) {
+    for (var i = 0, len = roots.length; i < len; i++) {
+        var root = roots[i];
+        if (root.dom === dom) {
+            return root;
+        }
+    }
+    return null;
+}
+function setRoot(dom, input, lifecycle) {
+    var root = {
+        dom: dom,
+        input: input,
+        lifecycle: lifecycle
+    };
+    roots.push(root);
+    return root;
+}
+function removeRoot(root) {
+    for (var i = 0, len = roots.length; i < len; i++) {
+        if (roots[i] === root) {
+            roots.splice(i, 1);
+            return;
+        }
+    }
+}
+if (process.env.NODE_ENV !== "production") {
+    if (isBrowser && document.body === null) {
+        warning('Inferno warning: you cannot initialize inferno without "document.body". Wait on "DOMContentLoaded" event, add script to bottom of body, or use async/defer attributes on script tag.');
+    }
+}
+var documentBody = isBrowser ? document.body : null;
+/**
+ * Renders virtual node tree into parent node.
+ * @param {VNode | null | string | number} input vNode to be rendered
+ * @param parentDom DOM node which content will be replaced by virtual node
+ * @returns {InfernoChildren} rendered virtual node
+ */
+function render(input, parentDom) {
+    if (documentBody === parentDom) {
+        if (process.env.NODE_ENV !== "production") {
+            throwError('you cannot render() to the "document.body". Use an empty element as a container instead.');
+        }
+        throwError();
+    }
+    if (input === NO_OP) {
+        return;
+    }
+    var root = getRoot(parentDom);
+    if (isNull(root)) {
+        var lifecycle = new Lifecycle();
+        if (!isInvalid(input)) {
+            if (input.dom) {
+                input = directClone(input);
+            }
+            if (!hydrateRoot(input, parentDom, lifecycle)) {
+                mount(input, parentDom, lifecycle, EMPTY_OBJ, false);
+            }
+            root = setRoot(parentDom, input, lifecycle);
+            lifecycle.trigger();
+        }
+    } else {
+        var lifecycle$1 = root.lifecycle;
+        lifecycle$1.listeners = [];
+        if (isNullOrUndef(input)) {
+            unmount(root.input, parentDom, lifecycle$1, false, false);
+            removeRoot(root);
+        } else {
+            if (input.dom) {
+                input = directClone(input);
+            }
+            patch(root.input, input, parentDom, lifecycle$1, EMPTY_OBJ, false, false);
+        }
+        root.input = input;
+        lifecycle$1.trigger();
+    }
+    if (root) {
+        var rootInput = root.input;
+        if (rootInput && rootInput.flags & 28 /* Component */) {
+                return rootInput.children;
+            }
+    }
+}
+function createRenderer(parentDom) {
+    return function renderer(lastInput, nextInput) {
+        if (!parentDom) {
+            parentDom = lastInput;
+        }
+        render(nextInput, parentDom);
+    };
+}
+
+/**
+ * @module Inferno
+ */ /** TypeDoc Comment */
+function patch(lastVNode, nextVNode, parentDom, lifecycle, context, isSVG, isRecycling) {
+    if (lastVNode !== nextVNode) {
+        var lastFlags = lastVNode.flags;
+        var nextFlags = nextVNode.flags;
+        if (nextFlags & 28 /* Component */) {
+                var isClass = (nextFlags & 4 /* ComponentClass */) > 0;
+                if (lastFlags & 28 /* Component */) {
+                        patchComponent(lastVNode, nextVNode, parentDom, lifecycle, context, isSVG, isClass, isRecycling);
+                    } else {
+                    replaceVNode(parentDom, mountComponent(nextVNode, null, lifecycle, context, isSVG, isClass), lastVNode, lifecycle, isRecycling);
+                }
+            } else if (nextFlags & 3970 /* Element */) {
+                if (lastFlags & 3970 /* Element */) {
+                        patchElement(lastVNode, nextVNode, parentDom, lifecycle, context, isSVG, isRecycling);
+                    } else {
+                    replaceVNode(parentDom, mountElement(nextVNode, null, lifecycle, context, isSVG), lastVNode, lifecycle, isRecycling);
+                }
+            } else if (nextFlags & 1 /* Text */) {
+                if (lastFlags & 1 /* Text */) {
+                        patchText(lastVNode, nextVNode);
+                    } else {
+                    replaceVNode(parentDom, mountText(nextVNode, null), lastVNode, lifecycle, isRecycling);
+                }
+            } else if (nextFlags & 4096 /* Void */) {
+                if (lastFlags & 4096 /* Void */) {
+                        patchVoid(lastVNode, nextVNode);
+                    } else {
+                    replaceVNode(parentDom, mountVoid(nextVNode, null), lastVNode, lifecycle, isRecycling);
+                }
+            } else {
+            // Error case: mount new one replacing old one
+            replaceLastChildAndUnmount(lastVNode, nextVNode, parentDom, lifecycle, context, isSVG, isRecycling);
+        }
+    }
+}
+function unmountChildren(children, dom, lifecycle, isRecycling) {
+    if (isVNode(children)) {
+        unmount(children, dom, lifecycle, true, isRecycling);
+    } else if (isArray(children)) {
+        removeAllChildren(dom, children, lifecycle, isRecycling);
+    } else {
+        dom.textContent = "";
+    }
+}
+function patchElement(lastVNode, nextVNode, parentDom, lifecycle, context, isSVG, isRecycling) {
+    var nextTag = nextVNode.type;
+    var lastTag = lastVNode.type;
+    if (lastTag !== nextTag) {
+        replaceWithNewNode(lastVNode, nextVNode, parentDom, lifecycle, context, isSVG, isRecycling);
+    } else {
+        var dom = lastVNode.dom;
+        var lastProps = lastVNode.props;
+        var nextProps = nextVNode.props;
+        var lastChildren = lastVNode.children;
+        var nextChildren = nextVNode.children;
+        var lastFlags = lastVNode.flags;
+        var nextFlags = nextVNode.flags;
+        var nextRef = nextVNode.ref;
+        var lastClassName = lastVNode.className;
+        var nextClassName = nextVNode.className;
+        nextVNode.dom = dom;
+        isSVG = isSVG || (nextFlags & 128 /* SvgElement */) > 0;
+        if (lastChildren !== nextChildren) {
+            var childrenIsSVG = isSVG === true && nextVNode.type !== "foreignObject";
+            patchChildren(lastFlags, nextFlags, lastChildren, nextChildren, dom, lifecycle, context, childrenIsSVG, isRecycling);
+        }
+        // inlined patchProps  -- starts --
+        if (lastProps !== nextProps) {
+            var lastPropsOrEmpty = lastProps || EMPTY_OBJ;
+            var nextPropsOrEmpty = nextProps || EMPTY_OBJ;
+            var hasControlledValue = false;
+            if (nextPropsOrEmpty !== EMPTY_OBJ) {
+                var isFormElement = (nextFlags & 3584 /* FormElement */) > 0;
+                if (isFormElement) {
+                    hasControlledValue = isControlledFormElement(nextPropsOrEmpty);
+                }
+                for (var prop in nextPropsOrEmpty) {
+                    // do not add a hasOwnProperty check here, it affects performance
+                    var nextValue = nextPropsOrEmpty[prop];
+                    var lastValue = lastPropsOrEmpty[prop];
+                    patchProp(prop, lastValue, nextValue, dom, isSVG, hasControlledValue);
+                }
+                if (isFormElement) {
+                    // When inferno is recycling form element, we need to process it like it would be mounting
+                    processElement(nextFlags, nextVNode, dom, nextPropsOrEmpty, isRecycling, hasControlledValue);
+                }
+            }
+            if (lastPropsOrEmpty !== EMPTY_OBJ) {
+                for (var prop$1 in lastPropsOrEmpty) {
+                    // do not add a hasOwnProperty check here, it affects performance
+                    if (isNullOrUndef(nextPropsOrEmpty[prop$1]) && !isNullOrUndef(lastPropsOrEmpty[prop$1])) {
+                        removeProp(prop$1, lastPropsOrEmpty[prop$1], dom, nextFlags);
+                    }
+                }
+            }
+        }
+        // inlined patchProps  -- ends --
+        if (lastClassName !== nextClassName) {
+            if (isNullOrUndef(nextClassName)) {
+                dom.removeAttribute("class");
+            } else {
+                if (isSVG) {
+                    dom.setAttribute("class", nextClassName);
+                } else {
+                    dom.className = nextClassName;
+                }
+            }
+        }
+        if (nextRef) {
+            if (lastVNode.ref !== nextRef || isRecycling) {
+                mountRef(dom, nextRef, lifecycle);
+            }
+        }
+    }
+}
+function patchChildren(lastFlags, nextFlags, lastChildren, nextChildren, dom, lifecycle, context, isSVG, isRecycling) {
+    var patchArray = false;
+    var patchKeyed = false;
+    if (nextFlags & 64 /* HasNonKeyedChildren */) {
+            patchArray = true;
+        } else if ((lastFlags & 32 /* HasKeyedChildren */) > 0 && (nextFlags & 32 /* HasKeyedChildren */) > 0) {
+        patchKeyed = true;
+        patchArray = true;
+    } else if (isInvalid(nextChildren)) {
+        unmountChildren(lastChildren, dom, lifecycle, isRecycling);
+    } else if (isInvalid(lastChildren)) {
+        if (isStringOrNumber(nextChildren)) {
+            setTextContent(dom, nextChildren);
+        } else {
+            if (isArray(nextChildren)) {
+                mountArrayChildren(nextChildren, dom, lifecycle, context, isSVG);
+            } else {
+                mount(nextChildren, dom, lifecycle, context, isSVG);
+            }
+        }
+    } else if (isStringOrNumber(nextChildren)) {
+        if (isStringOrNumber(lastChildren)) {
+            updateTextContent(dom, nextChildren);
+        } else {
+            unmountChildren(lastChildren, dom, lifecycle, isRecycling);
+            setTextContent(dom, nextChildren);
+        }
+    } else if (isArray(nextChildren)) {
+        if (isArray(lastChildren)) {
+            patchArray = true;
+            if (isKeyed(lastChildren, nextChildren)) {
+                patchKeyed = true;
+            }
+        } else {
+            unmountChildren(lastChildren, dom, lifecycle, isRecycling);
+            mountArrayChildren(nextChildren, dom, lifecycle, context, isSVG);
+        }
+    } else if (isArray(lastChildren)) {
+        removeAllChildren(dom, lastChildren, lifecycle, isRecycling);
+        mount(nextChildren, dom, lifecycle, context, isSVG);
+    } else if (isVNode(nextChildren)) {
+        if (isVNode(lastChildren)) {
+            patch(lastChildren, nextChildren, dom, lifecycle, context, isSVG, isRecycling);
+        } else {
+            unmountChildren(lastChildren, dom, lifecycle, isRecycling);
+            mount(nextChildren, dom, lifecycle, context, isSVG);
+        }
+    }
+    if (patchArray) {
+        var lastLength = lastChildren.length;
+        var nextLength = nextChildren.length;
+        // Fast path's for both algorithms
+        if (lastLength === 0) {
+            if (nextLength > 0) {
+                mountArrayChildren(nextChildren, dom, lifecycle, context, isSVG);
+            }
+        } else if (nextLength === 0) {
+            removeAllChildren(dom, lastChildren, lifecycle, isRecycling);
+        } else if (patchKeyed) {
+            patchKeyedChildren(lastChildren, nextChildren, dom, lifecycle, context, isSVG, isRecycling, lastLength, nextLength);
+        } else {
+            patchNonKeyedChildren(lastChildren, nextChildren, dom, lifecycle, context, isSVG, isRecycling, lastLength, nextLength);
+        }
+    }
+}
+function patchComponent(lastVNode, nextVNode, parentDom, lifecycle, context, isSVG, isClass, isRecycling) {
+    var lastType = lastVNode.type;
+    var nextType = nextVNode.type;
+    var lastKey = lastVNode.key;
+    var nextKey = nextVNode.key;
+    if (lastType !== nextType || lastKey !== nextKey) {
+        replaceWithNewNode(lastVNode, nextVNode, parentDom, lifecycle, context, isSVG, isRecycling);
+        return false;
+    } else {
+        var nextProps = nextVNode.props || EMPTY_OBJ;
+        if (isClass) {
+            var instance = lastVNode.children;
+            instance._updating = true;
+            if (instance._unmounted) {
+                if (isNull(parentDom)) {
+                    return true;
+                }
+                replaceChild(parentDom, mountComponent(nextVNode, null, lifecycle, context, isSVG, (nextVNode.flags & 4 /* ComponentClass */) > 0), lastVNode.dom);
+            } else {
+                var hasComponentDidUpdate = !isUndefined(instance.componentDidUpdate);
+                var nextState = instance.state;
+                // When component has componentDidUpdate hook, we need to clone lastState or will be modified by reference during update
+                var lastState = hasComponentDidUpdate ? combineFrom(nextState, null) : nextState;
+                var lastProps = instance.props;
+                nextVNode.children = instance;
+                instance._isSVG = isSVG;
+                var lastInput = instance._lastInput;
+                var nextInput = instance._updateComponent(lastState, nextState, lastProps, nextProps, context, false, false);
+                // If this component was destroyed by its parent do nothing, this is no-op
+                // It can happen by using external callback etc during render / update
+                if (instance._unmounted) {
+                    return false;
+                }
+                var didUpdate = true;
+                // Update component before getting child context
+                var childContext;
+                if (!isNullOrUndef(instance.getChildContext)) {
+                    childContext = instance.getChildContext();
+                }
+                if (isNullOrUndef(childContext)) {
+                    childContext = context;
+                } else {
+                    childContext = combineFrom(context, childContext);
+                }
+                instance._childContext = childContext;
+                if (isInvalid(nextInput)) {
+                    nextInput = createVoidVNode();
+                } else if (nextInput === NO_OP) {
+                    nextInput = lastInput;
+                    didUpdate = false;
+                } else if (isStringOrNumber(nextInput)) {
+                    nextInput = createTextVNode(nextInput, null);
+                } else if (isArray(nextInput)) {
+                    if (process.env.NODE_ENV !== "production") {
+                        throwError("a valid Inferno VNode (or null) must be returned from a component render. You may have returned an array or an invalid object.");
+                    }
+                    throwError();
+                } else if (isObject(nextInput)) {
+                    if (!isNull(nextInput.dom)) {
+                        nextInput = directClone(nextInput);
+                    }
+                }
+                if (nextInput.flags & 28 /* Component */) {
+                        nextInput.parentVNode = nextVNode;
+                    } else if (lastInput.flags & 28 /* Component */) {
+                        lastInput.parentVNode = nextVNode;
+                    }
+                instance._lastInput = nextInput;
+                instance._vNode = nextVNode;
+                if (didUpdate) {
+                    patch(lastInput, nextInput, parentDom, lifecycle, childContext, isSVG, isRecycling);
+                    if (hasComponentDidUpdate && instance.componentDidUpdate) {
+                        instance.componentDidUpdate(lastProps, lastState);
+                    }
+                    if (!isNull(options.afterUpdate)) {
+                        options.afterUpdate(nextVNode);
+                    }
+                    if (options.findDOMNodeEnabled) {
+                        componentToDOMNodeMap.set(instance, nextInput.dom);
+                    }
+                }
+                nextVNode.dom = nextInput.dom;
+            }
+            instance._updating = false;
+        } else {
+            var shouldUpdate = true;
+            var lastProps$1 = lastVNode.props;
+            var nextHooks = nextVNode.ref;
+            var nextHooksDefined = !isNullOrUndef(nextHooks);
+            var lastInput$1 = lastVNode.children;
+            var nextInput$1 = lastInput$1;
+            nextVNode.dom = lastVNode.dom;
+            nextVNode.children = lastInput$1;
+            if (lastKey !== nextKey) {
+                shouldUpdate = true;
+            } else {
+                if (nextHooksDefined && !isNullOrUndef(nextHooks.onComponentShouldUpdate)) {
+                    shouldUpdate = nextHooks.onComponentShouldUpdate(lastProps$1, nextProps);
+                }
+            }
+            if (shouldUpdate !== false) {
+                if (nextHooksDefined && !isNullOrUndef(nextHooks.onComponentWillUpdate)) {
+                    nextHooks.onComponentWillUpdate(lastProps$1, nextProps);
+                }
+                nextInput$1 = nextType(nextProps, context);
+                if (isInvalid(nextInput$1)) {
+                    nextInput$1 = createVoidVNode();
+                } else if (isStringOrNumber(nextInput$1) && nextInput$1 !== NO_OP) {
+                    nextInput$1 = createTextVNode(nextInput$1, null);
+                } else if (isArray(nextInput$1)) {
+                    if (process.env.NODE_ENV !== "production") {
+                        throwError("a valid Inferno VNode (or null) must be returned from a component render. You may have returned an array or an invalid object.");
+                    }
+                    throwError();
+                } else if (isObject(nextInput$1)) {
+                    if (!isNull(nextInput$1.dom)) {
+                        nextInput$1 = directClone(nextInput$1);
+                    }
+                }
+                if (nextInput$1 !== NO_OP) {
+                    patch(lastInput$1, nextInput$1, parentDom, lifecycle, context, isSVG, isRecycling);
+                    nextVNode.children = nextInput$1;
+                    if (nextHooksDefined && !isNullOrUndef(nextHooks.onComponentDidUpdate)) {
+                        nextHooks.onComponentDidUpdate(lastProps$1, nextProps);
+                    }
+                    nextVNode.dom = nextInput$1.dom;
+                }
+            }
+            if (nextInput$1.flags & 28 /* Component */) {
+                    nextInput$1.parentVNode = nextVNode;
+                } else if (lastInput$1.flags & 28 /* Component */) {
+                    lastInput$1.parentVNode = nextVNode;
+                }
+        }
+    }
+    return false;
+}
+function patchText(lastVNode, nextVNode) {
+    var nextText = nextVNode.children;
+    var dom = lastVNode.dom;
+    nextVNode.dom = dom;
+    if (lastVNode.children !== nextText) {
+        dom.nodeValue = nextText;
+    }
+}
+function patchVoid(lastVNode, nextVNode) {
+    nextVNode.dom = lastVNode.dom;
+}
+function patchNonKeyedChildren(lastChildren, nextChildren, dom, lifecycle, context, isSVG, isRecycling, lastChildrenLength, nextChildrenLength) {
+    var commonLength = lastChildrenLength > nextChildrenLength ? nextChildrenLength : lastChildrenLength;
+    var i = 0;
+    for (; i < commonLength; i++) {
+        var nextChild = nextChildren[i];
+        if (nextChild.dom) {
+            nextChild = nextChildren[i] = directClone(nextChild);
+        }
+        patch(lastChildren[i], nextChild, dom, lifecycle, context, isSVG, isRecycling);
+    }
+    if (lastChildrenLength < nextChildrenLength) {
+        for (i = commonLength; i < nextChildrenLength; i++) {
+            var nextChild$1 = nextChildren[i];
+            if (nextChild$1.dom) {
+                nextChild$1 = nextChildren[i] = directClone(nextChild$1);
+            }
+            appendChild(dom, mount(nextChild$1, null, lifecycle, context, isSVG));
+        }
+    } else if (lastChildrenLength > nextChildrenLength) {
+        for (i = commonLength; i < lastChildrenLength; i++) {
+            unmount(lastChildren[i], dom, lifecycle, false, isRecycling);
+        }
+    }
+}
+function patchKeyedChildren(a, b, dom, lifecycle, context, isSVG, isRecycling, aLength, bLength) {
+    var aEnd = aLength - 1;
+    var bEnd = bLength - 1;
+    var aStart = 0;
+    var bStart = 0;
+    var i;
+    var j;
+    var aNode;
+    var bNode;
+    var nextNode;
+    var nextPos;
+    var node;
+    var aStartNode = a[aStart];
+    var bStartNode = b[bStart];
+    var aEndNode = a[aEnd];
+    var bEndNode = b[bEnd];
+    if (bStartNode.dom) {
+        b[bStart] = bStartNode = directClone(bStartNode);
+    }
+    if (bEndNode.dom) {
+        b[bEnd] = bEndNode = directClone(bEndNode);
+    }
+    // Step 1
+    // tslint:disable-next-line
+    outer: {
+        // Sync nodes with the same key at the beginning.
+        while (aStartNode.key === bStartNode.key) {
+            patch(aStartNode, bStartNode, dom, lifecycle, context, isSVG, isRecycling);
+            aStart++;
+            bStart++;
+            if (aStart > aEnd || bStart > bEnd) {
+                break outer;
+            }
+            aStartNode = a[aStart];
+            bStartNode = b[bStart];
+            if (bStartNode.dom) {
+                b[bStart] = bStartNode = directClone(bStartNode);
+            }
+        }
+        // Sync nodes with the same key at the end.
+        while (aEndNode.key === bEndNode.key) {
+            patch(aEndNode, bEndNode, dom, lifecycle, context, isSVG, isRecycling);
+            aEnd--;
+            bEnd--;
+            if (aStart > aEnd || bStart > bEnd) {
+                break outer;
+            }
+            aEndNode = a[aEnd];
+            bEndNode = b[bEnd];
+            if (bEndNode.dom) {
+                b[bEnd] = bEndNode = directClone(bEndNode);
+            }
+        }
+    }
+    if (aStart > aEnd) {
+        if (bStart <= bEnd) {
+            nextPos = bEnd + 1;
+            nextNode = nextPos < bLength ? b[nextPos].dom : null;
+            while (bStart <= bEnd) {
+                node = b[bStart];
+                if (node.dom) {
+                    b[bStart] = node = directClone(node);
+                }
+                bStart++;
+                insertOrAppend(dom, mount(node, null, lifecycle, context, isSVG), nextNode);
+            }
+        }
+    } else if (bStart > bEnd) {
+        while (aStart <= aEnd) {
+            unmount(a[aStart++], dom, lifecycle, false, isRecycling);
+        }
+    } else {
+        var aLeft = aEnd - aStart + 1;
+        var bLeft = bEnd - bStart + 1;
+        var sources = new Array(bLeft);
+        // Mark all nodes as inserted.
+        for (i = 0; i < bLeft; i++) {
+            sources[i] = -1;
+        }
+        var moved = false;
+        var pos = 0;
+        var patched = 0;
+        // When sizes are small, just loop them through
+        if (bLeft <= 4 || aLeft * bLeft <= 16) {
+            for (i = aStart; i <= aEnd; i++) {
+                aNode = a[i];
+                if (patched < bLeft) {
+                    for (j = bStart; j <= bEnd; j++) {
+                        bNode = b[j];
+                        if (aNode.key === bNode.key) {
+                            sources[j - bStart] = i;
+                            if (pos > j) {
+                                moved = true;
+                            } else {
+                                pos = j;
+                            }
+                            if (bNode.dom) {
+                                b[j] = bNode = directClone(bNode);
+                            }
+                            patch(aNode, bNode, dom, lifecycle, context, isSVG, isRecycling);
+                            patched++;
+                            a[i] = null;
+                            break;
+                        }
+                    }
+                }
+            }
+        } else {
+            var keyIndex = new Map();
+            // Map keys by their index in array
+            for (i = bStart; i <= bEnd; i++) {
+                keyIndex.set(b[i].key, i);
+            }
+            // Try to patch same keys
+            for (i = aStart; i <= aEnd; i++) {
+                aNode = a[i];
+                if (patched < bLeft) {
+                    j = keyIndex.get(aNode.key);
+                    if (!isUndefined(j)) {
+                        bNode = b[j];
+                        sources[j - bStart] = i;
+                        if (pos > j) {
+                            moved = true;
+                        } else {
+                            pos = j;
+                        }
+                        if (bNode.dom) {
+                            b[j] = bNode = directClone(bNode);
+                        }
+                        patch(aNode, bNode, dom, lifecycle, context, isSVG, isRecycling);
+                        patched++;
+                        a[i] = null;
+                    }
+                }
+            }
+        }
+        // fast-path: if nothing patched remove all old and add all new
+        if (aLeft === aLength && patched === 0) {
+            removeAllChildren(dom, a, lifecycle, isRecycling);
+            while (bStart < bLeft) {
+                node = b[bStart];
+                if (node.dom) {
+                    b[bStart] = node = directClone(node);
+                }
+                bStart++;
+                insertOrAppend(dom, mount(node, null, lifecycle, context, isSVG), null);
+            }
+        } else {
+            i = aLeft - patched;
+            while (i > 0) {
+                aNode = a[aStart++];
+                if (!isNull(aNode)) {
+                    unmount(aNode, dom, lifecycle, true, isRecycling);
+                    i--;
+                }
+            }
+            if (moved) {
+                var seq = lis_algorithm(sources);
+                j = seq.length - 1;
+                for (i = bLeft - 1; i >= 0; i--) {
+                    if (sources[i] === -1) {
+                        pos = i + bStart;
+                        node = b[pos];
+                        if (node.dom) {
+                            b[pos] = node = directClone(node);
+                        }
+                        nextPos = pos + 1;
+                        insertOrAppend(dom, mount(node, null, lifecycle, context, isSVG), nextPos < bLength ? b[nextPos].dom : null);
+                    } else {
+                        if (j < 0 || i !== seq[j]) {
+                            pos = i + bStart;
+                            node = b[pos];
+                            nextPos = pos + 1;
+                            insertOrAppend(dom, node.dom, nextPos < bLength ? b[nextPos].dom : null);
+                        } else {
+                            j--;
+                        }
+                    }
+                }
+            } else if (patched !== bLeft) {
+                // when patched count doesn't match b length we need to insert those new ones
+                // loop backwards so we can use insertBefore
+                for (i = bLeft - 1; i >= 0; i--) {
+                    if (sources[i] === -1) {
+                        pos = i + bStart;
+                        node = b[pos];
+                        if (node.dom) {
+                            b[pos] = node = directClone(node);
+                        }
+                        nextPos = pos + 1;
+                        insertOrAppend(dom, mount(node, null, lifecycle, context, isSVG), nextPos < bLength ? b[nextPos].dom : null);
+                    }
+                }
+            }
+        }
+    }
+}
+// // https://en.wikipedia.org/wiki/Longest_increasing_subsequence
+function lis_algorithm(arr) {
+    var p = arr.slice(0);
+    var result = [0];
+    var i;
+    var j;
+    var u;
+    var v;
+    var c;
+    var len = arr.length;
+    for (i = 0; i < len; i++) {
+        var arrI = arr[i];
+        if (arrI !== -1) {
+            j = result[result.length - 1];
+            if (arr[j] < arrI) {
+                p[i] = j;
+                result.push(i);
+                continue;
+            }
+            u = 0;
+            v = result.length - 1;
+            while (u < v) {
+                c = (u + v) / 2 | 0;
+                if (arr[result[c]] < arrI) {
+                    u = c + 1;
+                } else {
+                    v = c;
+                }
+            }
+            if (arrI < arr[result[u]]) {
+                if (u > 0) {
+                    p[i] = result[u - 1];
+                }
+                result[u] = i;
+            }
+        }
+    }
+    u = result.length;
+    v = result[u - 1];
+    while (u-- > 0) {
+        result[u] = v;
+        v = p[v];
+    }
+    return result;
+}
+function isAttrAnEvent(attr) {
+    return attr[0] === "o" && attr[1] === "n";
+}
+function patchProp(prop, lastValue, nextValue, dom, isSVG, hasControlledValue) {
+    if (lastValue !== nextValue) {
+        if (skipProps.has(prop) || hasControlledValue && prop === "value") {
+            return;
+        } else if (booleanProps.has(prop)) {
+            prop = prop === "autoFocus" ? prop.toLowerCase() : prop;
+            dom[prop] = !!nextValue;
+        } else if (strictProps.has(prop)) {
+            var value = isNullOrUndef(nextValue) ? "" : nextValue;
+            if (dom[prop] !== value) {
+                dom[prop] = value;
+            }
+        } else if (isAttrAnEvent(prop)) {
+            patchEvent(prop, lastValue, nextValue, dom);
+        } else if (isNullOrUndef(nextValue)) {
+            dom.removeAttribute(prop);
+        } else if (prop === "style") {
+            patchStyle(lastValue, nextValue, dom);
+        } else if (prop === "dangerouslySetInnerHTML") {
+            var lastHtml = lastValue && lastValue.__html;
+            var nextHtml = nextValue && nextValue.__html;
+            if (lastHtml !== nextHtml) {
+                if (!isNullOrUndef(nextHtml) && !isSameInnerHTML(dom, nextHtml)) {
+                    dom.innerHTML = nextHtml;
+                }
+            }
+        } else {
+            // We optimize for NS being boolean. Its 99.9% time false
+            if (isSVG && namespaces.has(prop)) {
+                // If we end up in this path we can read property again
+                dom.setAttributeNS(namespaces.get(prop), prop, nextValue);
+            } else {
+                dom.setAttribute(prop, nextValue);
+            }
+        }
+    }
+}
+function patchEvent(name, lastValue, nextValue, dom) {
+    if (lastValue !== nextValue) {
+        if (delegatedEvents.has(name)) {
+            handleEvent(name, lastValue, nextValue, dom);
+        } else {
+            var nameLowerCase = name.toLowerCase();
+            var domEvent = dom[nameLowerCase];
+            // if the function is wrapped, that means it's been controlled by a wrapper
+            if (domEvent && domEvent.wrapped) {
+                return;
+            }
+            if (!isFunction(nextValue) && !isNullOrUndef(nextValue)) {
+                var linkEvent = nextValue.event;
+                if (linkEvent && isFunction(linkEvent)) {
+                    dom[nameLowerCase] = function (e) {
+                        linkEvent(nextValue.data, e);
+                    };
+                } else {
+                    if (process.env.NODE_ENV !== "production") {
+                        throwError("an event on a VNode \"" + name + "\". was not a function or a valid linkEvent.");
+                    }
+                    throwError();
+                }
+            } else {
+                dom[nameLowerCase] = nextValue;
+            }
+        }
+    }
+}
+// We are assuming here that we come from patchProp routine
+// -nextAttrValue cannot be null or undefined
+function patchStyle(lastAttrValue, nextAttrValue, dom) {
+    var domStyle = dom.style;
+    var style;
+    var value;
+    if (isString(nextAttrValue)) {
+        domStyle.cssText = nextAttrValue;
+        return;
+    }
+    if (!isNullOrUndef(lastAttrValue) && !isString(lastAttrValue)) {
+        for (style in nextAttrValue) {
+            // do not add a hasOwnProperty check here, it affects performance
+            value = nextAttrValue[style];
+            if (value !== lastAttrValue[style]) {
+                domStyle[style] = !isNumber(value) || isUnitlessNumber.has(style) ? value : value + "px";
+            }
+        }
+        for (style in lastAttrValue) {
+            if (isNullOrUndef(nextAttrValue[style])) {
+                domStyle[style] = "";
+            }
+        }
+    } else {
+        for (style in nextAttrValue) {
+            value = nextAttrValue[style];
+            domStyle[style] = !isNumber(value) || isUnitlessNumber.has(style) ? value : value + "px";
+        }
+    }
+}
+function removeProp(prop, lastValue, dom, nextFlags) {
+    if (prop === "value") {
+        // When removing value of select element, it needs to be set to null instead empty string, because empty string is valid value for option which makes that option selected
+        // MS IE/Edge don't follow html spec for textArea and input elements and we need to set empty string to value in those cases to avoid "null" and "undefined" texts
+        dom.value = nextFlags & 2048 /* SelectElement */ ? null : "";
+    } else if (prop === "style") {
+        dom.removeAttribute("style");
+    } else if (isAttrAnEvent(prop)) {
+        handleEvent(prop, lastValue, null, dom);
+    } else {
+        dom.removeAttribute(prop);
+    }
+}
+
+/**
+ * @module Inferno
+ */ /** TypeDoc Comment */
+function mount(vNode, parentDom, lifecycle, context, isSVG) {
+    var flags = vNode.flags;
+    if (flags & 3970 /* Element */) {
+            return mountElement(vNode, parentDom, lifecycle, context, isSVG);
+        } else if (flags & 28 /* Component */) {
+            return mountComponent(vNode, parentDom, lifecycle, context, isSVG, (flags & 4 /* ComponentClass */) > 0);
+        } else if (flags & 4096 /* Void */) {
+            return mountVoid(vNode, parentDom);
+        } else if (flags & 1 /* Text */) {
+            return mountText(vNode, parentDom);
+        } else {
+        if (process.env.NODE_ENV !== "production") {
+            if ((typeof vNode === 'undefined' ? 'undefined' : _typeof(vNode)) === "object") {
+                throwError("mount() received an object that's not a valid VNode, you should stringify it first. Object: \"" + JSON.stringify(vNode) + "\".");
+            } else {
+                throwError("mount() expects a valid VNode, instead it received an object with the type \"" + (typeof vNode === 'undefined' ? 'undefined' : _typeof(vNode)) + "\".");
+            }
+        }
+        throwError();
+    }
+}
+function mountText(vNode, parentDom) {
+    var dom = document.createTextNode(vNode.children);
+    vNode.dom = dom;
+    if (!isNull(parentDom)) {
+        appendChild(parentDom, dom);
+    }
+    return dom;
+}
+function mountVoid(vNode, parentDom) {
+    var dom = document.createTextNode("");
+    vNode.dom = dom;
+    if (!isNull(parentDom)) {
+        appendChild(parentDom, dom);
+    }
+    return dom;
+}
+function mountElement(vNode, parentDom, lifecycle, context, isSVG) {
+    var dom;
+    if (options.recyclingEnabled) {
+        dom = recycleElement(vNode, lifecycle, context, isSVG);
+        if (!isNull(dom)) {
+            if (!isNull(parentDom)) {
+                appendChild(parentDom, dom);
+            }
+            return dom;
+        }
+    }
+    var flags = vNode.flags;
+    isSVG = isSVG || (flags & 128 /* SvgElement */) > 0;
+    dom = documentCreateElement(vNode.type, isSVG);
+    var children = vNode.children;
+    var props = vNode.props;
+    var className = vNode.className;
+    var ref = vNode.ref;
+    vNode.dom = dom;
+    if (!isInvalid(children)) {
+        if (isStringOrNumber(children)) {
+            setTextContent(dom, children);
+        } else {
+            var childrenIsSVG = isSVG === true && vNode.type !== "foreignObject";
+            if (isArray(children)) {
+                mountArrayChildren(children, dom, lifecycle, context, childrenIsSVG);
+            } else if (isVNode(children)) {
+                mount(children, dom, lifecycle, context, childrenIsSVG);
+            }
+        }
+    }
+    if (!isNull(props)) {
+        var hasControlledValue = false;
+        var isFormElement = (flags & 3584 /* FormElement */) > 0;
+        if (isFormElement) {
+            hasControlledValue = isControlledFormElement(props);
+        }
+        for (var prop in props) {
+            // do not add a hasOwnProperty check here, it affects performance
+            patchProp(prop, null, props[prop], dom, isSVG, hasControlledValue);
+        }
+        if (isFormElement) {
+            processElement(flags, vNode, dom, props, true, hasControlledValue);
+        }
+    }
+    if (className !== null) {
+        if (isSVG) {
+            dom.setAttribute("class", className);
+        } else {
+            dom.className = className;
+        }
+    }
+    if (!isNull(ref)) {
+        mountRef(dom, ref, lifecycle);
+    }
+    if (!isNull(parentDom)) {
+        appendChild(parentDom, dom);
+    }
+    return dom;
+}
+function mountArrayChildren(children, dom, lifecycle, context, isSVG) {
+    for (var i = 0, len = children.length; i < len; i++) {
+        var child = children[i];
+        // Verify can string/number be here. might cause de-opt. - Normalization takes care of it.
+        if (!isInvalid(child)) {
+            if (child.dom) {
+                children[i] = child = directClone(child);
+            }
+            mount(children[i], dom, lifecycle, context, isSVG);
+        }
+    }
+}
+function mountComponent(vNode, parentDom, lifecycle, context, isSVG, isClass) {
+    var dom;
+    if (options.recyclingEnabled) {
+        dom = recycleComponent(vNode, lifecycle, context, isSVG);
+        if (!isNull(dom)) {
+            if (!isNull(parentDom)) {
+                appendChild(parentDom, dom);
+            }
+            return dom;
+        }
+    }
+    var type = vNode.type;
+    var props = vNode.props || EMPTY_OBJ;
+    var ref = vNode.ref;
+    if (isClass) {
+        var instance = createClassComponentInstance(vNode, type, props, context, isSVG, lifecycle);
+        var input = instance._lastInput;
+        instance._vNode = vNode;
+        vNode.dom = dom = mount(input, null, lifecycle, instance._childContext, isSVG);
+        if (!isNull(parentDom)) {
+            appendChild(parentDom, dom);
+        }
+        mountClassComponentCallbacks(vNode, ref, instance, lifecycle);
+        instance._updating = false;
+        if (options.findDOMNodeEnabled) {
+            componentToDOMNodeMap.set(instance, dom);
+        }
+    } else {
+        var input$1 = createFunctionalComponentInput(vNode, type, props, context);
+        vNode.dom = dom = mount(input$1, null, lifecycle, context, isSVG);
+        vNode.children = input$1;
+        mountFunctionalComponentCallbacks(props, ref, dom, lifecycle);
+        if (!isNull(parentDom)) {
+            appendChild(parentDom, dom);
+        }
+    }
+    return dom;
+}
+function mountClassComponentCallbacks(vNode, ref, instance, lifecycle) {
+    if (ref) {
+        if (isFunction(ref)) {
+            ref(instance);
+        } else {
+            if (process.env.NODE_ENV !== "production") {
+                if (isStringOrNumber(ref)) {
+                    throwError('string "refs" are not supported in Inferno 1.0. Use callback "refs" instead.');
+                } else if (isObject(ref) && vNode.flags & 4 /* ComponentClass */) {
+                        throwError("functional component lifecycle events are not supported on ES2015 class components.");
+                    } else {
+                    throwError("a bad value for \"ref\" was used on component: \"" + JSON.stringify(ref) + "\"");
+                }
+            }
+            throwError();
+        }
+    }
+    var hasDidMount = !isUndefined(instance.componentDidMount);
+    var afterMount = options.afterMount;
+    if (hasDidMount || !isNull(afterMount)) {
+        lifecycle.addListener(function () {
+            instance._updating = true;
+            if (afterMount) {
+                afterMount(vNode);
+            }
+            if (hasDidMount) {
+                instance.componentDidMount();
+            }
+            instance._updating = false;
+        });
+    }
+}
+function mountFunctionalComponentCallbacks(props, ref, dom, lifecycle) {
+    if (ref) {
+        if (!isNullOrUndef(ref.onComponentWillMount)) {
+            ref.onComponentWillMount(props);
+        }
+        if (!isNullOrUndef(ref.onComponentDidMount)) {
+            lifecycle.addListener(function () {
+                return ref.onComponentDidMount(dom, props);
+            });
+        }
+    }
+}
+function mountRef(dom, value, lifecycle) {
+    if (isFunction(value)) {
+        lifecycle.addListener(function () {
+            return value(dom);
+        });
+    } else {
+        if (isInvalid(value)) {
+            return;
+        }
+        if (process.env.NODE_ENV !== "production") {
+            throwError('string "refs" are not supported in Inferno 1.0. Use callback "refs" instead.');
+        }
+        throwError();
+    }
+}
+
+/**
+ * @module Inferno
+ */ /** TypeDoc Comment */
+// We need EMPTY_OBJ defined in one place.
+// Its used for comparison so we cant inline it into shared
+var EMPTY_OBJ = {};
+if (process.env.NODE_ENV !== "production") {
+    Object.freeze(EMPTY_OBJ);
+}
+function createClassComponentInstance(vNode, Component, props, context, isSVG, lifecycle) {
+    if (isUndefined(context)) {
+        context = EMPTY_OBJ; // Context should not be mutable
+    }
+    var instance = new Component(props, context);
+    vNode.children = instance;
+    instance._blockSetState = false;
+    instance.context = context;
+    if (instance.props === EMPTY_OBJ) {
+        instance.props = props;
+    }
+    // setState callbacks must fire after render is done when called from componentWillReceiveProps or componentWillMount
+    instance._lifecycle = lifecycle;
+    instance._unmounted = false;
+    instance._isSVG = isSVG;
+    if (!isNullOrUndef(instance.componentWillMount)) {
+        instance._blockRender = true;
+        instance.componentWillMount();
+        if (instance._pendingSetState) {
+            var state = instance.state;
+            var pending = instance._pendingState;
+            if (state === null) {
+                instance.state = pending;
+            } else {
+                for (var key in pending) {
+                    state[key] = pending[key];
+                }
+            }
+            instance._pendingSetState = false;
+            instance._pendingState = null;
+        }
+        instance._blockRender = false;
+    }
+    var childContext;
+    if (!isNullOrUndef(instance.getChildContext)) {
+        childContext = instance.getChildContext();
+    }
+    if (isNullOrUndef(childContext)) {
+        instance._childContext = context;
+    } else {
+        instance._childContext = combineFrom(context, childContext);
+    }
+    if (!isNull(options.beforeRender)) {
+        options.beforeRender(instance);
+    }
+    var input = instance.render(props, instance.state, context);
+    if (!isNull(options.afterRender)) {
+        options.afterRender(instance);
+    }
+    if (isArray(input)) {
+        if (process.env.NODE_ENV !== "production") {
+            throwError("a valid Inferno VNode (or null) must be returned from a component render. You may have returned an array or an invalid object.");
+        }
+        throwError();
+    } else if (isInvalid(input)) {
+        input = createVoidVNode();
+    } else if (isStringOrNumber(input)) {
+        input = createTextVNode(input, null);
+    } else {
+        if (input.dom) {
+            input = directClone(input);
+        }
+        if (input.flags & 28 /* Component */) {
+                // if we have an input that is also a component, we run into a tricky situation
+                // where the root vNode needs to always have the correct DOM entry
+                // so we break monomorphism on our input and supply it our vNode as parentVNode
+                // we can optimise this in the future, but this gets us out of a lot of issues
+                input.parentVNode = vNode;
+            }
+    }
+    instance._lastInput = input;
+    return instance;
+}
+function replaceLastChildAndUnmount(lastInput, nextInput, parentDom, lifecycle, context, isSVG, isRecycling) {
+    replaceVNode(parentDom, mount(nextInput, null, lifecycle, context, isSVG), lastInput, lifecycle, isRecycling);
+}
+function replaceVNode(parentDom, dom, vNode, lifecycle, isRecycling) {
+    unmount(vNode, null, lifecycle, false, isRecycling);
+    replaceChild(parentDom, dom, vNode.dom);
+}
+function createFunctionalComponentInput(vNode, component, props, context) {
+    var input = component(props, context);
+    if (isArray(input)) {
+        if (process.env.NODE_ENV !== "production") {
+            throwError("a valid Inferno VNode (or null) must be returned from a component render. You may have returned an array or an invalid object.");
+        }
+        throwError();
+    } else if (isInvalid(input)) {
+        input = createVoidVNode();
+    } else if (isStringOrNumber(input)) {
+        input = createTextVNode(input, null);
+    } else {
+        if (input.dom) {
+            input = directClone(input);
+        }
+        if (input.flags & 28 /* Component */) {
+                // if we have an input that is also a component, we run into a tricky situation
+                // where the root vNode needs to always have the correct DOM entry
+                // so we break monomorphism on our input and supply it our vNode as parentVNode
+                // we can optimise this in the future, but this gets us out of a lot of issues
+                input.parentVNode = vNode;
+            }
+    }
+    return input;
+}
+function setTextContent(dom, text) {
+    if (text !== "") {
+        dom.textContent = text;
+    } else {
+        dom.appendChild(document.createTextNode(""));
+    }
+}
+function updateTextContent(dom, text) {
+    var textNode = dom.firstChild;
+    // Guard against external change on DOM node.
+    if (isNull(textNode)) {
+        setTextContent(dom, text);
+    } else {
+        textNode.nodeValue = text;
+    }
+}
+function appendChild(parentDom, dom) {
+    parentDom.appendChild(dom);
+}
+function insertOrAppend(parentDom, newNode, nextNode) {
+    if (isNullOrUndef(nextNode)) {
+        appendChild(parentDom, newNode);
+    } else {
+        parentDom.insertBefore(newNode, nextNode);
+    }
+}
+function documentCreateElement(tag, isSVG) {
+    if (isSVG === true) {
+        return document.createElementNS(svgNS, tag);
+    } else {
+        return document.createElement(tag);
+    }
+}
+function replaceWithNewNode(lastNode, nextNode, parentDom, lifecycle, context, isSVG, isRecycling) {
+    unmount(lastNode, null, lifecycle, false, isRecycling);
+    var dom = mount(nextNode, null, lifecycle, context, isSVG);
+    nextNode.dom = dom;
+    replaceChild(parentDom, dom, lastNode.dom);
+}
+function replaceChild(parentDom, newDom, lastDom) {
+    if (!parentDom) {
+        parentDom = lastDom.parentNode;
+    }
+    parentDom.replaceChild(newDom, lastDom);
+}
+function removeChild(parentDom, dom) {
+    parentDom.removeChild(dom);
+}
+function removeAllChildren(dom, children, lifecycle, isRecycling) {
+    if (!options.recyclingEnabled || options.recyclingEnabled && !isRecycling) {
+        removeChildren(null, children, lifecycle, isRecycling);
+    }
+    dom.textContent = "";
+}
+function removeChildren(dom, children, lifecycle, isRecycling) {
+    for (var i = 0, len = children.length; i < len; i++) {
+        var child = children[i];
+        if (!isInvalid(child)) {
+            unmount(child, dom, lifecycle, true, isRecycling);
+        }
+    }
+}
+function isKeyed(lastChildren, nextChildren) {
+    return nextChildren.length > 0 && !isNullOrUndef(nextChildren[0]) && !isNullOrUndef(nextChildren[0].key) && lastChildren.length > 0 && !isNullOrUndef(lastChildren[0]) && !isNullOrUndef(lastChildren[0].key);
+}
+function isSameInnerHTML(dom, innerHTML) {
+    var tempdom = document.createElement("i");
+    tempdom.innerHTML = innerHTML;
+    return tempdom.innerHTML === dom.innerHTML;
+}
+function isSamePropsInnerHTML(dom, props) {
+    return Boolean(props && props.dangerouslySetInnerHTML && props.dangerouslySetInnerHTML.__html && isSameInnerHTML(dom, props.dangerouslySetInnerHTML.__html));
+}
+
+/**
+ * @module Inferno
+ */ /** TypeDoc Comment */
+/**
+ * Creates virtual node
+ * @param {number} flags
+ * @param {string|Function|null} type
+ * @param {string|null=} className
+ * @param {object=} children
+ * @param {object=} props
+ * @param {*=} key
+ * @param {object|Function=} ref
+ * @param {boolean=} noNormalise
+ * @returns {VNode} returns new virtual node
+ */
+function createVNode(flags, type, className, children, props, key, ref, noNormalise) {
+    if (flags & 16 /* ComponentUnknown */) {
+            flags = isStatefulComponent(type) ? 4 /* ComponentClass */
+            : 8 /* ComponentFunction */;
+        }
+    var vNode = {
+        children: children === void 0 ? null : children,
+        className: className === void 0 ? null : className,
+        dom: null,
+        flags: flags,
+        key: key === void 0 ? null : key,
+        props: props === void 0 ? null : props,
+        ref: ref === void 0 ? null : ref,
+        type: type
+    };
+    if (noNormalise !== true) {
+        normalize(vNode);
+    }
+    if (options.createVNode !== null) {
+        options.createVNode(vNode);
+    }
+    return vNode;
+}
+function directClone(vNodeToClone) {
+    var newVNode;
+    var flags = vNodeToClone.flags;
+    if (flags & 28 /* Component */) {
+            var props;
+            var propsToClone = vNodeToClone.props;
+            if (isNull(propsToClone)) {
+                props = EMPTY_OBJ;
+            } else {
+                props = {};
+                for (var key in propsToClone) {
+                    props[key] = propsToClone[key];
+                }
+            }
+            newVNode = createVNode(flags, vNodeToClone.type, null, null, props, vNodeToClone.key, vNodeToClone.ref, true);
+            var newProps = newVNode.props;
+            var newChildren = newProps.children;
+            // we need to also clone component children that are in props
+            // as the children may also have been hoisted
+            if (newChildren) {
+                if (isArray(newChildren)) {
+                    var len = newChildren.length;
+                    if (len > 0) {
+                        var tmpArray = [];
+                        for (var i = 0; i < len; i++) {
+                            var child = newChildren[i];
+                            if (isStringOrNumber(child)) {
+                                tmpArray.push(child);
+                            } else if (!isInvalid(child) && isVNode(child)) {
+                                tmpArray.push(directClone(child));
+                            }
+                        }
+                        newProps.children = tmpArray;
+                    }
+                } else if (isVNode(newChildren)) {
+                    newProps.children = directClone(newChildren);
+                }
+            }
+            newVNode.children = null;
+        } else if (flags & 3970 /* Element */) {
+            var children = vNodeToClone.children;
+            var props$1;
+            var propsToClone$1 = vNodeToClone.props;
+            if (propsToClone$1 === null) {
+                props$1 = EMPTY_OBJ;
+            } else {
+                props$1 = {};
+                for (var key$1 in propsToClone$1) {
+                    props$1[key$1] = propsToClone$1[key$1];
+                }
+            }
+            newVNode = createVNode(flags, vNodeToClone.type, vNodeToClone.className, children, props$1, vNodeToClone.key, vNodeToClone.ref, !children);
+        } else if (flags & 1 /* Text */) {
+            newVNode = createTextVNode(vNodeToClone.children, vNodeToClone.key);
+        }
+    return newVNode;
+}
+/*
+ directClone is preferred over cloneVNode and used internally also.
+ This function makes Inferno backwards compatible.
+ And can be tree-shaked by modern bundlers
+
+ Would be nice to combine this with directClone but could not do it without breaking change
+ */
+/**
+ * Clones given virtual node by creating new instance of it
+ * @param {VNode} vNodeToClone virtual node to be cloned
+ * @param {Props=} props additional props for new virtual node
+ * @param {...*} _children new children for new virtual node
+ * @returns {VNode} new virtual node
+ */
+function cloneVNode(vNodeToClone, props) {
+    var _children = [],
+        len$2 = arguments.length - 2;
+    while (len$2-- > 0) {
+        _children[len$2] = arguments[len$2 + 2];
+    }var children = _children;
+    var childrenLen = _children.length;
+    if (childrenLen > 0 && !isUndefined(_children[0])) {
+        if (!props) {
+            props = {};
+        }
+        if (childrenLen === 1) {
+            children = _children[0];
+        }
+        if (!isUndefined(children)) {
+            props.children = children;
+        }
+    }
+    var newVNode;
+    if (isArray(vNodeToClone)) {
+        var tmpArray = [];
+        for (var i = 0, len = vNodeToClone.length; i < len; i++) {
+            tmpArray.push(directClone(vNodeToClone[i]));
+        }
+        newVNode = tmpArray;
+    } else {
+        var flags = vNodeToClone.flags;
+        var className = vNodeToClone.className;
+        var key = vNodeToClone.key;
+        var ref = vNodeToClone.ref;
+        if (props) {
+            if (props.hasOwnProperty("className")) {
+                className = props.className;
+            }
+            if (props.hasOwnProperty("ref")) {
+                ref = props.ref;
+            }
+            if (props.hasOwnProperty("key")) {
+                key = props.key;
+            }
+        }
+        if (flags & 28 /* Component */) {
+                newVNode = createVNode(flags, vNodeToClone.type, className, null, !vNodeToClone.props && !props ? EMPTY_OBJ : combineFrom(vNodeToClone.props, props), key, ref, true);
+                var newProps = newVNode.props;
+                if (newProps) {
+                    var newChildren = newProps.children;
+                    // we need to also clone component children that are in props
+                    // as the children may also have been hoisted
+                    if (newChildren) {
+                        if (isArray(newChildren)) {
+                            var len$1 = newChildren.length;
+                            if (len$1 > 0) {
+                                var tmpArray$1 = [];
+                                for (var i$1 = 0; i$1 < len$1; i$1++) {
+                                    var child = newChildren[i$1];
+                                    if (isStringOrNumber(child)) {
+                                        tmpArray$1.push(child);
+                                    } else if (!isInvalid(child) && isVNode(child)) {
+                                        tmpArray$1.push(directClone(child));
+                                    }
+                                }
+                                newProps.children = tmpArray$1;
+                            }
+                        } else if (isVNode(newChildren)) {
+                            newProps.children = directClone(newChildren);
+                        }
+                    }
+                }
+                newVNode.children = null;
+            } else if (flags & 3970 /* Element */) {
+                children = props && !isUndefined(props.children) ? props.children : vNodeToClone.children;
+                newVNode = createVNode(flags, vNodeToClone.type, className, children, !vNodeToClone.props && !props ? EMPTY_OBJ : combineFrom(vNodeToClone.props, props), key, ref, false);
+            } else if (flags & 1 /* Text */) {
+                newVNode = createTextVNode(vNodeToClone.children, key);
+            }
+    }
+    return newVNode;
+}
+function createVoidVNode() {
+    return createVNode(4096 /* Void */, null);
+}
+function createTextVNode(text, key) {
+    return createVNode(1 /* Text */, null, null, text, null, key);
+}
+function isVNode(o) {
+    return !!o.flags;
+}
+
+/**
+ * @module Inferno
+ */ /** TypeDoc Comment */
+function applyKey(key, vNode) {
+    vNode.key = key;
+    return vNode;
+}
+function applyKeyIfMissing(key, vNode) {
+    if (isNumber(key)) {
+        key = "." + key;
+    }
+    if (isNull(vNode.key) || vNode.key[0] === ".") {
+        return applyKey(key, vNode);
+    }
+    return vNode;
+}
+function applyKeyPrefix(key, vNode) {
+    vNode.key = key + vNode.key;
+    return vNode;
+}
+function _normalizeVNodes(nodes, result, index, currentKey) {
+    for (var len = nodes.length; index < len; index++) {
+        var n = nodes[index];
+        var key = currentKey + "." + index;
+        if (!isInvalid(n)) {
+            if (isArray(n)) {
+                _normalizeVNodes(n, result, 0, key);
+            } else {
+                if (isStringOrNumber(n)) {
+                    n = createTextVNode(n, null);
+                } else if (isVNode(n) && n.dom || n.key && n.key[0] === ".") {
+                    n = directClone(n);
+                }
+                if (isNull(n.key) || n.key[0] === ".") {
+                    n = applyKey(key, n);
+                } else {
+                    n = applyKeyPrefix(currentKey, n);
+                }
+                result.push(n);
+            }
+        }
+    }
+}
+function normalizeVNodes(nodes) {
+    var newNodes;
+    // we assign $ which basically means we've flagged this array for future note
+    // if it comes back again, we need to clone it, as people are using it
+    // in an immutable way
+    // tslint:disable
+    if (nodes["$"] === true) {
+        nodes = nodes.slice();
+    } else {
+        nodes["$"] = true;
+    }
+    // tslint:enable
+    for (var i = 0, len = nodes.length; i < len; i++) {
+        var n = nodes[i];
+        if (isInvalid(n) || isArray(n)) {
+            var result = (newNodes || nodes).slice(0, i);
+            _normalizeVNodes(nodes, result, i, "");
+            return result;
+        } else if (isStringOrNumber(n)) {
+            if (!newNodes) {
+                newNodes = nodes.slice(0, i);
+            }
+            newNodes.push(applyKeyIfMissing(i, createTextVNode(n, null)));
+        } else if (isVNode(n) && n.dom !== null || isNull(n.key) && (n.flags & 64 /* HasNonKeyedChildren */) === 0) {
+            if (!newNodes) {
+                newNodes = nodes.slice(0, i);
+            }
+            newNodes.push(applyKeyIfMissing(i, directClone(n)));
+        } else if (newNodes) {
+            newNodes.push(applyKeyIfMissing(i, directClone(n)));
+        }
+    }
+    return newNodes || nodes;
+}
+function normalizeChildren(children) {
+    if (isArray(children)) {
+        return normalizeVNodes(children);
+    } else if (isVNode(children) && children.dom !== null) {
+        return directClone(children);
+    }
+    return children;
+}
+function normalizeProps(vNode, props, children) {
+    if (vNode.flags & 3970 /* Element */) {
+            if (isNullOrUndef(children) && props.hasOwnProperty("children")) {
+                vNode.children = props.children;
+            }
+            if (props.hasOwnProperty("className")) {
+                vNode.className = props.className || null;
+                delete props.className;
+            }
+        }
+    if (props.hasOwnProperty("ref")) {
+        vNode.ref = props.ref;
+        delete props.ref;
+    }
+    if (props.hasOwnProperty("key")) {
+        vNode.key = props.key;
+        delete props.key;
+    }
+}
+function getFlagsForElementVnode(type) {
+    if (type === "svg") {
+        return 128 /* SvgElement */;
+    } else if (type === "input") {
+        return 512 /* InputElement */;
+    } else if (type === "select") {
+        return 2048 /* SelectElement */;
+    } else if (type === "textarea") {
+        return 1024 /* TextareaElement */;
+    } else if (type === "media") {
+        return 256 /* MediaElement */;
+    }
+    return 2 /* HtmlElement */;
+}
+function normalize(vNode) {
+    var props = vNode.props;
+    var children = vNode.children;
+    // convert a wrongly created type back to element
+    // Primitive node doesn't have defaultProps, only Component
+    if (vNode.flags & 28 /* Component */) {
+            // set default props
+            var type = vNode.type;
+            var defaultProps = type.defaultProps;
+            if (!isNullOrUndef(defaultProps)) {
+                if (!props) {
+                    props = vNode.props = defaultProps; // Create new object if only defaultProps given
+                } else {
+                    for (var prop in defaultProps) {
+                        if (isUndefined(props[prop])) {
+                            props[prop] = defaultProps[prop];
+                        }
+                    }
+                }
+            }
+            if (isString(type)) {
+                vNode.flags = getFlagsForElementVnode(type);
+                if (props && props.children) {
+                    vNode.children = props.children;
+                    children = props.children;
+                }
+            }
+        }
+    if (props) {
+        normalizeProps(vNode, props, children);
+        if (!isInvalid(props.children)) {
+            props.children = normalizeChildren(props.children);
+        }
+    }
+    if (!isInvalid(children)) {
+        vNode.children = normalizeChildren(children);
+    }
+    if (process.env.NODE_ENV !== "production") {
+        // This code will be stripped out from production CODE
+        // It helps users to track errors in their applications.
+        var verifyKeys = function verifyKeys(vNodes) {
+            var keyValues = vNodes.map(function (vnode) {
+                return vnode.key;
+            });
+            keyValues.some(function (item, idx) {
+                var hasDuplicate = keyValues.indexOf(item) !== idx;
+                if (hasDuplicate) {
+                    warning("Inferno normalisation(...): Encountered two children with same key, all keys must be unique within its siblings. Duplicated key is:" + item);
+                }
+                return hasDuplicate;
+            });
+        };
+        if (vNode.children && Array.isArray(vNode.children)) {
+            verifyKeys(vNode.children);
+        }
+    }
+}
+
+/**
+ * @module Inferno
+ */ /** TypeDoc Comment */
+/**
+ * Links given data to event as first parameter
+ * @param {*} data data to be linked, it will be available in function as first parameter
+ * @param {Function} event Function to be called when event occurs
+ * @returns {{data: *, event: Function}}
+ */
+function linkEvent(data, event) {
+    if (isFunction(event)) {
+        return { data: data, event: event };
+    }
+    return null; // Return null when event is invalid, to avoid creating unnecessary event handlers
+}
+
+/**
+ * @module Inferno
+ */ /** TypeDoc Comment */
+/* tslint:disable:object-literal-sort-keys */
+if (process.env.NODE_ENV !== "production") {
+    /* tslint:disable-next-line:no-empty */
+    var testFunc = function testFn() {};
+    if ((testFunc.name || testFunc.toString()).indexOf("testFn") === -1) {
+        warning("It looks like you're using a minified copy of the development build " + "of Inferno. When deploying Inferno apps to production, make sure to use " + "the production build which skips development warnings and is faster. " + "See http://infernojs.org for more details.");
+    }
+}
+var version = "3.10.1";
+// we duplicate it so it plays nicely with different module loading systems
+var index = {
+    EMPTY_OBJ: EMPTY_OBJ,
+    NO_OP: NO_OP,
+    cloneVNode: cloneVNode,
+    createRenderer: createRenderer,
+    createVNode: createVNode,
+    findDOMNode: findDOMNode,
+    getFlagsForElementVnode: getFlagsForElementVnode,
+    internal_DOMNodeMap: componentToDOMNodeMap,
+    internal_isUnitlessNumber: isUnitlessNumber,
+    internal_normalize: normalize,
+    internal_patch: patch,
+    linkEvent: linkEvent,
+    options: options,
+    render: render,
+    version: version
+};
+
+exports['default'] = index;
+exports.EMPTY_OBJ = EMPTY_OBJ;
+exports.NO_OP = NO_OP;
+exports.cloneVNode = cloneVNode;
+exports.createRenderer = createRenderer;
+exports.createVNode = createVNode;
+exports.findDOMNode = findDOMNode;
+exports.getFlagsForElementVnode = getFlagsForElementVnode;
+exports.internal_DOMNodeMap = componentToDOMNodeMap;
+exports.internal_isUnitlessNumber = isUnitlessNumber;
+exports.internal_normalize = normalize;
+exports.internal_patch = patch;
+exports.linkEvent = linkEvent;
+exports.options = options;
+exports.render = render;
+exports.version = version;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
+
+/***/ }),
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7499,7 +13429,7 @@ exports.default = Alert;
 module.exports = exports['default'];
 
 /***/ }),
-/* 58 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7548,7 +13478,7 @@ exports.default = Breadcrumb;
 module.exports = exports['default'];
 
 /***/ }),
-/* 59 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7598,7 +13528,7 @@ exports.default = BreadcrumbItem;
 module.exports = exports['default'];
 
 /***/ }),
-/* 60 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7648,7 +13578,7 @@ exports.default = ButtonToolbar;
 module.exports = exports['default'];
 
 /***/ }),
-/* 61 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7697,7 +13627,7 @@ exports.default = CardFooter;
 module.exports = exports['default'];
 
 /***/ }),
-/* 62 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7746,7 +13676,7 @@ exports.default = CardHeader;
 module.exports = exports['default'];
 
 /***/ }),
-/* 63 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7805,7 +13735,7 @@ exports.default = CardImg;
 module.exports = exports['default'];
 
 /***/ }),
-/* 64 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7855,7 +13785,7 @@ exports.default = CardLink;
 module.exports = exports['default'];
 
 /***/ }),
-/* 65 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7904,7 +13834,7 @@ exports.default = CardSubtitle;
 module.exports = exports['default'];
 
 /***/ }),
-/* 66 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7926,7 +13856,7 @@ var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _infernoAnimation = __webpack_require__(47);
+var _infernoAnimation = __webpack_require__(36);
 
 var _utils = __webpack_require__(2);
 
@@ -8005,7 +13935,7 @@ exports.default = Collapse;
 module.exports = exports['default'];
 
 /***/ }),
-/* 67 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8053,7 +13983,73 @@ exports.default = Container;
 module.exports = exports['default'];
 
 /***/ }),
-/* 68 */
+/* 76 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _inferno = __webpack_require__(0);
+
+var _inferno2 = _interopRequireDefault(_inferno);
+
+var _classnames = __webpack_require__(1);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _utils = __webpack_require__(2);
+
+var _InputGroupText = __webpack_require__(77);
+
+var _InputGroupText2 = _interopRequireDefault(_InputGroupText);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var defaultProps = {
+  tag: 'div'
+};
+
+var InputGroupAddon = function InputGroupAddon(props) {
+  var className = props.className,
+      cssModule = props.cssModule,
+      Tag = props.tag,
+      addonType = props.addonType,
+      children = props.children,
+      attributes = _objectWithoutProperties(props, ['className', 'cssModule', 'tag', 'addonType', 'children']);
+
+  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'input-group-' + addonType), cssModule);
+
+  // Convenience to assist with transition
+  if (typeof children === 'string') {
+    return (0, _inferno.createVNode)(16, Tag, null, null, _extends({}, attributes, {
+      'className': classes,
+      children: (0, _inferno.createVNode)(16, _InputGroupText2.default, null, null, {
+        'children': children
+      })
+    }));
+  }
+
+  return (0, _inferno.createVNode)(16, Tag, null, null, _extends({}, attributes, {
+    'className': classes,
+    'children': children
+  }));
+};
+
+InputGroupAddon.defaultProps = defaultProps;
+
+exports.default = InputGroupAddon;
+module.exports = exports['default'];
+
+/***/ }),
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8080,29 +14076,29 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 var defaultProps = {
-  tag: 'div'
+  tag: 'span'
 };
 
-var InputGroupAddon = function InputGroupAddon(props) {
+var InputGroupText = function InputGroupText(props) {
   var className = props.className,
       cssModule = props.cssModule,
       Tag = props.tag,
       attributes = _objectWithoutProperties(props, ['className', 'cssModule', 'tag']);
 
-  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'input-group-addon'), cssModule);
+  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'input-group-text'), cssModule);
 
   return (0, _inferno.createVNode)(16, Tag, null, null, _extends({}, attributes, {
     'className': classes
   }));
 };
 
-InputGroupAddon.defaultProps = defaultProps;
+InputGroupText.defaultProps = defaultProps;
 
-exports.default = InputGroupAddon;
+exports.default = InputGroupText;
 module.exports = exports['default'];
 
 /***/ }),
-/* 69 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8152,7 +14148,7 @@ exports.default = Jumbotron;
 module.exports = exports['default'];
 
 /***/ }),
-/* 70 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8202,7 +14198,7 @@ exports.default = ListGroup;
 module.exports = exports['default'];
 
 /***/ }),
-/* 71 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8262,7 +14258,7 @@ exports.default = ListGroupItem;
 module.exports = exports['default'];
 
 /***/ }),
-/* 72 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8310,7 +14306,7 @@ exports.default = ListGroupItemHeading;
 module.exports = exports['default'];
 
 /***/ }),
-/* 73 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8358,7 +14354,7 @@ exports.default = ListGroupItemText;
 module.exports = exports['default'];
 
 /***/ }),
-/* 74 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8408,7 +14404,7 @@ exports.default = Pagination;
 module.exports = exports['default'];
 
 /***/ }),
-/* 75 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8460,7 +14456,7 @@ exports.default = PaginationItem;
 module.exports = exports['default'];
 
 /***/ }),
-/* 76 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8533,7 +14529,7 @@ exports.default = PaginationLink;
 module.exports = exports['default'];
 
 /***/ }),
-/* 77 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8557,15 +14553,15 @@ var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _popper = __webpack_require__(101);
+var _infernoPopper = __webpack_require__(8);
 
-var _PopperContent = __webpack_require__(80);
+var _PopperContent = __webpack_require__(89);
 
 var _PopperContent2 = _interopRequireDefault(_PopperContent);
 
 var _utils = __webpack_require__(2);
 
-var _infernoShared = __webpack_require__(25);
+var _infernoShared = __webpack_require__(26);
 
 var _inferno = __webpack_require__(0);
 
@@ -8742,7 +14738,7 @@ exports.default = Popover;
 module.exports = exports['default'];
 
 /***/ }),
-/* 78 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8791,7 +14787,7 @@ exports.default = PopoverBody;
 module.exports = exports['default'];
 
 /***/ }),
-/* 79 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8840,7 +14836,7 @@ exports.default = PopoverHeader;
 module.exports = exports['default'];
 
 /***/ }),
-/* 80 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8864,9 +14860,9 @@ var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _infernoPopper = __webpack_require__(16);
+var _infernoPopper = __webpack_require__(8);
 
-var _PopperTargetHelper = __webpack_require__(81);
+var _PopperTargetHelper = __webpack_require__(90);
 
 var _PopperTargetHelper2 = _interopRequireDefault(_PopperTargetHelper);
 
@@ -8972,7 +14968,7 @@ exports.default = PopperContent;
 module.exports = exports['default'];
 
 /***/ }),
-/* 81 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8993,7 +14989,7 @@ exports.default = PopperTargetHelper;
 module.exports = exports['default'];
 
 /***/ }),
-/* 82 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9013,7 +15009,7 @@ var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _lodash = __webpack_require__(100);
+var _lodash = __webpack_require__(106);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -9075,7 +15071,7 @@ exports.default = Progress;
 module.exports = exports['default'];
 
 /***/ }),
-/* 83 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9257,7 +15253,7 @@ TabContent.defaultProps = defaultProps;
 module.exports = exports['default'];
 
 /***/ }),
-/* 84 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9305,7 +15301,7 @@ TabPane.defaultProps = defaultProps;
 module.exports = exports['default'];
 
 /***/ }),
-/* 85 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9327,7 +15323,7 @@ var _infernoComponent2 = _interopRequireDefault(_infernoComponent);
 
 var _inferno = __webpack_require__(0);
 
-var _infernoShared = __webpack_require__(25);
+var _infernoShared = __webpack_require__(26);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -9435,7 +15431,7 @@ var Children = exports.Children = {
 /* /COMPATIBILITY */
 
 /***/ }),
-/* 86 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9496,7 +15492,7 @@ var isExtraneousPopstateEvent = exports.isExtraneousPopstateEvent = function isE
 };
 
 /***/ }),
-/* 87 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9515,15 +15511,15 @@ var _extends = Object.assign || function (target) {
   }return target;
 };
 
-var _resolvePathname = __webpack_require__(104);
+var _resolvePathname = __webpack_require__(109);
 
 var _resolvePathname2 = _interopRequireDefault(_resolvePathname);
 
-var _valueEqual = __webpack_require__(105);
+var _valueEqual = __webpack_require__(110);
 
 var _valueEqual2 = _interopRequireDefault(_valueEqual);
 
-var _PathUtils = __webpack_require__(46);
+var _PathUtils = __webpack_require__(49);
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : { default: obj };
@@ -9590,7 +15586,7 @@ var locationsAreEqual = exports.locationsAreEqual = function locationsAreEqual(a
 };
 
 /***/ }),
-/* 88 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9598,7 +15594,7 @@ var locationsAreEqual = exports.locationsAreEqual = function locationsAreEqual(a
 
 exports.__esModule = true;
 
-var _warning = __webpack_require__(49);
+var _warning = __webpack_require__(50);
 
 var _warning2 = _interopRequireDefault(_warning);
 
@@ -9683,343 +15679,7 @@ var createTransitionManager = function createTransitionManager() {
 exports.default = createTransitionManager;
 
 /***/ }),
-/* 89 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () {
-  function defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }return function (Constructor, protoProps, staticProps) {
-    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
-  };
-}();
-
-var _infernoComponent = __webpack_require__(3);
-
-var _infernoComponent2 = _interopRequireDefault(_infernoComponent);
-
-var _infernoCreateElement = __webpack_require__(48);
-
-var _infernoCreateElement2 = _interopRequireDefault(_infernoCreateElement);
-
-var _animatedComponent = __webpack_require__(24);
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
-}
-
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-
-function _possibleConstructorReturn(self, call) {
-  if (!self) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
-}
-
-function _inherits(subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
-  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-}
-
-var Animated = function (_Component) {
-  _inherits(Animated, _Component);
-
-  function Animated() {
-    _classCallCheck(this, Animated);
-
-    return _possibleConstructorReturn(this, (Animated.__proto__ || Object.getPrototypeOf(Animated)).apply(this, arguments));
-  }
-
-  _createClass(Animated, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      (0, _animatedComponent.animateOnAdd)(this, this.props.prefix, this.props.onDidEnter);
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      (0, _animatedComponent.animateOnRemove)(this, this.props.prefix, this.props.onDidLeave);
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      return (0, _infernoCreateElement2.default)(this.props.el || 'div', this.props, this.props.children);
-    }
-  }]);
-
-  return Animated;
-}(_infernoComponent2.default);
-
-exports.default = Animated;
-//# sourceMappingURL=Animated.js.map
-
-/***/ }),
-/* 90 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () {
-  function defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }return function (Constructor, protoProps, staticProps) {
-    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
-  };
-}();
-
-var _infernoComponent = __webpack_require__(3);
-
-var _infernoComponent2 = _interopRequireDefault(_infernoComponent);
-
-var _infernoCreateElement = __webpack_require__(48);
-
-var _infernoCreateElement2 = _interopRequireDefault(_infernoCreateElement);
-
-var _animatedComponent = __webpack_require__(24);
-
-var _inferno = __webpack_require__(0);
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
-}
-
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-
-function _possibleConstructorReturn(self, call) {
-  if (!self) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
-}
-
-function _inherits(subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
-  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-}
-
-var animateSizeChange = function animateSizeChange(component, animationName, sourceSize, targetSize) {
-  var node = component._vNode.dom;
-  // Do not animate if this class is set (should I do this by passing prop through context?)
-  if (node.closest('.InfernoAnimation--noAnim')) {
-    return;
-  }
-
-  // 1. Get height and set start of animation
-  node.style.height = sourceSize.height + 'px';
-  node.style.width = sourceSize.width + 'px';
-
-  // 2. Set an animation listener, code at end
-  var done = false;
-  var nrofTransitionsLeft;
-  var onTransitionEnd = function onTransitionEnd(event) {
-    // Make sure it isn't a child that is triggering the event
-    if (event && event.target !== node) {
-      return;
-    }
-    if (event !== undefined && nrofTransitionsLeft > 0) {
-      nrofTransitionsLeft--;
-      return;
-    }
-    if (done) return;
-    done = true;
-    // 5. Remove the element
-    // Note: If I don't declare an anonymous function immediately here this callback isn't called!
-    node.style.height = node.style.width = '';
-    node.classList.remove(animationName + '-cross-fade-active');
-  };
-  node.addEventListener("transitionend", onTransitionEnd, false);
-  var dummy = node.clientHeight;
-
-  // 3. Activate transition
-  node.classList.add(animationName + '-cross-fade-active');
-
-  var cs = window.getComputedStyle(node);
-  var dur = cs.getPropertyValue('transition-duration').split(',');
-  var del = cs.getPropertyValue('transition-delay').split(',');
-  var animTimeout = dur.map(function (v, index) {
-    return parseFloat(v) + parseFloat(del[index]);
-  }).reduce(function (prev, curr) {
-    return prev > curr ? prev : curr;
-  }, 0);
-  nrofTransitionsLeft = dur.length - 1;
-  setTimeout(onTransitionEnd, Math.round(animTimeout * 1000) + 50); // Fallback if transitionend fails
-
-  /*
-  console.log('----- transition-duration', cs.getPropertyValue('transition-duration'))
-  console.log('----- transition-delay', cs.getPropertyValue('transition-delay'))
-  console.log('----- animTimeout', Math.round(animTimeout * 1000) + 50)
-  */
-
-  // 4. Activate target state
-  setTimeout(function () {
-    node.style.height = targetSize.height + 'px';
-    node.style.width = targetSize.width + 'px';
-  }, 5);
-};
-
-function _getSizeOfCrossFadeVnode(vNode) {
-  var domEl = vNode.dom.parentElement;
-  domEl.classList.add('InfernoAnimation--getSize');
-  var height = domEl.offsetHeight;
-  var width = domEl.offsetWidth;
-  domEl.classList.remove('InfernoAnimation--getSize');
-  return { width: width, height: height };
-}
-
-var CrossFade = function (_Component) {
-  _inherits(CrossFade, _Component);
-
-  function CrossFade(props) {
-    _classCallCheck(this, CrossFade);
-
-    var _this = _possibleConstructorReturn(this, (CrossFade.__proto__ || Object.getPrototypeOf(CrossFade)).call(this, props));
-
-    _this.state = {
-      active: false
-    };
-
-    _this.setTargetSize = _this.setTargetSize.bind(_this);
-    _this.setSourceSize = _this.setSourceSize.bind(_this);
-    _this._animationCheck = _this._animationCheck.bind(_this);
-    return _this;
-  }
-
-  _createClass(CrossFade, [{
-    key: '_animationCheck',
-    value: function _animationCheck() {
-      if (this.state.active && this.targetSize && this.sourceSize && this._vNode.dom) {
-        animateSizeChange(this, this.props.prefix, this.sourceSize, this.targetSize);
-        this.targetSize = this.sourceSize = undefined;
-      }
-    }
-  }, {
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      setTimeout(function () {
-        _this2.targetSize = _this2.sourceSize = undefined;
-        _this2.setState({
-          active: true
-        });
-      }, 10);
-    }
-  }, {
-    key: 'setTargetSize',
-    value: function setTargetSize(vNode) {
-      this.targetSize = _getSizeOfCrossFadeVnode(vNode);
-      this._animationCheck();
-    }
-  }, {
-    key: 'setSourceSize',
-    value: function setSourceSize(vNode) {
-      this.sourceSize = _getSizeOfCrossFadeVnode(vNode);
-      this._animationCheck();
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this3 = this;
-
-      var elProps = {};
-      if (this.props.className) {
-        // Using 'InfernoAnimation--noAnim' to block animations in children
-        elProps['className'] = this.props.className + (!this.state.active ? ' InfernoAnimation--noAnim' : '');
-      } else if (!this.state.active) {
-        elProps['className'] = 'InfernoAnimation--noAnim';
-      }
-
-      var children = !Array.isArray(children) ? [this.props.children] : this.props.children;
-
-      var childEls = children.map(function (childEl) {
-        return (0, _infernoCreateElement2.default)(CrossFadeItem, {
-          // onComponentDidMount: this.setTargetSize, onComponentWillUnmount: this.setSourceSize, key: childEl.key
-          onEnter: _this3.setTargetSize, onLeave: _this3.setSourceSize, key: childEl && childEl.key, prefix: _this3.props.prefix
-        }, childEl);
-      });
-
-      return (0, _infernoCreateElement2.default)(this.props.el || 'div', elProps, childEls);
-    }
-  }]);
-
-  return CrossFade;
-}(_infernoComponent2.default);
-
-/*
-function CrossFadeItem (props) {
-  return (
-    <div className="CrossFadeItem">
-      {props.children}
-    </div>
-  )
-}
-*/
-
-var CrossFadeItem = function (_Component2) {
-  _inherits(CrossFadeItem, _Component2);
-
-  function CrossFadeItem() {
-    _classCallCheck(this, CrossFadeItem);
-
-    return _possibleConstructorReturn(this, (CrossFadeItem.__proto__ || Object.getPrototypeOf(CrossFadeItem)).apply(this, arguments));
-  }
-
-  _createClass(CrossFadeItem, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.props.onEnter(this._vNode);
-      (0, _animatedComponent.animateOnAdd)(this, this.props.prefix);
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      this.props.onLeave(this._vNode);
-      (0, _animatedComponent.animateOnRemove)(this, this.props.prefix);
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      return (0, _inferno.createVNode)(2, 'div', 'CrossFadeItem', this.props.children);
-    }
-  }]);
-
-  return CrossFadeItem;
-}(_infernoComponent2.default);
-
-exports.default = CrossFade;
-//# sourceMappingURL=CrossFade.js.map
-
-/***/ }),
-/* 91 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10055,6 +15715,20 @@ function isUndefined(o) {
 function isObject(o) {
     return (typeof o === 'undefined' ? 'undefined' : _typeof(o)) === "object";
 }
+function Lifecycle() {
+    this.listeners = [];
+}
+Lifecycle.prototype.addListener = function addListener(callback) {
+    this.listeners.push(callback);
+};
+Lifecycle.prototype.trigger = function trigger() {
+    var listeners = this.listeners;
+    var listener;
+    // We need to remove current listener from array when calling it, because more listeners might be added
+    while (listener = listeners.shift()) {
+        listener();
+    }
+};
 
 /**
  * @module Inferno-Create-Element
@@ -10143,7 +15817,17 @@ function createElement(type, props) {
 exports['default'] = createElement;
 
 /***/ }),
-/* 92 */
+/* 99 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = __webpack_require__(98).default;
+module.exports.default = module.exports;
+
+/***/ }),
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10157,11 +15841,11 @@ function _interopDefault(ex) {
     return ex && (typeof ex === 'undefined' ? 'undefined' : _typeof(ex)) === 'object' && 'default' in ex ? ex['default'] : ex;
 }
 
-var createElement = _interopDefault(__webpack_require__(94));
+var createElement = _interopDefault(__webpack_require__(99));
 var Component = _interopDefault(__webpack_require__(3));
 var Inferno = __webpack_require__(0);
 var Inferno__default = _interopDefault(Inferno);
-var pathToRegexp = _interopDefault(__webpack_require__(96));
+var pathToRegexp = _interopDefault(__webpack_require__(102));
 
 /**
  * @module Inferno-Shared
@@ -10195,6 +15879,20 @@ function combineFrom(first, second) {
     }
     return out;
 }
+function Lifecycle() {
+    this.listeners = [];
+}
+Lifecycle.prototype.addListener = function addListener(callback) {
+    this.listeners.push(callback);
+};
+Lifecycle.prototype.trigger = function trigger() {
+    var listeners = this.listeners;
+    var listener;
+    // We need to remove current listener from array when calling it, because more listeners might be added
+    while (listener = listeners.shift()) {
+        listener();
+    }
+};
 
 /**
  * @module Inferno-Router
@@ -10877,141 +16575,7 @@ exports['default'] = index;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }),
-/* 93 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-Object.defineProperty(exports, '__esModule', { value: true });
-
-var inferno = __webpack_require__(0);
-
-/**
- * @module Inferno-Shared
- */ /** TypeDoc Comment */
-function isNullOrUndef(o) {
-    return isUndefined(o) || isNull(o);
-}
-function isInvalid(o) {
-    return isNull(o) || o === false || isTrue(o) || isUndefined(o);
-}
-function isString(o) {
-    return typeof o === "string";
-}
-function isNull(o) {
-    return o === null;
-}
-function isTrue(o) {
-    return o === true;
-}
-function isUndefined(o) {
-    return o === void 0;
-}
-function isObject(o) {
-    return (typeof o === 'undefined' ? 'undefined' : _typeof(o)) === "object";
-}
-
-/**
- * @module Inferno-Create-Element
- */ /** TypeDoc Comment */
-var componentHooks = new Set();
-componentHooks.add("onComponentWillMount");
-componentHooks.add("onComponentDidMount");
-componentHooks.add("onComponentWillUnmount");
-componentHooks.add("onComponentShouldUpdate");
-componentHooks.add("onComponentWillUpdate");
-componentHooks.add("onComponentDidUpdate");
-/**
- * Creates virtual node
- * @param {string|Function|Component<any, any>} type Type of node
- * @param {object=} props Optional props for virtual node
- * @param {...{object}=} _children Optional children for virtual node
- * @returns {VNode} new virtual ndoe
- */
-function createElement(type, props) {
-    var _children = [],
-        len = arguments.length - 2;
-    while (len-- > 0) {
-        _children[len] = arguments[len + 2];
-    }if (isInvalid(type) || isObject(type)) {
-        throw new Error("Inferno Error: createElement() name parameter cannot be undefined, null, false or true, It must be a string, class or function.");
-    }
-    var children = _children;
-    var ref = null;
-    var key = null;
-    var className = null;
-    var flags = 0;
-    var newProps;
-    if (_children) {
-        if (_children.length === 1) {
-            children = _children[0];
-        } else if (_children.length === 0) {
-            children = void 0;
-        }
-    }
-    if (isString(type)) {
-        flags = inferno.getFlagsForElementVnode(type);
-        if (!isNullOrUndef(props)) {
-            newProps = {};
-            for (var prop in props) {
-                if (prop === "className" || prop === "class") {
-                    className = props[prop];
-                } else if (prop === "key") {
-                    key = props.key;
-                } else if (prop === "children" && isUndefined(children)) {
-                    children = props.children; // always favour children args, default to props
-                } else if (prop === "ref") {
-                    ref = props.ref;
-                } else {
-                    newProps[prop] = props[prop];
-                }
-            }
-        }
-    } else {
-        flags = 16 /* ComponentUnknown */;
-        if (!isUndefined(children)) {
-            if (!props) {
-                props = {};
-            }
-            props.children = children;
-            children = null;
-        }
-        if (!isNullOrUndef(props)) {
-            newProps = {};
-            for (var prop$1 in props) {
-                if (componentHooks.has(prop$1)) {
-                    if (!ref) {
-                        ref = {};
-                    }
-                    ref[prop$1] = props[prop$1];
-                } else if (prop$1 === "key") {
-                    key = props.key;
-                } else {
-                    newProps[prop$1] = props[prop$1];
-                }
-            }
-        }
-    }
-    return inferno.createVNode(flags, type, className, children, newProps, key, ref);
-}
-
-exports['default'] = createElement;
-
-/***/ }),
-/* 94 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = __webpack_require__(93).default;
-module.exports.default = module.exports;
-
-/***/ }),
-/* 95 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11022,7 +16586,7 @@ module.exports = Array.isArray || function (arr) {
 };
 
 /***/ }),
-/* 96 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11030,7 +16594,7 @@ module.exports = Array.isArray || function (arr) {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var isarray = __webpack_require__(95);
+var isarray = __webpack_require__(101);
 
 /**
  * Expose `pathToRegexp`.
@@ -11457,7 +17021,7 @@ function pathToRegexp(path, keys, options) {
 }
 
 /***/ }),
-/* 97 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11575,7 +17139,7 @@ exports.combineFrom = combineFrom;
 exports.Lifecycle = Lifecycle;
 
 /***/ }),
-/* 98 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11630,7 +17194,7 @@ module.exports = invariant;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }),
-/* 99 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11677,7 +17241,7 @@ function isObject(value) {
 module.exports = isObject;
 
 /***/ }),
-/* 100 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11849,2455 +17413,7 @@ function toNumber(value) {
 module.exports = toNumber;
 
 /***/ }),
-/* 101 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(global) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-/**!
- * @fileOverview Kickass library to create and place poppers near their reference elements.
- * @version 1.12.5
- * @license
- * Copyright (c) 2016 Federico Zivolo and contributors
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
-var nativeHints = ['native code', '[object MutationObserverConstructor]'];
-
-/**
- * Determine if a function is implemented natively (as opposed to a polyfill).
- * @method
- * @memberof Popper.Utils
- * @argument {Function | undefined} fn the function to check
- * @returns {Boolean}
- */
-var isNative = function isNative(fn) {
-  return nativeHints.some(function (hint) {
-    return (fn || '').toString().indexOf(hint) > -1;
-  });
-};
-
-var isBrowser = typeof window !== 'undefined';
-var longerTimeoutBrowsers = ['Edge', 'Trident', 'Firefox'];
-var timeoutDuration = 0;
-for (var i = 0; i < longerTimeoutBrowsers.length; i += 1) {
-  if (isBrowser && navigator.userAgent.indexOf(longerTimeoutBrowsers[i]) >= 0) {
-    timeoutDuration = 1;
-    break;
-  }
-}
-
-function microtaskDebounce(fn) {
-  var scheduled = false;
-  var i = 0;
-  var elem = document.createElement('span');
-
-  // MutationObserver provides a mechanism for scheduling microtasks, which
-  // are scheduled *before* the next task. This gives us a way to debounce
-  // a function but ensure it's called *before* the next paint.
-  var observer = new MutationObserver(function () {
-    fn();
-    scheduled = false;
-  });
-
-  observer.observe(elem, { attributes: true });
-
-  return function () {
-    if (!scheduled) {
-      scheduled = true;
-      elem.setAttribute('x-index', i);
-      i = i + 1; // don't use compund (+=) because it doesn't get optimized in V8
-    }
-  };
-}
-
-function taskDebounce(fn) {
-  var scheduled = false;
-  return function () {
-    if (!scheduled) {
-      scheduled = true;
-      setTimeout(function () {
-        scheduled = false;
-        fn();
-      }, timeoutDuration);
-    }
-  };
-}
-
-// It's common for MutationObserver polyfills to be seen in the wild, however
-// these rely on Mutation Events which only occur when an element is connected
-// to the DOM. The algorithm used in this module does not use a connected element,
-// and so we must ensure that a *native* MutationObserver is available.
-var supportsNativeMutationObserver = isBrowser && isNative(window.MutationObserver);
-
-/**
-* Create a debounced version of a method, that's asynchronously deferred
-* but called in the minimum time possible.
-*
-* @method
-* @memberof Popper.Utils
-* @argument {Function} fn
-* @returns {Function}
-*/
-var debounce = supportsNativeMutationObserver ? microtaskDebounce : taskDebounce;
-
-/**
- * Check if the given variable is a function
- * @method
- * @memberof Popper.Utils
- * @argument {Any} functionToCheck - variable to check
- * @returns {Boolean} answer to: is a function?
- */
-function isFunction(functionToCheck) {
-  var getType = {};
-  return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
-}
-
-/**
- * Get CSS computed property of the given element
- * @method
- * @memberof Popper.Utils
- * @argument {Eement} element
- * @argument {String} property
- */
-function getStyleComputedProperty(element, property) {
-  if (element.nodeType !== 1) {
-    return [];
-  }
-  // NOTE: 1 DOM access here
-  var css = window.getComputedStyle(element, null);
-  return property ? css[property] : css;
-}
-
-/**
- * Returns the parentNode or the host of the element
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element
- * @returns {Element} parent
- */
-function getParentNode(element) {
-  if (element.nodeName === 'HTML') {
-    return element;
-  }
-  return element.parentNode || element.host;
-}
-
-/**
- * Returns the scrolling parent of the given element
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element
- * @returns {Element} scroll parent
- */
-function getScrollParent(element) {
-  // Return body, `getScroll` will take care to get the correct `scrollTop` from it
-  if (!element || ['HTML', 'BODY', '#document'].indexOf(element.nodeName) !== -1) {
-    return window.document.body;
-  }
-
-  // Firefox want us to check `-x` and `-y` variations as well
-
-  var _getStyleComputedProp = getStyleComputedProperty(element),
-      overflow = _getStyleComputedProp.overflow,
-      overflowX = _getStyleComputedProp.overflowX,
-      overflowY = _getStyleComputedProp.overflowY;
-
-  if (/(auto|scroll)/.test(overflow + overflowY + overflowX)) {
-    return element;
-  }
-
-  return getScrollParent(getParentNode(element));
-}
-
-/**
- * Returns the offset parent of the given element
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element
- * @returns {Element} offset parent
- */
-function getOffsetParent(element) {
-  // NOTE: 1 DOM access here
-  var offsetParent = element && element.offsetParent;
-  var nodeName = offsetParent && offsetParent.nodeName;
-
-  if (!nodeName || nodeName === 'BODY' || nodeName === 'HTML') {
-    return window.document.documentElement;
-  }
-
-  // .offsetParent will return the closest TD or TABLE in case
-  // no offsetParent is present, I hate this job...
-  if (['TD', 'TABLE'].indexOf(offsetParent.nodeName) !== -1 && getStyleComputedProperty(offsetParent, 'position') === 'static') {
-    return getOffsetParent(offsetParent);
-  }
-
-  return offsetParent;
-}
-
-function isOffsetContainer(element) {
-  var nodeName = element.nodeName;
-
-  if (nodeName === 'BODY') {
-    return false;
-  }
-  return nodeName === 'HTML' || getOffsetParent(element.firstElementChild) === element;
-}
-
-/**
- * Finds the root node (document, shadowDOM root) of the given element
- * @method
- * @memberof Popper.Utils
- * @argument {Element} node
- * @returns {Element} root node
- */
-function getRoot(node) {
-  if (node.parentNode !== null) {
-    return getRoot(node.parentNode);
-  }
-
-  return node;
-}
-
-/**
- * Finds the offset parent common to the two provided nodes
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element1
- * @argument {Element} element2
- * @returns {Element} common offset parent
- */
-function findCommonOffsetParent(element1, element2) {
-  // This check is needed to avoid errors in case one of the elements isn't defined for any reason
-  if (!element1 || !element1.nodeType || !element2 || !element2.nodeType) {
-    return window.document.documentElement;
-  }
-
-  // Here we make sure to give as "start" the element that comes first in the DOM
-  var order = element1.compareDocumentPosition(element2) & Node.DOCUMENT_POSITION_FOLLOWING;
-  var start = order ? element1 : element2;
-  var end = order ? element2 : element1;
-
-  // Get common ancestor container
-  var range = document.createRange();
-  range.setStart(start, 0);
-  range.setEnd(end, 0);
-  var commonAncestorContainer = range.commonAncestorContainer;
-
-  // Both nodes are inside #document
-
-  if (element1 !== commonAncestorContainer && element2 !== commonAncestorContainer || start.contains(end)) {
-    if (isOffsetContainer(commonAncestorContainer)) {
-      return commonAncestorContainer;
-    }
-
-    return getOffsetParent(commonAncestorContainer);
-  }
-
-  // one of the nodes is inside shadowDOM, find which one
-  var element1root = getRoot(element1);
-  if (element1root.host) {
-    return findCommonOffsetParent(element1root.host, element2);
-  } else {
-    return findCommonOffsetParent(element1, getRoot(element2).host);
-  }
-}
-
-/**
- * Gets the scroll value of the given element in the given side (top and left)
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element
- * @argument {String} side `top` or `left`
- * @returns {number} amount of scrolled pixels
- */
-function getScroll(element) {
-  var side = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'top';
-
-  var upperSide = side === 'top' ? 'scrollTop' : 'scrollLeft';
-  var nodeName = element.nodeName;
-
-  if (nodeName === 'BODY' || nodeName === 'HTML') {
-    var html = window.document.documentElement;
-    var scrollingElement = window.document.scrollingElement || html;
-    return scrollingElement[upperSide];
-  }
-
-  return element[upperSide];
-}
-
-/*
- * Sum or subtract the element scroll values (left and top) from a given rect object
- * @method
- * @memberof Popper.Utils
- * @param {Object} rect - Rect object you want to change
- * @param {HTMLElement} element - The element from the function reads the scroll values
- * @param {Boolean} subtract - set to true if you want to subtract the scroll values
- * @return {Object} rect - The modifier rect object
- */
-function includeScroll(rect, element) {
-  var subtract = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
-  var scrollTop = getScroll(element, 'top');
-  var scrollLeft = getScroll(element, 'left');
-  var modifier = subtract ? -1 : 1;
-  rect.top += scrollTop * modifier;
-  rect.bottom += scrollTop * modifier;
-  rect.left += scrollLeft * modifier;
-  rect.right += scrollLeft * modifier;
-  return rect;
-}
-
-/*
- * Helper to detect borders of a given element
- * @method
- * @memberof Popper.Utils
- * @param {CSSStyleDeclaration} styles
- * Result of `getStyleComputedProperty` on the given element
- * @param {String} axis - `x` or `y`
- * @return {number} borders - The borders size of the given axis
- */
-
-function getBordersSize(styles, axis) {
-  var sideA = axis === 'x' ? 'Left' : 'Top';
-  var sideB = sideA === 'Left' ? 'Right' : 'Bottom';
-
-  return +styles['border' + sideA + 'Width'].split('px')[0] + +styles['border' + sideB + 'Width'].split('px')[0];
-}
-
-/**
- * Tells if you are running Internet Explorer 10
- * @method
- * @memberof Popper.Utils
- * @returns {Boolean} isIE10
- */
-var isIE10 = undefined;
-
-var isIE10$1 = function isIE10$1() {
-  if (isIE10 === undefined) {
-    isIE10 = navigator.appVersion.indexOf('MSIE 10') !== -1;
-  }
-  return isIE10;
-};
-
-function getSize(axis, body, html, computedStyle) {
-  return Math.max(body['offset' + axis], body['scroll' + axis], html['client' + axis], html['offset' + axis], html['scroll' + axis], isIE10$1() ? html['offset' + axis] + computedStyle['margin' + (axis === 'Height' ? 'Top' : 'Left')] + computedStyle['margin' + (axis === 'Height' ? 'Bottom' : 'Right')] : 0);
-}
-
-function getWindowSizes() {
-  var body = window.document.body;
-  var html = window.document.documentElement;
-  var computedStyle = isIE10$1() && window.getComputedStyle(html);
-
-  return {
-    height: getSize('Height', body, html, computedStyle),
-    width: getSize('Width', body, html, computedStyle)
-  };
-}
-
-var classCallCheck = function classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-};
-
-var createClass = function () {
-  function defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }
-
-  return function (Constructor, protoProps, staticProps) {
-    if (protoProps) defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) defineProperties(Constructor, staticProps);
-    return Constructor;
-  };
-}();
-
-var defineProperty = function defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-};
-
-var _extends = Object.assign || function (target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i];
-
-    for (var key in source) {
-      if (Object.prototype.hasOwnProperty.call(source, key)) {
-        target[key] = source[key];
-      }
-    }
-  }
-
-  return target;
-};
-
-/**
- * Given element offsets, generate an output similar to getBoundingClientRect
- * @method
- * @memberof Popper.Utils
- * @argument {Object} offsets
- * @returns {Object} ClientRect like output
- */
-function getClientRect(offsets) {
-  return _extends({}, offsets, {
-    right: offsets.left + offsets.width,
-    bottom: offsets.top + offsets.height
-  });
-}
-
-/**
- * Get bounding client rect of given element
- * @method
- * @memberof Popper.Utils
- * @param {HTMLElement} element
- * @return {Object} client rect
- */
-function getBoundingClientRect(element) {
-  var rect = {};
-
-  // IE10 10 FIX: Please, don't ask, the element isn't
-  // considered in DOM in some circumstances...
-  // This isn't reproducible in IE10 compatibility mode of IE11
-  if (isIE10$1()) {
-    try {
-      rect = element.getBoundingClientRect();
-      var scrollTop = getScroll(element, 'top');
-      var scrollLeft = getScroll(element, 'left');
-      rect.top += scrollTop;
-      rect.left += scrollLeft;
-      rect.bottom += scrollTop;
-      rect.right += scrollLeft;
-    } catch (err) {}
-  } else {
-    rect = element.getBoundingClientRect();
-  }
-
-  var result = {
-    left: rect.left,
-    top: rect.top,
-    width: rect.right - rect.left,
-    height: rect.bottom - rect.top
-  };
-
-  // subtract scrollbar size from sizes
-  var sizes = element.nodeName === 'HTML' ? getWindowSizes() : {};
-  var width = sizes.width || element.clientWidth || result.right - result.left;
-  var height = sizes.height || element.clientHeight || result.bottom - result.top;
-
-  var horizScrollbar = element.offsetWidth - width;
-  var vertScrollbar = element.offsetHeight - height;
-
-  // if an hypothetical scrollbar is detected, we must be sure it's not a `border`
-  // we make this check conditional for performance reasons
-  if (horizScrollbar || vertScrollbar) {
-    var styles = getStyleComputedProperty(element);
-    horizScrollbar -= getBordersSize(styles, 'x');
-    vertScrollbar -= getBordersSize(styles, 'y');
-
-    result.width -= horizScrollbar;
-    result.height -= vertScrollbar;
-  }
-
-  return getClientRect(result);
-}
-
-function getOffsetRectRelativeToArbitraryNode(children, parent) {
-  var isIE10 = isIE10$1();
-  var isHTML = parent.nodeName === 'HTML';
-  var childrenRect = getBoundingClientRect(children);
-  var parentRect = getBoundingClientRect(parent);
-  var scrollParent = getScrollParent(children);
-
-  var styles = getStyleComputedProperty(parent);
-  var borderTopWidth = +styles.borderTopWidth.split('px')[0];
-  var borderLeftWidth = +styles.borderLeftWidth.split('px')[0];
-
-  var offsets = getClientRect({
-    top: childrenRect.top - parentRect.top - borderTopWidth,
-    left: childrenRect.left - parentRect.left - borderLeftWidth,
-    width: childrenRect.width,
-    height: childrenRect.height
-  });
-  offsets.marginTop = 0;
-  offsets.marginLeft = 0;
-
-  // Subtract margins of documentElement in case it's being used as parent
-  // we do this only on HTML because it's the only element that behaves
-  // differently when margins are applied to it. The margins are included in
-  // the box of the documentElement, in the other cases not.
-  if (!isIE10 && isHTML) {
-    var marginTop = +styles.marginTop.split('px')[0];
-    var marginLeft = +styles.marginLeft.split('px')[0];
-
-    offsets.top -= borderTopWidth - marginTop;
-    offsets.bottom -= borderTopWidth - marginTop;
-    offsets.left -= borderLeftWidth - marginLeft;
-    offsets.right -= borderLeftWidth - marginLeft;
-
-    // Attach marginTop and marginLeft because in some circumstances we may need them
-    offsets.marginTop = marginTop;
-    offsets.marginLeft = marginLeft;
-  }
-
-  if (isIE10 ? parent.contains(scrollParent) : parent === scrollParent && scrollParent.nodeName !== 'BODY') {
-    offsets = includeScroll(offsets, parent);
-  }
-
-  return offsets;
-}
-
-function getViewportOffsetRectRelativeToArtbitraryNode(element) {
-  var html = window.document.documentElement;
-  var relativeOffset = getOffsetRectRelativeToArbitraryNode(element, html);
-  var width = Math.max(html.clientWidth, window.innerWidth || 0);
-  var height = Math.max(html.clientHeight, window.innerHeight || 0);
-
-  var scrollTop = getScroll(html);
-  var scrollLeft = getScroll(html, 'left');
-
-  var offset = {
-    top: scrollTop - relativeOffset.top + relativeOffset.marginTop,
-    left: scrollLeft - relativeOffset.left + relativeOffset.marginLeft,
-    width: width,
-    height: height
-  };
-
-  return getClientRect(offset);
-}
-
-/**
- * Check if the given element is fixed or is inside a fixed parent
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element
- * @argument {Element} customContainer
- * @returns {Boolean} answer to "isFixed?"
- */
-function isFixed(element) {
-  var nodeName = element.nodeName;
-  if (nodeName === 'BODY' || nodeName === 'HTML') {
-    return false;
-  }
-  if (getStyleComputedProperty(element, 'position') === 'fixed') {
-    return true;
-  }
-  return isFixed(getParentNode(element));
-}
-
-/**
- * Computed the boundaries limits and return them
- * @method
- * @memberof Popper.Utils
- * @param {HTMLElement} popper
- * @param {HTMLElement} reference
- * @param {number} padding
- * @param {HTMLElement} boundariesElement - Element used to define the boundaries
- * @returns {Object} Coordinates of the boundaries
- */
-function getBoundaries(popper, reference, padding, boundariesElement) {
-  // NOTE: 1 DOM access here
-  var boundaries = { top: 0, left: 0 };
-  var offsetParent = findCommonOffsetParent(popper, reference);
-
-  // Handle viewport case
-  if (boundariesElement === 'viewport') {
-    boundaries = getViewportOffsetRectRelativeToArtbitraryNode(offsetParent);
-  } else {
-    // Handle other cases based on DOM element used as boundaries
-    var boundariesNode = void 0;
-    if (boundariesElement === 'scrollParent') {
-      boundariesNode = getScrollParent(getParentNode(popper));
-      if (boundariesNode.nodeName === 'BODY') {
-        boundariesNode = window.document.documentElement;
-      }
-    } else if (boundariesElement === 'window') {
-      boundariesNode = window.document.documentElement;
-    } else {
-      boundariesNode = boundariesElement;
-    }
-
-    var offsets = getOffsetRectRelativeToArbitraryNode(boundariesNode, offsetParent);
-
-    // In case of HTML, we need a different computation
-    if (boundariesNode.nodeName === 'HTML' && !isFixed(offsetParent)) {
-      var _getWindowSizes = getWindowSizes(),
-          height = _getWindowSizes.height,
-          width = _getWindowSizes.width;
-
-      boundaries.top += offsets.top - offsets.marginTop;
-      boundaries.bottom = height + offsets.top;
-      boundaries.left += offsets.left - offsets.marginLeft;
-      boundaries.right = width + offsets.left;
-    } else {
-      // for all the other DOM elements, this one is good
-      boundaries = offsets;
-    }
-  }
-
-  // Add paddings
-  boundaries.left += padding;
-  boundaries.top += padding;
-  boundaries.right -= padding;
-  boundaries.bottom -= padding;
-
-  return boundaries;
-}
-
-function getArea(_ref) {
-  var width = _ref.width,
-      height = _ref.height;
-
-  return width * height;
-}
-
-/**
- * Utility used to transform the `auto` placement to the placement with more
- * available space.
- * @method
- * @memberof Popper.Utils
- * @argument {Object} data - The data object generated by update method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The data object, properly modified
- */
-function computeAutoPlacement(placement, refRect, popper, reference, boundariesElement) {
-  var padding = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0;
-
-  if (placement.indexOf('auto') === -1) {
-    return placement;
-  }
-
-  var boundaries = getBoundaries(popper, reference, padding, boundariesElement);
-
-  var rects = {
-    top: {
-      width: boundaries.width,
-      height: refRect.top - boundaries.top
-    },
-    right: {
-      width: boundaries.right - refRect.right,
-      height: boundaries.height
-    },
-    bottom: {
-      width: boundaries.width,
-      height: boundaries.bottom - refRect.bottom
-    },
-    left: {
-      width: refRect.left - boundaries.left,
-      height: boundaries.height
-    }
-  };
-
-  var sortedAreas = Object.keys(rects).map(function (key) {
-    return _extends({
-      key: key
-    }, rects[key], {
-      area: getArea(rects[key])
-    });
-  }).sort(function (a, b) {
-    return b.area - a.area;
-  });
-
-  var filteredAreas = sortedAreas.filter(function (_ref2) {
-    var width = _ref2.width,
-        height = _ref2.height;
-    return width >= popper.clientWidth && height >= popper.clientHeight;
-  });
-
-  var computedPlacement = filteredAreas.length > 0 ? filteredAreas[0].key : sortedAreas[0].key;
-
-  var variation = placement.split('-')[1];
-
-  return computedPlacement + (variation ? '-' + variation : '');
-}
-
-/**
- * Get offsets to the reference element
- * @method
- * @memberof Popper.Utils
- * @param {Object} state
- * @param {Element} popper - the popper element
- * @param {Element} reference - the reference element (the popper will be relative to this)
- * @returns {Object} An object containing the offsets which will be applied to the popper
- */
-function getReferenceOffsets(state, popper, reference) {
-  var commonOffsetParent = findCommonOffsetParent(popper, reference);
-  return getOffsetRectRelativeToArbitraryNode(reference, commonOffsetParent);
-}
-
-/**
- * Get the outer sizes of the given element (offset size + margins)
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element
- * @returns {Object} object containing width and height properties
- */
-function getOuterSizes(element) {
-  var styles = window.getComputedStyle(element);
-  var x = parseFloat(styles.marginTop) + parseFloat(styles.marginBottom);
-  var y = parseFloat(styles.marginLeft) + parseFloat(styles.marginRight);
-  var result = {
-    width: element.offsetWidth + y,
-    height: element.offsetHeight + x
-  };
-  return result;
-}
-
-/**
- * Get the opposite placement of the given one
- * @method
- * @memberof Popper.Utils
- * @argument {String} placement
- * @returns {String} flipped placement
- */
-function getOppositePlacement(placement) {
-  var hash = { left: 'right', right: 'left', bottom: 'top', top: 'bottom' };
-  return placement.replace(/left|right|bottom|top/g, function (matched) {
-    return hash[matched];
-  });
-}
-
-/**
- * Get offsets to the popper
- * @method
- * @memberof Popper.Utils
- * @param {Object} position - CSS position the Popper will get applied
- * @param {HTMLElement} popper - the popper element
- * @param {Object} referenceOffsets - the reference offsets (the popper will be relative to this)
- * @param {String} placement - one of the valid placement options
- * @returns {Object} popperOffsets - An object containing the offsets which will be applied to the popper
- */
-function getPopperOffsets(popper, referenceOffsets, placement) {
-  placement = placement.split('-')[0];
-
-  // Get popper node sizes
-  var popperRect = getOuterSizes(popper);
-
-  // Add position, width and height to our offsets object
-  var popperOffsets = {
-    width: popperRect.width,
-    height: popperRect.height
-  };
-
-  // depending by the popper placement we have to compute its offsets slightly differently
-  var isHoriz = ['right', 'left'].indexOf(placement) !== -1;
-  var mainSide = isHoriz ? 'top' : 'left';
-  var secondarySide = isHoriz ? 'left' : 'top';
-  var measurement = isHoriz ? 'height' : 'width';
-  var secondaryMeasurement = !isHoriz ? 'height' : 'width';
-
-  popperOffsets[mainSide] = referenceOffsets[mainSide] + referenceOffsets[measurement] / 2 - popperRect[measurement] / 2;
-  if (placement === secondarySide) {
-    popperOffsets[secondarySide] = referenceOffsets[secondarySide] - popperRect[secondaryMeasurement];
-  } else {
-    popperOffsets[secondarySide] = referenceOffsets[getOppositePlacement(secondarySide)];
-  }
-
-  return popperOffsets;
-}
-
-/**
- * Mimics the `find` method of Array
- * @method
- * @memberof Popper.Utils
- * @argument {Array} arr
- * @argument prop
- * @argument value
- * @returns index or -1
- */
-function find(arr, check) {
-  // use native find if supported
-  if (Array.prototype.find) {
-    return arr.find(check);
-  }
-
-  // use `filter` to obtain the same behavior of `find`
-  return arr.filter(check)[0];
-}
-
-/**
- * Return the index of the matching object
- * @method
- * @memberof Popper.Utils
- * @argument {Array} arr
- * @argument prop
- * @argument value
- * @returns index or -1
- */
-function findIndex(arr, prop, value) {
-  // use native findIndex if supported
-  if (Array.prototype.findIndex) {
-    return arr.findIndex(function (cur) {
-      return cur[prop] === value;
-    });
-  }
-
-  // use `find` + `indexOf` if `findIndex` isn't supported
-  var match = find(arr, function (obj) {
-    return obj[prop] === value;
-  });
-  return arr.indexOf(match);
-}
-
-/**
- * Loop trough the list of modifiers and run them in order,
- * each of them will then edit the data object.
- * @method
- * @memberof Popper.Utils
- * @param {dataObject} data
- * @param {Array} modifiers
- * @param {String} ends - Optional modifier name used as stopper
- * @returns {dataObject}
- */
-function runModifiers(modifiers, data, ends) {
-  var modifiersToRun = ends === undefined ? modifiers : modifiers.slice(0, findIndex(modifiers, 'name', ends));
-
-  modifiersToRun.forEach(function (modifier) {
-    if (modifier.function) {
-      console.warn('`modifier.function` is deprecated, use `modifier.fn`!');
-    }
-    var fn = modifier.function || modifier.fn;
-    if (modifier.enabled && isFunction(fn)) {
-      // Add properties to offsets to make them a complete clientRect object
-      // we do this before each modifier to make sure the previous one doesn't
-      // mess with these values
-      data.offsets.popper = getClientRect(data.offsets.popper);
-      data.offsets.reference = getClientRect(data.offsets.reference);
-
-      data = fn(data, modifier);
-    }
-  });
-
-  return data;
-}
-
-/**
- * Updates the position of the popper, computing the new offsets and applying
- * the new style.<br />
- * Prefer `scheduleUpdate` over `update` because of performance reasons.
- * @method
- * @memberof Popper
- */
-function update() {
-  // if popper is destroyed, don't perform any further update
-  if (this.state.isDestroyed) {
-    return;
-  }
-
-  var data = {
-    instance: this,
-    styles: {},
-    arrowStyles: {},
-    attributes: {},
-    flipped: false,
-    offsets: {}
-  };
-
-  // compute reference element offsets
-  data.offsets.reference = getReferenceOffsets(this.state, this.popper, this.reference);
-
-  // compute auto placement, store placement inside the data object,
-  // modifiers will be able to edit `placement` if needed
-  // and refer to originalPlacement to know the original value
-  data.placement = computeAutoPlacement(this.options.placement, data.offsets.reference, this.popper, this.reference, this.options.modifiers.flip.boundariesElement, this.options.modifiers.flip.padding);
-
-  // store the computed placement inside `originalPlacement`
-  data.originalPlacement = data.placement;
-
-  // compute the popper offsets
-  data.offsets.popper = getPopperOffsets(this.popper, data.offsets.reference, data.placement);
-  data.offsets.popper.position = 'absolute';
-
-  // run the modifiers
-  data = runModifiers(this.modifiers, data);
-
-  // the first `update` will call `onCreate` callback
-  // the other ones will call `onUpdate` callback
-  if (!this.state.isCreated) {
-    this.state.isCreated = true;
-    this.options.onCreate(data);
-  } else {
-    this.options.onUpdate(data);
-  }
-}
-
-/**
- * Helper used to know if the given modifier is enabled.
- * @method
- * @memberof Popper.Utils
- * @returns {Boolean}
- */
-function isModifierEnabled(modifiers, modifierName) {
-  return modifiers.some(function (_ref) {
-    var name = _ref.name,
-        enabled = _ref.enabled;
-    return enabled && name === modifierName;
-  });
-}
-
-/**
- * Get the prefixed supported property name
- * @method
- * @memberof Popper.Utils
- * @argument {String} property (camelCase)
- * @returns {String} prefixed property (camelCase or PascalCase, depending on the vendor prefix)
- */
-function getSupportedPropertyName(property) {
-  var prefixes = [false, 'ms', 'Webkit', 'Moz', 'O'];
-  var upperProp = property.charAt(0).toUpperCase() + property.slice(1);
-
-  for (var i = 0; i < prefixes.length - 1; i++) {
-    var prefix = prefixes[i];
-    var toCheck = prefix ? '' + prefix + upperProp : property;
-    if (typeof window.document.body.style[toCheck] !== 'undefined') {
-      return toCheck;
-    }
-  }
-  return null;
-}
-
-/**
- * Destroy the popper
- * @method
- * @memberof Popper
- */
-function destroy() {
-  this.state.isDestroyed = true;
-
-  // touch DOM only if `applyStyle` modifier is enabled
-  if (isModifierEnabled(this.modifiers, 'applyStyle')) {
-    this.popper.removeAttribute('x-placement');
-    this.popper.style.left = '';
-    this.popper.style.position = '';
-    this.popper.style.top = '';
-    this.popper.style[getSupportedPropertyName('transform')] = '';
-  }
-
-  this.disableEventListeners();
-
-  // remove the popper if user explicity asked for the deletion on destroy
-  // do not use `remove` because IE11 doesn't support it
-  if (this.options.removeOnDestroy) {
-    this.popper.parentNode.removeChild(this.popper);
-  }
-  return this;
-}
-
-function attachToScrollParents(scrollParent, event, callback, scrollParents) {
-  var isBody = scrollParent.nodeName === 'BODY';
-  var target = isBody ? window : scrollParent;
-  target.addEventListener(event, callback, { passive: true });
-
-  if (!isBody) {
-    attachToScrollParents(getScrollParent(target.parentNode), event, callback, scrollParents);
-  }
-  scrollParents.push(target);
-}
-
-/**
- * Setup needed event listeners used to update the popper position
- * @method
- * @memberof Popper.Utils
- * @private
- */
-function setupEventListeners(reference, options, state, updateBound) {
-  // Resize event listener on window
-  state.updateBound = updateBound;
-  window.addEventListener('resize', state.updateBound, { passive: true });
-
-  // Scroll event listener on scroll parents
-  var scrollElement = getScrollParent(reference);
-  attachToScrollParents(scrollElement, 'scroll', state.updateBound, state.scrollParents);
-  state.scrollElement = scrollElement;
-  state.eventsEnabled = true;
-
-  return state;
-}
-
-/**
- * It will add resize/scroll events and start recalculating
- * position of the popper element when they are triggered.
- * @method
- * @memberof Popper
- */
-function enableEventListeners() {
-  if (!this.state.eventsEnabled) {
-    this.state = setupEventListeners(this.reference, this.options, this.state, this.scheduleUpdate);
-  }
-}
-
-/**
- * Remove event listeners used to update the popper position
- * @method
- * @memberof Popper.Utils
- * @private
- */
-function removeEventListeners(reference, state) {
-  // Remove resize event listener on window
-  window.removeEventListener('resize', state.updateBound);
-
-  // Remove scroll event listener on scroll parents
-  state.scrollParents.forEach(function (target) {
-    target.removeEventListener('scroll', state.updateBound);
-  });
-
-  // Reset state
-  state.updateBound = null;
-  state.scrollParents = [];
-  state.scrollElement = null;
-  state.eventsEnabled = false;
-  return state;
-}
-
-/**
- * It will remove resize/scroll events and won't recalculate popper position
- * when they are triggered. It also won't trigger onUpdate callback anymore,
- * unless you call `update` method manually.
- * @method
- * @memberof Popper
- */
-function disableEventListeners() {
-  if (this.state.eventsEnabled) {
-    window.cancelAnimationFrame(this.scheduleUpdate);
-    this.state = removeEventListeners(this.reference, this.state);
-  }
-}
-
-/**
- * Tells if a given input is a number
- * @method
- * @memberof Popper.Utils
- * @param {*} input to check
- * @return {Boolean}
- */
-function isNumeric(n) {
-  return n !== '' && !isNaN(parseFloat(n)) && isFinite(n);
-}
-
-/**
- * Set the style to the given popper
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element - Element to apply the style to
- * @argument {Object} styles
- * Object with a list of properties and values which will be applied to the element
- */
-function setStyles(element, styles) {
-  Object.keys(styles).forEach(function (prop) {
-    var unit = '';
-    // add unit if the value is numeric and is one of the following
-    if (['width', 'height', 'top', 'right', 'bottom', 'left'].indexOf(prop) !== -1 && isNumeric(styles[prop])) {
-      unit = 'px';
-    }
-    element.style[prop] = styles[prop] + unit;
-  });
-}
-
-/**
- * Set the attributes to the given popper
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element - Element to apply the attributes to
- * @argument {Object} styles
- * Object with a list of properties and values which will be applied to the element
- */
-function setAttributes(element, attributes) {
-  Object.keys(attributes).forEach(function (prop) {
-    var value = attributes[prop];
-    if (value !== false) {
-      element.setAttribute(prop, attributes[prop]);
-    } else {
-      element.removeAttribute(prop);
-    }
-  });
-}
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by `update` method
- * @argument {Object} data.styles - List of style properties - values to apply to popper element
- * @argument {Object} data.attributes - List of attribute properties - values to apply to popper element
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The same data object
- */
-function applyStyle(data) {
-  // any property present in `data.styles` will be applied to the popper,
-  // in this way we can make the 3rd party modifiers add custom styles to it
-  // Be aware, modifiers could override the properties defined in the previous
-  // lines of this modifier!
-  setStyles(data.instance.popper, data.styles);
-
-  // any property present in `data.attributes` will be applied to the popper,
-  // they will be set as HTML attributes of the element
-  setAttributes(data.instance.popper, data.attributes);
-
-  // if arrowElement is defined and arrowStyles has some properties
-  if (data.arrowElement && Object.keys(data.arrowStyles).length) {
-    setStyles(data.arrowElement, data.arrowStyles);
-  }
-
-  return data;
-}
-
-/**
- * Set the x-placement attribute before everything else because it could be used
- * to add margins to the popper margins needs to be calculated to get the
- * correct popper offsets.
- * @method
- * @memberof Popper.modifiers
- * @param {HTMLElement} reference - The reference element used to position the popper
- * @param {HTMLElement} popper - The HTML element used as popper.
- * @param {Object} options - Popper.js options
- */
-function applyStyleOnLoad(reference, popper, options, modifierOptions, state) {
-  // compute reference element offsets
-  var referenceOffsets = getReferenceOffsets(state, popper, reference);
-
-  // compute auto placement, store placement inside the data object,
-  // modifiers will be able to edit `placement` if needed
-  // and refer to originalPlacement to know the original value
-  var placement = computeAutoPlacement(options.placement, referenceOffsets, popper, reference, options.modifiers.flip.boundariesElement, options.modifiers.flip.padding);
-
-  popper.setAttribute('x-placement', placement);
-
-  // Apply `position` to popper before anything else because
-  // without the position applied we can't guarantee correct computations
-  setStyles(popper, { position: 'absolute' });
-
-  return options;
-}
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by `update` method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The data object, properly modified
- */
-function computeStyle(data, options) {
-  var x = options.x,
-      y = options.y;
-  var popper = data.offsets.popper;
-
-  // Remove this legacy support in Popper.js v2
-
-  var legacyGpuAccelerationOption = find(data.instance.modifiers, function (modifier) {
-    return modifier.name === 'applyStyle';
-  }).gpuAcceleration;
-  if (legacyGpuAccelerationOption !== undefined) {
-    console.warn('WARNING: `gpuAcceleration` option moved to `computeStyle` modifier and will not be supported in future versions of Popper.js!');
-  }
-  var gpuAcceleration = legacyGpuAccelerationOption !== undefined ? legacyGpuAccelerationOption : options.gpuAcceleration;
-
-  var offsetParent = getOffsetParent(data.instance.popper);
-  var offsetParentRect = getBoundingClientRect(offsetParent);
-
-  // Styles
-  var styles = {
-    position: popper.position
-  };
-
-  // floor sides to avoid blurry text
-  var offsets = {
-    left: Math.floor(popper.left),
-    top: Math.floor(popper.top),
-    bottom: Math.floor(popper.bottom),
-    right: Math.floor(popper.right)
-  };
-
-  var sideA = x === 'bottom' ? 'top' : 'bottom';
-  var sideB = y === 'right' ? 'left' : 'right';
-
-  // if gpuAcceleration is set to `true` and transform is supported,
-  //  we use `translate3d` to apply the position to the popper we
-  // automatically use the supported prefixed version if needed
-  var prefixedProperty = getSupportedPropertyName('transform');
-
-  // now, let's make a step back and look at this code closely (wtf?)
-  // If the content of the popper grows once it's been positioned, it
-  // may happen that the popper gets misplaced because of the new content
-  // overflowing its reference element
-  // To avoid this problem, we provide two options (x and y), which allow
-  // the consumer to define the offset origin.
-  // If we position a popper on top of a reference element, we can set
-  // `x` to `top` to make the popper grow towards its top instead of
-  // its bottom.
-  var left = void 0,
-      top = void 0;
-  if (sideA === 'bottom') {
-    top = -offsetParentRect.height + offsets.bottom;
-  } else {
-    top = offsets.top;
-  }
-  if (sideB === 'right') {
-    left = -offsetParentRect.width + offsets.right;
-  } else {
-    left = offsets.left;
-  }
-  if (gpuAcceleration && prefixedProperty) {
-    styles[prefixedProperty] = 'translate3d(' + left + 'px, ' + top + 'px, 0)';
-    styles[sideA] = 0;
-    styles[sideB] = 0;
-    styles.willChange = 'transform';
-  } else {
-    // othwerise, we use the standard `top`, `left`, `bottom` and `right` properties
-    var invertTop = sideA === 'bottom' ? -1 : 1;
-    var invertLeft = sideB === 'right' ? -1 : 1;
-    styles[sideA] = top * invertTop;
-    styles[sideB] = left * invertLeft;
-    styles.willChange = sideA + ', ' + sideB;
-  }
-
-  // Attributes
-  var attributes = {
-    'x-placement': data.placement
-  };
-
-  // Update `data` attributes, styles and arrowStyles
-  data.attributes = _extends({}, attributes, data.attributes);
-  data.styles = _extends({}, styles, data.styles);
-  data.arrowStyles = _extends({}, data.offsets.arrow, data.arrowStyles);
-
-  return data;
-}
-
-/**
- * Helper used to know if the given modifier depends from another one.<br />
- * It checks if the needed modifier is listed and enabled.
- * @method
- * @memberof Popper.Utils
- * @param {Array} modifiers - list of modifiers
- * @param {String} requestingName - name of requesting modifier
- * @param {String} requestedName - name of requested modifier
- * @returns {Boolean}
- */
-function isModifierRequired(modifiers, requestingName, requestedName) {
-  var requesting = find(modifiers, function (_ref) {
-    var name = _ref.name;
-    return name === requestingName;
-  });
-
-  var isRequired = !!requesting && modifiers.some(function (modifier) {
-    return modifier.name === requestedName && modifier.enabled && modifier.order < requesting.order;
-  });
-
-  if (!isRequired) {
-    var _requesting = '`' + requestingName + '`';
-    var requested = '`' + requestedName + '`';
-    console.warn(requested + ' modifier is required by ' + _requesting + ' modifier in order to work, be sure to include it before ' + _requesting + '!');
-  }
-  return isRequired;
-}
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by update method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The data object, properly modified
- */
-function arrow(data, options) {
-  // arrow depends on keepTogether in order to work
-  if (!isModifierRequired(data.instance.modifiers, 'arrow', 'keepTogether')) {
-    return data;
-  }
-
-  var arrowElement = options.element;
-
-  // if arrowElement is a string, suppose it's a CSS selector
-  if (typeof arrowElement === 'string') {
-    arrowElement = data.instance.popper.querySelector(arrowElement);
-
-    // if arrowElement is not found, don't run the modifier
-    if (!arrowElement) {
-      return data;
-    }
-  } else {
-    // if the arrowElement isn't a query selector we must check that the
-    // provided DOM node is child of its popper node
-    if (!data.instance.popper.contains(arrowElement)) {
-      console.warn('WARNING: `arrow.element` must be child of its popper element!');
-      return data;
-    }
-  }
-
-  var placement = data.placement.split('-')[0];
-  var _data$offsets = data.offsets,
-      popper = _data$offsets.popper,
-      reference = _data$offsets.reference;
-
-  var isVertical = ['left', 'right'].indexOf(placement) !== -1;
-
-  var len = isVertical ? 'height' : 'width';
-  var sideCapitalized = isVertical ? 'Top' : 'Left';
-  var side = sideCapitalized.toLowerCase();
-  var altSide = isVertical ? 'left' : 'top';
-  var opSide = isVertical ? 'bottom' : 'right';
-  var arrowElementSize = getOuterSizes(arrowElement)[len];
-
-  //
-  // extends keepTogether behavior making sure the popper and its
-  // reference have enough pixels in conjuction
-  //
-
-  // top/left side
-  if (reference[opSide] - arrowElementSize < popper[side]) {
-    data.offsets.popper[side] -= popper[side] - (reference[opSide] - arrowElementSize);
-  }
-  // bottom/right side
-  if (reference[side] + arrowElementSize > popper[opSide]) {
-    data.offsets.popper[side] += reference[side] + arrowElementSize - popper[opSide];
-  }
-
-  // compute center of the popper
-  var center = reference[side] + reference[len] / 2 - arrowElementSize / 2;
-
-  // Compute the sideValue using the updated popper offsets
-  // take popper margin in account because we don't have this info available
-  var popperMarginSide = getStyleComputedProperty(data.instance.popper, 'margin' + sideCapitalized).replace('px', '');
-  var sideValue = center - getClientRect(data.offsets.popper)[side] - popperMarginSide;
-
-  // prevent arrowElement from being placed not contiguously to its popper
-  sideValue = Math.max(Math.min(popper[len] - arrowElementSize, sideValue), 0);
-
-  data.arrowElement = arrowElement;
-  data.offsets.arrow = {};
-  data.offsets.arrow[side] = Math.round(sideValue);
-  data.offsets.arrow[altSide] = ''; // make sure to unset any eventual altSide value from the DOM node
-
-  return data;
-}
-
-/**
- * Get the opposite placement variation of the given one
- * @method
- * @memberof Popper.Utils
- * @argument {String} placement variation
- * @returns {String} flipped placement variation
- */
-function getOppositeVariation(variation) {
-  if (variation === 'end') {
-    return 'start';
-  } else if (variation === 'start') {
-    return 'end';
-  }
-  return variation;
-}
-
-/**
- * List of accepted placements to use as values of the `placement` option.<br />
- * Valid placements are:
- * - `auto`
- * - `top`
- * - `right`
- * - `bottom`
- * - `left`
- *
- * Each placement can have a variation from this list:
- * - `-start`
- * - `-end`
- *
- * Variations are interpreted easily if you think of them as the left to right
- * written languages. Horizontally (`top` and `bottom`), `start` is left and `end`
- * is right.<br />
- * Vertically (`left` and `right`), `start` is top and `end` is bottom.
- *
- * Some valid examples are:
- * - `top-end` (on top of reference, right aligned)
- * - `right-start` (on right of reference, top aligned)
- * - `bottom` (on bottom, centered)
- * - `auto-right` (on the side with more space available, alignment depends by placement)
- *
- * @static
- * @type {Array}
- * @enum {String}
- * @readonly
- * @method placements
- * @memberof Popper
- */
-var placements = ['auto-start', 'auto', 'auto-end', 'top-start', 'top', 'top-end', 'right-start', 'right', 'right-end', 'bottom-end', 'bottom', 'bottom-start', 'left-end', 'left', 'left-start'];
-
-// Get rid of `auto` `auto-start` and `auto-end`
-var validPlacements = placements.slice(3);
-
-/**
- * Given an initial placement, returns all the subsequent placements
- * clockwise (or counter-clockwise).
- *
- * @method
- * @memberof Popper.Utils
- * @argument {String} placement - A valid placement (it accepts variations)
- * @argument {Boolean} counter - Set to true to walk the placements counterclockwise
- * @returns {Array} placements including their variations
- */
-function clockwise(placement) {
-  var counter = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
-  var index = validPlacements.indexOf(placement);
-  var arr = validPlacements.slice(index + 1).concat(validPlacements.slice(0, index));
-  return counter ? arr.reverse() : arr;
-}
-
-var BEHAVIORS = {
-  FLIP: 'flip',
-  CLOCKWISE: 'clockwise',
-  COUNTERCLOCKWISE: 'counterclockwise'
-};
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by update method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The data object, properly modified
- */
-function flip(data, options) {
-  // if `inner` modifier is enabled, we can't use the `flip` modifier
-  if (isModifierEnabled(data.instance.modifiers, 'inner')) {
-    return data;
-  }
-
-  if (data.flipped && data.placement === data.originalPlacement) {
-    // seems like flip is trying to loop, probably there's not enough space on any of the flippable sides
-    return data;
-  }
-
-  var boundaries = getBoundaries(data.instance.popper, data.instance.reference, options.padding, options.boundariesElement);
-
-  var placement = data.placement.split('-')[0];
-  var placementOpposite = getOppositePlacement(placement);
-  var variation = data.placement.split('-')[1] || '';
-
-  var flipOrder = [];
-
-  switch (options.behavior) {
-    case BEHAVIORS.FLIP:
-      flipOrder = [placement, placementOpposite];
-      break;
-    case BEHAVIORS.CLOCKWISE:
-      flipOrder = clockwise(placement);
-      break;
-    case BEHAVIORS.COUNTERCLOCKWISE:
-      flipOrder = clockwise(placement, true);
-      break;
-    default:
-      flipOrder = options.behavior;
-  }
-
-  flipOrder.forEach(function (step, index) {
-    if (placement !== step || flipOrder.length === index + 1) {
-      return data;
-    }
-
-    placement = data.placement.split('-')[0];
-    placementOpposite = getOppositePlacement(placement);
-
-    var popperOffsets = data.offsets.popper;
-    var refOffsets = data.offsets.reference;
-
-    // using floor because the reference offsets may contain decimals we are not going to consider here
-    var floor = Math.floor;
-    var overlapsRef = placement === 'left' && floor(popperOffsets.right) > floor(refOffsets.left) || placement === 'right' && floor(popperOffsets.left) < floor(refOffsets.right) || placement === 'top' && floor(popperOffsets.bottom) > floor(refOffsets.top) || placement === 'bottom' && floor(popperOffsets.top) < floor(refOffsets.bottom);
-
-    var overflowsLeft = floor(popperOffsets.left) < floor(boundaries.left);
-    var overflowsRight = floor(popperOffsets.right) > floor(boundaries.right);
-    var overflowsTop = floor(popperOffsets.top) < floor(boundaries.top);
-    var overflowsBottom = floor(popperOffsets.bottom) > floor(boundaries.bottom);
-
-    var overflowsBoundaries = placement === 'left' && overflowsLeft || placement === 'right' && overflowsRight || placement === 'top' && overflowsTop || placement === 'bottom' && overflowsBottom;
-
-    // flip the variation if required
-    var isVertical = ['top', 'bottom'].indexOf(placement) !== -1;
-    var flippedVariation = !!options.flipVariations && (isVertical && variation === 'start' && overflowsLeft || isVertical && variation === 'end' && overflowsRight || !isVertical && variation === 'start' && overflowsTop || !isVertical && variation === 'end' && overflowsBottom);
-
-    if (overlapsRef || overflowsBoundaries || flippedVariation) {
-      // this boolean to detect any flip loop
-      data.flipped = true;
-
-      if (overlapsRef || overflowsBoundaries) {
-        placement = flipOrder[index + 1];
-      }
-
-      if (flippedVariation) {
-        variation = getOppositeVariation(variation);
-      }
-
-      data.placement = placement + (variation ? '-' + variation : '');
-
-      // this object contains `position`, we want to preserve it along with
-      // any additional property we may add in the future
-      data.offsets.popper = _extends({}, data.offsets.popper, getPopperOffsets(data.instance.popper, data.offsets.reference, data.placement));
-
-      data = runModifiers(data.instance.modifiers, data, 'flip');
-    }
-  });
-  return data;
-}
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by update method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The data object, properly modified
- */
-function keepTogether(data) {
-  var _data$offsets = data.offsets,
-      popper = _data$offsets.popper,
-      reference = _data$offsets.reference;
-
-  var placement = data.placement.split('-')[0];
-  var floor = Math.floor;
-  var isVertical = ['top', 'bottom'].indexOf(placement) !== -1;
-  var side = isVertical ? 'right' : 'bottom';
-  var opSide = isVertical ? 'left' : 'top';
-  var measurement = isVertical ? 'width' : 'height';
-
-  if (popper[side] < floor(reference[opSide])) {
-    data.offsets.popper[opSide] = floor(reference[opSide]) - popper[measurement];
-  }
-  if (popper[opSide] > floor(reference[side])) {
-    data.offsets.popper[opSide] = floor(reference[side]);
-  }
-
-  return data;
-}
-
-/**
- * Converts a string containing value + unit into a px value number
- * @function
- * @memberof {modifiers~offset}
- * @private
- * @argument {String} str - Value + unit string
- * @argument {String} measurement - `height` or `width`
- * @argument {Object} popperOffsets
- * @argument {Object} referenceOffsets
- * @returns {Number|String}
- * Value in pixels, or original string if no values were extracted
- */
-function toValue(str, measurement, popperOffsets, referenceOffsets) {
-  // separate value from unit
-  var split = str.match(/((?:\-|\+)?\d*\.?\d*)(.*)/);
-  var value = +split[1];
-  var unit = split[2];
-
-  // If it's not a number it's an operator, I guess
-  if (!value) {
-    return str;
-  }
-
-  if (unit.indexOf('%') === 0) {
-    var element = void 0;
-    switch (unit) {
-      case '%p':
-        element = popperOffsets;
-        break;
-      case '%':
-      case '%r':
-      default:
-        element = referenceOffsets;
-    }
-
-    var rect = getClientRect(element);
-    return rect[measurement] / 100 * value;
-  } else if (unit === 'vh' || unit === 'vw') {
-    // if is a vh or vw, we calculate the size based on the viewport
-    var size = void 0;
-    if (unit === 'vh') {
-      size = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-    } else {
-      size = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-    }
-    return size / 100 * value;
-  } else {
-    // if is an explicit pixel unit, we get rid of the unit and keep the value
-    // if is an implicit unit, it's px, and we return just the value
-    return value;
-  }
-}
-
-/**
- * Parse an `offset` string to extrapolate `x` and `y` numeric offsets.
- * @function
- * @memberof {modifiers~offset}
- * @private
- * @argument {String} offset
- * @argument {Object} popperOffsets
- * @argument {Object} referenceOffsets
- * @argument {String} basePlacement
- * @returns {Array} a two cells array with x and y offsets in numbers
- */
-function parseOffset(offset, popperOffsets, referenceOffsets, basePlacement) {
-  var offsets = [0, 0];
-
-  // Use height if placement is left or right and index is 0 otherwise use width
-  // in this way the first offset will use an axis and the second one
-  // will use the other one
-  var useHeight = ['right', 'left'].indexOf(basePlacement) !== -1;
-
-  // Split the offset string to obtain a list of values and operands
-  // The regex addresses values with the plus or minus sign in front (+10, -20, etc)
-  var fragments = offset.split(/(\+|\-)/).map(function (frag) {
-    return frag.trim();
-  });
-
-  // Detect if the offset string contains a pair of values or a single one
-  // they could be separated by comma or space
-  var divider = fragments.indexOf(find(fragments, function (frag) {
-    return frag.search(/,|\s/) !== -1;
-  }));
-
-  if (fragments[divider] && fragments[divider].indexOf(',') === -1) {
-    console.warn('Offsets separated by white space(s) are deprecated, use a comma (,) instead.');
-  }
-
-  // If divider is found, we divide the list of values and operands to divide
-  // them by ofset X and Y.
-  var splitRegex = /\s*,\s*|\s+/;
-  var ops = divider !== -1 ? [fragments.slice(0, divider).concat([fragments[divider].split(splitRegex)[0]]), [fragments[divider].split(splitRegex)[1]].concat(fragments.slice(divider + 1))] : [fragments];
-
-  // Convert the values with units to absolute pixels to allow our computations
-  ops = ops.map(function (op, index) {
-    // Most of the units rely on the orientation of the popper
-    var measurement = (index === 1 ? !useHeight : useHeight) ? 'height' : 'width';
-    var mergeWithPrevious = false;
-    return op
-    // This aggregates any `+` or `-` sign that aren't considered operators
-    // e.g.: 10 + +5 => [10, +, +5]
-    .reduce(function (a, b) {
-      if (a[a.length - 1] === '' && ['+', '-'].indexOf(b) !== -1) {
-        a[a.length - 1] = b;
-        mergeWithPrevious = true;
-        return a;
-      } else if (mergeWithPrevious) {
-        a[a.length - 1] += b;
-        mergeWithPrevious = false;
-        return a;
-      } else {
-        return a.concat(b);
-      }
-    }, [])
-    // Here we convert the string values into number values (in px)
-    .map(function (str) {
-      return toValue(str, measurement, popperOffsets, referenceOffsets);
-    });
-  });
-
-  // Loop trough the offsets arrays and execute the operations
-  ops.forEach(function (op, index) {
-    op.forEach(function (frag, index2) {
-      if (isNumeric(frag)) {
-        offsets[index] += frag * (op[index2 - 1] === '-' ? -1 : 1);
-      }
-    });
-  });
-  return offsets;
-}
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by update method
- * @argument {Object} options - Modifiers configuration and options
- * @argument {Number|String} options.offset=0
- * The offset value as described in the modifier description
- * @returns {Object} The data object, properly modified
- */
-function offset(data, _ref) {
-  var offset = _ref.offset;
-  var placement = data.placement,
-      _data$offsets = data.offsets,
-      popper = _data$offsets.popper,
-      reference = _data$offsets.reference;
-
-  var basePlacement = placement.split('-')[0];
-
-  var offsets = void 0;
-  if (isNumeric(+offset)) {
-    offsets = [+offset, 0];
-  } else {
-    offsets = parseOffset(offset, popper, reference, basePlacement);
-  }
-
-  if (basePlacement === 'left') {
-    popper.top += offsets[0];
-    popper.left -= offsets[1];
-  } else if (basePlacement === 'right') {
-    popper.top += offsets[0];
-    popper.left += offsets[1];
-  } else if (basePlacement === 'top') {
-    popper.left += offsets[0];
-    popper.top -= offsets[1];
-  } else if (basePlacement === 'bottom') {
-    popper.left += offsets[0];
-    popper.top += offsets[1];
-  }
-
-  data.popper = popper;
-  return data;
-}
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by `update` method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The data object, properly modified
- */
-function preventOverflow(data, options) {
-  var boundariesElement = options.boundariesElement || getOffsetParent(data.instance.popper);
-
-  // If offsetParent is the reference element, we really want to
-  // go one step up and use the next offsetParent as reference to
-  // avoid to make this modifier completely useless and look like broken
-  if (data.instance.reference === boundariesElement) {
-    boundariesElement = getOffsetParent(boundariesElement);
-  }
-
-  var boundaries = getBoundaries(data.instance.popper, data.instance.reference, options.padding, boundariesElement);
-  options.boundaries = boundaries;
-
-  var order = options.priority;
-  var popper = data.offsets.popper;
-
-  var check = {
-    primary: function primary(placement) {
-      var value = popper[placement];
-      if (popper[placement] < boundaries[placement] && !options.escapeWithReference) {
-        value = Math.max(popper[placement], boundaries[placement]);
-      }
-      return defineProperty({}, placement, value);
-    },
-    secondary: function secondary(placement) {
-      var mainSide = placement === 'right' ? 'left' : 'top';
-      var value = popper[mainSide];
-      if (popper[placement] > boundaries[placement] && !options.escapeWithReference) {
-        value = Math.min(popper[mainSide], boundaries[placement] - (placement === 'right' ? popper.width : popper.height));
-      }
-      return defineProperty({}, mainSide, value);
-    }
-  };
-
-  order.forEach(function (placement) {
-    var side = ['left', 'top'].indexOf(placement) !== -1 ? 'primary' : 'secondary';
-    popper = _extends({}, popper, check[side](placement));
-  });
-
-  data.offsets.popper = popper;
-
-  return data;
-}
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by `update` method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The data object, properly modified
- */
-function shift(data) {
-  var placement = data.placement;
-  var basePlacement = placement.split('-')[0];
-  var shiftvariation = placement.split('-')[1];
-
-  // if shift shiftvariation is specified, run the modifier
-  if (shiftvariation) {
-    var _data$offsets = data.offsets,
-        reference = _data$offsets.reference,
-        popper = _data$offsets.popper;
-
-    var isVertical = ['bottom', 'top'].indexOf(basePlacement) !== -1;
-    var side = isVertical ? 'left' : 'top';
-    var measurement = isVertical ? 'width' : 'height';
-
-    var shiftOffsets = {
-      start: defineProperty({}, side, reference[side]),
-      end: defineProperty({}, side, reference[side] + reference[measurement] - popper[measurement])
-    };
-
-    data.offsets.popper = _extends({}, popper, shiftOffsets[shiftvariation]);
-  }
-
-  return data;
-}
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by update method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The data object, properly modified
- */
-function hide(data) {
-  if (!isModifierRequired(data.instance.modifiers, 'hide', 'preventOverflow')) {
-    return data;
-  }
-
-  var refRect = data.offsets.reference;
-  var bound = find(data.instance.modifiers, function (modifier) {
-    return modifier.name === 'preventOverflow';
-  }).boundaries;
-
-  if (refRect.bottom < bound.top || refRect.left > bound.right || refRect.top > bound.bottom || refRect.right < bound.left) {
-    // Avoid unnecessary DOM access if visibility hasn't changed
-    if (data.hide === true) {
-      return data;
-    }
-
-    data.hide = true;
-    data.attributes['x-out-of-boundaries'] = '';
-  } else {
-    // Avoid unnecessary DOM access if visibility hasn't changed
-    if (data.hide === false) {
-      return data;
-    }
-
-    data.hide = false;
-    data.attributes['x-out-of-boundaries'] = false;
-  }
-
-  return data;
-}
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by `update` method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The data object, properly modified
- */
-function inner(data) {
-  var placement = data.placement;
-  var basePlacement = placement.split('-')[0];
-  var _data$offsets = data.offsets,
-      popper = _data$offsets.popper,
-      reference = _data$offsets.reference;
-
-  var isHoriz = ['left', 'right'].indexOf(basePlacement) !== -1;
-
-  var subtractLength = ['top', 'left'].indexOf(basePlacement) === -1;
-
-  popper[isHoriz ? 'left' : 'top'] = reference[basePlacement] - (subtractLength ? popper[isHoriz ? 'width' : 'height'] : 0);
-
-  data.placement = getOppositePlacement(placement);
-  data.offsets.popper = getClientRect(popper);
-
-  return data;
-}
-
-/**
- * Modifier function, each modifier can have a function of this type assigned
- * to its `fn` property.<br />
- * These functions will be called on each update, this means that you must
- * make sure they are performant enough to avoid performance bottlenecks.
- *
- * @function ModifierFn
- * @argument {dataObject} data - The data object generated by `update` method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {dataObject} The data object, properly modified
- */
-
-/**
- * Modifiers are plugins used to alter the behavior of your poppers.<br />
- * Popper.js uses a set of 9 modifiers to provide all the basic functionalities
- * needed by the library.
- *
- * Usually you don't want to override the `order`, `fn` and `onLoad` props.
- * All the other properties are configurations that could be tweaked.
- * @namespace modifiers
- */
-var modifiers = {
-  /**
-   * Modifier used to shift the popper on the start or end of its reference
-   * element.<br />
-   * It will read the variation of the `placement` property.<br />
-   * It can be one either `-end` or `-start`.
-   * @memberof modifiers
-   * @inner
-   */
-  shift: {
-    /** @prop {number} order=100 - Index used to define the order of execution */
-    order: 100,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: shift
-  },
-
-  /**
-   * The `offset` modifier can shift your popper on both its axis.
-   *
-   * It accepts the following units:
-   * - `px` or unitless, interpreted as pixels
-   * - `%` or `%r`, percentage relative to the length of the reference element
-   * - `%p`, percentage relative to the length of the popper element
-   * - `vw`, CSS viewport width unit
-   * - `vh`, CSS viewport height unit
-   *
-   * For length is intended the main axis relative to the placement of the popper.<br />
-   * This means that if the placement is `top` or `bottom`, the length will be the
-   * `width`. In case of `left` or `right`, it will be the height.
-   *
-   * You can provide a single value (as `Number` or `String`), or a pair of values
-   * as `String` divided by a comma or one (or more) white spaces.<br />
-   * The latter is a deprecated method because it leads to confusion and will be
-   * removed in v2.<br />
-   * Additionally, it accepts additions and subtractions between different units.
-   * Note that multiplications and divisions aren't supported.
-   *
-   * Valid examples are:
-   * ```
-   * 10
-   * '10%'
-   * '10, 10'
-   * '10%, 10'
-   * '10 + 10%'
-   * '10 - 5vh + 3%'
-   * '-10px + 5vh, 5px - 6%'
-   * ```
-   * > **NB**: If you desire to apply offsets to your poppers in a way that may make them overlap
-   * > with their reference element, unfortunately, you will have to disable the `flip` modifier.
-   * > More on this [reading this issue](https://github.com/FezVrasta/popper.js/issues/373)
-   *
-   * @memberof modifiers
-   * @inner
-   */
-  offset: {
-    /** @prop {number} order=200 - Index used to define the order of execution */
-    order: 200,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: offset,
-    /** @prop {Number|String} offset=0
-     * The offset value as described in the modifier description
-     */
-    offset: 0
-  },
-
-  /**
-   * Modifier used to prevent the popper from being positioned outside the boundary.
-   *
-   * An scenario exists where the reference itself is not within the boundaries.<br />
-   * We can say it has "escaped the boundaries" — or just "escaped".<br />
-   * In this case we need to decide whether the popper should either:
-   *
-   * - detach from the reference and remain "trapped" in the boundaries, or
-   * - if it should ignore the boundary and "escape with its reference"
-   *
-   * When `escapeWithReference` is set to`true` and reference is completely
-   * outside its boundaries, the popper will overflow (or completely leave)
-   * the boundaries in order to remain attached to the edge of the reference.
-   *
-   * @memberof modifiers
-   * @inner
-   */
-  preventOverflow: {
-    /** @prop {number} order=300 - Index used to define the order of execution */
-    order: 300,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: preventOverflow,
-    /**
-     * @prop {Array} [priority=['left','right','top','bottom']]
-     * Popper will try to prevent overflow following these priorities by default,
-     * then, it could overflow on the left and on top of the `boundariesElement`
-     */
-    priority: ['left', 'right', 'top', 'bottom'],
-    /**
-     * @prop {number} padding=5
-     * Amount of pixel used to define a minimum distance between the boundaries
-     * and the popper this makes sure the popper has always a little padding
-     * between the edges of its container
-     */
-    padding: 5,
-    /**
-     * @prop {String|HTMLElement} boundariesElement='scrollParent'
-     * Boundaries used by the modifier, can be `scrollParent`, `window`,
-     * `viewport` or any DOM element.
-     */
-    boundariesElement: 'scrollParent'
-  },
-
-  /**
-   * Modifier used to make sure the reference and its popper stay near eachothers
-   * without leaving any gap between the two. Expecially useful when the arrow is
-   * enabled and you want to assure it to point to its reference element.
-   * It cares only about the first axis, you can still have poppers with margin
-   * between the popper and its reference element.
-   * @memberof modifiers
-   * @inner
-   */
-  keepTogether: {
-    /** @prop {number} order=400 - Index used to define the order of execution */
-    order: 400,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: keepTogether
-  },
-
-  /**
-   * This modifier is used to move the `arrowElement` of the popper to make
-   * sure it is positioned between the reference element and its popper element.
-   * It will read the outer size of the `arrowElement` node to detect how many
-   * pixels of conjuction are needed.
-   *
-   * It has no effect if no `arrowElement` is provided.
-   * @memberof modifiers
-   * @inner
-   */
-  arrow: {
-    /** @prop {number} order=500 - Index used to define the order of execution */
-    order: 500,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: arrow,
-    /** @prop {String|HTMLElement} element='[x-arrow]' - Selector or node used as arrow */
-    element: '[x-arrow]'
-  },
-
-  /**
-   * Modifier used to flip the popper's placement when it starts to overlap its
-   * reference element.
-   *
-   * Requires the `preventOverflow` modifier before it in order to work.
-   *
-   * **NOTE:** this modifier will interrupt the current update cycle and will
-   * restart it if it detects the need to flip the placement.
-   * @memberof modifiers
-   * @inner
-   */
-  flip: {
-    /** @prop {number} order=600 - Index used to define the order of execution */
-    order: 600,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: flip,
-    /**
-     * @prop {String|Array} behavior='flip'
-     * The behavior used to change the popper's placement. It can be one of
-     * `flip`, `clockwise`, `counterclockwise` or an array with a list of valid
-     * placements (with optional variations).
-     */
-    behavior: 'flip',
-    /**
-     * @prop {number} padding=5
-     * The popper will flip if it hits the edges of the `boundariesElement`
-     */
-    padding: 5,
-    /**
-     * @prop {String|HTMLElement} boundariesElement='viewport'
-     * The element which will define the boundaries of the popper position,
-     * the popper will never be placed outside of the defined boundaries
-     * (except if keepTogether is enabled)
-     */
-    boundariesElement: 'viewport'
-  },
-
-  /**
-   * Modifier used to make the popper flow toward the inner of the reference element.
-   * By default, when this modifier is disabled, the popper will be placed outside
-   * the reference element.
-   * @memberof modifiers
-   * @inner
-   */
-  inner: {
-    /** @prop {number} order=700 - Index used to define the order of execution */
-    order: 700,
-    /** @prop {Boolean} enabled=false - Whether the modifier is enabled or not */
-    enabled: false,
-    /** @prop {ModifierFn} */
-    fn: inner
-  },
-
-  /**
-   * Modifier used to hide the popper when its reference element is outside of the
-   * popper boundaries. It will set a `x-out-of-boundaries` attribute which can
-   * be used to hide with a CSS selector the popper when its reference is
-   * out of boundaries.
-   *
-   * Requires the `preventOverflow` modifier before it in order to work.
-   * @memberof modifiers
-   * @inner
-   */
-  hide: {
-    /** @prop {number} order=800 - Index used to define the order of execution */
-    order: 800,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: hide
-  },
-
-  /**
-   * Computes the style that will be applied to the popper element to gets
-   * properly positioned.
-   *
-   * Note that this modifier will not touch the DOM, it just prepares the styles
-   * so that `applyStyle` modifier can apply it. This separation is useful
-   * in case you need to replace `applyStyle` with a custom implementation.
-   *
-   * This modifier has `850` as `order` value to maintain backward compatibility
-   * with previous versions of Popper.js. Expect the modifiers ordering method
-   * to change in future major versions of the library.
-   *
-   * @memberof modifiers
-   * @inner
-   */
-  computeStyle: {
-    /** @prop {number} order=850 - Index used to define the order of execution */
-    order: 850,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: computeStyle,
-    /**
-     * @prop {Boolean} gpuAcceleration=true
-     * If true, it uses the CSS 3d transformation to position the popper.
-     * Otherwise, it will use the `top` and `left` properties.
-     */
-    gpuAcceleration: true,
-    /**
-     * @prop {string} [x='bottom']
-     * Where to anchor the X axis (`bottom` or `top`). AKA X offset origin.
-     * Change this if your popper should grow in a direction different from `bottom`
-     */
-    x: 'bottom',
-    /**
-     * @prop {string} [x='left']
-     * Where to anchor the Y axis (`left` or `right`). AKA Y offset origin.
-     * Change this if your popper should grow in a direction different from `right`
-     */
-    y: 'right'
-  },
-
-  /**
-   * Applies the computed styles to the popper element.
-   *
-   * All the DOM manipulations are limited to this modifier. This is useful in case
-   * you want to integrate Popper.js inside a framework or view library and you
-   * want to delegate all the DOM manipulations to it.
-   *
-   * Note that if you disable this modifier, you must make sure the popper element
-   * has its position set to `absolute` before Popper.js can do its work!
-   *
-   * Just disable this modifier and define you own to achieve the desired effect.
-   *
-   * @memberof modifiers
-   * @inner
-   */
-  applyStyle: {
-    /** @prop {number} order=900 - Index used to define the order of execution */
-    order: 900,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: applyStyle,
-    /** @prop {Function} */
-    onLoad: applyStyleOnLoad,
-    /**
-     * @deprecated since version 1.10.0, the property moved to `computeStyle` modifier
-     * @prop {Boolean} gpuAcceleration=true
-     * If true, it uses the CSS 3d transformation to position the popper.
-     * Otherwise, it will use the `top` and `left` properties.
-     */
-    gpuAcceleration: undefined
-  }
-};
-
-/**
- * The `dataObject` is an object containing all the informations used by Popper.js
- * this object get passed to modifiers and to the `onCreate` and `onUpdate` callbacks.
- * @name dataObject
- * @property {Object} data.instance The Popper.js instance
- * @property {String} data.placement Placement applied to popper
- * @property {String} data.originalPlacement Placement originally defined on init
- * @property {Boolean} data.flipped True if popper has been flipped by flip modifier
- * @property {Boolean} data.hide True if the reference element is out of boundaries, useful to know when to hide the popper.
- * @property {HTMLElement} data.arrowElement Node used as arrow by arrow modifier
- * @property {Object} data.styles Any CSS property defined here will be applied to the popper, it expects the JavaScript nomenclature (eg. `marginBottom`)
- * @property {Object} data.arrowStyles Any CSS property defined here will be applied to the popper arrow, it expects the JavaScript nomenclature (eg. `marginBottom`)
- * @property {Object} data.boundaries Offsets of the popper boundaries
- * @property {Object} data.offsets The measurements of popper, reference and arrow elements.
- * @property {Object} data.offsets.popper `top`, `left`, `width`, `height` values
- * @property {Object} data.offsets.reference `top`, `left`, `width`, `height` values
- * @property {Object} data.offsets.arrow] `top` and `left` offsets, only one of them will be different from 0
- */
-
-/**
- * Default options provided to Popper.js constructor.<br />
- * These can be overriden using the `options` argument of Popper.js.<br />
- * To override an option, simply pass as 3rd argument an object with the same
- * structure of this object, example:
- * ```
- * new Popper(ref, pop, {
- *   modifiers: {
- *     preventOverflow: { enabled: false }
- *   }
- * })
- * ```
- * @type {Object}
- * @static
- * @memberof Popper
- */
-var Defaults = {
-  /**
-   * Popper's placement
-   * @prop {Popper.placements} placement='bottom'
-   */
-  placement: 'bottom',
-
-  /**
-   * Whether events (resize, scroll) are initially enabled
-   * @prop {Boolean} eventsEnabled=true
-   */
-  eventsEnabled: true,
-
-  /**
-   * Set to true if you want to automatically remove the popper when
-   * you call the `destroy` method.
-   * @prop {Boolean} removeOnDestroy=false
-   */
-  removeOnDestroy: false,
-
-  /**
-   * Callback called when the popper is created.<br />
-   * By default, is set to no-op.<br />
-   * Access Popper.js instance with `data.instance`.
-   * @prop {onCreate}
-   */
-  onCreate: function onCreate() {},
-
-  /**
-   * Callback called when the popper is updated, this callback is not called
-   * on the initialization/creation of the popper, but only on subsequent
-   * updates.<br />
-   * By default, is set to no-op.<br />
-   * Access Popper.js instance with `data.instance`.
-   * @prop {onUpdate}
-   */
-  onUpdate: function onUpdate() {},
-
-  /**
-   * List of modifiers used to modify the offsets before they are applied to the popper.
-   * They provide most of the functionalities of Popper.js
-   * @prop {modifiers}
-   */
-  modifiers: modifiers
-};
-
-/**
- * @callback onCreate
- * @param {dataObject} data
- */
-
-/**
- * @callback onUpdate
- * @param {dataObject} data
- */
-
-// Utils
-// Methods
-var Popper = function () {
-  /**
-   * Create a new Popper.js instance
-   * @class Popper
-   * @param {HTMLElement|referenceObject} reference - The reference element used to position the popper
-   * @param {HTMLElement} popper - The HTML element used as popper.
-   * @param {Object} options - Your custom options to override the ones defined in [Defaults](#defaults)
-   * @return {Object} instance - The generated Popper.js instance
-   */
-  function Popper(reference, popper) {
-    var _this = this;
-
-    var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-    classCallCheck(this, Popper);
-
-    this.scheduleUpdate = function () {
-      return requestAnimationFrame(_this.update);
-    };
-
-    // make update() debounced, so that it only runs at most once-per-tick
-    this.update = debounce(this.update.bind(this));
-
-    // with {} we create a new object with the options inside it
-    this.options = _extends({}, Popper.Defaults, options);
-
-    // init state
-    this.state = {
-      isDestroyed: false,
-      isCreated: false,
-      scrollParents: []
-    };
-
-    // get reference and popper elements (allow jQuery wrappers)
-    this.reference = reference.jquery ? reference[0] : reference;
-    this.popper = popper.jquery ? popper[0] : popper;
-
-    // Deep merge modifiers options
-    this.options.modifiers = {};
-    Object.keys(_extends({}, Popper.Defaults.modifiers, options.modifiers)).forEach(function (name) {
-      _this.options.modifiers[name] = _extends({}, Popper.Defaults.modifiers[name] || {}, options.modifiers ? options.modifiers[name] : {});
-    });
-
-    // Refactoring modifiers' list (Object => Array)
-    this.modifiers = Object.keys(this.options.modifiers).map(function (name) {
-      return _extends({
-        name: name
-      }, _this.options.modifiers[name]);
-    })
-    // sort the modifiers by order
-    .sort(function (a, b) {
-      return a.order - b.order;
-    });
-
-    // modifiers have the ability to execute arbitrary code when Popper.js get inited
-    // such code is executed in the same order of its modifier
-    // they could add new properties to their options configuration
-    // BE AWARE: don't add options to `options.modifiers.name` but to `modifierOptions`!
-    this.modifiers.forEach(function (modifierOptions) {
-      if (modifierOptions.enabled && isFunction(modifierOptions.onLoad)) {
-        modifierOptions.onLoad(_this.reference, _this.popper, _this.options, modifierOptions, _this.state);
-      }
-    });
-
-    // fire the first update to position the popper in the right place
-    this.update();
-
-    var eventsEnabled = this.options.eventsEnabled;
-    if (eventsEnabled) {
-      // setup event listeners, they will take care of update the position in specific situations
-      this.enableEventListeners();
-    }
-
-    this.state.eventsEnabled = eventsEnabled;
-  }
-
-  // We can't use class properties because they don't get listed in the
-  // class prototype and break stuff like Sinon stubs
-
-
-  createClass(Popper, [{
-    key: 'update',
-    value: function update$$1() {
-      return update.call(this);
-    }
-  }, {
-    key: 'destroy',
-    value: function destroy$$1() {
-      return destroy.call(this);
-    }
-  }, {
-    key: 'enableEventListeners',
-    value: function enableEventListeners$$1() {
-      return enableEventListeners.call(this);
-    }
-  }, {
-    key: 'disableEventListeners',
-    value: function disableEventListeners$$1() {
-      return disableEventListeners.call(this);
-    }
-
-    /**
-     * Schedule an update, it will run on the next UI update available
-     * @method scheduleUpdate
-     * @memberof Popper
-     */
-
-    /**
-     * Collection of utilities useful when writing custom modifiers.
-     * Starting from version 1.7, this method is available only if you
-     * include `popper-utils.js` before `popper.js`.
-     *
-     * **DEPRECATION**: This way to access PopperUtils is deprecated
-     * and will be removed in v2! Use the PopperUtils module directly instead.
-     * Due to the high instability of the methods contained in Utils, we can't
-     * guarantee them to follow semver. Use them at your own risk!
-     * @static
-     * @private
-     * @type {Object}
-     * @deprecated since version 1.8
-     * @member Utils
-     * @memberof Popper
-     */
-
-  }]);
-  return Popper;
-}();
-
-/**
- * The `referenceObject` is an object that provides an interface compatible with Popper.js
- * and lets you use it as replacement of a real DOM node.<br />
- * You can use this method to position a popper relatively to a set of coordinates
- * in case you don't have a DOM node to use as reference.
- *
- * ```
- * new Popper(referenceObject, popperNode);
- * ```
- *
- * NB: This feature isn't supported in Internet Explorer 10
- * @name referenceObject
- * @property {Function} data.getBoundingClientRect
- * A function that returns a set of coordinates compatible with the native `getBoundingClientRect` method.
- * @property {number} data.clientWidth
- * An ES6 getter that will return the width of the virtual reference element.
- * @property {number} data.clientHeight
- * An ES6 getter that will return the height of the virtual reference element.
- */
-
-Popper.Utils = (typeof window !== 'undefined' ? window : global).PopperUtils;
-Popper.placements = placements;
-Popper.Defaults = Defaults;
-
-exports.default = Popper;
-//# sourceMappingURL=popper.js.map
-
-module.exports = exports['default'];
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(34)))
-
-/***/ }),
-/* 102 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14308,9 +17424,19 @@ module.exports = exports['default'];
 	var javascript = Prism.util.clone(Prism.languages.javascript);
 
 	Prism.languages.jsx = Prism.languages.extend('markup', javascript);
-	Prism.languages.jsx.tag.pattern = /<\/?[\w\.:-]+\s*(?:\s+[\w\.:-]+(?:=(?:("|')(\\?[\w\W])*?\1|[^\s'">=]+|(\{[\w\W]*?\})))?\s*)*\/?>/i;
+	Prism.languages.jsx.tag.pattern = /<\/?[\w.:-]+\s*(?:\s+(?:[\w.:-]+(?:=(?:("|')(?:\\[\s\S]|(?!\1)[^\\])*\1|[^\s'">=]+|(?:\{\{?[^}]*\}?\})))?|\{\.{3}[a-z_$][\w$]*(?:\.[a-z_$][\w$]*)*\}))*\s*\/?>/i;
 
-	Prism.languages.jsx.tag.inside['attr-value'].pattern = /=[^\{](?:('|")[\w\W]*?(\1)|[^\s>]+)/i;
+	Prism.languages.jsx.tag.inside['attr-value'].pattern = /=(?!\{)(?:("|')(?:\\[\s\S]|(?!\1)[^\\])*\1|[^\s'">]+)/i;
+
+	Prism.languages.insertBefore('inside', 'attr-name', {
+		'spread': {
+			pattern: /\{\.{3}[a-z_$][\w$]*(?:\.[a-z_$][\w$]*)*\}/,
+			inside: {
+				'punctuation': /\.{3}|[{}.]/,
+				'attr-value': /\w+/
+			}
+		}
+	}, Prism.languages.jsx.tag);
 
 	var jsxExpression = Prism.util.clone(Prism.languages.jsx);
 
@@ -14331,7 +17457,7 @@ module.exports = exports['default'];
 })(Prism);
 
 /***/ }),
-/* 103 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14359,6 +17485,8 @@ var Prism = function () {
 	var uniqueId = 0;
 
 	var _ = _self.Prism = {
+		manual: _self.Prism && _self.Prism.manual,
+		disableWorkerMessageHandler: _self.Prism && _self.Prism.disableWorkerMessageHandler,
 		util: {
 			encode: function encode(tokens) {
 				if (tokens instanceof Token) {
@@ -14398,8 +17526,7 @@ var Prism = function () {
 						return clone;
 
 					case 'Array':
-						// Check for existence for IE8
-						return o.map && o.map(function (v) {
+						return o.map(function (v) {
 							return _.util.clone(v);
 						});
 				}
@@ -14495,6 +17622,10 @@ var Prism = function () {
 		plugins: {},
 
 		highlightAll: function highlightAll(async, callback) {
+			_.highlightAllUnder(document, async, callback);
+		},
+
+		highlightAllUnder: function highlightAllUnder(container, async, callback) {
 			var env = {
 				callback: callback,
 				selector: 'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'
@@ -14502,7 +17633,7 @@ var Prism = function () {
 
 			_.hooks.run("before-highlightall", env);
 
-			var elements = env.elements || document.querySelectorAll(env.selector);
+			var elements = env.elements || container.querySelectorAll(env.selector);
 
 			for (var i = 0, element; element = elements[i++];) {
 				_.highlightElement(element, async === true, env.callback);
@@ -14527,11 +17658,13 @@ var Prism = function () {
 			// Set language on the element, if not present
 			element.className = element.className.replace(lang, '').replace(/\s+/g, ' ') + ' language-' + language;
 
-			// Set language on the parent, for styling
-			parent = element.parentNode;
+			if (element.parentNode) {
+				// Set language on the parent, for styling
+				parent = element.parentNode;
 
-			if (/pre/i.test(parent.nodeName)) {
-				parent.className = parent.className.replace(lang, '').replace(/\s+/g, ' ') + ' language-' + language;
+				if (/pre/i.test(parent.nodeName)) {
+					parent.className = parent.className.replace(lang, '').replace(/\s+/g, ' ') + ' language-' + language;
+				}
 			}
 
 			var code = element.textContent;
@@ -14547,7 +17680,9 @@ var Prism = function () {
 
 			if (!env.code || !env.grammar) {
 				if (env.code) {
+					_.hooks.run('before-highlight', env);
 					env.element.textContent = env.code;
+					_.hooks.run('after-highlight', env);
 				}
 				_.hooks.run('complete', env);
 				return;
@@ -14594,24 +17729,16 @@ var Prism = function () {
 			return Token.stringify(_.util.encode(tokens), language);
 		},
 
-		tokenize: function tokenize(text, grammar, language) {
+		matchGrammar: function matchGrammar(text, strarr, grammar, index, startPos, oneshot, target) {
 			var Token = _.Token;
 
-			var strarr = [text];
-
-			var rest = grammar.rest;
-
-			if (rest) {
-				for (var token in rest) {
-					grammar[token] = rest[token];
-				}
-
-				delete grammar.rest;
-			}
-
-			tokenloop: for (var token in grammar) {
+			for (var token in grammar) {
 				if (!grammar.hasOwnProperty(token) || !grammar[token]) {
 					continue;
+				}
+
+				if (token == target) {
+					return;
 				}
 
 				var patterns = grammar[token];
@@ -14634,13 +17761,13 @@ var Prism = function () {
 					pattern = pattern.pattern || pattern;
 
 					// Don’t cache length as it changes during the loop
-					for (var i = 0, pos = 0; i < strarr.length; pos += strarr[i].length, ++i) {
+					for (var i = index, pos = startPos; i < strarr.length; pos += strarr[i].length, ++i) {
 
 						var str = strarr[i];
 
 						if (strarr.length > text.length) {
 							// Something went terribly wrong, ABORT, ABORT!
-							break tokenloop;
+							return;
 						}
 
 						if (str instanceof Token) {
@@ -14665,7 +17792,7 @@ var Prism = function () {
 							    k = i,
 							    p = pos;
 
-							for (var len = strarr.length; k < len && p < to; ++k) {
+							for (var len = strarr.length; k < len && (p < to || !strarr[k].type && !strarr[k - 1].greedy); ++k) {
 								p += strarr[k].length;
 								// Move the index i to the element in strarr that is closest to from
 								if (from >= p) {
@@ -14689,6 +17816,10 @@ var Prism = function () {
 						}
 
 						if (!match) {
+							if (oneshot) {
+								break;
+							}
+
 							continue;
 						}
 
@@ -14705,6 +17836,8 @@ var Prism = function () {
 						var args = [i, delNum];
 
 						if (before) {
+							++i;
+							pos += before.length;
 							args.push(before);
 						}
 
@@ -14717,9 +17850,29 @@ var Prism = function () {
 						}
 
 						Array.prototype.splice.apply(strarr, args);
+
+						if (delNum != 1) _.matchGrammar(text, strarr, grammar, i, pos, true, token);
+
+						if (oneshot) break;
 					}
 				}
 			}
+		},
+
+		tokenize: function tokenize(text, grammar, language) {
+			var strarr = [text];
+
+			var rest = grammar.rest;
+
+			if (rest) {
+				for (var token in rest) {
+					grammar[token] = rest[token];
+				}
+
+				delete grammar.rest;
+			}
+
+			_.matchGrammar(text, strarr, grammar, 0, 0, false);
 
 			return strarr;
 		},
@@ -14779,10 +17932,6 @@ var Prism = function () {
 			parent: parent
 		};
 
-		if (env.type == 'comment') {
-			env.attributes['spellcheck'] = 'true';
-		}
-
 		if (o.alias) {
 			var aliases = _.util.type(o.alias) === 'Array' ? o.alias : [o.alias];
 			Array.prototype.push.apply(env.classes, aliases);
@@ -14802,18 +17951,21 @@ var Prism = function () {
 			// in Node.js
 			return _self.Prism;
 		}
-		// In worker
-		_self.addEventListener('message', function (evt) {
-			var message = JSON.parse(evt.data),
-			    lang = message.language,
-			    code = message.code,
-			    immediateClose = message.immediateClose;
 
-			_self.postMessage(_.highlight(code, _.languages[lang], lang));
-			if (immediateClose) {
-				_self.close();
-			}
-		}, false);
+		if (!_.disableWorkerMessageHandler) {
+			// In worker
+			_self.addEventListener('message', function (evt) {
+				var message = JSON.parse(evt.data),
+				    lang = message.language,
+				    code = message.code,
+				    immediateClose = message.immediateClose;
+
+				_self.postMessage(_.highlight(code, _.languages[lang], lang));
+				if (immediateClose) {
+					_self.close();
+				}
+			}, false);
+		}
 
 		return _self.Prism;
 	}
@@ -14824,7 +17976,7 @@ var Prism = function () {
 	if (script) {
 		_.filename = script.src;
 
-		if (document.addEventListener && !script.hasAttribute('data-manual')) {
+		if (!_.manual && !script.hasAttribute('data-manual')) {
 			if (document.readyState !== "loading") {
 				if (window.requestAnimationFrame) {
 					window.requestAnimationFrame(_.highlightAll);
@@ -14854,12 +18006,12 @@ if (typeof global !== 'undefined') {
 ********************************************** */
 
 Prism.languages.markup = {
-	'comment': /<!--[\w\W]*?-->/,
-	'prolog': /<\?[\w\W]+?\?>/,
-	'doctype': /<!DOCTYPE[\w\W]+?>/i,
-	'cdata': /<!\[CDATA\[[\w\W]*?]]>/i,
+	'comment': /<!--[\s\S]*?-->/,
+	'prolog': /<\?[\s\S]+?\?>/,
+	'doctype': /<!DOCTYPE[\s\S]+?>/i,
+	'cdata': /<!\[CDATA\[[\s\S]*?]]>/i,
 	'tag': {
-		pattern: /<\/?(?!\d)[^\s>\/=$<]+(?:\s+[^\s>\/=]+(?:=(?:("|')(?:\\\1|\\?(?!\1)[\w\W])*\1|[^\s'">=]+))?)*\s*\/?>/i,
+		pattern: /<\/?(?!\d)[^\s>\/=$<]+(?:\s+[^\s>\/=]+(?:=(?:("|')(?:\\[\s\S]|(?!\1)[^\\])*\1|[^\s'">=]+))?)*\s*\/?>/i,
 		inside: {
 			'tag': {
 				pattern: /^<\/?[^\s>\/]+/i,
@@ -14869,9 +18021,12 @@ Prism.languages.markup = {
 				}
 			},
 			'attr-value': {
-				pattern: /=(?:('|")[\w\W]*?(\1)|[^\s>]+)/i,
+				pattern: /=(?:("|')(?:\\[\s\S]|(?!\1)[^\\])*\1|[^\s'">=]+)/i,
 				inside: {
-					'punctuation': /[=>"']/
+					'punctuation': [/^=/, {
+						pattern: /(^|[^\\])["']/,
+						lookbehind: true
+					}]
 				}
 			},
 			'punctuation': /\/?>/,
@@ -14886,6 +18041,8 @@ Prism.languages.markup = {
 	},
 	'entity': /&#?[\da-z]{1,8};/i
 };
+
+Prism.languages.markup['tag'].inside['attr-value'].inside['entity'] = Prism.languages.markup['entity'];
 
 // Plugin to make entity title show the real entity, idea by Roman Komarov
 Prism.hooks.add('wrap', function (env) {
@@ -14905,21 +18062,21 @@ Prism.languages.svg = Prism.languages.markup;
 ********************************************** */
 
 Prism.languages.css = {
-	'comment': /\/\*[\w\W]*?\*\//,
+	'comment': /\/\*[\s\S]*?\*\//,
 	'atrule': {
-		pattern: /@[\w-]+?.*?(;|(?=\s*\{))/i,
+		pattern: /@[\w-]+?.*?(?:;|(?=\s*\{))/i,
 		inside: {
 			'rule': /@[\w-]+/
 			// See rest below
 		}
 	},
-	'url': /url\((?:(["'])(\\(?:\r\n|[\w\W])|(?!\1)[^\\\r\n])*\1|.*?)\)/i,
-	'selector': /[^\{\}\s][^\{\};]*?(?=\s*\{)/,
+	'url': /url\((?:(["'])(?:\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1|.*?)\)/i,
+	'selector': /[^{}\s][^{};]*?(?=\s*\{)/,
 	'string': {
-		pattern: /("|')(\\(?:\r\n|[\w\W])|(?!\1)[^\\\r\n])*\1/,
+		pattern: /("|')(?:\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/,
 		greedy: true
 	},
-	'property': /(\b|\B)[\w-]+(?=\s*:)/i,
+	'property': /[-_a-z\xA0-\uFFFF][-\w\xA0-\uFFFF]*(?=\s*:)/i,
 	'important': /\B!important\b/i,
 	'function': /[-a-z0-9]+(?=\()/i,
 	'punctuation': /[(){};:]/
@@ -14930,16 +18087,17 @@ Prism.languages.css['atrule'].inside.rest = Prism.util.clone(Prism.languages.css
 if (Prism.languages.markup) {
 	Prism.languages.insertBefore('markup', 'tag', {
 		'style': {
-			pattern: /(<style[\w\W]*?>)[\w\W]*?(?=<\/style>)/i,
+			pattern: /(<style[\s\S]*?>)[\s\S]*?(?=<\/style>)/i,
 			lookbehind: true,
 			inside: Prism.languages.css,
-			alias: 'language-css'
+			alias: 'language-css',
+			greedy: true
 		}
 	});
 
 	Prism.languages.insertBefore('inside', 'attr-value', {
 		'style-attr': {
-			pattern: /\s*style=("|').*?\1/i,
+			pattern: /\s*style=("|')(?:\\[\s\S]|(?!\1)[^\\])*\1/i,
 			inside: {
 				'attr-name': {
 					pattern: /^\s*style/i,
@@ -14962,25 +18120,25 @@ if (Prism.languages.markup) {
 
 Prism.languages.clike = {
 	'comment': [{
-		pattern: /(^|[^\\])\/\*[\w\W]*?\*\//,
+		pattern: /(^|[^\\])\/\*[\s\S]*?(?:\*\/|$)/,
 		lookbehind: true
 	}, {
 		pattern: /(^|[^\\:])\/\/.*/,
 		lookbehind: true
 	}],
 	'string': {
-		pattern: /(["'])(\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/,
+		pattern: /(["'])(?:\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/,
 		greedy: true
 	},
 	'class-name': {
-		pattern: /((?:\b(?:class|interface|extends|implements|trait|instanceof|new)\s+)|(?:catch\s+\())[a-z0-9_\.\\]+/i,
+		pattern: /((?:\b(?:class|interface|extends|implements|trait|instanceof|new)\s+)|(?:catch\s+\())[\w.\\]+/i,
 		lookbehind: true,
 		inside: {
-			punctuation: /(\.|\\)/
+			punctuation: /[.\\]/
 		}
 	},
-	'keyword': /\b(if|else|while|do|for|return|in|instanceof|function|new|try|throw|catch|finally|null|break|continue)\b/,
-	'boolean': /\b(true|false)\b/,
+	'keyword': /\b(?:if|else|while|do|for|return|in|instanceof|function|new|try|throw|catch|finally|null|break|continue)\b/,
+	'boolean': /\b(?:true|false)\b/,
 	'function': /[a-z0-9_]+(?=\()/i,
 	'number': /\b-?(?:0x[\da-f]+|\d*\.?\d+(?:e[+-]?\d+)?)\b/i,
 	'operator': /--?|\+\+?|!=?=?|<=?|>=?|==?=?|&&?|\|\|?|\?|\*|\/|~|\^|%/,
@@ -14992,24 +18150,29 @@ Prism.languages.clike = {
 ********************************************** */
 
 Prism.languages.javascript = Prism.languages.extend('clike', {
-	'keyword': /\b(as|async|await|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|finally|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|var|void|while|with|yield)\b/,
-	'number': /\b-?(0x[\dA-Fa-f]+|0b[01]+|0o[0-7]+|\d*\.?\d+([Ee][+-]?\d+)?|NaN|Infinity)\b/,
+	'keyword': /\b(?:as|async|await|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|finally|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|var|void|while|with|yield)\b/,
+	'number': /\b-?(?:0[xX][\dA-Fa-f]+|0[bB][01]+|0[oO][0-7]+|\d*\.?\d+(?:[Ee][+-]?\d+)?|NaN|Infinity)\b/,
 	// Allow for all non-ASCII characters (See http://stackoverflow.com/a/2008444)
-	'function': /[_$a-zA-Z\xA0-\uFFFF][_$a-zA-Z0-9\xA0-\uFFFF]*(?=\()/i,
-	'operator': /--?|\+\+?|!=?=?|<=?|>=?|==?=?|&&?|\|\|?|\?|\*\*?|\/|~|\^|%|\.{3}/
+	'function': /[_$a-z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\s*\()/i,
+	'operator': /-[-=]?|\+[+=]?|!=?=?|<<?=?|>>?>?=?|=(?:==?|>)?|&[&=]?|\|[|=]?|\*\*?=?|\/=?|~|\^=?|%=?|\?|\.{3}/
 });
 
 Prism.languages.insertBefore('javascript', 'keyword', {
 	'regex': {
-		pattern: /(^|[^/])\/(?!\/)(\[.+?]|\\.|[^/\\\r\n])+\/[gimyu]{0,5}(?=\s*($|[\r\n,.;})]))/,
+		pattern: /(^|[^/])\/(?!\/)(\[[^\]\r\n]+]|\\.|[^/\\\[\r\n])+\/[gimyu]{0,5}(?=\s*($|[\r\n,.;})]))/,
 		lookbehind: true,
 		greedy: true
+	},
+	// This must be declared before keyword because we use "function" inside the look-forward
+	'function-variable': {
+		pattern: /[_$a-z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\s*=\s*(?:function\b|(?:\([^()]*\)|[_$a-z\xA0-\uFFFF][$\w\xA0-\uFFFF]*)\s*=>))/i,
+		alias: 'function'
 	}
 });
 
 Prism.languages.insertBefore('javascript', 'string', {
 	'template-string': {
-		pattern: /`(?:\\\\|\\?[^\\])*?`/,
+		pattern: /`(?:\\[\s\S]|[^\\`])*`/,
 		greedy: true,
 		inside: {
 			'interpolation': {
@@ -15030,10 +18193,11 @@ Prism.languages.insertBefore('javascript', 'string', {
 if (Prism.languages.markup) {
 	Prism.languages.insertBefore('markup', 'tag', {
 		'script': {
-			pattern: /(<script[\w\W]*?>)[\w\W]*?(?=<\/script>)/i,
+			pattern: /(<script[\s\S]*?>)[\s\S]*?(?=<\/script>)/i,
 			lookbehind: true,
 			inside: Prism.languages.javascript,
-			alias: 'language-javascript'
+			alias: 'language-javascript',
+			greedy: true
 		}
 	});
 }
@@ -15063,66 +18227,63 @@ Prism.languages.js = Prism.languages.javascript;
 			'tex': 'latex'
 		};
 
-		if (Array.prototype.forEach) {
-			// Check to prevent error in IE8
-			Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-				var src = pre.getAttribute('data-src');
+		Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+			var src = pre.getAttribute('data-src');
 
-				var language,
-				    parent = pre;
-				var lang = /\blang(?:uage)?-(?!\*)(\w+)\b/i;
-				while (parent && !lang.test(parent.className)) {
-					parent = parent.parentNode;
-				}
+			var language,
+			    parent = pre;
+			var lang = /\blang(?:uage)?-(?!\*)(\w+)\b/i;
+			while (parent && !lang.test(parent.className)) {
+				parent = parent.parentNode;
+			}
 
-				if (parent) {
-					language = (pre.className.match(lang) || [, ''])[1];
-				}
+			if (parent) {
+				language = (pre.className.match(lang) || [, ''])[1];
+			}
 
-				if (!language) {
-					var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
-					language = Extensions[extension] || extension;
-				}
+			if (!language) {
+				var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+				language = Extensions[extension] || extension;
+			}
 
-				var code = document.createElement('code');
-				code.className = 'language-' + language;
+			var code = document.createElement('code');
+			code.className = 'language-' + language;
 
-				pre.textContent = '';
+			pre.textContent = '';
 
-				code.textContent = 'Loading…';
+			code.textContent = 'Loading…';
 
-				pre.appendChild(code);
+			pre.appendChild(code);
 
-				var xhr = new XMLHttpRequest();
+			var xhr = new XMLHttpRequest();
 
-				xhr.open('GET', src, true);
+			xhr.open('GET', src, true);
 
-				xhr.onreadystatechange = function () {
-					if (xhr.readyState == 4) {
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState == 4) {
 
-						if (xhr.status < 400 && xhr.responseText) {
-							code.textContent = xhr.responseText;
+					if (xhr.status < 400 && xhr.responseText) {
+						code.textContent = xhr.responseText;
 
-							Prism.highlightElement(code);
-						} else if (xhr.status >= 400) {
-							code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
-						} else {
-							code.textContent = '✖ Error: File does not exist or is empty';
-						}
+						Prism.highlightElement(code);
+					} else if (xhr.status >= 400) {
+						code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+					} else {
+						code.textContent = '✖ Error: File does not exist or is empty';
 					}
-				};
+				}
+			};
 
-				xhr.send(null);
-			});
-		}
+			xhr.send(null);
+		});
 	};
 
 	document.addEventListener('DOMContentLoaded', self.Prism.fileHighlight);
 })();
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(34)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(51)))
 
 /***/ }),
-/* 104 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15204,7 +18365,7 @@ exports.default = resolvePathname;
 module.exports = exports['default'];
 
 /***/ }),
-/* 105 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15261,7 +18422,7 @@ exports.default = valueEqual;
 module.exports = exports["default"];
 
 /***/ }),
-/* 106 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15304,7 +18465,7 @@ exports.default = function () {
 
 var _components = __webpack_require__(4);
 
-var _Alert = __webpack_require__(57);
+var _Alert = __webpack_require__(65);
 
 var _Alert2 = _interopRequireDefault(_Alert);
 
@@ -15315,7 +18476,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 107 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15360,7 +18521,7 @@ exports.default = function () {
 
 var _components = __webpack_require__(4);
 
-var _Badge = __webpack_require__(36);
+var _Badge = __webpack_require__(39);
 
 var _Badge2 = _interopRequireDefault(_Badge);
 
@@ -15371,7 +18532,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 108 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15415,11 +18576,11 @@ exports.default = function () {
 
 var _components = __webpack_require__(4);
 
-var _Breadcrumb = __webpack_require__(58);
+var _Breadcrumb = __webpack_require__(66);
 
 var _Breadcrumb2 = _interopRequireDefault(_Breadcrumb);
 
-var _BreadcrumbItem = __webpack_require__(59);
+var _BreadcrumbItem = __webpack_require__(67);
 
 var _BreadcrumbItem2 = _interopRequireDefault(_BreadcrumbItem);
 
@@ -15430,7 +18591,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 109 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15660,27 +18821,27 @@ var _Button = __webpack_require__(5);
 
 var _Button2 = _interopRequireDefault(_Button);
 
-var _ButtonGroup = __webpack_require__(19);
+var _ButtonGroup = __webpack_require__(21);
 
 var _ButtonGroup2 = _interopRequireDefault(_ButtonGroup);
 
-var _ButtonToolbar = __webpack_require__(60);
+var _ButtonToolbar = __webpack_require__(68);
 
 var _ButtonToolbar2 = _interopRequireDefault(_ButtonToolbar);
 
-var _ButtonDropdown = __webpack_require__(37);
+var _ButtonDropdown = __webpack_require__(40);
 
 var _ButtonDropdown2 = _interopRequireDefault(_ButtonDropdown);
 
-var _DropdownToggle = __webpack_require__(12);
+var _DropdownToggle = __webpack_require__(13);
 
 var _DropdownToggle2 = _interopRequireDefault(_DropdownToggle);
 
-var _DropdownMenu = __webpack_require__(11);
+var _DropdownMenu = __webpack_require__(12);
 
 var _DropdownMenu2 = _interopRequireDefault(_DropdownMenu);
 
-var _DropdownItem = __webpack_require__(10);
+var _DropdownItem = __webpack_require__(11);
 
 var _DropdownItem2 = _interopRequireDefault(_DropdownItem);
 
@@ -15850,7 +19011,7 @@ var SampleDropdownButton = function (_Component2) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 110 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15900,7 +19061,7 @@ var _Button = __webpack_require__(5);
 
 var _Button2 = _interopRequireDefault(_Button);
 
-var _Collapse = __webpack_require__(66);
+var _Collapse = __webpack_require__(74);
 
 var _Collapse2 = _interopRequireDefault(_Collapse);
 
@@ -15957,7 +19118,7 @@ var ToggleCollapse = function (_Component) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 111 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15990,19 +19151,19 @@ var _infernoComponent2 = _interopRequireDefault(_infernoComponent);
 
 var _components = __webpack_require__(4);
 
-var _Dropdown = __webpack_require__(9);
+var _Dropdown = __webpack_require__(10);
 
 var _Dropdown2 = _interopRequireDefault(_Dropdown);
 
-var _DropdownToggle = __webpack_require__(12);
+var _DropdownToggle = __webpack_require__(13);
 
 var _DropdownToggle2 = _interopRequireDefault(_DropdownToggle);
 
-var _DropdownMenu = __webpack_require__(11);
+var _DropdownMenu = __webpack_require__(12);
 
 var _DropdownMenu2 = _interopRequireDefault(_DropdownMenu);
 
-var _DropdownItem = __webpack_require__(10);
+var _DropdownItem = __webpack_require__(11);
 
 var _DropdownItem2 = _interopRequireDefault(_DropdownItem);
 
@@ -16072,7 +19233,7 @@ var DropdownExample = function (_Component) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 112 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16104,7 +19265,7 @@ exports.default = function () {
 
 var _components = __webpack_require__(4);
 
-var _Jumbotron = __webpack_require__(69);
+var _Jumbotron = __webpack_require__(78);
 
 var _Jumbotron2 = _interopRequireDefault(_Jumbotron);
 
@@ -16119,7 +19280,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 113 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16214,15 +19375,15 @@ exports.default = function () {
 
 var _components = __webpack_require__(4);
 
-var _Container = __webpack_require__(67);
+var _Container = __webpack_require__(75);
 
 var _Container2 = _interopRequireDefault(_Container);
 
-var _Row = __webpack_require__(45);
+var _Row = __webpack_require__(48);
 
 var _Row2 = _interopRequireDefault(_Row);
 
-var _Col = __webpack_require__(39);
+var _Col = __webpack_require__(42);
 
 var _Col2 = _interopRequireDefault(_Col);
 
@@ -16233,7 +19394,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 114 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16324,23 +19485,23 @@ exports.default = function () {
 
 var _components = __webpack_require__(4);
 
-var _ListGroup = __webpack_require__(70);
+var _ListGroup = __webpack_require__(79);
 
 var _ListGroup2 = _interopRequireDefault(_ListGroup);
 
-var _ListGroupItem = __webpack_require__(71);
+var _ListGroupItem = __webpack_require__(80);
 
 var _ListGroupItem2 = _interopRequireDefault(_ListGroupItem);
 
-var _ListGroupItemHeading = __webpack_require__(72);
+var _ListGroupItemHeading = __webpack_require__(81);
 
 var _ListGroupItemHeading2 = _interopRequireDefault(_ListGroupItemHeading);
 
-var _ListGroupItemText = __webpack_require__(73);
+var _ListGroupItemText = __webpack_require__(82);
 
 var _ListGroupItemText2 = _interopRequireDefault(_ListGroupItemText);
 
-var _Badge = __webpack_require__(36);
+var _Badge = __webpack_require__(39);
 
 var _Badge2 = _interopRequireDefault(_Badge);
 
@@ -16351,7 +19512,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 115 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16488,15 +19649,15 @@ exports.default = function () {
 
 var _components = __webpack_require__(4);
 
-var _Pagination = __webpack_require__(74);
+var _Pagination = __webpack_require__(83);
 
 var _Pagination2 = _interopRequireDefault(_Pagination);
 
-var _PaginationItem = __webpack_require__(75);
+var _PaginationItem = __webpack_require__(84);
 
 var _PaginationItem2 = _interopRequireDefault(_PaginationItem);
 
-var _PaginationLink = __webpack_require__(76);
+var _PaginationLink = __webpack_require__(85);
 
 var _PaginationLink2 = _interopRequireDefault(_PaginationLink);
 
@@ -16507,7 +19668,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 116 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16523,9 +19684,7 @@ exports.default = function () {
   return (0, _inferno.createVNode)(16, _components.Section, null, null, {
     'title': 'Popovers',
     children: [(0, _inferno.createVNode)(16, _components.Narrative, null, null, {
-      children: (0, _inferno.createVNode)(2, 'p', null, ['Popovers are built with ', (0, _inferno.createVNode)(2, 'a', null, 'http://tether.io', {
-        'href': 'http://tether.io/'
-      }), '.'])
+      children: (0, _inferno.createVNode)(2, 'p', null, 'Popovers are built with Popper.js.')
     }), (0, _inferno.createVNode)(16, _components.Stage, null, null, {
       children: [(0, _inferno.createVNode)(16, _components.Scene, null, null, {
         children: (0, _inferno.createVNode)(16, ExamplePopover)
@@ -16533,7 +19692,7 @@ exports.default = function () {
         children: [(0, _inferno.createVNode)(16, _components.Narrative, null, null, {
           children: 'This is the code to create a button with a popover:'
         }), (0, _inferno.createVNode)(16, _components.Code, null, null, {
-          children: 'class ExamplePopover extends Component {\n  constructor(props) {\n    super(props);\n\n    this.toggle = this.toggle.bind(this);\n    this.state = {\n      popoverOpen: false\n    };\n  }\n\n  toggle() {\n    this.setState({\n      popoverOpen: !this.state.popoverOpen\n    });\n  }\n\n  render() {\n    return (\n      <div>\n        <Button id="Popover1" onClick={this.toggle}>\n          Launch Popover\n        </Button>\n        <Popover placement="bottom" isOpen={this.state.popoverOpen} target="Popover1" toggle={this.toggle}>\n          <PopoverTitle>Popover Title</PopoverTitle>\n          <PopoverContent>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</PopoverContent>\n        </Popover>\n      </div>\n    );\n  }\n}'
+          children: 'import { Manager, Target, Popper, Arrow, Travel } from \'inferno-popper\'\n\nclass ExamplePopover extends Component {\n  constructor(props) {\n    super(props);\n\n    this.toggle = this.toggle.bind(this);\n    this.state = {\n      popoverOpen: false\n    };\n  }\n\n  toggle() {\n    this.setState({\n      popoverOpen: !this.state.popoverOpen\n    });\n  }\n\n  render() {\n    return (\n      <Manager>\n        <Target>\n          <Button id="Popover1" onClick={this.toggle}>\n            Launch Popover\n          </Button>\n        </Target>\n        <Popover placement="bottom" isOpen={this.state.popoverOpen} target="Popover1" toggle={this.toggle}>\n          <PopoverHeader>Popover Title</PopoverHeader>\n          <PopoverBody>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</PopoverBody>\n        </Popover>\n      </Manager>\n    );\n  }\n}'
         })]
       })]
     })]
@@ -16550,21 +19709,21 @@ var _Button = __webpack_require__(5);
 
 var _Button2 = _interopRequireDefault(_Button);
 
-var _Popover = __webpack_require__(77);
+var _Popover = __webpack_require__(86);
 
 var _Popover2 = _interopRequireDefault(_Popover);
 
-var _PopoverHeader = __webpack_require__(79);
+var _PopoverHeader = __webpack_require__(88);
 
 var _PopoverHeader2 = _interopRequireDefault(_PopoverHeader);
 
-var _PopoverBody = __webpack_require__(78);
+var _PopoverBody = __webpack_require__(87);
 
 var _PopoverBody2 = _interopRequireDefault(_PopoverBody);
 
 var _inferno = __webpack_require__(0);
 
-var _infernoPopper = __webpack_require__(16);
+var _infernoPopper = __webpack_require__(8);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16627,7 +19786,7 @@ var ExamplePopover = function (_Component) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 117 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16684,7 +19843,7 @@ exports.default = function () {
 
 var _components = __webpack_require__(4);
 
-var _Progress = __webpack_require__(82);
+var _Progress = __webpack_require__(91);
 
 var _Progress2 = _interopRequireDefault(_Progress);
 
@@ -16699,7 +19858,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 118 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16736,43 +19895,43 @@ var _classnames2 = _interopRequireDefault(_classnames);
 
 var _components = __webpack_require__(4);
 
-var _Nav = __webpack_require__(13);
+var _Nav = __webpack_require__(14);
 
 var _Nav2 = _interopRequireDefault(_Nav);
 
-var _NavItem = __webpack_require__(14);
+var _NavItem = __webpack_require__(15);
 
 var _NavItem2 = _interopRequireDefault(_NavItem);
 
-var _NavLink = __webpack_require__(15);
+var _NavLink = __webpack_require__(16);
 
 var _NavLink2 = _interopRequireDefault(_NavLink);
 
-var _TabContent = __webpack_require__(83);
+var _TabContent = __webpack_require__(92);
 
 var _TabContent2 = _interopRequireDefault(_TabContent);
 
-var _TabPane = __webpack_require__(84);
+var _TabPane = __webpack_require__(93);
 
 var _TabPane2 = _interopRequireDefault(_TabPane);
 
-var _Row = __webpack_require__(45);
+var _Row = __webpack_require__(48);
 
 var _Row2 = _interopRequireDefault(_Row);
 
-var _Col = __webpack_require__(39);
+var _Col = __webpack_require__(42);
 
 var _Col2 = _interopRequireDefault(_Col);
 
-var _Card = __webpack_require__(26);
+var _Card = __webpack_require__(27);
 
 var _Card2 = _interopRequireDefault(_Card);
 
-var _CardTitle = __webpack_require__(28);
+var _CardTitle = __webpack_require__(29);
 
 var _CardTitle2 = _interopRequireDefault(_CardTitle);
 
-var _CardText = __webpack_require__(27);
+var _CardText = __webpack_require__(28);
 
 var _CardText2 = _interopRequireDefault(_CardText);
 
@@ -16890,7 +20049,7 @@ var TabExample = function (_Component) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 119 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16933,27 +20092,27 @@ exports.default = function () {
 
 var _components = __webpack_require__(4);
 
-var _Card = __webpack_require__(26);
+var _Card = __webpack_require__(27);
 
 var _Card2 = _interopRequireDefault(_Card);
 
-var _CardBody = __webpack_require__(38);
+var _CardBody = __webpack_require__(41);
 
 var _CardBody2 = _interopRequireDefault(_CardBody);
 
-var _CardHeader = __webpack_require__(62);
+var _CardHeader = __webpack_require__(70);
 
 var _CardHeader2 = _interopRequireDefault(_CardHeader);
 
-var _CardFooter = __webpack_require__(61);
+var _CardFooter = __webpack_require__(69);
 
 var _CardFooter2 = _interopRequireDefault(_CardFooter);
 
-var _CardText = __webpack_require__(27);
+var _CardText = __webpack_require__(28);
 
 var _CardText2 = _interopRequireDefault(_CardText);
 
-var _CardTitle = __webpack_require__(28);
+var _CardTitle = __webpack_require__(29);
 
 var _CardTitle2 = _interopRequireDefault(_CardTitle);
 
@@ -16968,7 +20127,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 120 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17036,31 +20195,31 @@ exports.default = function () {
 
 var _components = __webpack_require__(4);
 
-var _Card = __webpack_require__(26);
+var _Card = __webpack_require__(27);
 
 var _Card2 = _interopRequireDefault(_Card);
 
-var _CardImg = __webpack_require__(63);
+var _CardImg = __webpack_require__(71);
 
 var _CardImg2 = _interopRequireDefault(_CardImg);
 
-var _CardBody = __webpack_require__(38);
+var _CardBody = __webpack_require__(41);
 
 var _CardBody2 = _interopRequireDefault(_CardBody);
 
-var _CardLink = __webpack_require__(64);
+var _CardLink = __webpack_require__(72);
 
 var _CardLink2 = _interopRequireDefault(_CardLink);
 
-var _CardSubtitle = __webpack_require__(65);
+var _CardSubtitle = __webpack_require__(73);
 
 var _CardSubtitle2 = _interopRequireDefault(_CardSubtitle);
 
-var _CardText = __webpack_require__(27);
+var _CardText = __webpack_require__(28);
 
 var _CardText2 = _interopRequireDefault(_CardText);
 
-var _CardTitle = __webpack_require__(28);
+var _CardTitle = __webpack_require__(29);
 
 var _CardTitle2 = _interopRequireDefault(_CardTitle);
 
@@ -17075,7 +20234,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 121 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17127,27 +20286,27 @@ var _infernoComponent2 = _interopRequireDefault(_infernoComponent);
 
 var _components = __webpack_require__(4);
 
-var _Form = __webpack_require__(20);
+var _Form = __webpack_require__(22);
 
 var _Form2 = _interopRequireDefault(_Form);
 
-var _FormGroup = __webpack_require__(21);
+var _FormGroup = __webpack_require__(23);
 
 var _FormGroup2 = _interopRequireDefault(_FormGroup);
 
-var _Input = __webpack_require__(22);
+var _Input = __webpack_require__(24);
 
 var _Input2 = _interopRequireDefault(_Input);
 
-var _InputGroup = __webpack_require__(29);
+var _InputGroup = __webpack_require__(30);
 
 var _InputGroup2 = _interopRequireDefault(_InputGroup);
 
-var _InputGroupButton = __webpack_require__(30);
+var _InputGroupButton = __webpack_require__(31);
 
 var _InputGroupButton2 = _interopRequireDefault(_InputGroupButton);
 
-var _Label = __webpack_require__(23);
+var _Label = __webpack_require__(25);
 
 var _Label2 = _interopRequireDefault(_Label);
 
@@ -17158,7 +20317,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 122 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17215,19 +20374,19 @@ exports.default = function () {
 
 var _components = __webpack_require__(4);
 
-var _Form = __webpack_require__(20);
+var _Form = __webpack_require__(22);
 
 var _Form2 = _interopRequireDefault(_Form);
 
-var _FormGroup = __webpack_require__(21);
+var _FormGroup = __webpack_require__(23);
 
 var _FormGroup2 = _interopRequireDefault(_FormGroup);
 
-var _Label = __webpack_require__(23);
+var _Label = __webpack_require__(25);
 
 var _Label2 = _interopRequireDefault(_Label);
 
-var _Input = __webpack_require__(22);
+var _Input = __webpack_require__(24);
 
 var _Input2 = _interopRequireDefault(_Input);
 
@@ -17238,7 +20397,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 123 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17288,31 +20447,31 @@ exports.default = function () {
 
 var _components = __webpack_require__(4);
 
-var _Form = __webpack_require__(20);
+var _Form = __webpack_require__(22);
 
 var _Form2 = _interopRequireDefault(_Form);
 
-var _FormGroup = __webpack_require__(21);
+var _FormGroup = __webpack_require__(23);
 
 var _FormGroup2 = _interopRequireDefault(_FormGroup);
 
-var _Input = __webpack_require__(22);
+var _Input = __webpack_require__(24);
 
 var _Input2 = _interopRequireDefault(_Input);
 
-var _InputGroup = __webpack_require__(29);
+var _InputGroup = __webpack_require__(30);
 
 var _InputGroup2 = _interopRequireDefault(_InputGroup);
 
-var _InputGroupAddon = __webpack_require__(68);
+var _InputGroupAddon = __webpack_require__(76);
 
 var _InputGroupAddon2 = _interopRequireDefault(_InputGroupAddon);
 
-var _InputGroupButton = __webpack_require__(30);
+var _InputGroupButton = __webpack_require__(31);
 
 var _InputGroupButton2 = _interopRequireDefault(_InputGroupButton);
 
-var _Label = __webpack_require__(23);
+var _Label = __webpack_require__(25);
 
 var _Label2 = _interopRequireDefault(_Label);
 
@@ -17323,7 +20482,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 124 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17390,27 +20549,27 @@ var _infernoComponent2 = _interopRequireDefault(_infernoComponent);
 
 var _components = __webpack_require__(4);
 
-var _Form = __webpack_require__(20);
+var _Form = __webpack_require__(22);
 
 var _Form2 = _interopRequireDefault(_Form);
 
-var _FormGroup = __webpack_require__(21);
+var _FormGroup = __webpack_require__(23);
 
 var _FormGroup2 = _interopRequireDefault(_FormGroup);
 
-var _Input = __webpack_require__(22);
+var _Input = __webpack_require__(24);
 
 var _Input2 = _interopRequireDefault(_Input);
 
-var _InputGroup = __webpack_require__(29);
+var _InputGroup = __webpack_require__(30);
 
 var _InputGroup2 = _interopRequireDefault(_InputGroup);
 
-var _InputGroupButton = __webpack_require__(30);
+var _InputGroupButton = __webpack_require__(31);
 
 var _InputGroupButton2 = _interopRequireDefault(_InputGroupButton);
 
-var _Label = __webpack_require__(23);
+var _Label = __webpack_require__(25);
 
 var _Label2 = _interopRequireDefault(_Label);
 
@@ -17418,23 +20577,23 @@ var _Button = __webpack_require__(5);
 
 var _Button2 = _interopRequireDefault(_Button);
 
-var _ButtonGroup = __webpack_require__(19);
+var _ButtonGroup = __webpack_require__(21);
 
 var _ButtonGroup2 = _interopRequireDefault(_ButtonGroup);
 
-var _ButtonDropdown = __webpack_require__(37);
+var _ButtonDropdown = __webpack_require__(40);
 
 var _ButtonDropdown2 = _interopRequireDefault(_ButtonDropdown);
 
-var _DropdownToggle = __webpack_require__(12);
+var _DropdownToggle = __webpack_require__(13);
 
 var _DropdownToggle2 = _interopRequireDefault(_DropdownToggle);
 
-var _DropdownMenu = __webpack_require__(11);
+var _DropdownMenu = __webpack_require__(12);
 
 var _DropdownMenu2 = _interopRequireDefault(_DropdownMenu);
 
-var _DropdownItem = __webpack_require__(10);
+var _DropdownItem = __webpack_require__(11);
 
 var _DropdownItem2 = _interopRequireDefault(_DropdownItem);
 
@@ -17503,7 +20662,7 @@ var SampleDropdownButton = function (_Component) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 125 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17545,23 +20704,23 @@ var _Button = __webpack_require__(5);
 
 var _Button2 = _interopRequireDefault(_Button);
 
-var _ButtonGroup = __webpack_require__(19);
+var _ButtonGroup = __webpack_require__(21);
 
 var _ButtonGroup2 = _interopRequireDefault(_ButtonGroup);
 
-var _Modal = __webpack_require__(40);
+var _Modal = __webpack_require__(43);
 
 var _Modal2 = _interopRequireDefault(_Modal);
 
-var _ModalHeader = __webpack_require__(43);
+var _ModalHeader = __webpack_require__(46);
 
 var _ModalHeader2 = _interopRequireDefault(_ModalHeader);
 
-var _ModalBody = __webpack_require__(41);
+var _ModalBody = __webpack_require__(44);
 
 var _ModalBody2 = _interopRequireDefault(_ModalBody);
 
-var _ModalFooter = __webpack_require__(42);
+var _ModalFooter = __webpack_require__(45);
 
 var _ModalFooter2 = _interopRequireDefault(_ModalFooter);
 
@@ -17572,7 +20731,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 126 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17625,23 +20784,23 @@ var _Button = __webpack_require__(5);
 
 var _Button2 = _interopRequireDefault(_Button);
 
-var _ButtonGroup = __webpack_require__(19);
+var _ButtonGroup = __webpack_require__(21);
 
 var _ButtonGroup2 = _interopRequireDefault(_ButtonGroup);
 
-var _Modal = __webpack_require__(40);
+var _Modal = __webpack_require__(43);
 
 var _Modal2 = _interopRequireDefault(_Modal);
 
-var _ModalHeader = __webpack_require__(43);
+var _ModalHeader = __webpack_require__(46);
 
 var _ModalHeader2 = _interopRequireDefault(_ModalHeader);
 
-var _ModalBody = __webpack_require__(41);
+var _ModalBody = __webpack_require__(44);
 
 var _ModalBody2 = _interopRequireDefault(_ModalBody);
 
-var _ModalFooter = __webpack_require__(42);
+var _ModalFooter = __webpack_require__(45);
 
 var _ModalFooter2 = _interopRequireDefault(_ModalFooter);
 
@@ -17716,7 +20875,7 @@ var ModalExample = function (_Component) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 127 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17783,15 +20942,15 @@ exports.default = function () {
 
 var _components = __webpack_require__(4);
 
-var _Nav = __webpack_require__(13);
+var _Nav = __webpack_require__(14);
 
 var _Nav2 = _interopRequireDefault(_Nav);
 
-var _NavItem = __webpack_require__(14);
+var _NavItem = __webpack_require__(15);
 
 var _NavItem2 = _interopRequireDefault(_NavItem);
 
-var _NavLink = __webpack_require__(15);
+var _NavLink = __webpack_require__(16);
 
 var _NavLink2 = _interopRequireDefault(_NavLink);
 
@@ -17802,7 +20961,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 128 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17833,35 +20992,35 @@ var _infernoComponent2 = _interopRequireDefault(_infernoComponent);
 
 var _components = __webpack_require__(4);
 
-var _Nav = __webpack_require__(13);
+var _Nav = __webpack_require__(14);
 
 var _Nav2 = _interopRequireDefault(_Nav);
 
-var _NavItem = __webpack_require__(14);
+var _NavItem = __webpack_require__(15);
 
 var _NavItem2 = _interopRequireDefault(_NavItem);
 
-var _NavLink = __webpack_require__(15);
+var _NavLink = __webpack_require__(16);
 
 var _NavLink2 = _interopRequireDefault(_NavLink);
 
-var _NavDropdown = __webpack_require__(44);
+var _NavDropdown = __webpack_require__(47);
 
 var _NavDropdown2 = _interopRequireDefault(_NavDropdown);
 
-var _Dropdown = __webpack_require__(9);
+var _Dropdown = __webpack_require__(10);
 
 var _Dropdown2 = _interopRequireDefault(_Dropdown);
 
-var _DropdownMenu = __webpack_require__(11);
+var _DropdownMenu = __webpack_require__(12);
 
 var _DropdownMenu2 = _interopRequireDefault(_DropdownMenu);
 
-var _DropdownToggle = __webpack_require__(12);
+var _DropdownToggle = __webpack_require__(13);
 
 var _DropdownToggle2 = _interopRequireDefault(_DropdownToggle);
 
-var _DropdownItem = __webpack_require__(10);
+var _DropdownItem = __webpack_require__(11);
 
 var _DropdownItem2 = _interopRequireDefault(_DropdownItem);
 
@@ -17958,7 +21117,7 @@ var TabbedNavbar = function (_Component) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 129 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17989,35 +21148,35 @@ var _infernoComponent2 = _interopRequireDefault(_infernoComponent);
 
 var _components = __webpack_require__(4);
 
-var _Nav = __webpack_require__(13);
+var _Nav = __webpack_require__(14);
 
 var _Nav2 = _interopRequireDefault(_Nav);
 
-var _NavItem = __webpack_require__(14);
+var _NavItem = __webpack_require__(15);
 
 var _NavItem2 = _interopRequireDefault(_NavItem);
 
-var _NavLink = __webpack_require__(15);
+var _NavLink = __webpack_require__(16);
 
 var _NavLink2 = _interopRequireDefault(_NavLink);
 
-var _NavDropdown = __webpack_require__(44);
+var _NavDropdown = __webpack_require__(47);
 
 var _NavDropdown2 = _interopRequireDefault(_NavDropdown);
 
-var _Dropdown = __webpack_require__(9);
+var _Dropdown = __webpack_require__(10);
 
 var _Dropdown2 = _interopRequireDefault(_Dropdown);
 
-var _DropdownMenu = __webpack_require__(11);
+var _DropdownMenu = __webpack_require__(12);
 
 var _DropdownMenu2 = _interopRequireDefault(_DropdownMenu);
 
-var _DropdownToggle = __webpack_require__(12);
+var _DropdownToggle = __webpack_require__(13);
 
 var _DropdownToggle2 = _interopRequireDefault(_DropdownToggle);
 
-var _DropdownItem = __webpack_require__(10);
+var _DropdownItem = __webpack_require__(11);
 
 var _DropdownItem2 = _interopRequireDefault(_DropdownItem);
 
@@ -18114,7 +21273,7 @@ var TabbedNavbar = function (_Component) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 130 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18183,15 +21342,15 @@ exports.default = function () {
 
 var _components = __webpack_require__(4);
 
-var _Nav = __webpack_require__(13);
+var _Nav = __webpack_require__(14);
 
 var _Nav2 = _interopRequireDefault(_Nav);
 
-var _NavItem = __webpack_require__(14);
+var _NavItem = __webpack_require__(15);
 
 var _NavItem2 = _interopRequireDefault(_NavItem);
 
-var _NavLink = __webpack_require__(15);
+var _NavLink = __webpack_require__(16);
 
 var _NavLink2 = _interopRequireDefault(_NavLink);
 
@@ -18202,7 +21361,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 131 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18220,27 +21379,27 @@ var _infernoComponent2 = _interopRequireDefault(_infernoComponent);
 
 var _infernoRouter = __webpack_require__(35);
 
-var _createBrowserHistory = __webpack_require__(51);
+var _createBrowserHistory = __webpack_require__(54);
 
 var _createBrowserHistory2 = _interopRequireDefault(_createBrowserHistory);
 
-var _BasicPage = __webpack_require__(52);
+var _BasicPage = __webpack_require__(55);
 
 var _BasicPage2 = _interopRequireDefault(_BasicPage);
 
-var _CardPage = __webpack_require__(53);
+var _CardPage = __webpack_require__(56);
 
 var _CardPage2 = _interopRequireDefault(_CardPage);
 
-var _FormPage = __webpack_require__(54);
+var _FormPage = __webpack_require__(57);
 
 var _FormPage2 = _interopRequireDefault(_FormPage);
 
-var _ModalPage = __webpack_require__(55);
+var _ModalPage = __webpack_require__(58);
 
 var _ModalPage2 = _interopRequireDefault(_ModalPage);
 
-var _NavigationPage = __webpack_require__(56);
+var _NavigationPage = __webpack_require__(59);
 
 var _NavigationPage2 = _interopRequireDefault(_NavigationPage);
 
@@ -18315,8 +21474,8 @@ if (typeof window !== 'undefined') {
 }
 
 /***/ }),
-/* 132 */,
-/* 133 */
+/* 137 */,
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18340,7 +21499,7 @@ var _inferno = __webpack_require__(7);
 
 var _inferno2 = _interopRequireDefault(_inferno);
 
-var _infernoComponent = __webpack_require__(8);
+var _infernoComponent = __webpack_require__(9);
 
 var _infernoComponent2 = _interopRequireDefault(_infernoComponent);
 
@@ -18401,7 +21560,7 @@ module.exports = exports['default'];
 //# sourceMappingURL=Arrow.js.map
 
 /***/ }),
-/* 134 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18427,7 +21586,7 @@ var _inferno = __webpack_require__(7);
 
 var _inferno2 = _interopRequireDefault(_inferno);
 
-var _infernoComponent = __webpack_require__(8);
+var _infernoComponent = __webpack_require__(9);
 
 var _infernoComponent2 = _interopRequireDefault(_infernoComponent);
 
@@ -18515,7 +21674,7 @@ module.exports = exports['default'];
 //# sourceMappingURL=Manager.js.map
 
 /***/ }),
-/* 135 */
+/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18551,7 +21710,7 @@ var _inferno = __webpack_require__(7);
 
 var _inferno2 = _interopRequireDefault(_inferno);
 
-var _infernoComponent = __webpack_require__(8);
+var _infernoComponent = __webpack_require__(9);
 
 var _infernoComponent2 = _interopRequireDefault(_infernoComponent);
 
@@ -18559,11 +21718,11 @@ var _infernoCreateElement = __webpack_require__(17);
 
 var _infernoCreateElement2 = _interopRequireDefault(_infernoCreateElement);
 
-var _popper = __webpack_require__(146);
+var _popper = __webpack_require__(52);
 
 var _popper2 = _interopRequireDefault(_popper);
 
-var _isEqualShallow = __webpack_require__(144);
+var _isEqualShallow = __webpack_require__(149);
 
 var _isEqualShallow2 = _interopRequireDefault(_isEqualShallow);
 
@@ -18821,7 +21980,7 @@ module.exports = exports['default'];
 //# sourceMappingURL=Popper.js.map
 
 /***/ }),
-/* 136 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18845,7 +22004,7 @@ var _inferno = __webpack_require__(7);
 
 var _inferno2 = _interopRequireDefault(_inferno);
 
-var _infernoComponent = __webpack_require__(8);
+var _infernoComponent = __webpack_require__(9);
 
 var _infernoComponent2 = _interopRequireDefault(_infernoComponent);
 
@@ -18900,7 +22059,7 @@ module.exports = exports['default'];
 //# sourceMappingURL=Target.js.map
 
 /***/ }),
-/* 137 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18926,7 +22085,7 @@ var _inferno = __webpack_require__(7);
 
 var _inferno2 = _interopRequireDefault(_inferno);
 
-var _infernoComponent = __webpack_require__(8);
+var _infernoComponent = __webpack_require__(9);
 
 var _infernoComponent2 = _interopRequireDefault(_infernoComponent);
 
@@ -18934,7 +22093,7 @@ var _infernoCreateElement = __webpack_require__(17);
 
 var _infernoCreateElement2 = _interopRequireDefault(_infernoCreateElement);
 
-var _compat = __webpack_require__(138);
+var _compat = __webpack_require__(143);
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : { default: obj };
@@ -19117,7 +22276,7 @@ module.exports = exports['default'];
 //# sourceMappingURL=Travel.js.map
 
 /***/ }),
-/* 138 */
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19143,13 +22302,13 @@ var _createClass = function () {
 exports.unmountComponentAtNode = unmountComponentAtNode;
 exports.unstable_renderSubtreeIntoContainer = unstable_renderSubtreeIntoContainer;
 
-var _infernoComponent = __webpack_require__(8);
+var _infernoComponent = __webpack_require__(9);
 
 var _infernoComponent2 = _interopRequireDefault(_infernoComponent);
 
 var _inferno = __webpack_require__(7);
 
-var _infernoShared = __webpack_require__(142);
+var _infernoShared = __webpack_require__(147);
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : { default: obj };
@@ -19272,7 +22431,7 @@ var Children = exports.Children = {
 //# sourceMappingURL=compat.js.map
 
 /***/ }),
-/* 139 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19289,8 +22448,6 @@ var inferno = __webpack_require__(7);
  */ /** TypeDoc Comment */
 var NO_OP = "$NO_OP";
 var ERROR_MSG = "a runtime error occured! Use Inferno in development environment to find the error.";
-// This should be boolean and not reference to window.document
-var isBrowser = !!(typeof window !== "undefined" && window.document);
 // this is MUCH faster than .constructor === Array and instanceof Array
 // in Node 7 and the later versions of V8, slower in older versions though
 var isArray = Array.isArray;
@@ -19336,6 +22493,20 @@ function combineFrom(first, second) {
     }
     return out;
 }
+function Lifecycle() {
+    this.listeners = [];
+}
+Lifecycle.prototype.addListener = function addListener(callback) {
+    this.listeners.push(callback);
+};
+Lifecycle.prototype.trigger = function trigger() {
+    var listeners = this.listeners;
+    var listener;
+    // We need to remove current listener from array when calling it, because more listeners might be added
+    while (listener = listeners.shift()) {
+        listener();
+    }
+};
 
 /**
  * @module Inferno-Component
@@ -19346,17 +22517,6 @@ if (process.env.NODE_ENV !== "production") {
     noOp = "Inferno Error: Can only update a mounted or mounting component. This usually means you called setState() or forceUpdate() on an unmounted component. This is a no-op.";
 }
 var componentCallbackQueue = new Map();
-// when a components root VNode is also a component, we can run into issues
-// this will recursively look for vNode.parentNode if the VNode is a component
-function updateParentComponentVNodes(vNode, dom) {
-    if (vNode.flags & 28 /* Component */) {
-            var parentVNode = vNode.parentVNode;
-            if (parentVNode) {
-                parentVNode.dom = dom;
-                updateParentComponentVNodes(parentVNode, dom);
-            }
-        }
-}
 var resolvedPromise = Promise.resolve();
 function addToQueue(component, force, callback) {
     var queue = componentCallbackQueue.get(component);
@@ -19384,13 +22544,13 @@ function queueStateChanges(component, newState, callback) {
     }
     var pending = component._pendingState;
     if (isNullOrUndef(pending)) {
-        component._pendingState = pending = newState;
+        component._pendingState = newState;
     } else {
         for (var stateKey in newState) {
             pending[stateKey] = newState[stateKey];
         }
     }
-    if (isBrowser && !component._pendingSetState && !component._blockRender) {
+    if (!component._pendingSetState && !component._blockRender) {
         if (!component._updating) {
             component._pendingSetState = true;
             component._updating = true;
@@ -19400,16 +22560,8 @@ function queueStateChanges(component, newState, callback) {
             addToQueue(component, false, callback);
         }
     } else {
-        var state = component.state;
-        if (state === null) {
-            component.state = pending;
-        } else {
-            for (var key in pending) {
-                state[key] = pending[key];
-            }
-        }
-        component._pendingState = null;
-        if (!isNullOrUndef(callback) && component._blockRender) {
+        component._pendingSetState = true;
+        if (isFunction(callback) && component._blockRender) {
             component._lifecycle.addListener(callback.bind(component));
         }
     }
@@ -19426,24 +22578,30 @@ function applyState(component, force, callback) {
         var props = component.props;
         var context = component.context;
         component._pendingState = null;
-        var nextInput = component._updateComponent(prevState, nextState, props, props, context, force, true);
+        var nextInput;
+        var renderOutput = component._updateComponent(prevState, nextState, props, props, context, force, true);
         var didUpdate = true;
-        if (isInvalid(nextInput)) {
+        if (isInvalid(renderOutput)) {
             nextInput = inferno.createVNode(4096 /* Void */, null);
-        } else if (nextInput === NO_OP) {
+        } else if (renderOutput === NO_OP) {
             nextInput = component._lastInput;
             didUpdate = false;
-        } else if (isStringOrNumber(nextInput)) {
-            nextInput = inferno.createVNode(1 /* Text */, null, null, nextInput);
-        } else if (isArray(nextInput)) {
+        } else if (isStringOrNumber(renderOutput)) {
+            nextInput = inferno.createVNode(1 /* Text */, null, null, renderOutput);
+        } else if (isArray(renderOutput)) {
             if (process.env.NODE_ENV !== "production") {
                 throwError("a valid Inferno VNode (or null) must be returned from a component render. You may have returned an array or an invalid object.");
             }
-            throwError();
+            return throwError();
+        } else {
+            nextInput = renderOutput;
         }
         var lastInput = component._lastInput;
         var vNode = component._vNode;
         var parentDom = lastInput.dom && lastInput.dom.parentNode || (lastInput.dom = vNode.dom);
+        if (nextInput.flags & 28 /* Component */) {
+                nextInput.parentVNode = vNode;
+            }
         component._lastInput = nextInput;
         if (didUpdate) {
             var childContext;
@@ -19457,6 +22615,10 @@ function applyState(component, force, callback) {
             }
             var lifeCycle = component._lifecycle;
             inferno.internal_patch(lastInput, nextInput, parentDom, lifeCycle, childContext, component._isSVG, false);
+            // If this component was unmounted by its parent, do nothing. This is no-op
+            if (component._unmounted) {
+                return;
+            }
             lifeCycle.trigger();
             if (!isNullOrUndef(component.componentDidUpdate)) {
                 component.componentDidUpdate(props, prevState, context);
@@ -19469,12 +22631,16 @@ function applyState(component, force, callback) {
         if (inferno.options.findDOMNodeEnabled) {
             inferno.internal_DOMNodeMap.set(component, nextInput.dom);
         }
-        updateParentComponentVNodes(vNode, dom);
+        while (!isNullOrUndef(vNode = vNode.parentVNode)) {
+            if ((vNode.flags & 28 /* Component */) > 0) {
+                vNode.dom = dom;
+            }
+        }
     } else {
         component.state = component._pendingState;
         component._pendingState = null;
     }
-    if (!isNullOrUndef(callback)) {
+    if (isFunction(callback)) {
         callback.call(component);
     }
 }
@@ -19497,7 +22663,7 @@ var Component = function Component(props, context) {
     this.context = context || inferno.EMPTY_OBJ; // context should not be mutable
 };
 Component.prototype.forceUpdate = function forceUpdate(callback) {
-    if (this._unmounted || !isBrowser) {
+    if (this._unmounted) {
         return;
     }
     applyState(this, true, callback);
@@ -19525,19 +22691,13 @@ Component.prototype._updateComponent = function _updateComponent(prevState, next
     if (prevProps !== nextProps || nextProps === inferno.EMPTY_OBJ || prevState !== nextState || force) {
         if (prevProps !== nextProps || nextProps === inferno.EMPTY_OBJ) {
             if (!isNullOrUndef(this.componentWillReceiveProps) && !fromSetState) {
-                // keep a copy of state before componentWillReceiveProps
-                var beforeState = combineFrom(this.state);
                 this._blockRender = true;
                 this.componentWillReceiveProps(nextProps, context);
-                this._blockRender = false;
-                var afterState = this.state;
-                if (beforeState !== afterState) {
-                    // if state changed in componentWillReceiveProps, reassign the beforeState
-                    this.state = beforeState;
-                    // set the afterState as pending state so the change gets picked up below
-                    this._pendingSetState = true;
-                    this._pendingState = afterState;
+                // If this component was removed during its own update do nothing...
+                if (this._unmounted) {
+                    return NO_OP;
                 }
+                this._blockRender = false;
             }
             if (this._pendingSetState) {
                 nextState = combineFrom(nextState, this._pendingState);
@@ -19578,7 +22738,7 @@ exports['default'] = Component;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }),
-/* 140 */
+/* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19614,6 +22774,20 @@ function isUndefined(o) {
 function isObject(o) {
     return (typeof o === 'undefined' ? 'undefined' : _typeof(o)) === "object";
 }
+function Lifecycle() {
+    this.listeners = [];
+}
+Lifecycle.prototype.addListener = function addListener(callback) {
+    this.listeners.push(callback);
+};
+Lifecycle.prototype.trigger = function trigger() {
+    var listeners = this.listeners;
+    var listener;
+    // We need to remove current listener from array when calling it, because more listeners might be added
+    while (listener = listeners.shift()) {
+        listener();
+    }
+};
 
 /**
  * @module Inferno-Create-Element
@@ -19702,7 +22876,7 @@ function createElement(type, props) {
 exports['default'] = createElement;
 
 /***/ }),
-/* 141 */
+/* 146 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19820,17 +22994,17 @@ exports.combineFrom = combineFrom;
 exports.Lifecycle = Lifecycle;
 
 /***/ }),
-/* 142 */
+/* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-module.exports = __webpack_require__(141);
+module.exports = __webpack_require__(146);
 module.exports.default = module.exports;
 
 /***/ }),
-/* 143 */
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20066,6 +23240,9 @@ function handleEvent(name, lastEvent, nextEvent, dom) {
 function dispatchEvents(event, target, items, count, isClick, eventData) {
     var dom = target;
     while (count > 0) {
+        if (isClick && dom.disabled) {
+            return;
+        }
         var eventsToTrigger = items.get(dom);
         if (eventsToTrigger) {
             count--;
@@ -20084,7 +23261,7 @@ function dispatchEvents(event, target, items, count, isClick, eventData) {
         // Html Nodes can be nested fe: span inside button in that scenario browser does not handle disabled attribute on parent,
         // because the event listener is on document.body
         // Don't process clicks on disabled elements
-        if (dom === null || isClick && dom.disabled) {
+        if (dom === null) {
             return;
         }
     }
@@ -20418,15 +23595,13 @@ function applyValue$2(nextPropsOrEmpty, dom, mounting) {
  * Currently user must choose either controlled or non-controlled and stick with that
  */
 function processElement(flags, vNode, dom, nextPropsOrEmpty, mounting, isControlled) {
-    if (flags & 512 /* InputElement */) {
-            processInput(vNode, dom, nextPropsOrEmpty, mounting, isControlled);
-        }
-    if (flags & 2048 /* SelectElement */) {
-            processSelect(vNode, dom, nextPropsOrEmpty, mounting, isControlled);
-        }
-    if (flags & 1024 /* TextareaElement */) {
-            processTextarea(vNode, dom, nextPropsOrEmpty, mounting, isControlled);
-        }
+    if ((flags & 512 /* InputElement */) > 0) {
+        processInput(vNode, dom, nextPropsOrEmpty, mounting, isControlled);
+    } else if ((flags & 2048 /* SelectElement */) > 0) {
+        processSelect(vNode, dom, nextPropsOrEmpty, mounting, isControlled);
+    } else if ((flags & 1024 /* TextareaElement */) > 0) {
+        processTextarea(vNode, dom, nextPropsOrEmpty, mounting, isControlled);
+    }
 }
 function isControlledFormElement(nextPropsOrEmpty) {
     return nextPropsOrEmpty.type && isCheckedType(nextPropsOrEmpty.type) ? !isNullOrUndef(nextPropsOrEmpty.checked) : !isNullOrUndef(nextPropsOrEmpty.value);
@@ -20721,111 +23896,77 @@ function poolComponent(vNode) {
  */ /** TypeDoc Comment */
 function unmount(vNode, parentDom, lifecycle, canRecycle, isRecycling) {
     var flags = vNode.flags;
+    var dom = vNode.dom;
     if (flags & 28 /* Component */) {
-            unmountComponent(vNode, parentDom, lifecycle, canRecycle, isRecycling);
+            var instance = vNode.children;
+            var isStatefulComponent$$1 = (flags & 4 /* ComponentClass */) > 0;
+            var props = vNode.props || EMPTY_OBJ;
+            var ref = vNode.ref;
+            if (!isRecycling) {
+                if (isStatefulComponent$$1) {
+                    if (!instance._unmounted) {
+                        if (!isNull(options.beforeUnmount)) {
+                            options.beforeUnmount(vNode);
+                        }
+                        if (!isUndefined(instance.componentWillUnmount)) {
+                            instance.componentWillUnmount();
+                        }
+                        if (ref && !isRecycling) {
+                            ref(null);
+                        }
+                        instance._unmounted = true;
+                        if (options.findDOMNodeEnabled) {
+                            componentToDOMNodeMap.delete(instance);
+                        }
+                        unmount(instance._lastInput, null, instance._lifecycle, false, isRecycling);
+                    }
+                } else {
+                    if (!isNullOrUndef(ref)) {
+                        if (!isNullOrUndef(ref.onComponentWillUnmount)) {
+                            ref.onComponentWillUnmount(dom, props);
+                        }
+                    }
+                    unmount(instance, null, lifecycle, false, isRecycling);
+                }
+            }
+            if (options.recyclingEnabled && !isStatefulComponent$$1 && (parentDom || canRecycle)) {
+                poolComponent(vNode);
+            }
         } else if (flags & 3970 /* Element */) {
-            unmountElement(vNode, parentDom, lifecycle, canRecycle, isRecycling);
-        } else if (flags & (1 /* Text */ | 4096 /* Void */)) {
-        unmountVoidOrText(vNode, parentDom);
-    }
-}
-function unmountVoidOrText(vNode, parentDom) {
-    if (!isNull(parentDom)) {
-        removeChild(parentDom, vNode.dom);
-    }
-}
-function unmountComponent(vNode, parentDom, lifecycle, canRecycle, isRecycling) {
-    var instance = vNode.children;
-    var flags = vNode.flags;
-    var isStatefulComponent$$1 = flags & 4;
-    var props = vNode.props || EMPTY_OBJ;
-    var ref = vNode.ref;
-    var dom = vNode.dom;
-    if (!isRecycling) {
-        if (isStatefulComponent$$1) {
-            if (!instance._unmounted) {
-                if (!isNull(options.beforeUnmount)) {
-                    options.beforeUnmount(vNode);
-                }
-                if (!isUndefined(instance.componentWillUnmount)) {
-                    instance.componentWillUnmount();
-                }
-                if (ref && !isRecycling) {
-                    ref(null);
-                }
-                instance._unmounted = true;
-                if (options.findDOMNodeEnabled) {
-                    componentToDOMNodeMap.delete(instance);
-                }
-                unmount(instance._lastInput, null, instance._lifecycle, false, isRecycling);
+            var ref$1 = vNode.ref;
+            var props$1 = vNode.props;
+            if (!isRecycling && isFunction(ref$1)) {
+                ref$1(null);
             }
-        } else {
-            if (!isNullOrUndef(ref)) {
-                if (!isNullOrUndef(ref.onComponentWillUnmount)) {
-                    ref.onComponentWillUnmount(dom, props);
+            var children = vNode.children;
+            if (!isNullOrUndef(children)) {
+                if (isArray(children)) {
+                    for (var i = 0, len = children.length; i < len; i++) {
+                        var child = children[i];
+                        if (!isInvalid(child) && isObject(child)) {
+                            unmount(child, null, lifecycle, false, isRecycling);
+                        }
+                    }
+                } else if (isObject(children)) {
+                    unmount(children, null, lifecycle, false, isRecycling);
                 }
             }
-            unmount(instance, null, lifecycle, false, isRecycling);
-        }
-    }
-    if (parentDom) {
-        removeChild(parentDom, dom);
-    }
-    if (options.recyclingEnabled && !isStatefulComponent$$1 && (parentDom || canRecycle)) {
-        poolComponent(vNode);
-    }
-}
-function unmountElement(vNode, parentDom, lifecycle, canRecycle, isRecycling) {
-    var dom = vNode.dom;
-    var ref = vNode.ref;
-    var props = vNode.props;
-    if (ref && !isRecycling) {
-        unmountRef(ref);
-    }
-    var children = vNode.children;
-    if (!isNullOrUndef(children)) {
-        unmountChildren$1(children, lifecycle, isRecycling);
-    }
-    if (!isNull(props)) {
-        for (var name in props) {
-            // do not add a hasOwnProperty check here, it affects performance
-            if (props[name] !== null && isAttrAnEvent(name)) {
-                patchEvent(name, props[name], null, dom);
-                // We need to set this null, because same props otherwise come back if SCU returns false and we are recyling
-                props[name] = null;
+            if (!isNull(props$1)) {
+                for (var name in props$1) {
+                    // do not add a hasOwnProperty check here, it affects performance
+                    if (props$1[name] !== null && isAttrAnEvent(name)) {
+                        patchEvent(name, props$1[name], null, dom);
+                        // We need to set this null, because same props otherwise come back if SCU returns false and we are recyling
+                        props$1[name] = null;
+                    }
+                }
+            }
+            if (options.recyclingEnabled && (parentDom || canRecycle)) {
+                poolElement(vNode);
             }
         }
-    }
     if (!isNull(parentDom)) {
         removeChild(parentDom, dom);
-    }
-    if (options.recyclingEnabled && (parentDom || canRecycle)) {
-        poolElement(vNode);
-    }
-}
-function unmountChildren$1(children, lifecycle, isRecycling) {
-    if (isArray(children)) {
-        for (var i = 0, len = children.length; i < len; i++) {
-            var child = children[i];
-            if (!isInvalid(child) && isObject(child)) {
-                unmount(child, null, lifecycle, false, isRecycling);
-            }
-        }
-    } else if (isObject(children)) {
-        unmount(children, null, lifecycle, false, isRecycling);
-    }
-}
-function unmountRef(ref) {
-    if (isFunction(ref)) {
-        ref(null);
-    } else {
-        if (isInvalid(ref)) {
-            return;
-        }
-        if (process.env.NODE_ENV !== "production") {
-            throwError('string "refs" are not supported in Inferno 1.0. Use callback "refs" instead.');
-        }
-        throwError();
     }
 }
 
@@ -21111,10 +24252,19 @@ function patchChildren(lastFlags, nextFlags, lastChildren, nextChildren, dom, li
         }
     }
     if (patchArray) {
-        if (patchKeyed) {
-            patchKeyedChildren(lastChildren, nextChildren, dom, lifecycle, context, isSVG, isRecycling);
+        var lastLength = lastChildren.length;
+        var nextLength = nextChildren.length;
+        // Fast path's for both algorithms
+        if (lastLength === 0) {
+            if (nextLength > 0) {
+                mountArrayChildren(nextChildren, dom, lifecycle, context, isSVG);
+            }
+        } else if (nextLength === 0) {
+            removeAllChildren(dom, lastChildren, lifecycle, isRecycling);
+        } else if (patchKeyed) {
+            patchKeyedChildren(lastChildren, nextChildren, dom, lifecycle, context, isSVG, isRecycling, lastLength, nextLength);
         } else {
-            patchNonKeyedChildren(lastChildren, nextChildren, dom, lifecycle, context, isSVG, isRecycling);
+            patchNonKeyedChildren(lastChildren, nextChildren, dom, lifecycle, context, isSVG, isRecycling, lastLength, nextLength);
         }
     }
 }
@@ -21146,6 +24296,11 @@ function patchComponent(lastVNode, nextVNode, parentDom, lifecycle, context, isS
                 instance._isSVG = isSVG;
                 var lastInput = instance._lastInput;
                 var nextInput = instance._updateComponent(lastState, nextState, lastProps, nextProps, context, false, false);
+                // If this component was destroyed by its parent do nothing, this is no-op
+                // It can happen by using external callback etc during render / update
+                if (instance._unmounted) {
+                    return false;
+                }
                 var didUpdate = true;
                 // Update component before getting child context
                 var childContext;
@@ -21261,9 +24416,7 @@ function patchText(lastVNode, nextVNode) {
 function patchVoid(lastVNode, nextVNode) {
     nextVNode.dom = lastVNode.dom;
 }
-function patchNonKeyedChildren(lastChildren, nextChildren, dom, lifecycle, context, isSVG, isRecycling) {
-    var lastChildrenLength = lastChildren.length;
-    var nextChildrenLength = nextChildren.length;
+function patchNonKeyedChildren(lastChildren, nextChildren, dom, lifecycle, context, isSVG, isRecycling, lastChildrenLength, nextChildrenLength) {
     var commonLength = lastChildrenLength > nextChildrenLength ? nextChildrenLength : lastChildrenLength;
     var i = 0;
     for (; i < commonLength; i++) {
@@ -21281,17 +24434,13 @@ function patchNonKeyedChildren(lastChildren, nextChildren, dom, lifecycle, conte
             }
             appendChild(dom, mount(nextChild$1, null, lifecycle, context, isSVG));
         }
-    } else if (nextChildrenLength === 0) {
-        removeAllChildren(dom, lastChildren, lifecycle, isRecycling);
     } else if (lastChildrenLength > nextChildrenLength) {
         for (i = commonLength; i < lastChildrenLength; i++) {
             unmount(lastChildren[i], dom, lifecycle, false, isRecycling);
         }
     }
 }
-function patchKeyedChildren(a, b, dom, lifecycle, context, isSVG, isRecycling) {
-    var aLength = a.length;
-    var bLength = b.length;
+function patchKeyedChildren(a, b, dom, lifecycle, context, isSVG, isRecycling, aLength, bLength) {
     var aEnd = aLength - 1;
     var bEnd = bLength - 1;
     var aStart = 0;
@@ -21303,15 +24452,6 @@ function patchKeyedChildren(a, b, dom, lifecycle, context, isSVG, isRecycling) {
     var nextNode;
     var nextPos;
     var node;
-    if (aLength === 0) {
-        if (bLength > 0) {
-            mountArrayChildren(b, dom, lifecycle, context, isSVG);
-        }
-        return;
-    } else if (bLength === 0) {
-        removeAllChildren(dom, a, lifecycle, isRecycling);
-        return;
-    }
     var aStartNode = a[aStart];
     var bStartNode = b[bStart];
     var aEndNode = a[aEnd];
@@ -21323,8 +24463,8 @@ function patchKeyedChildren(a, b, dom, lifecycle, context, isSVG, isRecycling) {
         b[bEnd] = bEndNode = directClone(bEndNode);
     }
     // Step 1
-    /* eslint no-constant-condition: 0 */
-    outer: while (true) {
+    // tslint:disable-next-line
+    outer: {
         // Sync nodes with the same key at the beginning.
         while (aStartNode.key === bStartNode.key) {
             patch(aStartNode, bStartNode, dom, lifecycle, context, isSVG, isRecycling);
@@ -21353,40 +24493,11 @@ function patchKeyedChildren(a, b, dom, lifecycle, context, isSVG, isRecycling) {
                 b[bEnd] = bEndNode = directClone(bEndNode);
             }
         }
-        // Move and sync nodes from right to left.
-        if (aEndNode.key === bStartNode.key) {
-            patch(aEndNode, bStartNode, dom, lifecycle, context, isSVG, isRecycling);
-            insertOrAppend(dom, bStartNode.dom, aStartNode.dom);
-            aEnd--;
-            bStart++;
-            aEndNode = a[aEnd];
-            bStartNode = b[bStart];
-            if (bStartNode.dom) {
-                b[bStart] = bStartNode = directClone(bStartNode);
-            }
-            continue;
-        }
-        // Move and sync nodes from left to right.
-        if (aStartNode.key === bEndNode.key) {
-            patch(aStartNode, bEndNode, dom, lifecycle, context, isSVG, isRecycling);
-            nextPos = bEnd + 1;
-            nextNode = nextPos < b.length ? b[nextPos].dom : null;
-            insertOrAppend(dom, bEndNode.dom, nextNode);
-            aStart++;
-            bEnd--;
-            aStartNode = a[aStart];
-            bEndNode = b[bEnd];
-            if (bEndNode.dom) {
-                b[bEnd] = bEndNode = directClone(bEndNode);
-            }
-            continue;
-        }
-        break;
     }
     if (aStart > aEnd) {
         if (bStart <= bEnd) {
             nextPos = bEnd + 1;
-            nextNode = nextPos < b.length ? b[nextPos].dom : null;
+            nextNode = nextPos < bLength ? b[nextPos].dom : null;
             while (bStart <= bEnd) {
                 node = b[bStart];
                 if (node.dom) {
@@ -21401,21 +24512,21 @@ function patchKeyedChildren(a, b, dom, lifecycle, context, isSVG, isRecycling) {
             unmount(a[aStart++], dom, lifecycle, false, isRecycling);
         }
     } else {
-        aLength = aEnd - aStart + 1;
-        bLength = bEnd - bStart + 1;
-        var sources = new Array(bLength);
+        var aLeft = aEnd - aStart + 1;
+        var bLeft = bEnd - bStart + 1;
+        var sources = new Array(bLeft);
         // Mark all nodes as inserted.
-        for (i = 0; i < bLength; i++) {
+        for (i = 0; i < bLeft; i++) {
             sources[i] = -1;
         }
         var moved = false;
         var pos = 0;
         var patched = 0;
         // When sizes are small, just loop them through
-        if (bLength <= 4 || aLength * bLength <= 16) {
+        if (bLeft <= 4 || aLeft * bLeft <= 16) {
             for (i = aStart; i <= aEnd; i++) {
                 aNode = a[i];
-                if (patched < bLength) {
+                if (patched < bLeft) {
                     for (j = bStart; j <= bEnd; j++) {
                         bNode = b[j];
                         if (aNode.key === bNode.key) {
@@ -21445,7 +24556,7 @@ function patchKeyedChildren(a, b, dom, lifecycle, context, isSVG, isRecycling) {
             // Try to patch same keys
             for (i = aStart; i <= aEnd; i++) {
                 aNode = a[i];
-                if (patched < bLength) {
+                if (patched < bLeft) {
                     j = keyIndex.get(aNode.key);
                     if (!isUndefined(j)) {
                         bNode = b[j];
@@ -21466,9 +24577,9 @@ function patchKeyedChildren(a, b, dom, lifecycle, context, isSVG, isRecycling) {
             }
         }
         // fast-path: if nothing patched remove all old and add all new
-        if (aLength === a.length && patched === 0) {
+        if (aLeft === aLength && patched === 0) {
             removeAllChildren(dom, a, lifecycle, isRecycling);
-            while (bStart < bLength) {
+            while (bStart < bLeft) {
                 node = b[bStart];
                 if (node.dom) {
                     b[bStart] = node = directClone(node);
@@ -21477,7 +24588,7 @@ function patchKeyedChildren(a, b, dom, lifecycle, context, isSVG, isRecycling) {
                 insertOrAppend(dom, mount(node, null, lifecycle, context, isSVG), null);
             }
         } else {
-            i = aLength - patched;
+            i = aLeft - patched;
             while (i > 0) {
                 aNode = a[aStart++];
                 if (!isNull(aNode)) {
@@ -21488,7 +24599,7 @@ function patchKeyedChildren(a, b, dom, lifecycle, context, isSVG, isRecycling) {
             if (moved) {
                 var seq = lis_algorithm(sources);
                 j = seq.length - 1;
-                for (i = bLength - 1; i >= 0; i--) {
+                for (i = bLeft - 1; i >= 0; i--) {
                     if (sources[i] === -1) {
                         pos = i + bStart;
                         node = b[pos];
@@ -21496,24 +24607,22 @@ function patchKeyedChildren(a, b, dom, lifecycle, context, isSVG, isRecycling) {
                             b[pos] = node = directClone(node);
                         }
                         nextPos = pos + 1;
-                        nextNode = nextPos < b.length ? b[nextPos].dom : null;
-                        insertOrAppend(dom, mount(node, null, lifecycle, context, isSVG), nextNode);
+                        insertOrAppend(dom, mount(node, null, lifecycle, context, isSVG), nextPos < bLength ? b[nextPos].dom : null);
                     } else {
                         if (j < 0 || i !== seq[j]) {
                             pos = i + bStart;
                             node = b[pos];
                             nextPos = pos + 1;
-                            nextNode = nextPos < b.length ? b[nextPos].dom : null;
-                            insertOrAppend(dom, node.dom, nextNode);
+                            insertOrAppend(dom, node.dom, nextPos < bLength ? b[nextPos].dom : null);
                         } else {
                             j--;
                         }
                     }
                 }
-            } else if (patched !== bLength) {
+            } else if (patched !== bLeft) {
                 // when patched count doesn't match b length we need to insert those new ones
                 // loop backwards so we can use insertBefore
-                for (i = bLength - 1; i >= 0; i--) {
+                for (i = bLeft - 1; i >= 0; i--) {
                     if (sources[i] === -1) {
                         pos = i + bStart;
                         node = b[pos];
@@ -21521,8 +24630,7 @@ function patchKeyedChildren(a, b, dom, lifecycle, context, isSVG, isRecycling) {
                             b[pos] = node = directClone(node);
                         }
                         nextPos = pos + 1;
-                        nextNode = nextPos < b.length ? b[nextPos].dom : null;
-                        insertOrAppend(dom, mount(node, null, lifecycle, context, isSVG), nextNode);
+                        insertOrAppend(dom, mount(node, null, lifecycle, context, isSVG), nextPos < bLength ? b[nextPos].dom : null);
                     }
                 }
             }
@@ -21541,30 +24649,29 @@ function lis_algorithm(arr) {
     var len = arr.length;
     for (i = 0; i < len; i++) {
         var arrI = arr[i];
-        if (arrI === -1) {
-            continue;
-        }
-        j = result[result.length - 1];
-        if (arr[j] < arrI) {
-            p[i] = j;
-            result.push(i);
-            continue;
-        }
-        u = 0;
-        v = result.length - 1;
-        while (u < v) {
-            c = (u + v) / 2 | 0;
-            if (arr[result[c]] < arrI) {
-                u = c + 1;
-            } else {
-                v = c;
+        if (arrI !== -1) {
+            j = result[result.length - 1];
+            if (arr[j] < arrI) {
+                p[i] = j;
+                result.push(i);
+                continue;
             }
-        }
-        if (arrI < arr[result[u]]) {
-            if (u > 0) {
-                p[i] = result[u - 1];
+            u = 0;
+            v = result.length - 1;
+            while (u < v) {
+                c = (u + v) / 2 | 0;
+                if (arr[result[c]] < arrI) {
+                    u = c + 1;
+                } else {
+                    v = c;
+                }
             }
-            result[u] = i;
+            if (arrI < arr[result[u]]) {
+                if (u > 0) {
+                    p[i] = result[u - 1];
+                }
+                result[u] = i;
+            }
         }
     }
     u = result.length;
@@ -21921,11 +25028,23 @@ function createClassComponentInstance(vNode, Component, props, context, isSVG, l
     // setState callbacks must fire after render is done when called from componentWillReceiveProps or componentWillMount
     instance._lifecycle = lifecycle;
     instance._unmounted = false;
-    instance._pendingSetState = true;
     instance._isSVG = isSVG;
     if (!isNullOrUndef(instance.componentWillMount)) {
         instance._blockRender = true;
         instance.componentWillMount();
+        if (instance._pendingSetState) {
+            var state = instance.state;
+            var pending = instance._pendingState;
+            if (state === null) {
+                instance.state = pending;
+            } else {
+                for (var key in pending) {
+                    state[key] = pending[key];
+                }
+            }
+            instance._pendingSetState = false;
+            instance._pendingState = null;
+        }
         instance._blockRender = false;
     }
     var childContext;
@@ -21965,7 +25084,6 @@ function createClassComponentInstance(vNode, Component, props, context, isSVG, l
                 input.parentVNode = vNode;
             }
     }
-    instance._pendingSetState = false;
     instance._lastInput = input;
     return instance;
 }
@@ -22009,7 +25127,13 @@ function setTextContent(dom, text) {
     }
 }
 function updateTextContent(dom, text) {
-    dom.firstChild.nodeValue = text;
+    var textNode = dom.firstChild;
+    // Guard against external change on DOM node.
+    if (isNull(textNode)) {
+        setTextContent(dom, text);
+    } else {
+        textNode.nodeValue = text;
+    }
 }
 function appendChild(parentDom, dom) {
     parentDom.appendChild(dom);
@@ -22034,11 +25158,11 @@ function replaceWithNewNode(lastNode, nextNode, parentDom, lifecycle, context, i
     nextNode.dom = dom;
     replaceChild(parentDom, dom, lastNode.dom);
 }
-function replaceChild(parentDom, nextDom, lastDom) {
+function replaceChild(parentDom, newDom, lastDom) {
     if (!parentDom) {
         parentDom = lastDom.parentNode;
     }
-    parentDom.replaceChild(nextDom, lastDom);
+    parentDom.replaceChild(newDom, lastDom);
 }
 function removeChild(parentDom, dom) {
     parentDom.removeChild(dom);
@@ -22072,16 +25196,6 @@ function isSamePropsInnerHTML(dom, props) {
 /**
  * @module Inferno
  */ /** TypeDoc Comment */
-function VNode(children, className, flags, key, props, ref, type) {
-    this.children = children;
-    this.className = className;
-    this.dom = null;
-    this.flags = flags;
-    this.key = key;
-    this.props = props;
-    this.ref = ref;
-    this.type = type;
-}
 /**
  * Creates virtual node
  * @param {number} flags
@@ -22099,7 +25213,16 @@ function createVNode(flags, type, className, children, props, key, ref, noNormal
             flags = isStatefulComponent(type) ? 4 /* ComponentClass */
             : 8 /* ComponentFunction */;
         }
-    var vNode = new VNode(children === void 0 ? null : children, className === void 0 ? null : className, flags, key === void 0 ? null : key, props === void 0 ? null : props, ref === void 0 ? null : ref, type);
+    var vNode = {
+        children: children === void 0 ? null : children,
+        className: className === void 0 ? null : className,
+        dom: null,
+        flags: flags,
+        key: key === void 0 ? null : key,
+        props: props === void 0 ? null : props,
+        ref: ref === void 0 ? null : ref,
+        type: type
+    };
     if (noNormalise !== true) {
         normalize(vNode);
     }
@@ -22470,7 +25593,7 @@ if (process.env.NODE_ENV !== "production") {
         warning("It looks like you're using a minified copy of the development build " + "of Inferno. When deploying Inferno apps to production, make sure to use " + "the production build which skips development warnings and is faster. " + "See http://infernojs.org for more details.");
     }
 }
-var version = "3.8.0";
+var version = "3.10.1";
 // we duplicate it so it plays nicely with different module loading systems
 var index = {
     EMPTY_OBJ: EMPTY_OBJ,
@@ -22509,7 +25632,7 @@ exports.version = version;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }),
-/* 144 */
+/* 149 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22522,7 +25645,7 @@ exports.version = version;
 
 
 
-var isPrimitive = __webpack_require__(145);
+var isPrimitive = __webpack_require__(150);
 
 module.exports = function isEqual(a, b) {
   if (!a && !b) {
@@ -22548,7 +25671,7 @@ module.exports = function isEqual(a, b) {
 };
 
 /***/ }),
-/* 145 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22568,2454 +25691,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 module.exports = function isPrimitive(value) {
   return value == null || typeof value !== 'function' && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) !== 'object';
 };
-
-/***/ }),
-/* 146 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(global) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-/**!
- * @fileOverview Kickass library to create and place poppers near their reference elements.
- * @version 1.12.3
- * @license
- * Copyright (c) 2016 Federico Zivolo and contributors
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
-var nativeHints = ['native code', '[object MutationObserverConstructor]'];
-
-/**
- * Determine if a function is implemented natively (as opposed to a polyfill).
- * @method
- * @memberof Popper.Utils
- * @argument {Function | undefined} fn the function to check
- * @returns {Boolean}
- */
-var isNative = function isNative(fn) {
-  return nativeHints.some(function (hint) {
-    return (fn || '').toString().indexOf(hint) > -1;
-  });
-};
-
-var isBrowser = typeof window !== 'undefined';
-var longerTimeoutBrowsers = ['Edge', 'Trident', 'Firefox'];
-var timeoutDuration = 0;
-for (var i = 0; i < longerTimeoutBrowsers.length; i += 1) {
-  if (isBrowser && navigator.userAgent.indexOf(longerTimeoutBrowsers[i]) >= 0) {
-    timeoutDuration = 1;
-    break;
-  }
-}
-
-function microtaskDebounce(fn) {
-  var scheduled = false;
-  var i = 0;
-  var elem = document.createElement('span');
-
-  // MutationObserver provides a mechanism for scheduling microtasks, which
-  // are scheduled *before* the next task. This gives us a way to debounce
-  // a function but ensure it's called *before* the next paint.
-  var observer = new MutationObserver(function () {
-    fn();
-    scheduled = false;
-  });
-
-  observer.observe(elem, { attributes: true });
-
-  return function () {
-    if (!scheduled) {
-      scheduled = true;
-      elem.setAttribute('x-index', i);
-      i = i + 1; // don't use compund (+=) because it doesn't get optimized in V8
-    }
-  };
-}
-
-function taskDebounce(fn) {
-  var scheduled = false;
-  return function () {
-    if (!scheduled) {
-      scheduled = true;
-      setTimeout(function () {
-        scheduled = false;
-        fn();
-      }, timeoutDuration);
-    }
-  };
-}
-
-// It's common for MutationObserver polyfills to be seen in the wild, however
-// these rely on Mutation Events which only occur when an element is connected
-// to the DOM. The algorithm used in this module does not use a connected element,
-// and so we must ensure that a *native* MutationObserver is available.
-var supportsNativeMutationObserver = isBrowser && isNative(window.MutationObserver);
-
-/**
-* Create a debounced version of a method, that's asynchronously deferred
-* but called in the minimum time possible.
-*
-* @method
-* @memberof Popper.Utils
-* @argument {Function} fn
-* @returns {Function}
-*/
-var debounce = supportsNativeMutationObserver ? microtaskDebounce : taskDebounce;
-
-/**
- * Check if the given variable is a function
- * @method
- * @memberof Popper.Utils
- * @argument {Any} functionToCheck - variable to check
- * @returns {Boolean} answer to: is a function?
- */
-function isFunction(functionToCheck) {
-  var getType = {};
-  return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
-}
-
-/**
- * Get CSS computed property of the given element
- * @method
- * @memberof Popper.Utils
- * @argument {Eement} element
- * @argument {String} property
- */
-function getStyleComputedProperty(element, property) {
-  if (element.nodeType !== 1) {
-    return [];
-  }
-  // NOTE: 1 DOM access here
-  var css = window.getComputedStyle(element, null);
-  return property ? css[property] : css;
-}
-
-/**
- * Returns the parentNode or the host of the element
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element
- * @returns {Element} parent
- */
-function getParentNode(element) {
-  if (element.nodeName === 'HTML') {
-    return element;
-  }
-  return element.parentNode || element.host;
-}
-
-/**
- * Returns the scrolling parent of the given element
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element
- * @returns {Element} scroll parent
- */
-function getScrollParent(element) {
-  // Return body, `getScroll` will take care to get the correct `scrollTop` from it
-  if (!element || ['HTML', 'BODY', '#document'].indexOf(element.nodeName) !== -1) {
-    return window.document.body;
-  }
-
-  // Firefox want us to check `-x` and `-y` variations as well
-
-  var _getStyleComputedProp = getStyleComputedProperty(element),
-      overflow = _getStyleComputedProp.overflow,
-      overflowX = _getStyleComputedProp.overflowX,
-      overflowY = _getStyleComputedProp.overflowY;
-
-  if (/(auto|scroll)/.test(overflow + overflowY + overflowX)) {
-    return element;
-  }
-
-  return getScrollParent(getParentNode(element));
-}
-
-/**
- * Returns the offset parent of the given element
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element
- * @returns {Element} offset parent
- */
-function getOffsetParent(element) {
-  // NOTE: 1 DOM access here
-  var offsetParent = element && element.offsetParent;
-  var nodeName = offsetParent && offsetParent.nodeName;
-
-  if (!nodeName || nodeName === 'BODY' || nodeName === 'HTML') {
-    return window.document.documentElement;
-  }
-
-  // .offsetParent will return the closest TD or TABLE in case
-  // no offsetParent is present, I hate this job...
-  if (['TD', 'TABLE'].indexOf(offsetParent.nodeName) !== -1 && getStyleComputedProperty(offsetParent, 'position') === 'static') {
-    return getOffsetParent(offsetParent);
-  }
-
-  return offsetParent;
-}
-
-function isOffsetContainer(element) {
-  var nodeName = element.nodeName;
-
-  if (nodeName === 'BODY') {
-    return false;
-  }
-  return nodeName === 'HTML' || getOffsetParent(element.firstElementChild) === element;
-}
-
-/**
- * Finds the root node (document, shadowDOM root) of the given element
- * @method
- * @memberof Popper.Utils
- * @argument {Element} node
- * @returns {Element} root node
- */
-function getRoot(node) {
-  if (node.parentNode !== null) {
-    return getRoot(node.parentNode);
-  }
-
-  return node;
-}
-
-/**
- * Finds the offset parent common to the two provided nodes
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element1
- * @argument {Element} element2
- * @returns {Element} common offset parent
- */
-function findCommonOffsetParent(element1, element2) {
-  // This check is needed to avoid errors in case one of the elements isn't defined for any reason
-  if (!element1 || !element1.nodeType || !element2 || !element2.nodeType) {
-    return window.document.documentElement;
-  }
-
-  // Here we make sure to give as "start" the element that comes first in the DOM
-  var order = element1.compareDocumentPosition(element2) & Node.DOCUMENT_POSITION_FOLLOWING;
-  var start = order ? element1 : element2;
-  var end = order ? element2 : element1;
-
-  // Get common ancestor container
-  var range = document.createRange();
-  range.setStart(start, 0);
-  range.setEnd(end, 0);
-  var commonAncestorContainer = range.commonAncestorContainer;
-
-  // Both nodes are inside #document
-
-  if (element1 !== commonAncestorContainer && element2 !== commonAncestorContainer || start.contains(end)) {
-    if (isOffsetContainer(commonAncestorContainer)) {
-      return commonAncestorContainer;
-    }
-
-    return getOffsetParent(commonAncestorContainer);
-  }
-
-  // one of the nodes is inside shadowDOM, find which one
-  var element1root = getRoot(element1);
-  if (element1root.host) {
-    return findCommonOffsetParent(element1root.host, element2);
-  } else {
-    return findCommonOffsetParent(element1, getRoot(element2).host);
-  }
-}
-
-/**
- * Gets the scroll value of the given element in the given side (top and left)
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element
- * @argument {String} side `top` or `left`
- * @returns {number} amount of scrolled pixels
- */
-function getScroll(element) {
-  var side = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'top';
-
-  var upperSide = side === 'top' ? 'scrollTop' : 'scrollLeft';
-  var nodeName = element.nodeName;
-
-  if (nodeName === 'BODY' || nodeName === 'HTML') {
-    var html = window.document.documentElement;
-    var scrollingElement = window.document.scrollingElement || html;
-    return scrollingElement[upperSide];
-  }
-
-  return element[upperSide];
-}
-
-/*
- * Sum or subtract the element scroll values (left and top) from a given rect object
- * @method
- * @memberof Popper.Utils
- * @param {Object} rect - Rect object you want to change
- * @param {HTMLElement} element - The element from the function reads the scroll values
- * @param {Boolean} subtract - set to true if you want to subtract the scroll values
- * @return {Object} rect - The modifier rect object
- */
-function includeScroll(rect, element) {
-  var subtract = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
-  var scrollTop = getScroll(element, 'top');
-  var scrollLeft = getScroll(element, 'left');
-  var modifier = subtract ? -1 : 1;
-  rect.top += scrollTop * modifier;
-  rect.bottom += scrollTop * modifier;
-  rect.left += scrollLeft * modifier;
-  rect.right += scrollLeft * modifier;
-  return rect;
-}
-
-/*
- * Helper to detect borders of a given element
- * @method
- * @memberof Popper.Utils
- * @param {CSSStyleDeclaration} styles
- * Result of `getStyleComputedProperty` on the given element
- * @param {String} axis - `x` or `y`
- * @return {number} borders - The borders size of the given axis
- */
-
-function getBordersSize(styles, axis) {
-  var sideA = axis === 'x' ? 'Left' : 'Top';
-  var sideB = sideA === 'Left' ? 'Right' : 'Bottom';
-
-  return +styles['border' + sideA + 'Width'].split('px')[0] + +styles['border' + sideB + 'Width'].split('px')[0];
-}
-
-/**
- * Tells if you are running Internet Explorer 10
- * @method
- * @memberof Popper.Utils
- * @returns {Boolean} isIE10
- */
-var isIE10 = undefined;
-
-var isIE10$1 = function isIE10$1() {
-  if (isIE10 === undefined) {
-    isIE10 = navigator.appVersion.indexOf('MSIE 10') !== -1;
-  }
-  return isIE10;
-};
-
-function getSize(axis, body, html, computedStyle) {
-  return Math.max(body['offset' + axis], body['scroll' + axis], html['client' + axis], html['offset' + axis], html['scroll' + axis], isIE10$1() ? html['offset' + axis] + computedStyle['margin' + (axis === 'Height' ? 'Top' : 'Left')] + computedStyle['margin' + (axis === 'Height' ? 'Bottom' : 'Right')] : 0);
-}
-
-function getWindowSizes() {
-  var body = window.document.body;
-  var html = window.document.documentElement;
-  var computedStyle = isIE10$1() && window.getComputedStyle(html);
-
-  return {
-    height: getSize('Height', body, html, computedStyle),
-    width: getSize('Width', body, html, computedStyle)
-  };
-}
-
-var classCallCheck = function classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-};
-
-var createClass = function () {
-  function defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }
-
-  return function (Constructor, protoProps, staticProps) {
-    if (protoProps) defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) defineProperties(Constructor, staticProps);
-    return Constructor;
-  };
-}();
-
-var defineProperty = function defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-};
-
-var _extends = Object.assign || function (target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i];
-
-    for (var key in source) {
-      if (Object.prototype.hasOwnProperty.call(source, key)) {
-        target[key] = source[key];
-      }
-    }
-  }
-
-  return target;
-};
-
-/**
- * Given element offsets, generate an output similar to getBoundingClientRect
- * @method
- * @memberof Popper.Utils
- * @argument {Object} offsets
- * @returns {Object} ClientRect like output
- */
-function getClientRect(offsets) {
-  return _extends({}, offsets, {
-    right: offsets.left + offsets.width,
-    bottom: offsets.top + offsets.height
-  });
-}
-
-/**
- * Get bounding client rect of given element
- * @method
- * @memberof Popper.Utils
- * @param {HTMLElement} element
- * @return {Object} client rect
- */
-function getBoundingClientRect(element) {
-  var rect = {};
-
-  // IE10 10 FIX: Please, don't ask, the element isn't
-  // considered in DOM in some circumstances...
-  // This isn't reproducible in IE10 compatibility mode of IE11
-  if (isIE10$1()) {
-    try {
-      rect = element.getBoundingClientRect();
-      var scrollTop = getScroll(element, 'top');
-      var scrollLeft = getScroll(element, 'left');
-      rect.top += scrollTop;
-      rect.left += scrollLeft;
-      rect.bottom += scrollTop;
-      rect.right += scrollLeft;
-    } catch (err) {}
-  } else {
-    rect = element.getBoundingClientRect();
-  }
-
-  var result = {
-    left: rect.left,
-    top: rect.top,
-    width: rect.right - rect.left,
-    height: rect.bottom - rect.top
-  };
-
-  // subtract scrollbar size from sizes
-  var sizes = element.nodeName === 'HTML' ? getWindowSizes() : {};
-  var width = sizes.width || element.clientWidth || result.right - result.left;
-  var height = sizes.height || element.clientHeight || result.bottom - result.top;
-
-  var horizScrollbar = element.offsetWidth - width;
-  var vertScrollbar = element.offsetHeight - height;
-
-  // if an hypothetical scrollbar is detected, we must be sure it's not a `border`
-  // we make this check conditional for performance reasons
-  if (horizScrollbar || vertScrollbar) {
-    var styles = getStyleComputedProperty(element);
-    horizScrollbar -= getBordersSize(styles, 'x');
-    vertScrollbar -= getBordersSize(styles, 'y');
-
-    result.width -= horizScrollbar;
-    result.height -= vertScrollbar;
-  }
-
-  return getClientRect(result);
-}
-
-function getOffsetRectRelativeToArbitraryNode(children, parent) {
-  var isIE10 = isIE10$1();
-  var isHTML = parent.nodeName === 'HTML';
-  var childrenRect = getBoundingClientRect(children);
-  var parentRect = getBoundingClientRect(parent);
-  var scrollParent = getScrollParent(children);
-
-  var styles = getStyleComputedProperty(parent);
-  var borderTopWidth = +styles.borderTopWidth.split('px')[0];
-  var borderLeftWidth = +styles.borderLeftWidth.split('px')[0];
-
-  var offsets = getClientRect({
-    top: childrenRect.top - parentRect.top - borderTopWidth,
-    left: childrenRect.left - parentRect.left - borderLeftWidth,
-    width: childrenRect.width,
-    height: childrenRect.height
-  });
-  offsets.marginTop = 0;
-  offsets.marginLeft = 0;
-
-  // Subtract margins of documentElement in case it's being used as parent
-  // we do this only on HTML because it's the only element that behaves
-  // differently when margins are applied to it. The margins are included in
-  // the box of the documentElement, in the other cases not.
-  if (!isIE10 && isHTML) {
-    var marginTop = +styles.marginTop.split('px')[0];
-    var marginLeft = +styles.marginLeft.split('px')[0];
-
-    offsets.top -= borderTopWidth - marginTop;
-    offsets.bottom -= borderTopWidth - marginTop;
-    offsets.left -= borderLeftWidth - marginLeft;
-    offsets.right -= borderLeftWidth - marginLeft;
-
-    // Attach marginTop and marginLeft because in some circumstances we may need them
-    offsets.marginTop = marginTop;
-    offsets.marginLeft = marginLeft;
-  }
-
-  if (isIE10 ? parent.contains(scrollParent) : parent === scrollParent && scrollParent.nodeName !== 'BODY') {
-    offsets = includeScroll(offsets, parent);
-  }
-
-  return offsets;
-}
-
-function getViewportOffsetRectRelativeToArtbitraryNode(element) {
-  var html = window.document.documentElement;
-  var relativeOffset = getOffsetRectRelativeToArbitraryNode(element, html);
-  var width = Math.max(html.clientWidth, window.innerWidth || 0);
-  var height = Math.max(html.clientHeight, window.innerHeight || 0);
-
-  var scrollTop = getScroll(html);
-  var scrollLeft = getScroll(html, 'left');
-
-  var offset = {
-    top: scrollTop - relativeOffset.top + relativeOffset.marginTop,
-    left: scrollLeft - relativeOffset.left + relativeOffset.marginLeft,
-    width: width,
-    height: height
-  };
-
-  return getClientRect(offset);
-}
-
-/**
- * Check if the given element is fixed or is inside a fixed parent
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element
- * @argument {Element} customContainer
- * @returns {Boolean} answer to "isFixed?"
- */
-function isFixed(element) {
-  var nodeName = element.nodeName;
-  if (nodeName === 'BODY' || nodeName === 'HTML') {
-    return false;
-  }
-  if (getStyleComputedProperty(element, 'position') === 'fixed') {
-    return true;
-  }
-  return isFixed(getParentNode(element));
-}
-
-/**
- * Computed the boundaries limits and return them
- * @method
- * @memberof Popper.Utils
- * @param {HTMLElement} popper
- * @param {HTMLElement} reference
- * @param {number} padding
- * @param {HTMLElement} boundariesElement - Element used to define the boundaries
- * @returns {Object} Coordinates of the boundaries
- */
-function getBoundaries(popper, reference, padding, boundariesElement) {
-  // NOTE: 1 DOM access here
-  var boundaries = { top: 0, left: 0 };
-  var offsetParent = findCommonOffsetParent(popper, reference);
-
-  // Handle viewport case
-  if (boundariesElement === 'viewport') {
-    boundaries = getViewportOffsetRectRelativeToArtbitraryNode(offsetParent);
-  } else {
-    // Handle other cases based on DOM element used as boundaries
-    var boundariesNode = void 0;
-    if (boundariesElement === 'scrollParent') {
-      boundariesNode = getScrollParent(getParentNode(popper));
-      if (boundariesNode.nodeName === 'BODY') {
-        boundariesNode = window.document.documentElement;
-      }
-    } else if (boundariesElement === 'window') {
-      boundariesNode = window.document.documentElement;
-    } else {
-      boundariesNode = boundariesElement;
-    }
-
-    var offsets = getOffsetRectRelativeToArbitraryNode(boundariesNode, offsetParent);
-
-    // In case of HTML, we need a different computation
-    if (boundariesNode.nodeName === 'HTML' && !isFixed(offsetParent)) {
-      var _getWindowSizes = getWindowSizes(),
-          height = _getWindowSizes.height,
-          width = _getWindowSizes.width;
-
-      boundaries.top += offsets.top - offsets.marginTop;
-      boundaries.bottom = height + offsets.top;
-      boundaries.left += offsets.left - offsets.marginLeft;
-      boundaries.right = width + offsets.left;
-    } else {
-      // for all the other DOM elements, this one is good
-      boundaries = offsets;
-    }
-  }
-
-  // Add paddings
-  boundaries.left += padding;
-  boundaries.top += padding;
-  boundaries.right -= padding;
-  boundaries.bottom -= padding;
-
-  return boundaries;
-}
-
-function getArea(_ref) {
-  var width = _ref.width,
-      height = _ref.height;
-
-  return width * height;
-}
-
-/**
- * Utility used to transform the `auto` placement to the placement with more
- * available space.
- * @method
- * @memberof Popper.Utils
- * @argument {Object} data - The data object generated by update method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The data object, properly modified
- */
-function computeAutoPlacement(placement, refRect, popper, reference, boundariesElement) {
-  var padding = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0;
-
-  if (placement.indexOf('auto') === -1) {
-    return placement;
-  }
-
-  var boundaries = getBoundaries(popper, reference, padding, boundariesElement);
-
-  var rects = {
-    top: {
-      width: boundaries.width,
-      height: refRect.top - boundaries.top
-    },
-    right: {
-      width: boundaries.right - refRect.right,
-      height: boundaries.height
-    },
-    bottom: {
-      width: boundaries.width,
-      height: boundaries.bottom - refRect.bottom
-    },
-    left: {
-      width: refRect.left - boundaries.left,
-      height: boundaries.height
-    }
-  };
-
-  var sortedAreas = Object.keys(rects).map(function (key) {
-    return _extends({
-      key: key
-    }, rects[key], {
-      area: getArea(rects[key])
-    });
-  }).sort(function (a, b) {
-    return b.area - a.area;
-  });
-
-  var filteredAreas = sortedAreas.filter(function (_ref2) {
-    var width = _ref2.width,
-        height = _ref2.height;
-    return width >= popper.clientWidth && height >= popper.clientHeight;
-  });
-
-  var computedPlacement = filteredAreas.length > 0 ? filteredAreas[0].key : sortedAreas[0].key;
-
-  var variation = placement.split('-')[1];
-
-  return computedPlacement + (variation ? '-' + variation : '');
-}
-
-/**
- * Get offsets to the reference element
- * @method
- * @memberof Popper.Utils
- * @param {Object} state
- * @param {Element} popper - the popper element
- * @param {Element} reference - the reference element (the popper will be relative to this)
- * @returns {Object} An object containing the offsets which will be applied to the popper
- */
-function getReferenceOffsets(state, popper, reference) {
-  var commonOffsetParent = findCommonOffsetParent(popper, reference);
-  return getOffsetRectRelativeToArbitraryNode(reference, commonOffsetParent);
-}
-
-/**
- * Get the outer sizes of the given element (offset size + margins)
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element
- * @returns {Object} object containing width and height properties
- */
-function getOuterSizes(element) {
-  var styles = window.getComputedStyle(element);
-  var x = parseFloat(styles.marginTop) + parseFloat(styles.marginBottom);
-  var y = parseFloat(styles.marginLeft) + parseFloat(styles.marginRight);
-  var result = {
-    width: element.offsetWidth + y,
-    height: element.offsetHeight + x
-  };
-  return result;
-}
-
-/**
- * Get the opposite placement of the given one
- * @method
- * @memberof Popper.Utils
- * @argument {String} placement
- * @returns {String} flipped placement
- */
-function getOppositePlacement(placement) {
-  var hash = { left: 'right', right: 'left', bottom: 'top', top: 'bottom' };
-  return placement.replace(/left|right|bottom|top/g, function (matched) {
-    return hash[matched];
-  });
-}
-
-/**
- * Get offsets to the popper
- * @method
- * @memberof Popper.Utils
- * @param {Object} position - CSS position the Popper will get applied
- * @param {HTMLElement} popper - the popper element
- * @param {Object} referenceOffsets - the reference offsets (the popper will be relative to this)
- * @param {String} placement - one of the valid placement options
- * @returns {Object} popperOffsets - An object containing the offsets which will be applied to the popper
- */
-function getPopperOffsets(popper, referenceOffsets, placement) {
-  placement = placement.split('-')[0];
-
-  // Get popper node sizes
-  var popperRect = getOuterSizes(popper);
-
-  // Add position, width and height to our offsets object
-  var popperOffsets = {
-    width: popperRect.width,
-    height: popperRect.height
-  };
-
-  // depending by the popper placement we have to compute its offsets slightly differently
-  var isHoriz = ['right', 'left'].indexOf(placement) !== -1;
-  var mainSide = isHoriz ? 'top' : 'left';
-  var secondarySide = isHoriz ? 'left' : 'top';
-  var measurement = isHoriz ? 'height' : 'width';
-  var secondaryMeasurement = !isHoriz ? 'height' : 'width';
-
-  popperOffsets[mainSide] = referenceOffsets[mainSide] + referenceOffsets[measurement] / 2 - popperRect[measurement] / 2;
-  if (placement === secondarySide) {
-    popperOffsets[secondarySide] = referenceOffsets[secondarySide] - popperRect[secondaryMeasurement];
-  } else {
-    popperOffsets[secondarySide] = referenceOffsets[getOppositePlacement(secondarySide)];
-  }
-
-  return popperOffsets;
-}
-
-/**
- * Mimics the `find` method of Array
- * @method
- * @memberof Popper.Utils
- * @argument {Array} arr
- * @argument prop
- * @argument value
- * @returns index or -1
- */
-function find(arr, check) {
-  // use native find if supported
-  if (Array.prototype.find) {
-    return arr.find(check);
-  }
-
-  // use `filter` to obtain the same behavior of `find`
-  return arr.filter(check)[0];
-}
-
-/**
- * Return the index of the matching object
- * @method
- * @memberof Popper.Utils
- * @argument {Array} arr
- * @argument prop
- * @argument value
- * @returns index or -1
- */
-function findIndex(arr, prop, value) {
-  // use native findIndex if supported
-  if (Array.prototype.findIndex) {
-    return arr.findIndex(function (cur) {
-      return cur[prop] === value;
-    });
-  }
-
-  // use `find` + `indexOf` if `findIndex` isn't supported
-  var match = find(arr, function (obj) {
-    return obj[prop] === value;
-  });
-  return arr.indexOf(match);
-}
-
-/**
- * Loop trough the list of modifiers and run them in order,
- * each of them will then edit the data object.
- * @method
- * @memberof Popper.Utils
- * @param {dataObject} data
- * @param {Array} modifiers
- * @param {String} ends - Optional modifier name used as stopper
- * @returns {dataObject}
- */
-function runModifiers(modifiers, data, ends) {
-  var modifiersToRun = ends === undefined ? modifiers : modifiers.slice(0, findIndex(modifiers, 'name', ends));
-
-  modifiersToRun.forEach(function (modifier) {
-    if (modifier.function) {
-      console.warn('`modifier.function` is deprecated, use `modifier.fn`!');
-    }
-    var fn = modifier.function || modifier.fn;
-    if (modifier.enabled && isFunction(fn)) {
-      // Add properties to offsets to make them a complete clientRect object
-      // we do this before each modifier to make sure the previous one doesn't
-      // mess with these values
-      data.offsets.popper = getClientRect(data.offsets.popper);
-      data.offsets.reference = getClientRect(data.offsets.reference);
-
-      data = fn(data, modifier);
-    }
-  });
-
-  return data;
-}
-
-/**
- * Updates the position of the popper, computing the new offsets and applying
- * the new style.<br />
- * Prefer `scheduleUpdate` over `update` because of performance reasons.
- * @method
- * @memberof Popper
- */
-function update() {
-  // if popper is destroyed, don't perform any further update
-  if (this.state.isDestroyed) {
-    return;
-  }
-
-  var data = {
-    instance: this,
-    styles: {},
-    arrowStyles: {},
-    attributes: {},
-    flipped: false,
-    offsets: {}
-  };
-
-  // compute reference element offsets
-  data.offsets.reference = getReferenceOffsets(this.state, this.popper, this.reference);
-
-  // compute auto placement, store placement inside the data object,
-  // modifiers will be able to edit `placement` if needed
-  // and refer to originalPlacement to know the original value
-  data.placement = computeAutoPlacement(this.options.placement, data.offsets.reference, this.popper, this.reference, this.options.modifiers.flip.boundariesElement, this.options.modifiers.flip.padding);
-
-  // store the computed placement inside `originalPlacement`
-  data.originalPlacement = data.placement;
-
-  // compute the popper offsets
-  data.offsets.popper = getPopperOffsets(this.popper, data.offsets.reference, data.placement);
-  data.offsets.popper.position = 'absolute';
-
-  // run the modifiers
-  data = runModifiers(this.modifiers, data);
-
-  // the first `update` will call `onCreate` callback
-  // the other ones will call `onUpdate` callback
-  if (!this.state.isCreated) {
-    this.state.isCreated = true;
-    this.options.onCreate(data);
-  } else {
-    this.options.onUpdate(data);
-  }
-}
-
-/**
- * Helper used to know if the given modifier is enabled.
- * @method
- * @memberof Popper.Utils
- * @returns {Boolean}
- */
-function isModifierEnabled(modifiers, modifierName) {
-  return modifiers.some(function (_ref) {
-    var name = _ref.name,
-        enabled = _ref.enabled;
-    return enabled && name === modifierName;
-  });
-}
-
-/**
- * Get the prefixed supported property name
- * @method
- * @memberof Popper.Utils
- * @argument {String} property (camelCase)
- * @returns {String} prefixed property (camelCase or PascalCase, depending on the vendor prefix)
- */
-function getSupportedPropertyName(property) {
-  var prefixes = [false, 'ms', 'Webkit', 'Moz', 'O'];
-  var upperProp = property.charAt(0).toUpperCase() + property.slice(1);
-
-  for (var i = 0; i < prefixes.length - 1; i++) {
-    var prefix = prefixes[i];
-    var toCheck = prefix ? '' + prefix + upperProp : property;
-    if (typeof window.document.body.style[toCheck] !== 'undefined') {
-      return toCheck;
-    }
-  }
-  return null;
-}
-
-/**
- * Destroy the popper
- * @method
- * @memberof Popper
- */
-function destroy() {
-  this.state.isDestroyed = true;
-
-  // touch DOM only if `applyStyle` modifier is enabled
-  if (isModifierEnabled(this.modifiers, 'applyStyle')) {
-    this.popper.removeAttribute('x-placement');
-    this.popper.style.left = '';
-    this.popper.style.position = '';
-    this.popper.style.top = '';
-    this.popper.style[getSupportedPropertyName('transform')] = '';
-  }
-
-  this.disableEventListeners();
-
-  // remove the popper if user explicity asked for the deletion on destroy
-  // do not use `remove` because IE11 doesn't support it
-  if (this.options.removeOnDestroy) {
-    this.popper.parentNode.removeChild(this.popper);
-  }
-  return this;
-}
-
-function attachToScrollParents(scrollParent, event, callback, scrollParents) {
-  var isBody = scrollParent.nodeName === 'BODY';
-  var target = isBody ? window : scrollParent;
-  target.addEventListener(event, callback, { passive: true });
-
-  if (!isBody) {
-    attachToScrollParents(getScrollParent(target.parentNode), event, callback, scrollParents);
-  }
-  scrollParents.push(target);
-}
-
-/**
- * Setup needed event listeners used to update the popper position
- * @method
- * @memberof Popper.Utils
- * @private
- */
-function setupEventListeners(reference, options, state, updateBound) {
-  // Resize event listener on window
-  state.updateBound = updateBound;
-  window.addEventListener('resize', state.updateBound, { passive: true });
-
-  // Scroll event listener on scroll parents
-  var scrollElement = getScrollParent(reference);
-  attachToScrollParents(scrollElement, 'scroll', state.updateBound, state.scrollParents);
-  state.scrollElement = scrollElement;
-  state.eventsEnabled = true;
-
-  return state;
-}
-
-/**
- * It will add resize/scroll events and start recalculating
- * position of the popper element when they are triggered.
- * @method
- * @memberof Popper
- */
-function enableEventListeners() {
-  if (!this.state.eventsEnabled) {
-    this.state = setupEventListeners(this.reference, this.options, this.state, this.scheduleUpdate);
-  }
-}
-
-/**
- * Remove event listeners used to update the popper position
- * @method
- * @memberof Popper.Utils
- * @private
- */
-function removeEventListeners(reference, state) {
-  // Remove resize event listener on window
-  window.removeEventListener('resize', state.updateBound);
-
-  // Remove scroll event listener on scroll parents
-  state.scrollParents.forEach(function (target) {
-    target.removeEventListener('scroll', state.updateBound);
-  });
-
-  // Reset state
-  state.updateBound = null;
-  state.scrollParents = [];
-  state.scrollElement = null;
-  state.eventsEnabled = false;
-  return state;
-}
-
-/**
- * It will remove resize/scroll events and won't recalculate popper position
- * when they are triggered. It also won't trigger onUpdate callback anymore,
- * unless you call `update` method manually.
- * @method
- * @memberof Popper
- */
-function disableEventListeners() {
-  if (this.state.eventsEnabled) {
-    window.cancelAnimationFrame(this.scheduleUpdate);
-    this.state = removeEventListeners(this.reference, this.state);
-  }
-}
-
-/**
- * Tells if a given input is a number
- * @method
- * @memberof Popper.Utils
- * @param {*} input to check
- * @return {Boolean}
- */
-function isNumeric(n) {
-  return n !== '' && !isNaN(parseFloat(n)) && isFinite(n);
-}
-
-/**
- * Set the style to the given popper
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element - Element to apply the style to
- * @argument {Object} styles
- * Object with a list of properties and values which will be applied to the element
- */
-function setStyles(element, styles) {
-  Object.keys(styles).forEach(function (prop) {
-    var unit = '';
-    // add unit if the value is numeric and is one of the following
-    if (['width', 'height', 'top', 'right', 'bottom', 'left'].indexOf(prop) !== -1 && isNumeric(styles[prop])) {
-      unit = 'px';
-    }
-    element.style[prop] = styles[prop] + unit;
-  });
-}
-
-/**
- * Set the attributes to the given popper
- * @method
- * @memberof Popper.Utils
- * @argument {Element} element - Element to apply the attributes to
- * @argument {Object} styles
- * Object with a list of properties and values which will be applied to the element
- */
-function setAttributes(element, attributes) {
-  Object.keys(attributes).forEach(function (prop) {
-    var value = attributes[prop];
-    if (value !== false) {
-      element.setAttribute(prop, attributes[prop]);
-    } else {
-      element.removeAttribute(prop);
-    }
-  });
-}
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by `update` method
- * @argument {Object} data.styles - List of style properties - values to apply to popper element
- * @argument {Object} data.attributes - List of attribute properties - values to apply to popper element
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The same data object
- */
-function applyStyle(data) {
-  // any property present in `data.styles` will be applied to the popper,
-  // in this way we can make the 3rd party modifiers add custom styles to it
-  // Be aware, modifiers could override the properties defined in the previous
-  // lines of this modifier!
-  setStyles(data.instance.popper, data.styles);
-
-  // any property present in `data.attributes` will be applied to the popper,
-  // they will be set as HTML attributes of the element
-  setAttributes(data.instance.popper, data.attributes);
-
-  // if arrowElement is defined and arrowStyles has some properties
-  if (data.arrowElement && Object.keys(data.arrowStyles).length) {
-    setStyles(data.arrowElement, data.arrowStyles);
-  }
-
-  return data;
-}
-
-/**
- * Set the x-placement attribute before everything else because it could be used
- * to add margins to the popper margins needs to be calculated to get the
- * correct popper offsets.
- * @method
- * @memberof Popper.modifiers
- * @param {HTMLElement} reference - The reference element used to position the popper
- * @param {HTMLElement} popper - The HTML element used as popper.
- * @param {Object} options - Popper.js options
- */
-function applyStyleOnLoad(reference, popper, options, modifierOptions, state) {
-  // compute reference element offsets
-  var referenceOffsets = getReferenceOffsets(state, popper, reference);
-
-  // compute auto placement, store placement inside the data object,
-  // modifiers will be able to edit `placement` if needed
-  // and refer to originalPlacement to know the original value
-  var placement = computeAutoPlacement(options.placement, referenceOffsets, popper, reference, options.modifiers.flip.boundariesElement, options.modifiers.flip.padding);
-
-  popper.setAttribute('x-placement', placement);
-
-  // Apply `position` to popper before anything else because
-  // without the position applied we can't guarantee correct computations
-  setStyles(popper, { position: 'absolute' });
-
-  return options;
-}
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by `update` method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The data object, properly modified
- */
-function computeStyle(data, options) {
-  var x = options.x,
-      y = options.y;
-  var popper = data.offsets.popper;
-
-  // Remove this legacy support in Popper.js v2
-
-  var legacyGpuAccelerationOption = find(data.instance.modifiers, function (modifier) {
-    return modifier.name === 'applyStyle';
-  }).gpuAcceleration;
-  if (legacyGpuAccelerationOption !== undefined) {
-    console.warn('WARNING: `gpuAcceleration` option moved to `computeStyle` modifier and will not be supported in future versions of Popper.js!');
-  }
-  var gpuAcceleration = legacyGpuAccelerationOption !== undefined ? legacyGpuAccelerationOption : options.gpuAcceleration;
-
-  var offsetParent = getOffsetParent(data.instance.popper);
-  var offsetParentRect = getBoundingClientRect(offsetParent);
-
-  // Styles
-  var styles = {
-    position: popper.position
-  };
-
-  // floor sides to avoid blurry text
-  var offsets = {
-    left: Math.floor(popper.left),
-    top: Math.floor(popper.top),
-    bottom: Math.floor(popper.bottom),
-    right: Math.floor(popper.right)
-  };
-
-  var sideA = x === 'bottom' ? 'top' : 'bottom';
-  var sideB = y === 'right' ? 'left' : 'right';
-
-  // if gpuAcceleration is set to `true` and transform is supported,
-  //  we use `translate3d` to apply the position to the popper we
-  // automatically use the supported prefixed version if needed
-  var prefixedProperty = getSupportedPropertyName('transform');
-
-  // now, let's make a step back and look at this code closely (wtf?)
-  // If the content of the popper grows once it's been positioned, it
-  // may happen that the popper gets misplaced because of the new content
-  // overflowing its reference element
-  // To avoid this problem, we provide two options (x and y), which allow
-  // the consumer to define the offset origin.
-  // If we position a popper on top of a reference element, we can set
-  // `x` to `top` to make the popper grow towards its top instead of
-  // its bottom.
-  var left = void 0,
-      top = void 0;
-  if (sideA === 'bottom') {
-    top = -offsetParentRect.height + offsets.bottom;
-  } else {
-    top = offsets.top;
-  }
-  if (sideB === 'right') {
-    left = -offsetParentRect.width + offsets.right;
-  } else {
-    left = offsets.left;
-  }
-  if (gpuAcceleration && prefixedProperty) {
-    styles[prefixedProperty] = 'translate3d(' + left + 'px, ' + top + 'px, 0)';
-    styles[sideA] = 0;
-    styles[sideB] = 0;
-    styles.willChange = 'transform';
-  } else {
-    // othwerise, we use the standard `top`, `left`, `bottom` and `right` properties
-    var invertTop = sideA === 'bottom' ? -1 : 1;
-    var invertLeft = sideB === 'right' ? -1 : 1;
-    styles[sideA] = top * invertTop;
-    styles[sideB] = left * invertLeft;
-    styles.willChange = sideA + ', ' + sideB;
-  }
-
-  // Attributes
-  var attributes = {
-    'x-placement': data.placement
-  };
-
-  // Update `data` attributes, styles and arrowStyles
-  data.attributes = _extends({}, attributes, data.attributes);
-  data.styles = _extends({}, styles, data.styles);
-  data.arrowStyles = _extends({}, data.offsets.arrow, data.arrowStyles);
-
-  return data;
-}
-
-/**
- * Helper used to know if the given modifier depends from another one.<br />
- * It checks if the needed modifier is listed and enabled.
- * @method
- * @memberof Popper.Utils
- * @param {Array} modifiers - list of modifiers
- * @param {String} requestingName - name of requesting modifier
- * @param {String} requestedName - name of requested modifier
- * @returns {Boolean}
- */
-function isModifierRequired(modifiers, requestingName, requestedName) {
-  var requesting = find(modifiers, function (_ref) {
-    var name = _ref.name;
-    return name === requestingName;
-  });
-
-  var isRequired = !!requesting && modifiers.some(function (modifier) {
-    return modifier.name === requestedName && modifier.enabled && modifier.order < requesting.order;
-  });
-
-  if (!isRequired) {
-    var _requesting = '`' + requestingName + '`';
-    var requested = '`' + requestedName + '`';
-    console.warn(requested + ' modifier is required by ' + _requesting + ' modifier in order to work, be sure to include it before ' + _requesting + '!');
-  }
-  return isRequired;
-}
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by update method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The data object, properly modified
- */
-function arrow(data, options) {
-  // arrow depends on keepTogether in order to work
-  if (!isModifierRequired(data.instance.modifiers, 'arrow', 'keepTogether')) {
-    return data;
-  }
-
-  var arrowElement = options.element;
-
-  // if arrowElement is a string, suppose it's a CSS selector
-  if (typeof arrowElement === 'string') {
-    arrowElement = data.instance.popper.querySelector(arrowElement);
-
-    // if arrowElement is not found, don't run the modifier
-    if (!arrowElement) {
-      return data;
-    }
-  } else {
-    // if the arrowElement isn't a query selector we must check that the
-    // provided DOM node is child of its popper node
-    if (!data.instance.popper.contains(arrowElement)) {
-      console.warn('WARNING: `arrow.element` must be child of its popper element!');
-      return data;
-    }
-  }
-
-  var placement = data.placement.split('-')[0];
-  var _data$offsets = data.offsets,
-      popper = _data$offsets.popper,
-      reference = _data$offsets.reference;
-
-  var isVertical = ['left', 'right'].indexOf(placement) !== -1;
-
-  var len = isVertical ? 'height' : 'width';
-  var sideCapitalized = isVertical ? 'Top' : 'Left';
-  var side = sideCapitalized.toLowerCase();
-  var altSide = isVertical ? 'left' : 'top';
-  var opSide = isVertical ? 'bottom' : 'right';
-  var arrowElementSize = getOuterSizes(arrowElement)[len];
-
-  //
-  // extends keepTogether behavior making sure the popper and its
-  // reference have enough pixels in conjuction
-  //
-
-  // top/left side
-  if (reference[opSide] - arrowElementSize < popper[side]) {
-    data.offsets.popper[side] -= popper[side] - (reference[opSide] - arrowElementSize);
-  }
-  // bottom/right side
-  if (reference[side] + arrowElementSize > popper[opSide]) {
-    data.offsets.popper[side] += reference[side] + arrowElementSize - popper[opSide];
-  }
-
-  // compute center of the popper
-  var center = reference[side] + reference[len] / 2 - arrowElementSize / 2;
-
-  // Compute the sideValue using the updated popper offsets
-  // take popper margin in account because we don't have this info available
-  var popperMarginSide = getStyleComputedProperty(data.instance.popper, 'margin' + sideCapitalized).replace('px', '');
-  var sideValue = center - getClientRect(data.offsets.popper)[side] - popperMarginSide;
-
-  // prevent arrowElement from being placed not contiguously to its popper
-  sideValue = Math.max(Math.min(popper[len] - arrowElementSize, sideValue), 0);
-
-  data.arrowElement = arrowElement;
-  data.offsets.arrow = {};
-  data.offsets.arrow[side] = Math.round(sideValue);
-  data.offsets.arrow[altSide] = ''; // make sure to unset any eventual altSide value from the DOM node
-
-  return data;
-}
-
-/**
- * Get the opposite placement variation of the given one
- * @method
- * @memberof Popper.Utils
- * @argument {String} placement variation
- * @returns {String} flipped placement variation
- */
-function getOppositeVariation(variation) {
-  if (variation === 'end') {
-    return 'start';
-  } else if (variation === 'start') {
-    return 'end';
-  }
-  return variation;
-}
-
-/**
- * List of accepted placements to use as values of the `placement` option.<br />
- * Valid placements are:
- * - `auto`
- * - `top`
- * - `right`
- * - `bottom`
- * - `left`
- *
- * Each placement can have a variation from this list:
- * - `-start`
- * - `-end`
- *
- * Variations are interpreted easily if you think of them as the left to right
- * written languages. Horizontally (`top` and `bottom`), `start` is left and `end`
- * is right.<br />
- * Vertically (`left` and `right`), `start` is top and `end` is bottom.
- *
- * Some valid examples are:
- * - `top-end` (on top of reference, right aligned)
- * - `right-start` (on right of reference, top aligned)
- * - `bottom` (on bottom, centered)
- * - `auto-right` (on the side with more space available, alignment depends by placement)
- *
- * @static
- * @type {Array}
- * @enum {String}
- * @readonly
- * @method placements
- * @memberof Popper
- */
-var placements = ['auto-start', 'auto', 'auto-end', 'top-start', 'top', 'top-end', 'right-start', 'right', 'right-end', 'bottom-end', 'bottom', 'bottom-start', 'left-end', 'left', 'left-start'];
-
-// Get rid of `auto` `auto-start` and `auto-end`
-var validPlacements = placements.slice(3);
-
-/**
- * Given an initial placement, returns all the subsequent placements
- * clockwise (or counter-clockwise).
- *
- * @method
- * @memberof Popper.Utils
- * @argument {String} placement - A valid placement (it accepts variations)
- * @argument {Boolean} counter - Set to true to walk the placements counterclockwise
- * @returns {Array} placements including their variations
- */
-function clockwise(placement) {
-  var counter = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
-  var index = validPlacements.indexOf(placement);
-  var arr = validPlacements.slice(index + 1).concat(validPlacements.slice(0, index));
-  return counter ? arr.reverse() : arr;
-}
-
-var BEHAVIORS = {
-  FLIP: 'flip',
-  CLOCKWISE: 'clockwise',
-  COUNTERCLOCKWISE: 'counterclockwise'
-};
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by update method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The data object, properly modified
- */
-function flip(data, options) {
-  // if `inner` modifier is enabled, we can't use the `flip` modifier
-  if (isModifierEnabled(data.instance.modifiers, 'inner')) {
-    return data;
-  }
-
-  if (data.flipped && data.placement === data.originalPlacement) {
-    // seems like flip is trying to loop, probably there's not enough space on any of the flippable sides
-    return data;
-  }
-
-  var boundaries = getBoundaries(data.instance.popper, data.instance.reference, options.padding, options.boundariesElement);
-
-  var placement = data.placement.split('-')[0];
-  var placementOpposite = getOppositePlacement(placement);
-  var variation = data.placement.split('-')[1] || '';
-
-  var flipOrder = [];
-
-  switch (options.behavior) {
-    case BEHAVIORS.FLIP:
-      flipOrder = [placement, placementOpposite];
-      break;
-    case BEHAVIORS.CLOCKWISE:
-      flipOrder = clockwise(placement);
-      break;
-    case BEHAVIORS.COUNTERCLOCKWISE:
-      flipOrder = clockwise(placement, true);
-      break;
-    default:
-      flipOrder = options.behavior;
-  }
-
-  flipOrder.forEach(function (step, index) {
-    if (placement !== step || flipOrder.length === index + 1) {
-      return data;
-    }
-
-    placement = data.placement.split('-')[0];
-    placementOpposite = getOppositePlacement(placement);
-
-    var popperOffsets = data.offsets.popper;
-    var refOffsets = data.offsets.reference;
-
-    // using floor because the reference offsets may contain decimals we are not going to consider here
-    var floor = Math.floor;
-    var overlapsRef = placement === 'left' && floor(popperOffsets.right) > floor(refOffsets.left) || placement === 'right' && floor(popperOffsets.left) < floor(refOffsets.right) || placement === 'top' && floor(popperOffsets.bottom) > floor(refOffsets.top) || placement === 'bottom' && floor(popperOffsets.top) < floor(refOffsets.bottom);
-
-    var overflowsLeft = floor(popperOffsets.left) < floor(boundaries.left);
-    var overflowsRight = floor(popperOffsets.right) > floor(boundaries.right);
-    var overflowsTop = floor(popperOffsets.top) < floor(boundaries.top);
-    var overflowsBottom = floor(popperOffsets.bottom) > floor(boundaries.bottom);
-
-    var overflowsBoundaries = placement === 'left' && overflowsLeft || placement === 'right' && overflowsRight || placement === 'top' && overflowsTop || placement === 'bottom' && overflowsBottom;
-
-    // flip the variation if required
-    var isVertical = ['top', 'bottom'].indexOf(placement) !== -1;
-    var flippedVariation = !!options.flipVariations && (isVertical && variation === 'start' && overflowsLeft || isVertical && variation === 'end' && overflowsRight || !isVertical && variation === 'start' && overflowsTop || !isVertical && variation === 'end' && overflowsBottom);
-
-    if (overlapsRef || overflowsBoundaries || flippedVariation) {
-      // this boolean to detect any flip loop
-      data.flipped = true;
-
-      if (overlapsRef || overflowsBoundaries) {
-        placement = flipOrder[index + 1];
-      }
-
-      if (flippedVariation) {
-        variation = getOppositeVariation(variation);
-      }
-
-      data.placement = placement + (variation ? '-' + variation : '');
-
-      // this object contains `position`, we want to preserve it along with
-      // any additional property we may add in the future
-      data.offsets.popper = _extends({}, data.offsets.popper, getPopperOffsets(data.instance.popper, data.offsets.reference, data.placement));
-
-      data = runModifiers(data.instance.modifiers, data, 'flip');
-    }
-  });
-  return data;
-}
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by update method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The data object, properly modified
- */
-function keepTogether(data) {
-  var _data$offsets = data.offsets,
-      popper = _data$offsets.popper,
-      reference = _data$offsets.reference;
-
-  var placement = data.placement.split('-')[0];
-  var floor = Math.floor;
-  var isVertical = ['top', 'bottom'].indexOf(placement) !== -1;
-  var side = isVertical ? 'right' : 'bottom';
-  var opSide = isVertical ? 'left' : 'top';
-  var measurement = isVertical ? 'width' : 'height';
-
-  if (popper[side] < floor(reference[opSide])) {
-    data.offsets.popper[opSide] = floor(reference[opSide]) - popper[measurement];
-  }
-  if (popper[opSide] > floor(reference[side])) {
-    data.offsets.popper[opSide] = floor(reference[side]);
-  }
-
-  return data;
-}
-
-/**
- * Converts a string containing value + unit into a px value number
- * @function
- * @memberof {modifiers~offset}
- * @private
- * @argument {String} str - Value + unit string
- * @argument {String} measurement - `height` or `width`
- * @argument {Object} popperOffsets
- * @argument {Object} referenceOffsets
- * @returns {Number|String}
- * Value in pixels, or original string if no values were extracted
- */
-function toValue(str, measurement, popperOffsets, referenceOffsets) {
-  // separate value from unit
-  var split = str.match(/((?:\-|\+)?\d*\.?\d*)(.*)/);
-  var value = +split[1];
-  var unit = split[2];
-
-  // If it's not a number it's an operator, I guess
-  if (!value) {
-    return str;
-  }
-
-  if (unit.indexOf('%') === 0) {
-    var element = void 0;
-    switch (unit) {
-      case '%p':
-        element = popperOffsets;
-        break;
-      case '%':
-      case '%r':
-      default:
-        element = referenceOffsets;
-    }
-
-    var rect = getClientRect(element);
-    return rect[measurement] / 100 * value;
-  } else if (unit === 'vh' || unit === 'vw') {
-    // if is a vh or vw, we calculate the size based on the viewport
-    var size = void 0;
-    if (unit === 'vh') {
-      size = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-    } else {
-      size = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-    }
-    return size / 100 * value;
-  } else {
-    // if is an explicit pixel unit, we get rid of the unit and keep the value
-    // if is an implicit unit, it's px, and we return just the value
-    return value;
-  }
-}
-
-/**
- * Parse an `offset` string to extrapolate `x` and `y` numeric offsets.
- * @function
- * @memberof {modifiers~offset}
- * @private
- * @argument {String} offset
- * @argument {Object} popperOffsets
- * @argument {Object} referenceOffsets
- * @argument {String} basePlacement
- * @returns {Array} a two cells array with x and y offsets in numbers
- */
-function parseOffset(offset, popperOffsets, referenceOffsets, basePlacement) {
-  var offsets = [0, 0];
-
-  // Use height if placement is left or right and index is 0 otherwise use width
-  // in this way the first offset will use an axis and the second one
-  // will use the other one
-  var useHeight = ['right', 'left'].indexOf(basePlacement) !== -1;
-
-  // Split the offset string to obtain a list of values and operands
-  // The regex addresses values with the plus or minus sign in front (+10, -20, etc)
-  var fragments = offset.split(/(\+|\-)/).map(function (frag) {
-    return frag.trim();
-  });
-
-  // Detect if the offset string contains a pair of values or a single one
-  // they could be separated by comma or space
-  var divider = fragments.indexOf(find(fragments, function (frag) {
-    return frag.search(/,|\s/) !== -1;
-  }));
-
-  if (fragments[divider] && fragments[divider].indexOf(',') === -1) {
-    console.warn('Offsets separated by white space(s) are deprecated, use a comma (,) instead.');
-  }
-
-  // If divider is found, we divide the list of values and operands to divide
-  // them by ofset X and Y.
-  var splitRegex = /\s*,\s*|\s+/;
-  var ops = divider !== -1 ? [fragments.slice(0, divider).concat([fragments[divider].split(splitRegex)[0]]), [fragments[divider].split(splitRegex)[1]].concat(fragments.slice(divider + 1))] : [fragments];
-
-  // Convert the values with units to absolute pixels to allow our computations
-  ops = ops.map(function (op, index) {
-    // Most of the units rely on the orientation of the popper
-    var measurement = (index === 1 ? !useHeight : useHeight) ? 'height' : 'width';
-    var mergeWithPrevious = false;
-    return op
-    // This aggregates any `+` or `-` sign that aren't considered operators
-    // e.g.: 10 + +5 => [10, +, +5]
-    .reduce(function (a, b) {
-      if (a[a.length - 1] === '' && ['+', '-'].indexOf(b) !== -1) {
-        a[a.length - 1] = b;
-        mergeWithPrevious = true;
-        return a;
-      } else if (mergeWithPrevious) {
-        a[a.length - 1] += b;
-        mergeWithPrevious = false;
-        return a;
-      } else {
-        return a.concat(b);
-      }
-    }, [])
-    // Here we convert the string values into number values (in px)
-    .map(function (str) {
-      return toValue(str, measurement, popperOffsets, referenceOffsets);
-    });
-  });
-
-  // Loop trough the offsets arrays and execute the operations
-  ops.forEach(function (op, index) {
-    op.forEach(function (frag, index2) {
-      if (isNumeric(frag)) {
-        offsets[index] += frag * (op[index2 - 1] === '-' ? -1 : 1);
-      }
-    });
-  });
-  return offsets;
-}
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by update method
- * @argument {Object} options - Modifiers configuration and options
- * @argument {Number|String} options.offset=0
- * The offset value as described in the modifier description
- * @returns {Object} The data object, properly modified
- */
-function offset(data, _ref) {
-  var offset = _ref.offset;
-  var placement = data.placement,
-      _data$offsets = data.offsets,
-      popper = _data$offsets.popper,
-      reference = _data$offsets.reference;
-
-  var basePlacement = placement.split('-')[0];
-
-  var offsets = void 0;
-  if (isNumeric(+offset)) {
-    offsets = [+offset, 0];
-  } else {
-    offsets = parseOffset(offset, popper, reference, basePlacement);
-  }
-
-  if (basePlacement === 'left') {
-    popper.top += offsets[0];
-    popper.left -= offsets[1];
-  } else if (basePlacement === 'right') {
-    popper.top += offsets[0];
-    popper.left += offsets[1];
-  } else if (basePlacement === 'top') {
-    popper.left += offsets[0];
-    popper.top -= offsets[1];
-  } else if (basePlacement === 'bottom') {
-    popper.left += offsets[0];
-    popper.top += offsets[1];
-  }
-
-  data.popper = popper;
-  return data;
-}
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by `update` method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The data object, properly modified
- */
-function preventOverflow(data, options) {
-  var boundariesElement = options.boundariesElement || getOffsetParent(data.instance.popper);
-
-  // If offsetParent is the reference element, we really want to
-  // go one step up and use the next offsetParent as reference to
-  // avoid to make this modifier completely useless and look like broken
-  if (data.instance.reference === boundariesElement) {
-    boundariesElement = getOffsetParent(boundariesElement);
-  }
-
-  var boundaries = getBoundaries(data.instance.popper, data.instance.reference, options.padding, boundariesElement);
-  options.boundaries = boundaries;
-
-  var order = options.priority;
-  var popper = data.offsets.popper;
-
-  var check = {
-    primary: function primary(placement) {
-      var value = popper[placement];
-      if (popper[placement] < boundaries[placement] && !options.escapeWithReference) {
-        value = Math.max(popper[placement], boundaries[placement]);
-      }
-      return defineProperty({}, placement, value);
-    },
-    secondary: function secondary(placement) {
-      var mainSide = placement === 'right' ? 'left' : 'top';
-      var value = popper[mainSide];
-      if (popper[placement] > boundaries[placement] && !options.escapeWithReference) {
-        value = Math.min(popper[mainSide], boundaries[placement] - (placement === 'right' ? popper.width : popper.height));
-      }
-      return defineProperty({}, mainSide, value);
-    }
-  };
-
-  order.forEach(function (placement) {
-    var side = ['left', 'top'].indexOf(placement) !== -1 ? 'primary' : 'secondary';
-    popper = _extends({}, popper, check[side](placement));
-  });
-
-  data.offsets.popper = popper;
-
-  return data;
-}
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by `update` method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The data object, properly modified
- */
-function shift(data) {
-  var placement = data.placement;
-  var basePlacement = placement.split('-')[0];
-  var shiftvariation = placement.split('-')[1];
-
-  // if shift shiftvariation is specified, run the modifier
-  if (shiftvariation) {
-    var _data$offsets = data.offsets,
-        reference = _data$offsets.reference,
-        popper = _data$offsets.popper;
-
-    var isVertical = ['bottom', 'top'].indexOf(basePlacement) !== -1;
-    var side = isVertical ? 'left' : 'top';
-    var measurement = isVertical ? 'width' : 'height';
-
-    var shiftOffsets = {
-      start: defineProperty({}, side, reference[side]),
-      end: defineProperty({}, side, reference[side] + reference[measurement] - popper[measurement])
-    };
-
-    data.offsets.popper = _extends({}, popper, shiftOffsets[shiftvariation]);
-  }
-
-  return data;
-}
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by update method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The data object, properly modified
- */
-function hide(data) {
-  if (!isModifierRequired(data.instance.modifiers, 'hide', 'preventOverflow')) {
-    return data;
-  }
-
-  var refRect = data.offsets.reference;
-  var bound = find(data.instance.modifiers, function (modifier) {
-    return modifier.name === 'preventOverflow';
-  }).boundaries;
-
-  if (refRect.bottom < bound.top || refRect.left > bound.right || refRect.top > bound.bottom || refRect.right < bound.left) {
-    // Avoid unnecessary DOM access if visibility hasn't changed
-    if (data.hide === true) {
-      return data;
-    }
-
-    data.hide = true;
-    data.attributes['x-out-of-boundaries'] = '';
-  } else {
-    // Avoid unnecessary DOM access if visibility hasn't changed
-    if (data.hide === false) {
-      return data;
-    }
-
-    data.hide = false;
-    data.attributes['x-out-of-boundaries'] = false;
-  }
-
-  return data;
-}
-
-/**
- * @function
- * @memberof Modifiers
- * @argument {Object} data - The data object generated by `update` method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {Object} The data object, properly modified
- */
-function inner(data) {
-  var placement = data.placement;
-  var basePlacement = placement.split('-')[0];
-  var _data$offsets = data.offsets,
-      popper = _data$offsets.popper,
-      reference = _data$offsets.reference;
-
-  var isHoriz = ['left', 'right'].indexOf(basePlacement) !== -1;
-
-  var subtractLength = ['top', 'left'].indexOf(basePlacement) === -1;
-
-  popper[isHoriz ? 'left' : 'top'] = reference[basePlacement] - (subtractLength ? popper[isHoriz ? 'width' : 'height'] : 0);
-
-  data.placement = getOppositePlacement(placement);
-  data.offsets.popper = getClientRect(popper);
-
-  return data;
-}
-
-/**
- * Modifier function, each modifier can have a function of this type assigned
- * to its `fn` property.<br />
- * These functions will be called on each update, this means that you must
- * make sure they are performant enough to avoid performance bottlenecks.
- *
- * @function ModifierFn
- * @argument {dataObject} data - The data object generated by `update` method
- * @argument {Object} options - Modifiers configuration and options
- * @returns {dataObject} The data object, properly modified
- */
-
-/**
- * Modifiers are plugins used to alter the behavior of your poppers.<br />
- * Popper.js uses a set of 9 modifiers to provide all the basic functionalities
- * needed by the library.
- *
- * Usually you don't want to override the `order`, `fn` and `onLoad` props.
- * All the other properties are configurations that could be tweaked.
- * @namespace modifiers
- */
-var modifiers = {
-  /**
-   * Modifier used to shift the popper on the start or end of its reference
-   * element.<br />
-   * It will read the variation of the `placement` property.<br />
-   * It can be one either `-end` or `-start`.
-   * @memberof modifiers
-   * @inner
-   */
-  shift: {
-    /** @prop {number} order=100 - Index used to define the order of execution */
-    order: 100,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: shift
-  },
-
-  /**
-   * The `offset` modifier can shift your popper on both its axis.
-   *
-   * It accepts the following units:
-   * - `px` or unitless, interpreted as pixels
-   * - `%` or `%r`, percentage relative to the length of the reference element
-   * - `%p`, percentage relative to the length of the popper element
-   * - `vw`, CSS viewport width unit
-   * - `vh`, CSS viewport height unit
-   *
-   * For length is intended the main axis relative to the placement of the popper.<br />
-   * This means that if the placement is `top` or `bottom`, the length will be the
-   * `width`. In case of `left` or `right`, it will be the height.
-   *
-   * You can provide a single value (as `Number` or `String`), or a pair of values
-   * as `String` divided by a comma or one (or more) white spaces.<br />
-   * The latter is a deprecated method because it leads to confusion and will be
-   * removed in v2.<br />
-   * Additionally, it accepts additions and subtractions between different units.
-   * Note that multiplications and divisions aren't supported.
-   *
-   * Valid examples are:
-   * ```
-   * 10
-   * '10%'
-   * '10, 10'
-   * '10%, 10'
-   * '10 + 10%'
-   * '10 - 5vh + 3%'
-   * '-10px + 5vh, 5px - 6%'
-   * ```
-   * > **NB**: If you desire to apply offsets to your poppers in a way that may make them overlap
-   * > with their reference element, unfortunately, you will have to disable the `flip` modifier.
-   * > More on this [reading this issue](https://github.com/FezVrasta/popper.js/issues/373)
-   *
-   * @memberof modifiers
-   * @inner
-   */
-  offset: {
-    /** @prop {number} order=200 - Index used to define the order of execution */
-    order: 200,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: offset,
-    /** @prop {Number|String} offset=0
-     * The offset value as described in the modifier description
-     */
-    offset: 0
-  },
-
-  /**
-   * Modifier used to prevent the popper from being positioned outside the boundary.
-   *
-   * An scenario exists where the reference itself is not within the boundaries.<br />
-   * We can say it has "escaped the boundaries" — or just "escaped".<br />
-   * In this case we need to decide whether the popper should either:
-   *
-   * - detach from the reference and remain "trapped" in the boundaries, or
-   * - if it should ignore the boundary and "escape with its reference"
-   *
-   * When `escapeWithReference` is set to`true` and reference is completely
-   * outside its boundaries, the popper will overflow (or completely leave)
-   * the boundaries in order to remain attached to the edge of the reference.
-   *
-   * @memberof modifiers
-   * @inner
-   */
-  preventOverflow: {
-    /** @prop {number} order=300 - Index used to define the order of execution */
-    order: 300,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: preventOverflow,
-    /**
-     * @prop {Array} [priority=['left','right','top','bottom']]
-     * Popper will try to prevent overflow following these priorities by default,
-     * then, it could overflow on the left and on top of the `boundariesElement`
-     */
-    priority: ['left', 'right', 'top', 'bottom'],
-    /**
-     * @prop {number} padding=5
-     * Amount of pixel used to define a minimum distance between the boundaries
-     * and the popper this makes sure the popper has always a little padding
-     * between the edges of its container
-     */
-    padding: 5,
-    /**
-     * @prop {String|HTMLElement} boundariesElement='scrollParent'
-     * Boundaries used by the modifier, can be `scrollParent`, `window`,
-     * `viewport` or any DOM element.
-     */
-    boundariesElement: 'scrollParent'
-  },
-
-  /**
-   * Modifier used to make sure the reference and its popper stay near eachothers
-   * without leaving any gap between the two. Expecially useful when the arrow is
-   * enabled and you want to assure it to point to its reference element.
-   * It cares only about the first axis, you can still have poppers with margin
-   * between the popper and its reference element.
-   * @memberof modifiers
-   * @inner
-   */
-  keepTogether: {
-    /** @prop {number} order=400 - Index used to define the order of execution */
-    order: 400,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: keepTogether
-  },
-
-  /**
-   * This modifier is used to move the `arrowElement` of the popper to make
-   * sure it is positioned between the reference element and its popper element.
-   * It will read the outer size of the `arrowElement` node to detect how many
-   * pixels of conjuction are needed.
-   *
-   * It has no effect if no `arrowElement` is provided.
-   * @memberof modifiers
-   * @inner
-   */
-  arrow: {
-    /** @prop {number} order=500 - Index used to define the order of execution */
-    order: 500,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: arrow,
-    /** @prop {String|HTMLElement} element='[x-arrow]' - Selector or node used as arrow */
-    element: '[x-arrow]'
-  },
-
-  /**
-   * Modifier used to flip the popper's placement when it starts to overlap its
-   * reference element.
-   *
-   * Requires the `preventOverflow` modifier before it in order to work.
-   *
-   * **NOTE:** this modifier will interrupt the current update cycle and will
-   * restart it if it detects the need to flip the placement.
-   * @memberof modifiers
-   * @inner
-   */
-  flip: {
-    /** @prop {number} order=600 - Index used to define the order of execution */
-    order: 600,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: flip,
-    /**
-     * @prop {String|Array} behavior='flip'
-     * The behavior used to change the popper's placement. It can be one of
-     * `flip`, `clockwise`, `counterclockwise` or an array with a list of valid
-     * placements (with optional variations).
-     */
-    behavior: 'flip',
-    /**
-     * @prop {number} padding=5
-     * The popper will flip if it hits the edges of the `boundariesElement`
-     */
-    padding: 5,
-    /**
-     * @prop {String|HTMLElement} boundariesElement='viewport'
-     * The element which will define the boundaries of the popper position,
-     * the popper will never be placed outside of the defined boundaries
-     * (except if keepTogether is enabled)
-     */
-    boundariesElement: 'viewport'
-  },
-
-  /**
-   * Modifier used to make the popper flow toward the inner of the reference element.
-   * By default, when this modifier is disabled, the popper will be placed outside
-   * the reference element.
-   * @memberof modifiers
-   * @inner
-   */
-  inner: {
-    /** @prop {number} order=700 - Index used to define the order of execution */
-    order: 700,
-    /** @prop {Boolean} enabled=false - Whether the modifier is enabled or not */
-    enabled: false,
-    /** @prop {ModifierFn} */
-    fn: inner
-  },
-
-  /**
-   * Modifier used to hide the popper when its reference element is outside of the
-   * popper boundaries. It will set a `x-out-of-boundaries` attribute which can
-   * be used to hide with a CSS selector the popper when its reference is
-   * out of boundaries.
-   *
-   * Requires the `preventOverflow` modifier before it in order to work.
-   * @memberof modifiers
-   * @inner
-   */
-  hide: {
-    /** @prop {number} order=800 - Index used to define the order of execution */
-    order: 800,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: hide
-  },
-
-  /**
-   * Computes the style that will be applied to the popper element to gets
-   * properly positioned.
-   *
-   * Note that this modifier will not touch the DOM, it just prepares the styles
-   * so that `applyStyle` modifier can apply it. This separation is useful
-   * in case you need to replace `applyStyle` with a custom implementation.
-   *
-   * This modifier has `850` as `order` value to maintain backward compatibility
-   * with previous versions of Popper.js. Expect the modifiers ordering method
-   * to change in future major versions of the library.
-   *
-   * @memberof modifiers
-   * @inner
-   */
-  computeStyle: {
-    /** @prop {number} order=850 - Index used to define the order of execution */
-    order: 850,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: computeStyle,
-    /**
-     * @prop {Boolean} gpuAcceleration=true
-     * If true, it uses the CSS 3d transformation to position the popper.
-     * Otherwise, it will use the `top` and `left` properties.
-     */
-    gpuAcceleration: true,
-    /**
-     * @prop {string} [x='bottom']
-     * Where to anchor the X axis (`bottom` or `top`). AKA X offset origin.
-     * Change this if your popper should grow in a direction different from `bottom`
-     */
-    x: 'bottom',
-    /**
-     * @prop {string} [x='left']
-     * Where to anchor the Y axis (`left` or `right`). AKA Y offset origin.
-     * Change this if your popper should grow in a direction different from `right`
-     */
-    y: 'right'
-  },
-
-  /**
-   * Applies the computed styles to the popper element.
-   *
-   * All the DOM manipulations are limited to this modifier. This is useful in case
-   * you want to integrate Popper.js inside a framework or view library and you
-   * want to delegate all the DOM manipulations to it.
-   *
-   * Note that if you disable this modifier, you must make sure the popper element
-   * has its position set to `absolute` before Popper.js can do its work!
-   *
-   * Just disable this modifier and define you own to achieve the desired effect.
-   *
-   * @memberof modifiers
-   * @inner
-   */
-  applyStyle: {
-    /** @prop {number} order=900 - Index used to define the order of execution */
-    order: 900,
-    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    enabled: true,
-    /** @prop {ModifierFn} */
-    fn: applyStyle,
-    /** @prop {Function} */
-    onLoad: applyStyleOnLoad,
-    /**
-     * @deprecated since version 1.10.0, the property moved to `computeStyle` modifier
-     * @prop {Boolean} gpuAcceleration=true
-     * If true, it uses the CSS 3d transformation to position the popper.
-     * Otherwise, it will use the `top` and `left` properties.
-     */
-    gpuAcceleration: undefined
-  }
-};
-
-/**
- * The `dataObject` is an object containing all the informations used by Popper.js
- * this object get passed to modifiers and to the `onCreate` and `onUpdate` callbacks.
- * @name dataObject
- * @property {Object} data.instance The Popper.js instance
- * @property {String} data.placement Placement applied to popper
- * @property {String} data.originalPlacement Placement originally defined on init
- * @property {Boolean} data.flipped True if popper has been flipped by flip modifier
- * @property {Boolean} data.hide True if the reference element is out of boundaries, useful to know when to hide the popper.
- * @property {HTMLElement} data.arrowElement Node used as arrow by arrow modifier
- * @property {Object} data.styles Any CSS property defined here will be applied to the popper, it expects the JavaScript nomenclature (eg. `marginBottom`)
- * @property {Object} data.arrowStyles Any CSS property defined here will be applied to the popper arrow, it expects the JavaScript nomenclature (eg. `marginBottom`)
- * @property {Object} data.boundaries Offsets of the popper boundaries
- * @property {Object} data.offsets The measurements of popper, reference and arrow elements.
- * @property {Object} data.offsets.popper `top`, `left`, `width`, `height` values
- * @property {Object} data.offsets.reference `top`, `left`, `width`, `height` values
- * @property {Object} data.offsets.arrow] `top` and `left` offsets, only one of them will be different from 0
- */
-
-/**
- * Default options provided to Popper.js constructor.<br />
- * These can be overriden using the `options` argument of Popper.js.<br />
- * To override an option, simply pass as 3rd argument an object with the same
- * structure of this object, example:
- * ```
- * new Popper(ref, pop, {
- *   modifiers: {
- *     preventOverflow: { enabled: false }
- *   }
- * })
- * ```
- * @type {Object}
- * @static
- * @memberof Popper
- */
-var Defaults = {
-  /**
-   * Popper's placement
-   * @prop {Popper.placements} placement='bottom'
-   */
-  placement: 'bottom',
-
-  /**
-   * Whether events (resize, scroll) are initially enabled
-   * @prop {Boolean} eventsEnabled=true
-   */
-  eventsEnabled: true,
-
-  /**
-   * Set to true if you want to automatically remove the popper when
-   * you call the `destroy` method.
-   * @prop {Boolean} removeOnDestroy=false
-   */
-  removeOnDestroy: false,
-
-  /**
-   * Callback called when the popper is created.<br />
-   * By default, is set to no-op.<br />
-   * Access Popper.js instance with `data.instance`.
-   * @prop {onCreate}
-   */
-  onCreate: function onCreate() {},
-
-  /**
-   * Callback called when the popper is updated, this callback is not called
-   * on the initialization/creation of the popper, but only on subsequent
-   * updates.<br />
-   * By default, is set to no-op.<br />
-   * Access Popper.js instance with `data.instance`.
-   * @prop {onUpdate}
-   */
-  onUpdate: function onUpdate() {},
-
-  /**
-   * List of modifiers used to modify the offsets before they are applied to the popper.
-   * They provide most of the functionalities of Popper.js
-   * @prop {modifiers}
-   */
-  modifiers: modifiers
-};
-
-/**
- * @callback onCreate
- * @param {dataObject} data
- */
-
-/**
- * @callback onUpdate
- * @param {dataObject} data
- */
-
-// Utils
-// Methods
-var Popper = function () {
-  /**
-   * Create a new Popper.js instance
-   * @class Popper
-   * @param {HTMLElement|referenceObject} reference - The reference element used to position the popper
-   * @param {HTMLElement} popper - The HTML element used as popper.
-   * @param {Object} options - Your custom options to override the ones defined in [Defaults](#defaults)
-   * @return {Object} instance - The generated Popper.js instance
-   */
-  function Popper(reference, popper) {
-    var _this = this;
-
-    var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-    classCallCheck(this, Popper);
-
-    this.scheduleUpdate = function () {
-      return requestAnimationFrame(_this.update);
-    };
-
-    // make update() debounced, so that it only runs at most once-per-tick
-    this.update = debounce(this.update.bind(this));
-
-    // with {} we create a new object with the options inside it
-    this.options = _extends({}, Popper.Defaults, options);
-
-    // init state
-    this.state = {
-      isDestroyed: false,
-      isCreated: false,
-      scrollParents: []
-    };
-
-    // get reference and popper elements (allow jQuery wrappers)
-    this.reference = reference.jquery ? reference[0] : reference;
-    this.popper = popper.jquery ? popper[0] : popper;
-
-    // Deep merge modifiers options
-    this.options.modifiers = {};
-    Object.keys(_extends({}, Popper.Defaults.modifiers, options.modifiers)).forEach(function (name) {
-      _this.options.modifiers[name] = _extends({}, Popper.Defaults.modifiers[name] || {}, options.modifiers ? options.modifiers[name] : {});
-    });
-
-    // Refactoring modifiers' list (Object => Array)
-    this.modifiers = Object.keys(this.options.modifiers).map(function (name) {
-      return _extends({
-        name: name
-      }, _this.options.modifiers[name]);
-    })
-    // sort the modifiers by order
-    .sort(function (a, b) {
-      return a.order - b.order;
-    });
-
-    // modifiers have the ability to execute arbitrary code when Popper.js get inited
-    // such code is executed in the same order of its modifier
-    // they could add new properties to their options configuration
-    // BE AWARE: don't add options to `options.modifiers.name` but to `modifierOptions`!
-    this.modifiers.forEach(function (modifierOptions) {
-      if (modifierOptions.enabled && isFunction(modifierOptions.onLoad)) {
-        modifierOptions.onLoad(_this.reference, _this.popper, _this.options, modifierOptions, _this.state);
-      }
-    });
-
-    // fire the first update to position the popper in the right place
-    this.update();
-
-    var eventsEnabled = this.options.eventsEnabled;
-    if (eventsEnabled) {
-      // setup event listeners, they will take care of update the position in specific situations
-      this.enableEventListeners();
-    }
-
-    this.state.eventsEnabled = eventsEnabled;
-  }
-
-  // We can't use class properties because they don't get listed in the
-  // class prototype and break stuff like Sinon stubs
-
-
-  createClass(Popper, [{
-    key: 'update',
-    value: function update$$1() {
-      return update.call(this);
-    }
-  }, {
-    key: 'destroy',
-    value: function destroy$$1() {
-      return destroy.call(this);
-    }
-  }, {
-    key: 'enableEventListeners',
-    value: function enableEventListeners$$1() {
-      return enableEventListeners.call(this);
-    }
-  }, {
-    key: 'disableEventListeners',
-    value: function disableEventListeners$$1() {
-      return disableEventListeners.call(this);
-    }
-
-    /**
-     * Schedule an update, it will run on the next UI update available
-     * @method scheduleUpdate
-     * @memberof Popper
-     */
-
-    /**
-     * Collection of utilities useful when writing custom modifiers.
-     * Starting from version 1.7, this method is available only if you
-     * include `popper-utils.js` before `popper.js`.
-     *
-     * **DEPRECATION**: This way to access PopperUtils is deprecated
-     * and will be removed in v2! Use the PopperUtils module directly instead.
-     * Due to the high instability of the methods contained in Utils, we can't
-     * guarantee them to follow semver. Use them at your own risk!
-     * @static
-     * @private
-     * @type {Object}
-     * @deprecated since version 1.8
-     * @member Utils
-     * @memberof Popper
-     */
-
-  }]);
-  return Popper;
-}();
-
-/**
- * The `referenceObject` is an object that provides an interface compatible with Popper.js
- * and lets you use it as replacement of a real DOM node.<br />
- * You can use this method to position a popper relatively to a set of coordinates
- * in case you don't have a DOM node to use as reference.
- *
- * ```
- * new Popper(referenceObject, popperNode);
- * ```
- *
- * NB: This feature isn't supported in Internet Explorer 10
- * @name referenceObject
- * @property {Function} data.getBoundingClientRect
- * A function that returns a set of coordinates compatible with the native `getBoundingClientRect` method.
- * @property {number} data.clientWidth
- * An ES6 getter that will return the width of the virtual reference element.
- * @property {number} data.clientHeight
- * An ES6 getter that will return the height of the virtual reference element.
- */
-
-Popper.Utils = (typeof window !== 'undefined' ? window : global).PopperUtils;
-Popper.placements = placements;
-Popper.Defaults = Defaults;
-
-exports.default = Popper;
-//# sourceMappingURL=popper.js.map
-
-module.exports = exports['default'];
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(34)))
 
 /***/ })
 /******/ ]);
