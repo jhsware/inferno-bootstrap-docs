@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 125);
+/******/ 	return __webpack_require__(__webpack_require__.s = 215);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -72,7 +72,7 @@
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__ = __webpack_require__(31);
+/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__ = __webpack_require__(30);
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "Component", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["a"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "EMPTY_OBJ", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["b"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "NO_OP", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["c"]; });
@@ -96,7 +96,7 @@ if (process.env.NODE_ENV !== 'production') {
   console.warn('You are running production build of Inferno in development mode. Use dev:module entry point.');
 }
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(6)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(13)))
 
 /***/ }),
 /* 1 */
@@ -146,7 +146,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 	if (typeof module !== 'undefined' && module.exports) {
 		module.exports = classNames;
-	} else if ("function" === 'function' && _typeof(__webpack_require__(49)) === 'object' && __webpack_require__(49)) {
+	} else if ("function" === 'function' && _typeof(__webpack_require__(31)) === 'object' && __webpack_require__(31)) {
 		// register as 'classnames', consistent with npm package name
 		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
 			return classNames;
@@ -159,101 +159,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.getScrollbarWidth = getScrollbarWidth;
-exports.setScrollbarWidth = setScrollbarWidth;
-exports.isBodyOverflowing = isBodyOverflowing;
-exports.getOriginalBodyPadding = getOriginalBodyPadding;
-exports.conditionallyUpdateScrollbar = conditionallyUpdateScrollbar;
-exports.mapToCssModules = mapToCssModules;
-exports.omit = omit;
-exports.getTarget = getTarget;
-
-var _infernoShared = __webpack_require__(21);
-
-// https://github.com/twbs/bootstrap/blob/v4.0.0-alpha.4/js/src/modal#L436-L443
-function getScrollbarWidth() {
-  var scrollDiv = document.createElement('div');
-  // .modal-scrollbar-measure styles // https://github.com/twbs/bootstrap/blob/v4.0.0-alpha.4/scss/_modal.scss#L106-L113
-  scrollDiv.style.position = 'absolute';
-  scrollDiv.style.top = '-9999px';
-  scrollDiv.style.width = '50px';
-  scrollDiv.style.height = '50px';
-  scrollDiv.style.overflow = 'scroll';
-  document.body.appendChild(scrollDiv);
-  var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
-  document.body.removeChild(scrollDiv);
-  return scrollbarWidth;
-}
-
-function setScrollbarWidth(padding) {
-  document.body.style.paddingRight = padding > 0 ? padding + 'px' : null;
-}
-
-function isBodyOverflowing() {
-  return document.body.clientWidth < window.innerWidth;
-}
-
-function getOriginalBodyPadding() {
-  return parseInt(window.getComputedStyle(document.body, null).getPropertyValue('padding-right') || 0, 10);
-}
-
-function conditionallyUpdateScrollbar() {
-  var scrollbarWidth = getScrollbarWidth();
-  // https://github.com/twbs/bootstrap/blob/v4.0.0-alpha.4/js/src/modal#L420
-  var fixedContent = document.querySelectorAll('.navbar-fixed-top, .navbar-fixed-bottom, .is-fixed')[0];
-  var bodyPadding = fixedContent ? parseInt(fixedContent.style.paddingRight || 0, 10) : 0;
-
-  if (isBodyOverflowing()) {
-    setScrollbarWidth(bodyPadding + scrollbarWidth);
-  }
-}
-
-function mapToCssModules(className, cssModule) {
-  if (!cssModule) return className;
-  return className.split(' ').map(function (c) {
-    return cssModule[c] || c;
-  }).join(' ');
-}
-
-/**
- * Returns a new object with the key/value pairs from `obj` that are not in the array `omitKeys`.
- */
-function omit(obj, omitKeys) {
-  var result = {};
-  Object.keys(obj).forEach(function (key) {
-    if (omitKeys.indexOf(key) === -1) {
-      result[key] = obj[key];
-    }
-  });
-  return result;
-}
-
-function getTarget(target) {
-  if ((0, _infernoShared.isFunction)(target)) {
-    return target();
-  }
-
-  if (typeof target === 'string' && document) {
-    var selection = document.querySelector(target);
-    if (selection === null) {
-      return document.querySelector('#' + target);
-    }
-    return selection;
-  }
-
-  return target;
-}
-
-/***/ }),
-/* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -383,7 +288,103 @@ function createElement(type, props) {
 
 
 /***/ }),
-/* 4 */
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getScrollbarWidth = getScrollbarWidth;
+exports.setScrollbarWidth = setScrollbarWidth;
+exports.isBodyOverflowing = isBodyOverflowing;
+exports.getOriginalBodyPadding = getOriginalBodyPadding;
+exports.conditionallyUpdateScrollbar = conditionallyUpdateScrollbar;
+exports.mapToCssModules = mapToCssModules;
+exports.omit = omit;
+exports.getTarget = getTarget;
+
+var _infernoShared = __webpack_require__(8);
+
+// https://github.com/twbs/bootstrap/blob/v4.0.0-alpha.4/js/src/modal#L436-L443
+function getScrollbarWidth() {
+  var scrollDiv = document.createElement('div');
+  // .modal-scrollbar-measure styles // https://github.com/twbs/bootstrap/blob/v4.0.0-alpha.4/scss/_modal.scss#L106-L113
+  scrollDiv.style.position = 'absolute';
+  scrollDiv.style.top = '-9999px';
+  scrollDiv.style.width = '50px';
+  scrollDiv.style.height = '50px';
+  scrollDiv.style.overflow = 'scroll';
+  document.body.appendChild(scrollDiv);
+  var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+  document.body.removeChild(scrollDiv);
+  return scrollbarWidth;
+}
+
+function setScrollbarWidth(padding) {
+  document.body.style.paddingRight = padding > 0 ? padding + 'px' : null;
+}
+
+function isBodyOverflowing() {
+  return document.body.clientWidth < window.innerWidth;
+}
+
+function getOriginalBodyPadding() {
+  return parseInt(window.getComputedStyle(document.body, null).getPropertyValue('padding-right') || 0, 10);
+}
+
+function conditionallyUpdateScrollbar() {
+  var scrollbarWidth = getScrollbarWidth();
+  // https://github.com/twbs/bootstrap/blob/v4.0.0-alpha.4/js/src/modal#L420
+  var fixedContent = document.querySelectorAll('.navbar-fixed-top, .navbar-fixed-bottom, .is-fixed')[0];
+  var bodyPadding = fixedContent ? parseInt(fixedContent.style.paddingRight || 0, 10) : 0;
+
+  if (isBodyOverflowing()) {
+    setScrollbarWidth(bodyPadding + scrollbarWidth);
+  }
+}
+
+function mapToCssModules(className, cssModule) {
+  if (!cssModule) return className;
+  return className.split(' ').map(function (c) {
+    return cssModule[c] || c;
+  }).join(' ');
+}
+
+/**
+ * Returns a new object with the key/value pairs from `obj` that are not in the array `omitKeys`.
+ */
+function omit(obj, omitKeys) {
+  var result = {};
+  Object.keys(obj).forEach(function (key) {
+    if (omitKeys.indexOf(key) === -1) {
+      result[key] = obj[key];
+    }
+  });
+  return result;
+}
+
+function getTarget(target) {
+  if ((0, _infernoShared.isFunction)(target)) {
+    return target();
+  }
+
+  if (typeof target === 'string' && document) {
+    var selection = document.querySelector(target);
+    if (selection === null) {
+      return document.querySelector('#' + target);
+    }
+    return selection;
+  }
+
+  return target;
+}
+
+/***/ }),
+/* 4 */,
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -406,9 +407,9 @@ var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _infernoRouter = __webpack_require__(32);
+var _infernoRouter = __webpack_require__(88);
 
-var _prismjs = __webpack_require__(100);
+var _prismjs = __webpack_require__(187);
 
 var _prismjs2 = _interopRequireDefault(_prismjs);
 
@@ -420,7 +421,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-__webpack_require__(99);
+__webpack_require__(186);
 
 var Section = exports.Section = function (_Component) {
   _inherits(Section, _Component);
@@ -613,7 +614,23 @@ var Page = exports.Page = function (_Component3) {
 }(_inferno.Component);
 
 /***/ }),
-/* 5 */
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = {
+  Arrow: __webpack_require__(80),
+  Manager: __webpack_require__(81),
+  Popper: __webpack_require__(82),
+  Target: __webpack_require__(83),
+  Travel: __webpack_require__(84),
+  placements: __webpack_require__(29).placements
+};
+
+/***/ }),
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -627,13 +644,13 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _inferno = __webpack_require__(0);
 
-var _infernoCreateElement = __webpack_require__(3);
+var _infernoCreateElement = __webpack_require__(2);
 
 var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -716,232 +733,104 @@ exports.default = Button;
 module.exports = exports['default'];
 
 /***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-// shim for using process in browser
-var process = module.exports = {};
-
-// cached from whatever global is present so that test runners that stub it
-// don't break things.  But we need to wrap it in a try catch in case it is
-// wrapped in strict mode code which doesn't define any globals.  It's inside a
-// function because try/catches deoptimize in certain engines.
-
-var cachedSetTimeout;
-var cachedClearTimeout;
-
-function defaultSetTimout() {
-    throw new Error('setTimeout has not been defined');
-}
-function defaultClearTimeout() {
-    throw new Error('clearTimeout has not been defined');
-}
-(function () {
-    try {
-        if (typeof setTimeout === 'function') {
-            cachedSetTimeout = setTimeout;
-        } else {
-            cachedSetTimeout = defaultSetTimout;
-        }
-    } catch (e) {
-        cachedSetTimeout = defaultSetTimout;
-    }
-    try {
-        if (typeof clearTimeout === 'function') {
-            cachedClearTimeout = clearTimeout;
-        } else {
-            cachedClearTimeout = defaultClearTimeout;
-        }
-    } catch (e) {
-        cachedClearTimeout = defaultClearTimeout;
-    }
-})();
-function runTimeout(fun) {
-    if (cachedSetTimeout === setTimeout) {
-        //normal enviroments in sane situations
-        return setTimeout(fun, 0);
-    }
-    // if setTimeout wasn't available but was latter defined
-    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-        cachedSetTimeout = setTimeout;
-        return setTimeout(fun, 0);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedSetTimeout(fun, 0);
-    } catch (e) {
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-            return cachedSetTimeout.call(null, fun, 0);
-        } catch (e) {
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-            return cachedSetTimeout.call(this, fun, 0);
-        }
-    }
-}
-function runClearTimeout(marker) {
-    if (cachedClearTimeout === clearTimeout) {
-        //normal enviroments in sane situations
-        return clearTimeout(marker);
-    }
-    // if clearTimeout wasn't available but was latter defined
-    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-        cachedClearTimeout = clearTimeout;
-        return clearTimeout(marker);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedClearTimeout(marker);
-    } catch (e) {
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-            return cachedClearTimeout.call(null, marker);
-        } catch (e) {
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-            return cachedClearTimeout.call(this, marker);
-        }
-    }
-}
-var queue = [];
-var draining = false;
-var currentQueue;
-var queueIndex = -1;
-
-function cleanUpNextTick() {
-    if (!draining || !currentQueue) {
-        return;
-    }
-    draining = false;
-    if (currentQueue.length) {
-        queue = currentQueue.concat(queue);
-    } else {
-        queueIndex = -1;
-    }
-    if (queue.length) {
-        drainQueue();
-    }
-}
-
-function drainQueue() {
-    if (draining) {
-        return;
-    }
-    var timeout = runTimeout(cleanUpNextTick);
-    draining = true;
-
-    var len = queue.length;
-    while (len) {
-        currentQueue = queue;
-        queue = [];
-        while (++queueIndex < len) {
-            if (currentQueue) {
-                currentQueue[queueIndex].run();
-            }
-        }
-        queueIndex = -1;
-        len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    runClearTimeout(timeout);
-}
-
-process.nextTick = function (fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-            args[i - 1] = arguments[i];
-        }
-    }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-        runTimeout(drainQueue);
-    }
-};
-
-// v8 likes predictible objects
-function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
-}
-Item.prototype.run = function () {
-    this.fun.apply(null, this.array);
-};
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-process.version = ''; // empty string to avoid regexp issues
-process.versions = {};
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-process.prependListener = noop;
-process.prependOnceListener = noop;
-
-process.listeners = function (name) {
-    return [];
-};
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-process.cwd = function () {
-    return '/';
-};
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-process.umask = function () {
-    return 0;
-};
-
-/***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__ = __webpack_require__(140);
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "Component", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["a"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "EMPTY_OBJ", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["b"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "NO_OP", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["c"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "createComponentVNode", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["d"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "createPortal", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["e"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "createRenderer", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["f"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "createTextVNode", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["g"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "createVNode", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["h"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "directClone", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["i"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getFlagsForElementVnode", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["j"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getNumberStyleValue", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["k"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "hydrate", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["l"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "linkEvent", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["m"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "normalizeProps", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["n"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "options", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["o"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "render", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["p"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "version", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["q"]; });
-
-
-if (process.env.NODE_ENV !== 'production') {
-  console.warn('You are running production build of Inferno in development mode. Use dev:module entry point.');
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NO_OP", function() { return NO_OP; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ERROR_MSG", function() { return ERROR_MSG; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isBrowser", function() { return isBrowser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toArray", function() { return toArray; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isArray", function() { return isArray; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isStringOrNumber", function() { return isStringOrNumber; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isNullOrUndef", function() { return isNullOrUndef; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isInvalid", function() { return isInvalid; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isFunction", function() { return isFunction; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isString", function() { return isString; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isNumber", function() { return isNumber; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isNull", function() { return isNull; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isTrue", function() { return isTrue; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isUndefined", function() { return isUndefined; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isDefined", function() { return isDefined; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isObject", function() { return isObject; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "throwError", function() { return throwError; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "warning", function() { return warning; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "combineFrom", function() { return combineFrom; });
+var NO_OP = '$NO_OP';
+var ERROR_MSG = 'a runtime error occured! Use Inferno in development environment to find the error.';
+// This should be boolean and not reference to window.document
+var isBrowser = !!(typeof window !== 'undefined' && window.document);
+function toArray(children) {
+    return isArray(children) ? children : children ? [children] : children;
+}
+// this is MUCH faster than .constructor === Array and instanceof Array
+// in Node 7 and the later versions of V8, slower in older versions though
+var isArray = Array.isArray;
+function isStringOrNumber(o) {
+    var type = typeof o;
+    return type === 'string' || type === 'number';
+}
+function isNullOrUndef(o) {
+    return isUndefined(o) || isNull(o);
+}
+function isInvalid(o) {
+    return isNull(o) || o === false || isTrue(o) || isUndefined(o);
+}
+function isFunction(o) {
+    return typeof o === 'function';
+}
+function isString(o) {
+    return typeof o === 'string';
+}
+function isNumber(o) {
+    return typeof o === 'number';
+}
+function isNull(o) {
+    return o === null;
+}
+function isTrue(o) {
+    return o === true;
+}
+function isUndefined(o) {
+    return o === void 0;
+}
+function isDefined(o) {
+    return o !== void 0;
+}
+function isObject(o) {
+    return typeof o === 'object';
+}
+function throwError(message) {
+    if (!message) {
+        message = ERROR_MSG;
+    }
+    throw new Error(("Inferno Error: " + message));
+}
+function warning(message) {
+    // tslint:disable-next-line:no-console
+    console.error(message);
+}
+function combineFrom(first, second) {
+    var out = {};
+    if (first) {
+        for (var key in first) {
+            out[key] = first[key];
+        }
+    }
+    if (second) {
+        for (var key$1 in second) {
+            out[key$1] = second[key$1];
+        }
+    }
+    return out;
 }
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(6)))
+
+
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -961,11 +850,11 @@ var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
-var _infernoShared = __webpack_require__(21);
+var _infernoShared = __webpack_require__(8);
 
-var _infernoPopper = __webpack_require__(9);
+var _infernoPopper = __webpack_require__(6);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1171,23 +1060,125 @@ exports.default = Dropdown;
 module.exports = exports['default'];
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-module.exports = {
-  Arrow: __webpack_require__(128),
-  Manager: __webpack_require__(129),
-  Popper: __webpack_require__(130),
-  Target: __webpack_require__(131),
-  Travel: __webpack_require__(132),
-  placements: __webpack_require__(48).placements
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _infernoCreateElement = __webpack_require__(2);
+
+var _classnames = __webpack_require__(1);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _utils = __webpack_require__(3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var defaultProps = {
+  tag: 'ul',
+  vertical: false
 };
 
+var getVerticalClass = function getVerticalClass(vertical) {
+  if (vertical === false) {
+    return false;
+  } else if (vertical === true || vertical === 'xs') {
+    return 'flex-column';
+  }
+
+  return 'flex-' + vertical + '-column';
+};
+
+var Nav = function Nav(props) {
+  var children = props.children,
+      className = props.className,
+      cssModule = props.cssModule,
+      tabs = props.tabs,
+      pills = props.pills,
+      vertical = props.vertical,
+      horizontal = props.horizontal,
+      justified = props.justified,
+      fill = props.fill,
+      navbar = props.navbar,
+      card = props.card,
+      Tag = props.tag,
+      attributes = _objectWithoutProperties(props, ['children', 'className', 'cssModule', 'tabs', 'pills', 'vertical', 'horizontal', 'justified', 'fill', 'navbar', 'card', 'tag']);
+
+  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, navbar ? 'navbar-nav' : 'nav', horizontal ? 'justify-content-' + horizontal : false, getVerticalClass(vertical), {
+    'nav-tabs': tabs,
+    'card-header-tabs': card && tabs,
+    'nav-pills': pills,
+    'card-header-pills': card && pills,
+    'nav-justified': justified,
+    'nav-fill': fill
+  }), cssModule);
+
+  Object.assign(attributes, { className: classes });
+
+  return (0, _infernoCreateElement.createElement)(Tag, attributes, children);
+};
+
+Nav.defaultProps = defaultProps;
+
+exports.default = Nav;
+module.exports = exports['default'];
+
 /***/ }),
-/* 10 */
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _infernoCreateElement = __webpack_require__(2);
+
+var _classnames = __webpack_require__(1);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _utils = __webpack_require__(3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var defaultProps = {
+  tag: 'li'
+};
+
+var NavItem = function NavItem(props) {
+  var children = props.children,
+      className = props.className,
+      cssModule = props.cssModule,
+      Tag = props.tag,
+      attributes = _objectWithoutProperties(props, ['children', 'className', 'cssModule', 'tag']);
+
+  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'nav-item'), cssModule);
+
+  Object.assign(attributes, { className: classes });
+
+  return (0, _infernoCreateElement.createElement)(Tag, attributes, children);
+};
+
+NavItem.defaultProps = defaultProps;
+
+exports.default = NavItem;
+module.exports = exports['default'];
+
+/***/ }),
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1201,13 +1192,306 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _inferno = __webpack_require__(0);
 
-var _infernoCreateElement = __webpack_require__(3);
+var _infernoCreateElement = __webpack_require__(2);
 
 var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var defaultProps = {
+  tag: 'a'
+};
+
+var NavLink = function (_Component) {
+  _inherits(NavLink, _Component);
+
+  function NavLink(props) {
+    _classCallCheck(this, NavLink);
+
+    var _this = _possibleConstructorReturn(this, (NavLink.__proto__ || Object.getPrototypeOf(NavLink)).call(this, props));
+
+    _this.onClick = _this.onClick.bind(_this);
+    return _this;
+  }
+
+  _createClass(NavLink, [{
+    key: 'onClick',
+    value: function onClick(e) {
+      if (this.props.disabled) {
+        e.preventDefault();
+        return;
+      }
+
+      if (this.props.href === '#') {
+        e.preventDefault();
+      }
+
+      if (this.props.onClick) {
+        this.props.onClick(e);
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          children = _props.children,
+          className = _props.className,
+          cssModule = _props.cssModule,
+          active = _props.active,
+          Tag = _props.tag,
+          innerRef = _props.innerRef,
+          attributes = _objectWithoutProperties(_props, ['children', 'className', 'cssModule', 'active', 'tag', 'innerRef']);
+
+      var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'nav-link', {
+        disabled: attributes.disabled,
+        active: active
+      }), cssModule);
+
+      Object.assign(attributes, {
+        className: classes,
+        ref: innerRef,
+        onClick: this.onClick
+      });
+
+      return (0, _infernoCreateElement.createElement)(Tag, attributes, children);
+    }
+  }]);
+
+  return NavLink;
+}(_inferno.Component);
+
+NavLink.defaultProps = defaultProps;
+
+exports.default = NavLink;
+module.exports = exports['default'];
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+// shim for using process in browser
+var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
+
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout() {
+    throw new Error('clearTimeout has not been defined');
+}
+(function () {
+    try {
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
+        }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
+    }
+    try {
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
+        }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
+    }
+})();
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch (e) {
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch (e) {
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+}
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e) {
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e) {
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
+}
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = runTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while (len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    runClearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        runTimeout(drainQueue);
+    }
+};
+
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) {
+    return [];
+};
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () {
+    return '/';
+};
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function () {
+    return 0;
+};
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _inferno = __webpack_require__(0);
+
+var _infernoCreateElement = __webpack_require__(2);
+
+var _classnames = __webpack_require__(1);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _utils = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1315,7 +1599,7 @@ exports.default = DropdownItem;
 module.exports = exports['default'];
 
 /***/ }),
-/* 11 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1335,9 +1619,9 @@ var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
-var _infernoPopper = __webpack_require__(9);
+var _infernoPopper = __webpack_require__(6);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1384,7 +1668,7 @@ exports.default = DropdownMenu;
 module.exports = exports['default'];
 
 /***/ }),
-/* 12 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1404,11 +1688,11 @@ var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
-var _infernoPopper = __webpack_require__(9);
+var _infernoPopper = __webpack_require__(6);
 
-var _Button = __webpack_require__(5);
+var _Button = __webpack_require__(7);
 
 var _Button2 = _interopRequireDefault(_Button);
 
@@ -1512,3554 +1796,7 @@ exports.default = DropdownToggle;
 module.exports = exports['default'];
 
 /***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _infernoCreateElement = __webpack_require__(3);
-
-var _classnames = __webpack_require__(1);
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _utils = __webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-var defaultProps = {
-  tag: 'ul',
-  vertical: false
-};
-
-var getVerticalClass = function getVerticalClass(vertical) {
-  if (vertical === false) {
-    return false;
-  } else if (vertical === true || vertical === 'xs') {
-    return 'flex-column';
-  }
-
-  return 'flex-' + vertical + '-column';
-};
-
-var Nav = function Nav(props) {
-  var children = props.children,
-      className = props.className,
-      cssModule = props.cssModule,
-      tabs = props.tabs,
-      pills = props.pills,
-      vertical = props.vertical,
-      horizontal = props.horizontal,
-      justified = props.justified,
-      fill = props.fill,
-      navbar = props.navbar,
-      card = props.card,
-      Tag = props.tag,
-      attributes = _objectWithoutProperties(props, ['children', 'className', 'cssModule', 'tabs', 'pills', 'vertical', 'horizontal', 'justified', 'fill', 'navbar', 'card', 'tag']);
-
-  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, navbar ? 'navbar-nav' : 'nav', horizontal ? 'justify-content-' + horizontal : false, getVerticalClass(vertical), {
-    'nav-tabs': tabs,
-    'card-header-tabs': card && tabs,
-    'nav-pills': pills,
-    'card-header-pills': card && pills,
-    'nav-justified': justified,
-    'nav-fill': fill
-  }), cssModule);
-
-  Object.assign(attributes, { className: classes });
-
-  return (0, _infernoCreateElement.createElement)(Tag, attributes, children);
-};
-
-Nav.defaultProps = defaultProps;
-
-exports.default = Nav;
-module.exports = exports['default'];
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _infernoCreateElement = __webpack_require__(3);
-
-var _classnames = __webpack_require__(1);
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _utils = __webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-var defaultProps = {
-  tag: 'li'
-};
-
-var NavItem = function NavItem(props) {
-  var children = props.children,
-      className = props.className,
-      cssModule = props.cssModule,
-      Tag = props.tag,
-      attributes = _objectWithoutProperties(props, ['children', 'className', 'cssModule', 'tag']);
-
-  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'nav-item'), cssModule);
-
-  Object.assign(attributes, { className: classes });
-
-  return (0, _infernoCreateElement.createElement)(Tag, attributes, children);
-};
-
-NavItem.defaultProps = defaultProps;
-
-exports.default = NavItem;
-module.exports = exports['default'];
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _inferno = __webpack_require__(0);
-
-var _infernoCreateElement = __webpack_require__(3);
-
-var _classnames = __webpack_require__(1);
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _utils = __webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var defaultProps = {
-  tag: 'a'
-};
-
-var NavLink = function (_Component) {
-  _inherits(NavLink, _Component);
-
-  function NavLink(props) {
-    _classCallCheck(this, NavLink);
-
-    var _this = _possibleConstructorReturn(this, (NavLink.__proto__ || Object.getPrototypeOf(NavLink)).call(this, props));
-
-    _this.onClick = _this.onClick.bind(_this);
-    return _this;
-  }
-
-  _createClass(NavLink, [{
-    key: 'onClick',
-    value: function onClick(e) {
-      if (this.props.disabled) {
-        e.preventDefault();
-        return;
-      }
-
-      if (this.props.href === '#') {
-        e.preventDefault();
-      }
-
-      if (this.props.onClick) {
-        this.props.onClick(e);
-      }
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          children = _props.children,
-          className = _props.className,
-          cssModule = _props.cssModule,
-          active = _props.active,
-          Tag = _props.tag,
-          innerRef = _props.innerRef,
-          attributes = _objectWithoutProperties(_props, ['children', 'className', 'cssModule', 'active', 'tag', 'innerRef']);
-
-      var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'nav-link', {
-        disabled: attributes.disabled,
-        active: active
-      }), cssModule);
-
-      Object.assign(attributes, {
-        className: classes,
-        ref: innerRef,
-        onClick: this.onClick
-      });
-
-      return (0, _infernoCreateElement.createElement)(Tag, attributes, children);
-    }
-  }]);
-
-  return NavLink;
-}(_inferno.Component);
-
-NavLink.defaultProps = defaultProps;
-
-exports.default = NavLink;
-module.exports = exports['default'];
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var addLeadingSlash = exports.addLeadingSlash = function addLeadingSlash(path) {
-  return path.charAt(0) === '/' ? path : '/' + path;
-};
-
-var stripLeadingSlash = exports.stripLeadingSlash = function stripLeadingSlash(path) {
-  return path.charAt(0) === '/' ? path.substr(1) : path;
-};
-
-var hasBasename = exports.hasBasename = function hasBasename(path, prefix) {
-  return new RegExp('^' + prefix + '(\\/|\\?|#|$)', 'i').test(path);
-};
-
-var stripBasename = exports.stripBasename = function stripBasename(path, prefix) {
-  return hasBasename(path, prefix) ? path.substr(prefix.length) : path;
-};
-
-var stripTrailingSlash = exports.stripTrailingSlash = function stripTrailingSlash(path) {
-  return path.charAt(path.length - 1) === '/' ? path.slice(0, -1) : path;
-};
-
-var parsePath = exports.parsePath = function parsePath(path) {
-  var pathname = path || '/';
-  var search = '';
-  var hash = '';
-
-  var hashIndex = pathname.indexOf('#');
-  if (hashIndex !== -1) {
-    hash = pathname.substr(hashIndex);
-    pathname = pathname.substr(0, hashIndex);
-  }
-
-  var searchIndex = pathname.indexOf('?');
-  if (searchIndex !== -1) {
-    search = pathname.substr(searchIndex);
-    pathname = pathname.substr(0, searchIndex);
-  }
-
-  return {
-    pathname: pathname,
-    search: search === '?' ? '' : search,
-    hash: hash === '#' ? '' : hash
-  };
-};
-
-var createPath = exports.createPath = function createPath(location) {
-  var pathname = location.pathname,
-      search = location.search,
-      hash = location.hash;
-
-  var path = pathname || '/';
-
-  if (search && search !== '?') path += search.charAt(0) === '?' ? search : '?' + search;
-
-  if (hash && hash !== '#') path += hash.charAt(0) === '#' ? hash : '#' + hash;
-
-  return path;
-};
-
-/***/ }),
 /* 17 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createElement", function() { return createElement; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_inferno__ = __webpack_require__(7);
-
-
-// This should be boolean and not reference to window.document
-var isBrowser = !!(typeof window !== 'undefined' && window.document);
-function isNullOrUndef(o) {
-    return isUndefined(o) || isNull(o);
-}
-function isInvalid(o) {
-    return isNull(o) || o === false || isTrue(o) || isUndefined(o);
-}
-function isString(o) {
-    return typeof o === 'string';
-}
-function isNull(o) {
-    return o === null;
-}
-function isTrue(o) {
-    return o === true;
-}
-function isUndefined(o) {
-    return o === void 0;
-}
-function isObject(o) {
-    return typeof o === 'object';
-}
-
-var componentHooks = {
-    onComponentDidMount: 1,
-    onComponentDidUpdate: 1,
-    onComponentShouldUpdate: 1,
-    onComponentWillMount: 1,
-    onComponentWillUnmount: 1,
-    onComponentWillUpdate: 1
-};
-/**
- * Creates virtual node
- * @param {string|Function|Component<any, any>} type Type of node
- * @param {object=} props Optional props for virtual node
- * @param {...{object}=} _children Optional children for virtual node
- * @returns {VNode} new virtual ndoe
- */
-function createElement(type, props) {
-    var _children = [], len = arguments.length - 2;
-    while ( len-- > 0 ) _children[ len ] = arguments[ len + 2 ];
-
-    if (isInvalid(type) || isObject(type)) {
-        throw new Error('Inferno Error: createElement() name parameter cannot be undefined, null, false or true, It must be a string, class or function.');
-    }
-    var children = _children;
-    var ref = null;
-    var key = null;
-    var className = null;
-    var flags = 0;
-    var newProps;
-    if (_children) {
-        if (_children.length === 1) {
-            children = _children[0];
-        }
-        else if (_children.length === 0) {
-            children = void 0;
-        }
-    }
-    if (isString(type)) {
-        flags = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_inferno__["getFlagsForElementVnode"])(type);
-        if (!isNullOrUndef(props)) {
-            newProps = {};
-            for (var prop in props) {
-                if (prop === 'className' || prop === 'class') {
-                    className = props[prop];
-                }
-                else if (prop === 'key') {
-                    key = props.key;
-                }
-                else if (prop === 'children' && isUndefined(children)) {
-                    children = props.children; // always favour children args, default to props
-                }
-                else if (prop === 'ref') {
-                    ref = props.ref;
-                }
-                else {
-                    newProps[prop] = props[prop];
-                }
-            }
-        }
-    }
-    else {
-        flags = 2 /* ComponentUnknown */;
-        if (!isUndefined(children)) {
-            if (!props) {
-                props = {};
-            }
-            props.children = children;
-            children = null;
-        }
-        if (!isNullOrUndef(props)) {
-            newProps = {};
-            for (var prop$1 in props) {
-                if (componentHooks[prop$1] !== void 0) {
-                    if (!ref) {
-                        ref = {};
-                    }
-                    ref[prop$1] = props[prop$1];
-                }
-                else if (prop$1 === 'key') {
-                    key = props.key;
-                }
-                else if (prop$1 === 'ref') {
-                    ref = props.ref;
-                }
-                else {
-                    newProps[prop$1] = props[prop$1];
-                }
-            }
-        }
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_inferno__["createComponentVNode"])(flags, type, newProps, key, ref);
-    }
-    return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_inferno__["createVNode"])(flags, type, className, children, 0 /* UnknownChildren */, newProps, key, ref);
-}
-
-
-
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _inferno = __webpack_require__(0);
-
-var _inferno2 = _interopRequireDefault(_inferno);
-
-var _infernoCreateElement = __webpack_require__(3);
-
-var _classnames = __webpack_require__(1);
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _utils = __webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-var defaultProps = {
-  tag: 'div'
-};
-
-var Card = function Card(props) {
-  var children = props.children,
-      className = props.className,
-      cssModule = props.cssModule,
-      color = props.color,
-      block = props.block,
-      body = props.body,
-      inverse = props.inverse,
-      outline = props.outline,
-      Tag = props.tag,
-      attributes = _objectWithoutProperties(props, ['children', 'className', 'cssModule', 'color', 'block', 'body', 'inverse', 'outline', 'tag']);
-
-  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'card', inverse ? 'text-white' : false, block || body ? 'card-body' : false, color ? (outline ? 'border' : 'bg') + '-' + color : false), cssModule);
-
-  Object.assign(attributes, { className: classes });
-
-  return (0, _infernoCreateElement.createElement)(Tag, attributes, children);
-};
-
-Card.defaultProps = defaultProps;
-
-exports.default = Card;
-module.exports = exports['default'];
-
-/***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.locationsAreEqual = exports.createLocation = undefined;
-
-var _resolvePathname = __webpack_require__(91);
-
-var _resolvePathname2 = _interopRequireDefault(_resolvePathname);
-
-var _valueEqual = __webpack_require__(92);
-
-var _valueEqual2 = _interopRequireDefault(_valueEqual);
-
-var _PathUtils = __webpack_require__(16);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var _extends = Object.assign || function (target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i];for (var key in source) {
-      if (Object.prototype.hasOwnProperty.call(source, key)) {
-        target[key] = source[key];
-      }
-    }
-  }return target;
-};
-
-var createLocation = exports.createLocation = function createLocation(path, state, key, currentLocation) {
-  var location = void 0;
-  if (typeof path === 'string') {
-    // Two-arg form: push(path, state)
-    location = (0, _PathUtils.parsePath)(path);
-    location.state = state;
-  } else {
-    // One-arg form: push(location)
-    location = _extends({}, path);
-
-    if (location.pathname === undefined) location.pathname = '';
-
-    if (location.search) {
-      if (location.search.charAt(0) !== '?') location.search = '?' + location.search;
-    } else {
-      location.search = '';
-    }
-
-    if (location.hash) {
-      if (location.hash.charAt(0) !== '#') location.hash = '#' + location.hash;
-    } else {
-      location.hash = '';
-    }
-
-    if (state !== undefined && location.state === undefined) location.state = state;
-  }
-
-  try {
-    location.pathname = decodeURI(location.pathname);
-  } catch (e) {
-    if (e instanceof URIError) {
-      throw new URIError('Pathname "' + location.pathname + '" could not be decoded. ' + 'This is likely caused by an invalid percent-encoding.');
-    } else {
-      throw e;
-    }
-  }
-
-  if (key) location.key = key;
-
-  if (currentLocation) {
-    // Resolve incomplete/relative pathname relative to current location.
-    if (!location.pathname) {
-      location.pathname = currentLocation.pathname;
-    } else if (location.pathname.charAt(0) !== '/') {
-      location.pathname = (0, _resolvePathname2.default)(location.pathname, currentLocation.pathname);
-    }
-  } else {
-    // When there is no prior location and pathname is empty, set it to /
-    if (!location.pathname) {
-      location.pathname = '/';
-    }
-  }
-
-  return location;
-};
-
-var locationsAreEqual = exports.locationsAreEqual = function locationsAreEqual(a, b) {
-  return a.pathname === b.pathname && a.search === b.search && a.hash === b.hash && a.key === b.key && (0, _valueEqual2.default)(a.state, b.state);
-};
-
-/***/ }),
-/* 20 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/**
- * Copyright 2014-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
-
-
-
-/**
- * Similar to invariant but only logs a warning if the condition is not met.
- * This can be used to log issues in development environments in critical
- * paths. Removing the logging code for production environments will keep the
- * same logic and follow the same code paths.
- */
-
-var warning = function warning() {};
-
-if (process.env.NODE_ENV !== 'production') {
-  warning = function warning(condition, format, args) {
-    var len = arguments.length;
-    args = new Array(len > 2 ? len - 2 : 0);
-    for (var key = 2; key < len; key++) {
-      args[key - 2] = arguments[key];
-    }
-    if (format === undefined) {
-      throw new Error('`warning(condition, format, ...args)` requires a warning ' + 'message argument');
-    }
-
-    if (format.length < 10 || /^[s\W]*$/.test(format)) {
-      throw new Error('The warning format should be able to uniquely identify this ' + 'warning. Please, use a more descriptive format than: ' + format);
-    }
-
-    if (!condition) {
-      var argIndex = 0;
-      var message = 'Warning: ' + format.replace(/%s/g, function () {
-        return args[argIndex++];
-      });
-      if (typeof console !== 'undefined') {
-        console.error(message);
-      }
-      try {
-        // This error was thrown as a convenience so that you can use this stack
-        // to find the callsite that caused this warning to fire.
-        throw new Error(message);
-      } catch (x) {}
-    }
-  };
-}
-
-module.exports = warning;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
-
-/***/ }),
-/* 21 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NO_OP", function() { return NO_OP; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ERROR_MSG", function() { return ERROR_MSG; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isBrowser", function() { return isBrowser; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toArray", function() { return toArray; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isArray", function() { return isArray; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isStringOrNumber", function() { return isStringOrNumber; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isNullOrUndef", function() { return isNullOrUndef; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isInvalid", function() { return isInvalid; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isFunction", function() { return isFunction; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isString", function() { return isString; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isNumber", function() { return isNumber; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isNull", function() { return isNull; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isTrue", function() { return isTrue; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isUndefined", function() { return isUndefined; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isDefined", function() { return isDefined; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isObject", function() { return isObject; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "throwError", function() { return throwError; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "warning", function() { return warning; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "combineFrom", function() { return combineFrom; });
-var NO_OP = '$NO_OP';
-var ERROR_MSG = 'a runtime error occured! Use Inferno in development environment to find the error.';
-// This should be boolean and not reference to window.document
-var isBrowser = !!(typeof window !== 'undefined' && window.document);
-function toArray(children) {
-    return isArray(children) ? children : children ? [children] : children;
-}
-// this is MUCH faster than .constructor === Array and instanceof Array
-// in Node 7 and the later versions of V8, slower in older versions though
-var isArray = Array.isArray;
-function isStringOrNumber(o) {
-    var type = typeof o;
-    return type === 'string' || type === 'number';
-}
-function isNullOrUndef(o) {
-    return isUndefined(o) || isNull(o);
-}
-function isInvalid(o) {
-    return isNull(o) || o === false || isTrue(o) || isUndefined(o);
-}
-function isFunction(o) {
-    return typeof o === 'function';
-}
-function isString(o) {
-    return typeof o === 'string';
-}
-function isNumber(o) {
-    return typeof o === 'number';
-}
-function isNull(o) {
-    return o === null;
-}
-function isTrue(o) {
-    return o === true;
-}
-function isUndefined(o) {
-    return o === void 0;
-}
-function isDefined(o) {
-    return o !== void 0;
-}
-function isObject(o) {
-    return typeof o === 'object';
-}
-function throwError(message) {
-    if (!message) {
-        message = ERROR_MSG;
-    }
-    throw new Error(("Inferno Error: " + message));
-}
-function warning(message) {
-    // tslint:disable-next-line:no-console
-    console.error(message);
-}
-function combineFrom(first, second) {
-    var out = {};
-    if (first) {
-        for (var key in first) {
-            out[key] = first[key];
-        }
-    }
-    if (second) {
-        for (var key$1 in second) {
-            out[key$1] = second[key$1];
-        }
-    }
-    return out;
-}
-
-
-
-
-/***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _inferno = __webpack_require__(0);
-
-var _inferno2 = _interopRequireDefault(_inferno);
-
-var _infernoCreateElement = __webpack_require__(3);
-
-var _classnames = __webpack_require__(1);
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _utils = __webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-var defaultProps = {
-  tag: 'div',
-  role: 'group'
-};
-
-var ButtonGroup = function ButtonGroup(props) {
-  var children = props.children,
-      className = props.className,
-      cssModule = props.cssModule,
-      size = props.size,
-      vertical = props.vertical,
-      Tag = props.tag,
-      attributes = _objectWithoutProperties(props, ['children', 'className', 'cssModule', 'size', 'vertical', 'tag']);
-
-  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, size ? 'btn-group-' + size : false, vertical ? 'btn-group-vertical' : 'btn-group'), cssModule);
-
-  Object.assign(attributes, { className: classes });
-
-  return (0, _infernoCreateElement.createElement)(Tag, attributes, children);
-};
-
-ButtonGroup.defaultProps = defaultProps;
-
-exports.default = ButtonGroup;
-module.exports = exports['default'];
-
-/***/ }),
-/* 23 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _inferno = __webpack_require__(0);
-
-var _inferno2 = _interopRequireDefault(_inferno);
-
-var _infernoCreateElement = __webpack_require__(3);
-
-var _classnames = __webpack_require__(1);
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _utils = __webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-var defaultProps = {
-  tag: 'div'
-};
-
-var CardBody = function CardBody(props) {
-  var children = props.children,
-      className = props.className,
-      cssModule = props.cssModule,
-      Tag = props.tag,
-      attributes = _objectWithoutProperties(props, ['children', 'className', 'cssModule', 'tag']);
-
-  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'card-body'), cssModule);
-
-  Object.assign(attributes, { className: classes });
-
-  return (0, _infernoCreateElement.createElement)(Tag, attributes, children);
-};
-
-CardBody.defaultProps = defaultProps;
-
-exports.default = CardBody;
-module.exports = exports['default'];
-
-/***/ }),
-/* 24 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _inferno = __webpack_require__(0);
-
-var _inferno2 = _interopRequireDefault(_inferno);
-
-var _infernoCreateElement = __webpack_require__(3);
-
-var _classnames = __webpack_require__(1);
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _utils = __webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-var defaultProps = {
-  tag: 'p'
-};
-
-var CardText = function CardText(props) {
-  var children = props.children,
-      className = props.className,
-      cssModule = props.cssModule,
-      Tag = props.tag,
-      attributes = _objectWithoutProperties(props, ['children', 'className', 'cssModule', 'tag']);
-
-  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'card-text'), cssModule);
-
-  Object.assign(attributes, { className: classes });
-
-  return (0, _infernoCreateElement.createElement)(Tag, attributes, children);
-};
-
-CardText.defaultProps = defaultProps;
-
-exports.default = CardText;
-module.exports = exports['default'];
-
-/***/ }),
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _inferno = __webpack_require__(0);
-
-var _inferno2 = _interopRequireDefault(_inferno);
-
-var _infernoCreateElement = __webpack_require__(3);
-
-var _classnames = __webpack_require__(1);
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _utils = __webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-var defaultProps = {
-  tag: 'h4'
-};
-
-var CardTitle = function CardTitle(props) {
-  var children = props.children,
-      className = props.className,
-      cssModule = props.cssModule,
-      Tag = props.tag,
-      attributes = _objectWithoutProperties(props, ['children', 'className', 'cssModule', 'tag']);
-
-  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'card-title'), cssModule);
-
-  Object.assign(attributes, { className: classes });
-
-  return (0, _infernoCreateElement.createElement)(Tag, attributes, children);
-};
-
-CardTitle.defaultProps = defaultProps;
-
-exports.default = CardTitle;
-module.exports = exports['default'];
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _inferno = __webpack_require__(0);
-
-var _inferno2 = _interopRequireDefault(_inferno);
-
-var _infernoCreateElement = __webpack_require__(3);
-
-var _classnames = __webpack_require__(1);
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _utils = __webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-var defaultProps = {
-  tag: 'form'
-};
-
-/**
- * 
- * NOTE: I have removed the `inline`-attribute, this can be done with CSS
- * which gives cleaner code and better separation of semantics and styling.
- */
-
-var Form = function Form(props) {
-  var children = props.children,
-      className = props.className,
-      cssModule = props.cssModule,
-      Tag = props.tag,
-      innerRef = props.innerRef,
-      attributes = _objectWithoutProperties(props, ['children', 'className', 'cssModule', 'tag', 'innerRef']);
-
-  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className), cssModule);
-
-  Object.assign(attributes, {
-    className: classes,
-    ref: innerRef
-  });
-
-  return (0, _infernoCreateElement.createElement)(Tag, attributes, children);
-};
-
-Form.defaultProps = defaultProps;
-
-exports.default = Form;
-module.exports = exports['default'];
-
-/***/ }),
-/* 27 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _inferno = __webpack_require__(0);
-
-var _inferno2 = _interopRequireDefault(_inferno);
-
-var _infernoCreateElement = __webpack_require__(3);
-
-var _classnames = __webpack_require__(1);
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _utils = __webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-var defaultProps = {
-  tag: 'div'
-};
-
-var FormGroup = function FormGroup(props) {
-  var children = props.children,
-      className = props.className,
-      cssModule = props.cssModule,
-      row = props.row,
-      disabled = props.disabled,
-      check = props.check,
-      Tag = props.tag,
-      attributes = _objectWithoutProperties(props, ['children', 'className', 'cssModule', 'row', 'disabled', 'check', 'tag']);
-
-  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, row ? 'row' : false, check ? 'form-check' : 'form-group', check && disabled ? 'disabled' : false), cssModule);
-
-  Object.assign(attributes, { className: classes });
-
-  return (0, _infernoCreateElement.createElement)(Tag, attributes, children);
-};
-
-FormGroup.defaultProps = defaultProps;
-
-exports.default = FormGroup;
-module.exports = exports['default'];
-
-/***/ }),
-/* 28 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _inferno = __webpack_require__(0);
-
-var _infernoCreateElement = __webpack_require__(3);
-
-var _classnames = __webpack_require__(1);
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _utils = __webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* eslint react/prefer-stateless-function: 0 */
-
-
-var defaultProps = {
-  tag: 'p',
-  type: 'text'
-};
-
-var Input = function (_Component) {
-  _inherits(Input, _Component);
-
-  function Input() {
-    _classCallCheck(this, Input);
-
-    return _possibleConstructorReturn(this, (Input.__proto__ || Object.getPrototypeOf(Input)).apply(this, arguments));
-  }
-
-  _createClass(Input, [{
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          className = _props.className,
-          cssModule = _props.cssModule,
-          type = _props.type,
-          bsSize = _props.bsSize,
-          tag = _props.tag,
-          valid = _props.valid,
-          addon = _props.addon,
-          plaintext = _props.plaintext,
-          innerRef = _props.innerRef,
-          attributes = _objectWithoutProperties(_props, ['className', 'cssModule', 'type', 'bsSize', 'tag', 'valid', 'addon', 'plaintext', 'innerRef']);
-
-      var checkInput = ['radio', 'checkbox'].indexOf(type) > -1;
-
-      var fileInput = type === 'file';
-      var textareaInput = type === 'textarea';
-      var selectInput = type === 'select';
-      var Tag = selectInput || textareaInput ? type : 'input';
-
-      var formControlClass = 'form-control';
-
-      if (plaintext) {
-        formControlClass = formControlClass + '-plaintext';
-        Tag = tag;
-      } else if (fileInput) {
-        formControlClass = formControlClass + '-file';
-      } else if (checkInput) {
-        if (addon) {
-          formControlClass = null;
-        } else {
-          formControlClass = 'form-check-input';
-        }
-      }
-
-      var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, valid === false && 'is-invalid', valid && 'is-valid', bsSize ? 'form-control-' + bsSize : false, formControlClass), cssModule);
-
-      if (Tag === 'input') {
-        attributes.type = type;
-      }
-
-      Object.assign(attributes, {
-        className: classes,
-        ref: innerRef
-      });
-
-      return (0, _infernoCreateElement.createElement)(Tag, attributes);
-    }
-  }]);
-
-  return Input;
-}(_inferno.Component);
-
-Input.defaultProps = defaultProps;
-
-exports.default = Input;
-module.exports = exports['default'];
-
-/***/ }),
-/* 29 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _inferno = __webpack_require__(0);
-
-var _inferno2 = _interopRequireDefault(_inferno);
-
-var _infernoCreateElement = __webpack_require__(3);
-
-var _classnames = __webpack_require__(1);
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _utils = __webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-var defaultProps = {
-  tag: 'label'
-};
-
-/**
- * 
- * NOTE: I have removed the `inline`-attribute, this can be done with CSS
- * which gives cleaner code and better separation of semantics and styling.
- * 
- * This affects widths property
- */
-
-var Label = function Label(props) {
-  var children = props.children,
-      className = props.className,
-      cssModule = props.cssModule,
-      hidden = props.hidden,
-      Tag = props.tag,
-      check = props.check,
-      disabled = props.disabled,
-      htmlFor = props.htmlFor,
-      attributes = _objectWithoutProperties(props, ['children', 'className', 'cssModule', 'hidden', 'tag', 'check', 'disabled', 'htmlFor']);
-
-  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, hidden ? 'sr-only' : false, check ? 'form-check-label' : 'form-control-label', check && disabled ? 'disabled' : false), cssModule);
-
-  Object.assign(attributes, {
-    className: classes,
-    htmlFor: htmlFor
-  });
-
-  return (0, _infernoCreateElement.createElement)(Tag, attributes, children);
-};
-
-Label.defaultProps = defaultProps;
-
-exports.default = Label;
-module.exports = exports['default'];
-
-/***/ }),
-/* 30 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _warning = __webpack_require__(20);
-
-var _warning2 = _interopRequireDefault(_warning);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var createTransitionManager = function createTransitionManager() {
-  var prompt = null;
-
-  var setPrompt = function setPrompt(nextPrompt) {
-    (0, _warning2.default)(prompt == null, 'A history supports only one prompt at a time');
-
-    prompt = nextPrompt;
-
-    return function () {
-      if (prompt === nextPrompt) prompt = null;
-    };
-  };
-
-  var confirmTransitionTo = function confirmTransitionTo(location, action, getUserConfirmation, callback) {
-    // TODO: If another transition starts while we're still confirming
-    // the previous one, we may end up in a weird state. Figure out the
-    // best way to handle this.
-    if (prompt != null) {
-      var result = typeof prompt === 'function' ? prompt(location, action) : prompt;
-
-      if (typeof result === 'string') {
-        if (typeof getUserConfirmation === 'function') {
-          getUserConfirmation(result, callback);
-        } else {
-          (0, _warning2.default)(false, 'A history needs a getUserConfirmation function in order to use a prompt message');
-
-          callback(true);
-        }
-      } else {
-        // Return false from a transition hook to cancel the transition.
-        callback(result !== false);
-      }
-    } else {
-      callback(true);
-    }
-  };
-
-  var listeners = [];
-
-  var appendListener = function appendListener(fn) {
-    var isActive = true;
-
-    var listener = function listener() {
-      if (isActive) fn.apply(undefined, arguments);
-    };
-
-    listeners.push(listener);
-
-    return function () {
-      isActive = false;
-      listeners = listeners.filter(function (item) {
-        return item !== listener;
-      });
-    };
-  };
-
-  var notifyListeners = function notifyListeners() {
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    listeners.forEach(function (listener) {
-      return listener.apply(undefined, args);
-    });
-  };
-
-  return {
-    setPrompt: setPrompt,
-    confirmTransitionTo: confirmTransitionTo,
-    appendListener: appendListener,
-    notifyListeners: notifyListeners
-  };
-};
-
-exports.default = createTransitionManager;
-module.exports = exports['default'];
-
-/***/ }),
-/* 31 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Component; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return EMPTY_OBJ; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return NO_OP; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return createComponentVNode; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return createPortal; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return createRenderer; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return createTextVNode; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return createVNode; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return directClone; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return getFlagsForElementVnode; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return getNumberStyleValue; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return hydrate; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return linkEvent; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return normalizeProps; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return options; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return version; });
-var NO_OP = '$NO_OP';
-var ERROR_MSG = 'a runtime error occured! Use Inferno in development environment to find the error.';
-// This should be boolean and not reference to window.document
-var isBrowser = !!(typeof window !== 'undefined' && window.document);
-// this is MUCH faster than .constructor === Array and instanceof Array
-// in Node 7 and the later versions of V8, slower in older versions though
-var isArray = Array.isArray;
-function isStringOrNumber(o) {
-    var type = typeof o;
-    return type === 'string' || type === 'number';
-}
-function isNullOrUndef(o) {
-    return isUndefined(o) || isNull(o);
-}
-function isInvalid(o) {
-    return isNull(o) || o === false || isTrue(o) || isUndefined(o);
-}
-function isFunction(o) {
-    return typeof o === 'function';
-}
-function isString(o) {
-    return typeof o === 'string';
-}
-function isNumber(o) {
-    return typeof o === 'number';
-}
-function isNull(o) {
-    return o === null;
-}
-function isTrue(o) {
-    return o === true;
-}
-function isUndefined(o) {
-    return o === void 0;
-}
-function isDefined(o) {
-    return o !== void 0;
-}
-function isObject(o) {
-    return typeof o === 'object';
-}
-function throwError(message) {
-    if (!message) {
-        message = ERROR_MSG;
-    }
-    throw new Error(("Inferno Error: " + message));
-}
-function combineFrom(first, second) {
-    var out = {};
-    if (first) {
-        for (var key in first) {
-            out[key] = first[key];
-        }
-    }
-    if (second) {
-        for (var key$1 in second) {
-            out[key$1] = second[key$1];
-        }
-    }
-    return out;
-}
-
-var keyPrefix = '$';
-function getVNode(childFlags, children, className, flags, key, props, ref, type) {
-    {
-        return {
-            childFlags: childFlags,
-            children: children,
-            className: className,
-            dom: null,
-            flags: flags,
-            key: key === void 0 ? null : key,
-            parentVNode: null,
-            props: props === void 0 ? null : props,
-            ref: ref === void 0 ? null : ref,
-            type: type
-        };
-    }
-    return {
-        childFlags: childFlags,
-        children: children,
-        className: className,
-        dom: null,
-        flags: flags,
-        isValidated: false,
-        key: key === void 0 ? null : key,
-        parentVNode: null,
-        props: props === void 0 ? null : props,
-        ref: ref === void 0 ? null : ref,
-        type: type
-    };
-}
-function createVNode(flags, type, className, children, childFlags, props, key, ref) {
-    var childFlag = childFlags === void 0 ? 1 /* HasInvalidChildren */ : childFlags;
-    var vNode = getVNode(childFlag, children, className, flags, key, props, ref, type);
-    var optsVNode = options.createVNode;
-    if (typeof optsVNode === 'function') {
-        optsVNode(vNode);
-    }
-    if (childFlag === 0 /* UnknownChildren */) {
-        normalizeChildren(vNode, vNode.children);
-    }
-    return vNode;
-}
-function createComponentVNode(flags, type, props, key, ref) {
-    if ((flags & 2 /* ComponentUnknown */) > 0) {
-        flags = isDefined(type.prototype) && isFunction(type.prototype.render) ? 4 /* ComponentClass */ : 8 /* ComponentFunction */;
-    }
-    // set default props
-    var defaultProps = type.defaultProps;
-    if (!isNullOrUndef(defaultProps)) {
-        if (!props) {
-            props = {}; // Props can be referenced and modified at application level so always create new object
-        }
-        for (var prop in defaultProps) {
-            if (isUndefined(props[prop])) {
-                props[prop] = defaultProps[prop];
-            }
-        }
-    }
-    if ((flags & 8 /* ComponentFunction */) > 0) {
-        var defaultHooks = type.defaultHooks;
-        if (!isNullOrUndef(defaultHooks)) {
-            if (!ref) {
-                // As ref cannot be referenced from application level, we can use the same refs object
-                ref = defaultHooks;
-            }
-            else {
-                for (var prop$1 in defaultHooks) {
-                    if (isUndefined(ref[prop$1])) {
-                        ref[prop$1] = defaultHooks[prop$1];
-                    }
-                }
-            }
-        }
-    }
-    var vNode = getVNode(1 /* HasInvalidChildren */, null, null, flags, key, props, ref, type);
-    var optsVNode = options.createVNode;
-    if (isFunction(optsVNode)) {
-        optsVNode(vNode);
-    }
-    return vNode;
-}
-function createTextVNode(text, key) {
-    return getVNode(1 /* HasInvalidChildren */, isNullOrUndef(text) ? '' : text, null, 16 /* Text */, key, null, null, null);
-}
-function normalizeProps(vNode) {
-    var props = vNode.props;
-    if (props) {
-        if (vNode.flags & 481 /* Element */) {
-            if (isDefined(props.children) && isNullOrUndef(vNode.children)) {
-                normalizeChildren(vNode, props.children);
-            }
-            if (isDefined(props.className)) {
-                vNode.className = props.className || null;
-                props.className = undefined;
-            }
-        }
-        if (isDefined(props.key)) {
-            vNode.key = props.key;
-            props.key = undefined;
-        }
-        if (isDefined(props.ref)) {
-            vNode.ref = props.ref;
-            props.ref = undefined;
-        }
-    }
-    return vNode;
-}
-function directClone(vNodeToClone) {
-    var newVNode;
-    var flags = vNodeToClone.flags;
-    if (flags & 14 /* Component */) {
-        var props;
-        var propsToClone = vNodeToClone.props;
-        if (!isNull(propsToClone)) {
-            props = {};
-            for (var key in propsToClone) {
-                props[key] = propsToClone[key];
-            }
-        }
-        newVNode = createComponentVNode(flags, vNodeToClone.type, props, vNodeToClone.key, vNodeToClone.ref);
-    }
-    else if (flags & 481 /* Element */) {
-        var children = vNodeToClone.children;
-        newVNode = createVNode(flags, vNodeToClone.type, vNodeToClone.className, children, 0 /* UnknownChildren */, vNodeToClone.props, vNodeToClone.key, vNodeToClone.ref);
-    }
-    else if (flags & 16 /* Text */) {
-        newVNode = createTextVNode(vNodeToClone.children, vNodeToClone.key);
-    }
-    else if (flags & 1024 /* Portal */) {
-        newVNode = vNodeToClone;
-    }
-    return newVNode;
-}
-function createVoidVNode() {
-    return createTextVNode('', null);
-}
-function _normalizeVNodes(nodes, result, index, currentKey) {
-    for (var len = nodes.length; index < len; index++) {
-        var n = nodes[index];
-        if (!isInvalid(n)) {
-            var newKey = currentKey + keyPrefix + index;
-            if (isArray(n)) {
-                _normalizeVNodes(n, result, 0, newKey);
-            }
-            else {
-                if (isStringOrNumber(n)) {
-                    n = createTextVNode(n, newKey);
-                }
-                else {
-                    var oldKey = n.key;
-                    var isPrefixedKey = isString(oldKey) && oldKey[0] === keyPrefix;
-                    if (!isNull(n.dom) || isPrefixedKey) {
-                        n = directClone(n);
-                    }
-                    if (isNull(oldKey) || isPrefixedKey) {
-                        n.key = newKey;
-                    }
-                    else {
-                        n.key = currentKey + oldKey;
-                    }
-                }
-                result.push(n);
-            }
-        }
-    }
-}
-function getFlagsForElementVnode(type) {
-    if (type === 'svg') {
-        return 32 /* SvgElement */;
-    }
-    if (type === 'input') {
-        return 64 /* InputElement */;
-    }
-    if (type === 'select') {
-        return 256 /* SelectElement */;
-    }
-    if (type === 'textarea') {
-        return 128 /* TextareaElement */;
-    }
-    return 1 /* HtmlElement */;
-}
-function normalizeChildren(vNode, children) {
-    var newChildren;
-    var newChildFlags;
-    // Don't change children to match strict equal (===) true in patching
-    if (isInvalid(children)) {
-        newChildFlags = 1 /* HasInvalidChildren */;
-        newChildren = children;
-    }
-    else if (isString(children)) {
-        newChildFlags = 2 /* HasVNodeChildren */;
-        newChildren = createTextVNode(children);
-    }
-    else if (isNumber(children)) {
-        newChildFlags = 2 /* HasVNodeChildren */;
-        newChildren = createTextVNode(children + '');
-    }
-    else if (isArray(children)) {
-        var len = children.length;
-        if (len === 0) {
-            newChildren = null;
-            newChildFlags = 1 /* HasInvalidChildren */;
-        }
-        else {
-            // we assign $ which basically means we've flagged this array for future note
-            // if it comes back again, we need to clone it, as people are using it
-            // in an immutable way
-            // tslint:disable-next-line
-            if (Object.isFrozen(children) || children['$'] === true) {
-                children = children.slice();
-            }
-            newChildFlags = 8 /* HasKeyedChildren */;
-            for (var i = 0; i < len; i++) {
-                var n = children[i];
-                if (isInvalid(n) || isArray(n)) {
-                    newChildren = newChildren || children.slice(0, i);
-                    _normalizeVNodes(children, newChildren, i, '');
-                    break;
-                }
-                else if (isStringOrNumber(n)) {
-                    newChildren = newChildren || children.slice(0, i);
-                    newChildren.push(createTextVNode(n, keyPrefix + i));
-                }
-                else {
-                    var key = n.key;
-                    var isNullDom = isNull(n.dom);
-                    var isNullKey = isNull(key);
-                    var isPrefixed = !isNullKey && key[0] === keyPrefix;
-                    if (!isNullDom || isNullKey || isPrefixed) {
-                        newChildren = newChildren || children.slice(0, i);
-                        if (!isNullDom || isPrefixed) {
-                            n = directClone(n);
-                        }
-                        if (isNullKey || isPrefixed) {
-                            n.key = keyPrefix + i;
-                        }
-                        newChildren.push(n);
-                    }
-                    else if (newChildren) {
-                        newChildren.push(n);
-                    }
-                }
-            }
-            newChildren = newChildren || children;
-            newChildren.$ = true;
-        }
-    }
-    else {
-        newChildren = children;
-        if (!isNull(children.dom)) {
-            newChildren = directClone(children);
-        }
-        newChildFlags = 2 /* HasVNodeChildren */;
-    }
-    vNode.children = newChildren;
-    vNode.childFlags = newChildFlags;
-    return vNode;
-}
-var options = {
-    afterMount: null,
-    afterRender: null,
-    afterUpdate: null,
-    beforeRender: null,
-    beforeUnmount: null,
-    createVNode: null,
-    roots: []
-};
-
-/**
- * Links given data to event as first parameter
- * @param {*} data data to be linked, it will be available in function as first parameter
- * @param {Function} event Function to be called when event occurs
- * @returns {{data: *, event: Function}}
- */
-function linkEvent(data, event) {
-    if (isFunction(event)) {
-        return { data: data, event: event };
-    }
-    return null; // Return null when event is invalid, to avoid creating unnecessary event handlers
-}
-
-var xlinkNS = 'http://www.w3.org/1999/xlink';
-var xmlNS = 'http://www.w3.org/XML/1998/namespace';
-var svgNS = 'http://www.w3.org/2000/svg';
-var namespaces = {
-    'xlink:actuate': xlinkNS,
-    'xlink:arcrole': xlinkNS,
-    'xlink:href': xlinkNS,
-    'xlink:role': xlinkNS,
-    'xlink:show': xlinkNS,
-    'xlink:title': xlinkNS,
-    'xlink:type': xlinkNS,
-    'xml:base': xmlNS,
-    'xml:lang': xmlNS,
-    'xml:space': xmlNS
-};
-
-// We need EMPTY_OBJ defined in one place.
-// Its used for comparison so we cant inline it into shared
-var EMPTY_OBJ = {};
-var LIFECYCLE = [];
-function appendChild(parentDom, dom) {
-    parentDom.appendChild(dom);
-}
-function insertOrAppend(parentDom, newNode, nextNode) {
-    if (isNullOrUndef(nextNode)) {
-        appendChild(parentDom, newNode);
-    }
-    else {
-        parentDom.insertBefore(newNode, nextNode);
-    }
-}
-function documentCreateElement(tag, isSVG) {
-    if (isSVG === true) {
-        return document.createElementNS(svgNS, tag);
-    }
-    return document.createElement(tag);
-}
-function replaceChild(parentDom, newDom, lastDom) {
-    parentDom.replaceChild(newDom, lastDom);
-}
-function removeChild(parentDom, dom) {
-    parentDom.removeChild(dom);
-}
-function callAll(arrayFn) {
-    var listener;
-    while ((listener = arrayFn.shift()) !== undefined) {
-        listener();
-    }
-}
-
-var attachedEventCounts = {};
-var attachedEvents = {};
-function handleEvent(name, nextEvent, dom) {
-    var eventsLeft = attachedEventCounts[name];
-    var eventsObject = dom.$EV;
-    if (nextEvent) {
-        if (!eventsLeft) {
-            attachedEvents[name] = attachEventToDocument(name);
-            attachedEventCounts[name] = 0;
-        }
-        if (!eventsObject) {
-            eventsObject = dom.$EV = {};
-        }
-        if (!eventsObject[name]) {
-            attachedEventCounts[name]++;
-        }
-        eventsObject[name] = nextEvent;
-    }
-    else if (eventsObject && eventsObject[name]) {
-        attachedEventCounts[name]--;
-        if (eventsLeft === 1) {
-            document.removeEventListener(normalizeEventName(name), attachedEvents[name]);
-            attachedEvents[name] = null;
-        }
-        eventsObject[name] = nextEvent;
-    }
-}
-function dispatchEvents(event, target, isClick, name, eventData) {
-    var dom = target;
-    while (!isNull(dom)) {
-        // Html Nodes can be nested fe: span inside button in that scenario browser does not handle disabled attribute on parent,
-        // because the event listener is on document.body
-        // Don't process clicks on disabled elements
-        if (isClick && dom.disabled) {
-            return;
-        }
-        var eventsObject = dom.$EV;
-        if (eventsObject) {
-            var currentEvent = eventsObject[name];
-            if (currentEvent) {
-                // linkEvent object
-                eventData.dom = dom;
-                if (currentEvent.event) {
-                    currentEvent.event(currentEvent.data, event);
-                }
-                else {
-                    currentEvent(event);
-                }
-                if (event.cancelBubble) {
-                    return;
-                }
-            }
-        }
-        dom = dom.parentNode;
-    }
-}
-function normalizeEventName(name) {
-    return name.substr(2).toLowerCase();
-}
-function stopPropagation() {
-    this.cancelBubble = true;
-    this.stopImmediatePropagation();
-}
-function attachEventToDocument(name) {
-    var docEvent = function (event) {
-        var type = event.type;
-        var isClick = type === 'click' || type === 'dblclick';
-        if (isClick && event.button !== 0) {
-            // Firefox incorrectly triggers click event for mid/right mouse buttons.
-            // This bug has been active for 12 years.
-            // https://bugzilla.mozilla.org/show_bug.cgi?id=184051
-            event.preventDefault();
-            event.stopPropagation();
-            return false;
-        }
-        event.stopPropagation = stopPropagation;
-        // Event data needs to be object to save reference to currentTarget getter
-        var eventData = {
-            dom: document
-        };
-        try {
-            Object.defineProperty(event, 'currentTarget', {
-                configurable: true,
-                get: function get() {
-                    return eventData.dom;
-                }
-            });
-        }
-        catch (e) {
-            /* safari7 and phantomJS will crash */
-        }
-        dispatchEvents(event, event.target, isClick, name, eventData);
-    };
-    document.addEventListener(normalizeEventName(name), docEvent);
-    return docEvent;
-}
-
-function isSameInnerHTML(dom, innerHTML) {
-    var tempdom = document.createElement('i');
-    tempdom.innerHTML = innerHTML;
-    return tempdom.innerHTML === dom.innerHTML;
-}
-function isSamePropsInnerHTML(dom, props) {
-    return Boolean(props && props.dangerouslySetInnerHTML && props.dangerouslySetInnerHTML.__html && isSameInnerHTML(dom, props.dangerouslySetInnerHTML.__html));
-}
-
-function triggerEventListener(props, methodName, e) {
-    if (props[methodName]) {
-        var listener = props[methodName];
-        if (listener.event) {
-            listener.event(listener.data, e);
-        }
-        else {
-            listener(e);
-        }
-    }
-    else {
-        var nativeListenerName = methodName.toLowerCase();
-        if (props[nativeListenerName]) {
-            props[nativeListenerName](e);
-        }
-    }
-}
-function createWrappedFunction(methodName, applyValue) {
-    var fnMethod = function (e) {
-        e.stopPropagation();
-        var vNode = this.$V;
-        // If vNode is gone by the time event fires, no-op
-        if (!vNode) {
-            return;
-        }
-        var props = vNode.props || EMPTY_OBJ;
-        var dom = vNode.dom;
-        if (isString(methodName)) {
-            triggerEventListener(props, methodName, e);
-        }
-        else {
-            for (var i = 0; i < methodName.length; i++) {
-                triggerEventListener(props, methodName[i], e);
-            }
-        }
-        if (isFunction(applyValue)) {
-            var newVNode = this.$V;
-            var newProps = newVNode.props || EMPTY_OBJ;
-            applyValue(newProps, dom, false, newVNode);
-        }
-    };
-    Object.defineProperty(fnMethod, 'wrapped', {
-        configurable: false,
-        enumerable: false,
-        value: true,
-        writable: false
-    });
-    return fnMethod;
-}
-
-function isCheckedType(type) {
-    return type === 'checkbox' || type === 'radio';
-}
-var onTextInputChange = createWrappedFunction('onInput', applyValueInput);
-var wrappedOnChange = createWrappedFunction(['onClick', 'onChange'], applyValueInput);
-/* tslint:disable-next-line:no-empty */
-function emptywrapper(event) {
-    event.stopPropagation();
-}
-emptywrapper.wrapped = true;
-function inputEvents(dom, nextPropsOrEmpty) {
-    if (isCheckedType(nextPropsOrEmpty.type)) {
-        dom.onchange = wrappedOnChange;
-        dom.onclick = emptywrapper;
-    }
-    else {
-        dom.oninput = onTextInputChange;
-    }
-}
-function applyValueInput(nextPropsOrEmpty, dom) {
-    var type = nextPropsOrEmpty.type;
-    var value = nextPropsOrEmpty.value;
-    var checked = nextPropsOrEmpty.checked;
-    var multiple = nextPropsOrEmpty.multiple;
-    var defaultValue = nextPropsOrEmpty.defaultValue;
-    var hasValue = !isNullOrUndef(value);
-    if (type && type !== dom.type) {
-        dom.setAttribute('type', type);
-    }
-    if (!isNullOrUndef(multiple) && multiple !== dom.multiple) {
-        dom.multiple = multiple;
-    }
-    if (!isNullOrUndef(defaultValue) && !hasValue) {
-        dom.defaultValue = defaultValue + '';
-    }
-    if (isCheckedType(type)) {
-        if (hasValue) {
-            dom.value = value;
-        }
-        if (!isNullOrUndef(checked)) {
-            dom.checked = checked;
-        }
-    }
-    else {
-        if (hasValue && dom.value !== value) {
-            dom.defaultValue = value;
-            dom.value = value;
-        }
-        else if (!isNullOrUndef(checked)) {
-            dom.checked = checked;
-        }
-    }
-}
-
-function updateChildOptionGroup(vNode, value) {
-    var type = vNode.type;
-    if (type === 'optgroup') {
-        var children = vNode.children;
-        var childFlags = vNode.childFlags;
-        if (childFlags & 12 /* MultipleChildren */) {
-            for (var i = 0, len = children.length; i < len; i++) {
-                updateChildOption(children[i], value);
-            }
-        }
-        else if (childFlags === 2 /* HasVNodeChildren */) {
-            updateChildOption(children, value);
-        }
-    }
-    else {
-        updateChildOption(vNode, value);
-    }
-}
-function updateChildOption(vNode, value) {
-    var props = vNode.props || EMPTY_OBJ;
-    var dom = vNode.dom;
-    // we do this as multiple may have changed
-    dom.value = props.value;
-    if ((isArray(value) && value.indexOf(props.value) !== -1) || props.value === value) {
-        dom.selected = true;
-    }
-    else if (!isNullOrUndef(value) || !isNullOrUndef(props.selected)) {
-        dom.selected = props.selected || false;
-    }
-}
-var onSelectChange = createWrappedFunction('onChange', applyValueSelect);
-function selectEvents(dom) {
-    dom.onchange = onSelectChange;
-}
-function applyValueSelect(nextPropsOrEmpty, dom, mounting, vNode) {
-    var multiplePropInBoolean = Boolean(nextPropsOrEmpty.multiple);
-    if (!isNullOrUndef(nextPropsOrEmpty.multiple) && multiplePropInBoolean !== dom.multiple) {
-        dom.multiple = multiplePropInBoolean;
-    }
-    var childFlags = vNode.childFlags;
-    if ((childFlags & 1 /* HasInvalidChildren */) === 0) {
-        var children = vNode.children;
-        var value = nextPropsOrEmpty.value;
-        if (mounting && isNullOrUndef(value)) {
-            value = nextPropsOrEmpty.defaultValue;
-        }
-        if (childFlags & 12 /* MultipleChildren */) {
-            for (var i = 0, len = children.length; i < len; i++) {
-                updateChildOptionGroup(children[i], value);
-            }
-        }
-        else if (childFlags === 2 /* HasVNodeChildren */) {
-            updateChildOptionGroup(children, value);
-        }
-    }
-}
-
-var onTextareaInputChange = createWrappedFunction('onInput', applyValueTextArea);
-var wrappedOnChange$1 = createWrappedFunction('onChange');
-function textAreaEvents(dom, nextPropsOrEmpty) {
-    dom.oninput = onTextareaInputChange;
-    if (nextPropsOrEmpty.onChange) {
-        dom.onchange = wrappedOnChange$1;
-    }
-}
-function applyValueTextArea(nextPropsOrEmpty, dom, mounting) {
-    var value = nextPropsOrEmpty.value;
-    var domValue = dom.value;
-    if (isNullOrUndef(value)) {
-        if (mounting) {
-            var defaultValue = nextPropsOrEmpty.defaultValue;
-            if (!isNullOrUndef(defaultValue) && defaultValue !== domValue) {
-                dom.defaultValue = defaultValue;
-                dom.value = defaultValue;
-            }
-        }
-    }
-    else if (domValue !== value) {
-        /* There is value so keep it controlled */
-        dom.defaultValue = value;
-        dom.value = value;
-    }
-}
-
-/**
- * There is currently no support for switching same input between controlled and nonControlled
- * If that ever becomes a real issue, then re design controlled elements
- * Currently user must choose either controlled or non-controlled and stick with that
- */
-function processElement(flags, vNode, dom, nextPropsOrEmpty, mounting, isControlled) {
-    if (flags & 64 /* InputElement */) {
-        applyValueInput(nextPropsOrEmpty, dom);
-    }
-    else if (flags & 256 /* SelectElement */) {
-        applyValueSelect(nextPropsOrEmpty, dom, mounting, vNode);
-    }
-    else if (flags & 128 /* TextareaElement */) {
-        applyValueTextArea(nextPropsOrEmpty, dom, mounting);
-    }
-    if (isControlled) {
-        dom.$V = vNode;
-    }
-}
-function addFormElementEventHandlers(flags, dom, nextPropsOrEmpty) {
-    if (flags & 64 /* InputElement */) {
-        inputEvents(dom, nextPropsOrEmpty);
-    }
-    else if (flags & 256 /* SelectElement */) {
-        selectEvents(dom);
-    }
-    else if (flags & 128 /* TextareaElement */) {
-        textAreaEvents(dom, nextPropsOrEmpty);
-    }
-}
-function isControlledFormElement(nextPropsOrEmpty) {
-    return nextPropsOrEmpty.type && isCheckedType(nextPropsOrEmpty.type) ? !isNullOrUndef(nextPropsOrEmpty.checked) : !isNullOrUndef(nextPropsOrEmpty.value);
-}
-
-function remove(vNode, parentDom) {
-    unmount(vNode);
-    if (!isNull(parentDom)) {
-        removeChild(parentDom, vNode.dom);
-        // Let carbage collector free memory
-        vNode.dom = null;
-    }
-}
-function unmount(vNode) {
-    var flags = vNode.flags;
-    if (flags & 481 /* Element */) {
-        var ref = vNode.ref;
-        var props = vNode.props;
-        if (isFunction(ref)) {
-            ref(null);
-        }
-        var children = vNode.children;
-        var childFlags = vNode.childFlags;
-        if (childFlags & 12 /* MultipleChildren */) {
-            unmountAllChildren(children);
-        }
-        else if (childFlags === 2 /* HasVNodeChildren */) {
-            unmount(children);
-        }
-        if (!isNull(props)) {
-            for (var name in props) {
-                switch (name) {
-                    case 'onClick':
-                    case 'onDblClick':
-                    case 'onFocusIn':
-                    case 'onFocusOut':
-                    case 'onKeyDown':
-                    case 'onKeyPress':
-                    case 'onKeyUp':
-                    case 'onMouseDown':
-                    case 'onMouseMove':
-                    case 'onMouseUp':
-                    case 'onSubmit':
-                    case 'onTouchEnd':
-                    case 'onTouchMove':
-                    case 'onTouchStart':
-                        handleEvent(name, null, vNode.dom);
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-    }
-    else if (flags & 14 /* Component */) {
-        var instance = vNode.children;
-        var ref$1 = vNode.ref;
-        if (flags & 4 /* ComponentClass */) {
-            if (isFunction(options.beforeUnmount)) {
-                options.beforeUnmount(vNode);
-            }
-            if (isFunction(instance.componentWillUnmount)) {
-                instance.componentWillUnmount();
-            }
-            if (isFunction(ref$1)) {
-                ref$1(null);
-            }
-            instance.$UN = true;
-            unmount(instance.$LI);
-        }
-        else {
-            if (!isNullOrUndef(ref$1) && isFunction(ref$1.onComponentWillUnmount)) {
-                ref$1.onComponentWillUnmount(vNode.dom, vNode.props || EMPTY_OBJ);
-            }
-            unmount(instance);
-        }
-    }
-    else if (flags & 1024 /* Portal */) {
-        var children$1 = vNode.children;
-        if (!isNull(children$1) && isObject(children$1)) {
-            remove(children$1, vNode.type);
-        }
-    }
-}
-function unmountAllChildren(children) {
-    for (var i = 0, len = children.length; i < len; i++) {
-        unmount(children[i]);
-    }
-}
-function removeAllChildren(dom, children) {
-    unmountAllChildren(children);
-    dom.textContent = '';
-}
-
-function createLinkEvent(linkEvent, nextValue) {
-    return function (e) {
-        linkEvent(nextValue.data, e);
-    };
-}
-function patchEvent(name, lastValue, nextValue, dom) {
-    var nameLowerCase = name.toLowerCase();
-    if (!isFunction(nextValue) && !isNullOrUndef(nextValue)) {
-        var linkEvent = nextValue.event;
-        if (linkEvent && isFunction(linkEvent)) {
-            dom[nameLowerCase] = createLinkEvent(linkEvent, nextValue);
-        }
-        else {
-            // Development warning
-            
-        }
-    }
-    else {
-        var domEvent = dom[nameLowerCase];
-        // if the function is wrapped, that means it's been controlled by a wrapper
-        if (!domEvent || !domEvent.wrapped) {
-            dom[nameLowerCase] = nextValue;
-        }
-    }
-}
-function getNumberStyleValue(style, value) {
-    switch (style) {
-        case 'animationIterationCount':
-        case 'borderImageOutset':
-        case 'borderImageSlice':
-        case 'borderImageWidth':
-        case 'boxFlex':
-        case 'boxFlexGroup':
-        case 'boxOrdinalGroup':
-        case 'columnCount':
-        case 'fillOpacity':
-        case 'flex':
-        case 'flexGrow':
-        case 'flexNegative':
-        case 'flexOrder':
-        case 'flexPositive':
-        case 'flexShrink':
-        case 'floodOpacity':
-        case 'fontWeight':
-        case 'gridColumn':
-        case 'gridRow':
-        case 'lineClamp':
-        case 'lineHeight':
-        case 'opacity':
-        case 'order':
-        case 'orphans':
-        case 'stopOpacity':
-        case 'strokeDasharray':
-        case 'strokeDashoffset':
-        case 'strokeMiterlimit':
-        case 'strokeOpacity':
-        case 'strokeWidth':
-        case 'tabSize':
-        case 'widows':
-        case 'zIndex':
-        case 'zoom':
-            return value;
-        default:
-            return value + 'px';
-    }
-}
-// We are assuming here that we come from patchProp routine
-// -nextAttrValue cannot be null or undefined
-function patchStyle(lastAttrValue, nextAttrValue, dom) {
-    var domStyle = dom.style;
-    var style;
-    var value;
-    if (isString(nextAttrValue)) {
-        domStyle.cssText = nextAttrValue;
-        return;
-    }
-    if (!isNullOrUndef(lastAttrValue) && !isString(lastAttrValue)) {
-        for (style in nextAttrValue) {
-            // do not add a hasOwnProperty check here, it affects performance
-            value = nextAttrValue[style];
-            if (value !== lastAttrValue[style]) {
-                domStyle[style] = isNumber(value) ? getNumberStyleValue(style, value) : value;
-            }
-        }
-        for (style in lastAttrValue) {
-            if (isNullOrUndef(nextAttrValue[style])) {
-                domStyle[style] = '';
-            }
-        }
-    }
-    else {
-        for (style in nextAttrValue) {
-            value = nextAttrValue[style];
-            domStyle[style] = isNumber(value) ? getNumberStyleValue(style, value) : value;
-        }
-    }
-}
-function patchProp(prop, lastValue, nextValue, dom, isSVG, hasControlledValue, lastVNode) {
-    switch (prop) {
-        case 'onClick':
-        case 'onDblClick':
-        case 'onFocusIn':
-        case 'onFocusOut':
-        case 'onKeyDown':
-        case 'onKeyPress':
-        case 'onKeyUp':
-        case 'onMouseDown':
-        case 'onMouseMove':
-        case 'onMouseUp':
-        case 'onSubmit':
-        case 'onTouchEnd':
-        case 'onTouchMove':
-        case 'onTouchStart':
-            handleEvent(prop, nextValue, dom);
-            break;
-        case 'children':
-        case 'childrenType':
-        case 'className':
-        case 'defaultValue':
-        case 'key':
-        case 'multiple':
-        case 'ref':
-            return;
-        case 'allowfullscreen':
-        case 'autoFocus':
-        case 'autoplay':
-        case 'capture':
-        case 'checked':
-        case 'controls':
-        case 'default':
-        case 'disabled':
-        case 'hidden':
-        case 'indeterminate':
-        case 'loop':
-        case 'muted':
-        case 'novalidate':
-        case 'open':
-        case 'readOnly':
-        case 'required':
-        case 'reversed':
-        case 'scoped':
-        case 'seamless':
-        case 'selected':
-            prop = prop === 'autoFocus' ? prop.toLowerCase() : prop;
-            dom[prop] = !!nextValue;
-            break;
-        case 'defaultChecked':
-        case 'value':
-        case 'volume':
-            if (hasControlledValue && prop === 'value') {
-                return;
-            }
-            var value = isNullOrUndef(nextValue) ? '' : nextValue;
-            if (dom[prop] !== value) {
-                dom[prop] = value;
-            }
-            break;
-        case 'dangerouslySetInnerHTML':
-            var lastHtml = (lastValue && lastValue.__html) || '';
-            var nextHtml = (nextValue && nextValue.__html) || '';
-            if (lastHtml !== nextHtml) {
-                if (!isNullOrUndef(nextHtml) && !isSameInnerHTML(dom, nextHtml)) {
-                    if (!isNull(lastVNode)) {
-                        if (lastVNode.childFlags & 12 /* MultipleChildren */) {
-                            unmountAllChildren(lastVNode.children);
-                        }
-                        else if (lastVNode.childFlags === 2 /* HasVNodeChildren */) {
-                            unmount(lastVNode.children);
-                        }
-                        lastVNode.children = null;
-                        lastVNode.childFlags = 1 /* HasInvalidChildren */;
-                    }
-                    dom.innerHTML = nextHtml;
-                }
-            }
-            break;
-        default:
-            if (prop[0] === 'o' && prop[1] === 'n') {
-                patchEvent(prop, lastValue, nextValue, dom);
-            }
-            else if (isNullOrUndef(nextValue)) {
-                dom.removeAttribute(prop);
-            }
-            else if (prop === 'style') {
-                patchStyle(lastValue, nextValue, dom);
-            }
-            else if (isSVG && namespaces[prop]) {
-                // We optimize for NS being boolean. Its 99.9% time false
-                // If we end up in this path we can read property again
-                dom.setAttributeNS(namespaces[prop], prop, nextValue);
-            }
-            else {
-                dom.setAttribute(prop, nextValue);
-            }
-            break;
-    }
-}
-function mountProps(vNode, flags, props, dom, isSVG) {
-    var hasControlledValue = false;
-    var isFormElement = (flags & 448 /* FormElement */) > 0;
-    if (isFormElement) {
-        hasControlledValue = isControlledFormElement(props);
-        if (hasControlledValue) {
-            addFormElementEventHandlers(flags, dom, props);
-        }
-    }
-    for (var prop in props) {
-        // do not add a hasOwnProperty check here, it affects performance
-        patchProp(prop, null, props[prop], dom, isSVG, hasControlledValue, null);
-    }
-    if (isFormElement) {
-        processElement(flags, vNode, dom, props, true, hasControlledValue);
-    }
-}
-
-function createClassComponentInstance(vNode, Component, props, context) {
-    var instance = new Component(props, context);
-    vNode.children = instance;
-    instance.$V = vNode;
-    instance.$BS = false;
-    instance.context = context;
-    if (instance.props === EMPTY_OBJ) {
-        instance.props = props;
-    }
-    instance.$UN = false;
-    if (isFunction(instance.componentWillMount)) {
-        instance.$BR = true;
-        instance.componentWillMount();
-        if (instance.$PSS) {
-            var state = instance.state;
-            var pending = instance.$PS;
-            if (isNull(state)) {
-                instance.state = pending;
-            }
-            else {
-                for (var key in pending) {
-                    state[key] = pending[key];
-                }
-            }
-            instance.$PSS = false;
-            instance.$PS = null;
-        }
-        instance.$BR = false;
-    }
-    if (isFunction(options.beforeRender)) {
-        options.beforeRender(instance);
-    }
-    var input = handleComponentInput(instance.render(props, instance.state, context), vNode);
-    var childContext;
-    if (isFunction(instance.getChildContext)) {
-        childContext = instance.getChildContext();
-    }
-    if (isNullOrUndef(childContext)) {
-        instance.$CX = context;
-    }
-    else {
-        instance.$CX = combineFrom(context, childContext);
-    }
-    if (isFunction(options.afterRender)) {
-        options.afterRender(instance);
-    }
-    instance.$LI = input;
-    return instance;
-}
-function handleComponentInput(input, componentVNode) {
-    // Development validation
-    if (isInvalid(input)) {
-        input = createVoidVNode();
-    }
-    else if (isStringOrNumber(input)) {
-        input = createTextVNode(input, null);
-    }
-    else {
-        if (input.dom) {
-            input = directClone(input);
-        }
-        if (input.flags & 14 /* Component */) {
-            // if we have an input that is also a component, we run into a tricky situation
-            // where the root vNode needs to always have the correct DOM entry
-            // we can optimise this in the future, but this gets us out of a lot of issues
-            input.parentVNode = componentVNode;
-        }
-    }
-    return input;
-}
-
-function mount(vNode, parentDom, lifecycle, context, isSVG) {
-    var flags = vNode.flags;
-    if (flags & 481 /* Element */) {
-        return mountElement(vNode, parentDom, lifecycle, context, isSVG);
-    }
-    if (flags & 14 /* Component */) {
-        return mountComponent(vNode, parentDom, lifecycle, context, isSVG, (flags & 4 /* ComponentClass */) > 0);
-    }
-    if (flags & 512 /* Void */ || flags & 16 /* Text */) {
-        return mountText(vNode, parentDom);
-    }
-    if (flags & 1024 /* Portal */) {
-        mount(vNode.children, vNode.type, lifecycle, context, false);
-        return (vNode.dom = mountText(createVoidVNode(), parentDom));
-    }
-    // Development validation, in production we don't need to throw because it crashes anyway
-    
-}
-function mountText(vNode, parentDom) {
-    var dom = (vNode.dom = document.createTextNode(vNode.children));
-    if (!isNull(parentDom)) {
-        appendChild(parentDom, dom);
-    }
-    return dom;
-}
-function mountElement(vNode, parentDom, lifecycle, context, isSVG) {
-    var flags = vNode.flags;
-    var children = vNode.children;
-    var props = vNode.props;
-    var className = vNode.className;
-    var ref = vNode.ref;
-    var childFlags = vNode.childFlags;
-    isSVG = isSVG || (flags & 32 /* SvgElement */) > 0;
-    var dom = documentCreateElement(vNode.type, isSVG);
-    vNode.dom = dom;
-    if (!isNullOrUndef(className) && className !== '') {
-        if (isSVG) {
-            dom.setAttribute('class', className);
-        }
-        else {
-            dom.className = className;
-        }
-    }
-    if (!isNull(parentDom)) {
-        appendChild(parentDom, dom);
-    }
-    if ((childFlags & 1 /* HasInvalidChildren */) === 0) {
-        var childrenIsSVG = isSVG === true && vNode.type !== 'foreignObject';
-        if (childFlags === 2 /* HasVNodeChildren */) {
-            mount(children, dom, lifecycle, context, childrenIsSVG);
-        }
-        else if (childFlags & 12 /* MultipleChildren */) {
-            mountArrayChildren(children, dom, lifecycle, context, childrenIsSVG);
-        }
-    }
-    if (!isNull(props)) {
-        mountProps(vNode, flags, props, dom, isSVG);
-    }
-    if (isFunction(ref)) {
-        mountRef(dom, ref, lifecycle);
-    }
-    return dom;
-}
-function mountArrayChildren(children, dom, lifecycle, context, isSVG) {
-    for (var i = 0, len = children.length; i < len; i++) {
-        var child = children[i];
-        if (!isNull(child.dom)) {
-            children[i] = child = directClone(child);
-        }
-        mount(child, dom, lifecycle, context, isSVG);
-    }
-}
-function mountComponent(vNode, parentDom, lifecycle, context, isSVG, isClass) {
-    var dom;
-    var type = vNode.type;
-    var props = vNode.props || EMPTY_OBJ;
-    var ref = vNode.ref;
-    if (isClass) {
-        var instance = createClassComponentInstance(vNode, type, props, context);
-        var input = instance.$LI;
-        vNode.dom = dom = mount(input, null, lifecycle, instance.$CX, isSVG);
-        mountClassComponentCallbacks(vNode, ref, instance, lifecycle);
-        instance.$UPD = false;
-    }
-    else {
-        var input$1 = handleComponentInput(type(props, context), vNode);
-        vNode.dom = dom = mount(input$1, null, lifecycle, context, isSVG);
-        vNode.children = input$1;
-        mountFunctionalComponentCallbacks(props, ref, dom, lifecycle);
-    }
-    if (!isNull(parentDom)) {
-        appendChild(parentDom, dom);
-    }
-    return dom;
-}
-function createClassMountCallback(instance, hasAfterMount, afterMount, vNode, hasDidMount) {
-    return function () {
-        instance.$UPD = true;
-        if (hasAfterMount) {
-            afterMount(vNode);
-        }
-        if (hasDidMount) {
-            instance.componentDidMount();
-        }
-        instance.$UPD = false;
-    };
-}
-function mountClassComponentCallbacks(vNode, ref, instance, lifecycle) {
-    if (isFunction(ref)) {
-        ref(instance);
-    }
-    else {
-        
-    }
-    var hasDidMount = isFunction(instance.componentDidMount);
-    var afterMount = options.afterMount;
-    var hasAfterMount = isFunction(afterMount);
-    if (hasDidMount || hasAfterMount) {
-        lifecycle.push(createClassMountCallback(instance, hasAfterMount, afterMount, vNode, hasDidMount));
-    }
-}
-// Create did mount callback lazily to avoid creating function context if not needed
-function createOnMountCallback(ref, dom, props) {
-    return function () { return ref.onComponentDidMount(dom, props); };
-}
-function mountFunctionalComponentCallbacks(props, ref, dom, lifecycle) {
-    if (!isNullOrUndef(ref)) {
-        if (isFunction(ref.onComponentWillMount)) {
-            ref.onComponentWillMount(props);
-        }
-        if (isFunction(ref.onComponentDidMount)) {
-            lifecycle.push(createOnMountCallback(ref, dom, props));
-        }
-    }
-}
-function mountRef(dom, value, lifecycle) {
-    lifecycle.push(function () { return value(dom); });
-}
-
-function hydrateComponent(vNode, dom, lifecycle, context, isSVG, isClass) {
-    var type = vNode.type;
-    var ref = vNode.ref;
-    var props = vNode.props || EMPTY_OBJ;
-    if (isClass) {
-        var instance = createClassComponentInstance(vNode, type, props, context);
-        var input = instance.$LI;
-        hydrateVNode(input, dom, lifecycle, instance.$CX, isSVG);
-        vNode.dom = input.dom;
-        mountClassComponentCallbacks(vNode, ref, instance, lifecycle);
-        instance.$UPD = false; // Mount finished allow going sync
-    }
-    else {
-        var input$1 = handleComponentInput(type(props, context), vNode);
-        hydrateVNode(input$1, dom, lifecycle, context, isSVG);
-        vNode.children = input$1;
-        vNode.dom = input$1.dom;
-        mountFunctionalComponentCallbacks(props, ref, dom, lifecycle);
-    }
-}
-function hydrateElement(vNode, dom, lifecycle, context, isSVG) {
-    var children = vNode.children;
-    var props = vNode.props;
-    var className = vNode.className;
-    var flags = vNode.flags;
-    var ref = vNode.ref;
-    isSVG = isSVG || (flags & 32 /* SvgElement */) > 0;
-    if (dom.nodeType !== 1 || dom.tagName.toLowerCase() !== vNode.type) {
-        var newDom = mountElement(vNode, null, lifecycle, context, isSVG);
-        vNode.dom = newDom;
-        replaceChild(dom.parentNode, newDom, dom);
-    }
-    else {
-        vNode.dom = dom;
-        var childNode = dom.firstChild;
-        var childFlags = vNode.childFlags;
-        if ((childFlags & 1 /* HasInvalidChildren */) === 0) {
-            var nextSibling = null;
-            while (childNode) {
-                nextSibling = childNode.nextSibling;
-                if (childNode.nodeType === 8) {
-                    if (childNode.data === '!') {
-                        dom.replaceChild(document.createTextNode(''), childNode);
-                    }
-                    else {
-                        dom.removeChild(childNode);
-                    }
-                }
-                childNode = nextSibling;
-            }
-            childNode = dom.firstChild;
-            if (childFlags === 2 /* HasVNodeChildren */) {
-                if (isNull(childNode)) {
-                    mount(children, dom, lifecycle, context, isSVG);
-                }
-                else {
-                    nextSibling = childNode.nextSibling;
-                    hydrateVNode(children, childNode, lifecycle, context, isSVG);
-                    childNode = nextSibling;
-                }
-            }
-            else if (childFlags & 12 /* MultipleChildren */) {
-                for (var i = 0, len = children.length; i < len; i++) {
-                    var child = children[i];
-                    if (isNull(childNode)) {
-                        mount(child, dom, lifecycle, context, isSVG);
-                    }
-                    else {
-                        nextSibling = childNode.nextSibling;
-                        hydrateVNode(child, childNode, lifecycle, context, isSVG);
-                        childNode = nextSibling;
-                    }
-                }
-            }
-            // clear any other DOM nodes, there should be only a single entry for the root
-            while (childNode) {
-                nextSibling = childNode.nextSibling;
-                dom.removeChild(childNode);
-                childNode = nextSibling;
-            }
-        }
-        else if (!isNull(dom.firstChild) && !isSamePropsInnerHTML(dom, props)) {
-            dom.textContent = ''; // dom has content, but VNode has no children remove everything from DOM
-            if (flags & 448 /* FormElement */) {
-                // If element is form element, we need to clear defaultValue also
-                dom.defaultValue = '';
-            }
-        }
-        if (!isNull(props)) {
-            mountProps(vNode, flags, props, dom, isSVG);
-        }
-        if (isNullOrUndef(className)) {
-            if (dom.className !== '') {
-                dom.removeAttribute('class');
-            }
-        }
-        else if (isSVG) {
-            dom.setAttribute('class', className);
-        }
-        else {
-            dom.className = className;
-        }
-        if (isFunction(ref)) {
-            mountRef(dom, ref, lifecycle);
-        }
-        else {
-            
-        }
-    }
-}
-function hydrateText(vNode, dom) {
-    if (dom.nodeType !== 3) {
-        var newDom = mountText(vNode, null);
-        vNode.dom = newDom;
-        replaceChild(dom.parentNode, newDom, dom);
-    }
-    else {
-        var text = vNode.children;
-        if (dom.nodeValue !== text) {
-            dom.nodeValue = text;
-        }
-        vNode.dom = dom;
-    }
-}
-function hydrateVNode(vNode, dom, lifecycle, context, isSVG) {
-    var flags = vNode.flags;
-    if (flags & 14 /* Component */) {
-        hydrateComponent(vNode, dom, lifecycle, context, isSVG, (flags & 4 /* ComponentClass */) > 0);
-    }
-    else if (flags & 481 /* Element */) {
-        hydrateElement(vNode, dom, lifecycle, context, isSVG);
-    }
-    else if (flags & 16 /* Text */) {
-        hydrateText(vNode, dom);
-    }
-    else if (flags & 512 /* Void */) {
-        vNode.dom = dom;
-    }
-    else {
-        throwError();
-    }
-}
-function hydrate(input, parentDom, callback) {
-    var dom = parentDom.firstChild;
-    if (!isNull(dom)) {
-        if (!isInvalid(input)) {
-            hydrateVNode(input, dom, LIFECYCLE, EMPTY_OBJ, false);
-        }
-        dom = parentDom.firstChild;
-        // clear any other DOM nodes, there should be only a single entry for the root
-        while ((dom = dom.nextSibling)) {
-            parentDom.removeChild(dom);
-        }
-    }
-    if (LIFECYCLE.length > 0) {
-        callAll(LIFECYCLE);
-    }
-    if (!parentDom.$V) {
-        options.roots.push(parentDom);
-    }
-    parentDom.$V = input;
-    if (isFunction(callback)) {
-        callback();
-    }
-}
-
-function replaceWithNewNode(lastNode, nextNode, parentDom, lifecycle, context, isSVG) {
-    unmount(lastNode);
-    replaceChild(parentDom, mount(nextNode, null, lifecycle, context, isSVG), lastNode.dom);
-}
-function patch(lastVNode, nextVNode, parentDom, lifecycle, context, isSVG) {
-    if (lastVNode !== nextVNode) {
-        var nextFlags = nextVNode.flags;
-        if (lastVNode.flags !== nextFlags || nextFlags & 2048 /* ReCreate */) {
-            replaceWithNewNode(lastVNode, nextVNode, parentDom, lifecycle, context, isSVG);
-        }
-        else if (nextFlags & 481 /* Element */) {
-            patchElement(lastVNode, nextVNode, parentDom, lifecycle, context, isSVG);
-        }
-        else if (nextFlags & 14 /* Component */) {
-            patchComponent(lastVNode, nextVNode, parentDom, lifecycle, context, isSVG, (nextFlags & 4 /* ComponentClass */) > 0);
-        }
-        else if (nextFlags & 16 /* Text */) {
-            patchText(lastVNode, nextVNode, parentDom);
-        }
-        else if (nextFlags & 512 /* Void */) {
-            nextVNode.dom = lastVNode.dom;
-        }
-        else {
-            // Portal
-            patchPortal(lastVNode, nextVNode, lifecycle, context);
-        }
-    }
-}
-function patchPortal(lastVNode, nextVNode, lifecycle, context) {
-    var lastContainer = lastVNode.type;
-    var nextContainer = nextVNode.type;
-    var nextChildren = nextVNode.children;
-    patchChildren(lastVNode.childFlags, nextVNode.childFlags, lastVNode.children, nextChildren, lastContainer, lifecycle, context, false);
-    nextVNode.dom = lastVNode.dom;
-    if (lastContainer !== nextContainer && !isInvalid(nextChildren)) {
-        var node = nextChildren.dom;
-        lastContainer.removeChild(node);
-        nextContainer.appendChild(node);
-    }
-}
-function patchElement(lastVNode, nextVNode, parentDom, lifecycle, context, isSVG) {
-    var nextTag = nextVNode.type;
-    if (lastVNode.type !== nextTag) {
-        replaceWithNewNode(lastVNode, nextVNode, parentDom, lifecycle, context, isSVG);
-    }
-    else {
-        var dom = lastVNode.dom;
-        var nextFlags = nextVNode.flags;
-        var lastProps = lastVNode.props;
-        var nextProps = nextVNode.props;
-        var isFormElement = false;
-        var hasControlledValue = false;
-        var nextPropsOrEmpty;
-        nextVNode.dom = dom;
-        isSVG = isSVG || (nextFlags & 32 /* SvgElement */) > 0;
-        // inlined patchProps  -- starts --
-        if (lastProps !== nextProps) {
-            var lastPropsOrEmpty = lastProps || EMPTY_OBJ;
-            nextPropsOrEmpty = nextProps || EMPTY_OBJ;
-            if (nextPropsOrEmpty !== EMPTY_OBJ) {
-                isFormElement = (nextFlags & 448 /* FormElement */) > 0;
-                if (isFormElement) {
-                    hasControlledValue = isControlledFormElement(nextPropsOrEmpty);
-                }
-                for (var prop in nextPropsOrEmpty) {
-                    var lastValue = lastPropsOrEmpty[prop];
-                    var nextValue = nextPropsOrEmpty[prop];
-                    if (lastValue !== nextValue) {
-                        patchProp(prop, lastValue, nextValue, dom, isSVG, hasControlledValue, lastVNode);
-                    }
-                }
-            }
-            if (lastPropsOrEmpty !== EMPTY_OBJ) {
-                for (var prop$1 in lastPropsOrEmpty) {
-                    // do not add a hasOwnProperty check here, it affects performance
-                    if (!nextPropsOrEmpty.hasOwnProperty(prop$1) && !isNullOrUndef(lastPropsOrEmpty[prop$1])) {
-                        patchProp(prop$1, lastPropsOrEmpty[prop$1], null, dom, isSVG, hasControlledValue, lastVNode);
-                    }
-                }
-            }
-        }
-        var lastChildren = lastVNode.children;
-        var nextChildren = nextVNode.children;
-        var nextRef = nextVNode.ref;
-        var lastClassName = lastVNode.className;
-        var nextClassName = nextVNode.className;
-        if (lastChildren !== nextChildren) {
-            patchChildren(lastVNode.childFlags, nextVNode.childFlags, lastChildren, nextChildren, dom, lifecycle, context, isSVG && nextTag !== 'foreignObject');
-        }
-        if (isFormElement) {
-            processElement(nextFlags, nextVNode, dom, nextPropsOrEmpty, false, hasControlledValue);
-        }
-        // inlined patchProps  -- ends --
-        if (lastClassName !== nextClassName) {
-            if (isNullOrUndef(nextClassName)) {
-                dom.removeAttribute('class');
-            }
-            else if (isSVG) {
-                dom.setAttribute('class', nextClassName);
-            }
-            else {
-                dom.className = nextClassName;
-            }
-        }
-        if (isFunction(nextRef) && lastVNode.ref !== nextRef) {
-            mountRef(dom, nextRef, lifecycle);
-        }
-        else {
-            
-        }
-    }
-}
-function patchChildren(lastChildFlags, nextChildFlags, lastChildren, nextChildren, parentDOM, lifecycle, context, isSVG) {
-    switch (lastChildFlags) {
-        case 2 /* HasVNodeChildren */:
-            switch (nextChildFlags) {
-                case 2 /* HasVNodeChildren */:
-                    patch(lastChildren, nextChildren, parentDOM, lifecycle, context, isSVG);
-                    break;
-                case 1 /* HasInvalidChildren */:
-                    remove(lastChildren, parentDOM);
-                    break;
-                default:
-                    remove(lastChildren, parentDOM);
-                    mountArrayChildren(nextChildren, parentDOM, lifecycle, context, isSVG);
-                    break;
-            }
-            break;
-        case 1 /* HasInvalidChildren */:
-            switch (nextChildFlags) {
-                case 2 /* HasVNodeChildren */:
-                    mount(nextChildren, parentDOM, lifecycle, context, isSVG);
-                    break;
-                case 1 /* HasInvalidChildren */:
-                    break;
-                default:
-                    mountArrayChildren(nextChildren, parentDOM, lifecycle, context, isSVG);
-                    break;
-            }
-            break;
-        default:
-            if (nextChildFlags & 12 /* MultipleChildren */) {
-                var lastLength = lastChildren.length;
-                var nextLength = nextChildren.length;
-                // Fast path's for both algorithms
-                if (lastLength === 0) {
-                    if (nextLength > 0) {
-                        mountArrayChildren(nextChildren, parentDOM, lifecycle, context, isSVG);
-                    }
-                }
-                else if (nextLength === 0) {
-                    removeAllChildren(parentDOM, lastChildren);
-                }
-                else {
-                    if (nextChildFlags === 8 /* HasKeyedChildren */ && lastChildFlags === 8 /* HasKeyedChildren */) {
-                        patchKeyedChildren(lastChildren, nextChildren, parentDOM, lifecycle, context, isSVG, lastLength, nextLength);
-                    }
-                    else {
-                        patchNonKeyedChildren(lastChildren, nextChildren, parentDOM, lifecycle, context, isSVG, lastLength, nextLength);
-                    }
-                }
-            }
-            else if (nextChildFlags === 1 /* HasInvalidChildren */) {
-                removeAllChildren(parentDOM, lastChildren);
-            }
-            else {
-                removeAllChildren(parentDOM, lastChildren);
-                mount(nextChildren, parentDOM, lifecycle, context, isSVG);
-            }
-            break;
-    }
-}
-function updateClassComponent(instance, nextState, nextVNode, nextProps, parentDom, lifecycle, context, isSVG, force, fromSetState) {
-    var lastState = instance.state;
-    var lastProps = instance.props;
-    nextVNode.children = instance;
-    var lastInput = instance.$LI;
-    var renderOutput;
-    if (instance.$UN) {
-        return;
-    }
-    if (lastProps !== nextProps || nextProps === EMPTY_OBJ) {
-        if (!fromSetState && isFunction(instance.componentWillReceiveProps)) {
-            instance.$BR = true;
-            instance.componentWillReceiveProps(nextProps, context);
-            // If instance component was removed during its own update do nothing...
-            if (instance.$UN) {
-                return;
-            }
-            instance.$BR = false;
-        }
-        if (instance.$PSS) {
-            nextState = combineFrom(nextState, instance.$PS);
-            instance.$PSS = false;
-            instance.$PS = null;
-        }
-    }
-    /* Update if scu is not defined, or it returns truthy value or force */
-    var hasSCU = isFunction(instance.shouldComponentUpdate);
-    if (force || !hasSCU || (hasSCU && instance.shouldComponentUpdate(nextProps, nextState, context))) {
-        if (isFunction(instance.componentWillUpdate)) {
-            instance.$BS = true;
-            instance.componentWillUpdate(nextProps, nextState, context);
-            instance.$BS = false;
-        }
-        instance.props = nextProps;
-        instance.state = nextState;
-        instance.context = context;
-        if (isFunction(options.beforeRender)) {
-            options.beforeRender(instance);
-        }
-        renderOutput = instance.render(nextProps, nextState, context);
-        if (isFunction(options.afterRender)) {
-            options.afterRender(instance);
-        }
-        var didUpdate = renderOutput !== NO_OP;
-        var childContext;
-        if (isFunction(instance.getChildContext)) {
-            childContext = instance.getChildContext();
-        }
-        if (isNullOrUndef(childContext)) {
-            childContext = context;
-        }
-        else {
-            childContext = combineFrom(context, childContext);
-        }
-        instance.$CX = childContext;
-        if (didUpdate) {
-            var nextInput = (instance.$LI = handleComponentInput(renderOutput, nextVNode));
-            patch(lastInput, nextInput, parentDom, lifecycle, childContext, isSVG);
-            if (isFunction(instance.componentDidUpdate)) {
-                instance.componentDidUpdate(lastProps, lastState);
-            }
-            if (isFunction(options.afterUpdate)) {
-                options.afterUpdate(nextVNode);
-            }
-        }
-    }
-    else {
-        instance.props = nextProps;
-        instance.state = nextState;
-        instance.context = context;
-    }
-    nextVNode.dom = instance.$LI.dom;
-}
-function patchComponent(lastVNode, nextVNode, parentDom, lifecycle, context, isSVG, isClass) {
-    var nextType = nextVNode.type;
-    var lastKey = lastVNode.key;
-    var nextKey = nextVNode.key;
-    if (lastVNode.type !== nextType || lastKey !== nextKey) {
-        replaceWithNewNode(lastVNode, nextVNode, parentDom, lifecycle, context, isSVG);
-    }
-    else {
-        var nextProps = nextVNode.props || EMPTY_OBJ;
-        if (isClass) {
-            var instance = lastVNode.children;
-            instance.$UPD = true;
-            updateClassComponent(instance, instance.state, nextVNode, nextProps, parentDom, lifecycle, context, isSVG, false, false);
-            instance.$V = nextVNode;
-            instance.$UPD = false;
-        }
-        else {
-            var shouldUpdate = true;
-            var lastProps = lastVNode.props;
-            var nextHooks = nextVNode.ref;
-            var nextHooksDefined = !isNullOrUndef(nextHooks);
-            var lastInput = lastVNode.children;
-            nextVNode.dom = lastVNode.dom;
-            nextVNode.children = lastInput;
-            if (nextHooksDefined && isFunction(nextHooks.onComponentShouldUpdate)) {
-                shouldUpdate = nextHooks.onComponentShouldUpdate(lastProps, nextProps);
-            }
-            if (shouldUpdate !== false) {
-                if (nextHooksDefined && isFunction(nextHooks.onComponentWillUpdate)) {
-                    nextHooks.onComponentWillUpdate(lastProps, nextProps);
-                }
-                var nextInput = nextType(nextProps, context);
-                if (nextInput !== NO_OP) {
-                    nextInput = handleComponentInput(nextInput, nextVNode);
-                    patch(lastInput, nextInput, parentDom, lifecycle, context, isSVG);
-                    nextVNode.children = nextInput;
-                    nextVNode.dom = nextInput.dom;
-                    if (nextHooksDefined && isFunction(nextHooks.onComponentDidUpdate)) {
-                        nextHooks.onComponentDidUpdate(lastProps, nextProps);
-                    }
-                }
-            }
-            else if (lastInput.flags & 14 /* Component */) {
-                lastInput.parentVNode = nextVNode;
-            }
-        }
-    }
-}
-function patchText(lastVNode, nextVNode, parentDom) {
-    var nextText = nextVNode.children;
-    var textNode = parentDom.firstChild;
-    var dom;
-    // Guard against external change on DOM node.
-    if (isNull(textNode)) {
-        parentDom.textContent = nextText;
-        dom = parentDom.firstChild;
-    }
-    else {
-        dom = lastVNode.dom;
-        if (nextText !== lastVNode.children) {
-            dom.nodeValue = nextText;
-        }
-    }
-    nextVNode.dom = dom;
-}
-function patchNonKeyedChildren(lastChildren, nextChildren, dom, lifecycle, context, isSVG, lastChildrenLength, nextChildrenLength) {
-    var commonLength = lastChildrenLength > nextChildrenLength ? nextChildrenLength : lastChildrenLength;
-    var i = 0;
-    for (; i < commonLength; i++) {
-        var nextChild = nextChildren[i];
-        if (nextChild.dom) {
-            nextChild = nextChildren[i] = directClone(nextChild);
-        }
-        patch(lastChildren[i], nextChild, dom, lifecycle, context, isSVG);
-    }
-    if (lastChildrenLength < nextChildrenLength) {
-        for (i = commonLength; i < nextChildrenLength; i++) {
-            var nextChild$1 = nextChildren[i];
-            if (nextChild$1.dom) {
-                nextChild$1 = nextChildren[i] = directClone(nextChild$1);
-            }
-            appendChild(dom, mount(nextChild$1, null, lifecycle, context, isSVG));
-        }
-    }
-    else if (lastChildrenLength > nextChildrenLength) {
-        for (i = commonLength; i < lastChildrenLength; i++) {
-            remove(lastChildren[i], dom);
-        }
-    }
-}
-function patchKeyedChildren(a, b, dom, lifecycle, context, isSVG, aLength, bLength) {
-    var aEnd = aLength - 1;
-    var bEnd = bLength - 1;
-    var aStart = 0;
-    var bStart = 0;
-    var i;
-    var j;
-    var aNode;
-    var bNode;
-    var nextNode;
-    var nextPos;
-    var node;
-    var aStartNode = a[aStart];
-    var bStartNode = b[bStart];
-    var aEndNode = a[aEnd];
-    var bEndNode = b[bEnd];
-    if (bStartNode.dom) {
-        b[bStart] = bStartNode = directClone(bStartNode);
-    }
-    if (bEndNode.dom) {
-        b[bEnd] = bEndNode = directClone(bEndNode);
-    }
-    // Step 1
-    // tslint:disable-next-line
-    outer: {
-        // Sync nodes with the same key at the beginning.
-        while (aStartNode.key === bStartNode.key) {
-            patch(aStartNode, bStartNode, dom, lifecycle, context, isSVG);
-            aStart++;
-            bStart++;
-            if (aStart > aEnd || bStart > bEnd) {
-                break outer;
-            }
-            aStartNode = a[aStart];
-            bStartNode = b[bStart];
-            if (bStartNode.dom) {
-                b[bStart] = bStartNode = directClone(bStartNode);
-            }
-        }
-        // Sync nodes with the same key at the end.
-        while (aEndNode.key === bEndNode.key) {
-            patch(aEndNode, bEndNode, dom, lifecycle, context, isSVG);
-            aEnd--;
-            bEnd--;
-            if (aStart > aEnd || bStart > bEnd) {
-                break outer;
-            }
-            aEndNode = a[aEnd];
-            bEndNode = b[bEnd];
-            if (bEndNode.dom) {
-                b[bEnd] = bEndNode = directClone(bEndNode);
-            }
-        }
-    }
-    if (aStart > aEnd) {
-        if (bStart <= bEnd) {
-            nextPos = bEnd + 1;
-            nextNode = nextPos < bLength ? b[nextPos].dom : null;
-            while (bStart <= bEnd) {
-                node = b[bStart];
-                if (node.dom) {
-                    b[bStart] = node = directClone(node);
-                }
-                bStart++;
-                insertOrAppend(dom, mount(node, null, lifecycle, context, isSVG), nextNode);
-            }
-        }
-    }
-    else if (bStart > bEnd) {
-        while (aStart <= aEnd) {
-            remove(a[aStart++], dom);
-        }
-    }
-    else {
-        var aLeft = aEnd - aStart + 1;
-        var bLeft = bEnd - bStart + 1;
-        var sources = new Array(bLeft);
-        for (i = 0; i < bLeft; i++) {
-            sources[i] = -1;
-        }
-        var moved = false;
-        var pos = 0;
-        var patched = 0;
-        // When sizes are small, just loop them through
-        if (bLeft <= 4 || aLeft * bLeft <= 16) {
-            for (i = aStart; i <= aEnd; i++) {
-                aNode = a[i];
-                if (patched < bLeft) {
-                    for (j = bStart; j <= bEnd; j++) {
-                        bNode = b[j];
-                        if (aNode.key === bNode.key) {
-                            sources[j - bStart] = i;
-                            if (pos > j) {
-                                moved = true;
-                            }
-                            else {
-                                pos = j;
-                            }
-                            if (bNode.dom) {
-                                b[j] = bNode = directClone(bNode);
-                            }
-                            patch(aNode, bNode, dom, lifecycle, context, isSVG);
-                            patched++;
-                            a[i] = null;
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-        else {
-            var keyIndex = {};
-            // Map keys by their index in array
-            for (i = bStart; i <= bEnd; i++) {
-                keyIndex[b[i].key] = i;
-            }
-            // Try to patch same keys
-            for (i = aStart; i <= aEnd; i++) {
-                aNode = a[i];
-                if (patched < bLeft) {
-                    j = keyIndex[aNode.key];
-                    if (isDefined(j)) {
-                        bNode = b[j];
-                        sources[j - bStart] = i;
-                        if (pos > j) {
-                            moved = true;
-                        }
-                        else {
-                            pos = j;
-                        }
-                        if (bNode.dom) {
-                            b[j] = bNode = directClone(bNode);
-                        }
-                        patch(aNode, bNode, dom, lifecycle, context, isSVG);
-                        patched++;
-                        a[i] = null;
-                    }
-                }
-            }
-        }
-        // fast-path: if nothing patched remove all old and add all new
-        if (aLeft === aLength && patched === 0) {
-            removeAllChildren(dom, a);
-            mountArrayChildren(b, dom, lifecycle, context, isSVG);
-        }
-        else {
-            i = aLeft - patched;
-            while (i > 0) {
-                aNode = a[aStart++];
-                if (!isNull(aNode)) {
-                    remove(aNode, dom);
-                    i--;
-                }
-            }
-            if (moved) {
-                var seq = lis_algorithm(sources);
-                j = seq.length - 1;
-                for (i = bLeft - 1; i >= 0; i--) {
-                    if (sources[i] === -1) {
-                        pos = i + bStart;
-                        node = b[pos];
-                        if (node.dom) {
-                            b[pos] = node = directClone(node);
-                        }
-                        nextPos = pos + 1;
-                        insertOrAppend(dom, mount(node, null, lifecycle, context, isSVG), nextPos < bLength ? b[nextPos].dom : null);
-                    }
-                    else if (j < 0 || i !== seq[j]) {
-                        pos = i + bStart;
-                        node = b[pos];
-                        nextPos = pos + 1;
-                        insertOrAppend(dom, node.dom, nextPos < bLength ? b[nextPos].dom : null);
-                    }
-                    else {
-                        j--;
-                    }
-                }
-            }
-            else if (patched !== bLeft) {
-                // when patched count doesn't match b length we need to insert those new ones
-                // loop backwards so we can use insertBefore
-                for (i = bLeft - 1; i >= 0; i--) {
-                    if (sources[i] === -1) {
-                        pos = i + bStart;
-                        node = b[pos];
-                        if (node.dom) {
-                            b[pos] = node = directClone(node);
-                        }
-                        nextPos = pos + 1;
-                        insertOrAppend(dom, mount(node, null, lifecycle, context, isSVG), nextPos < bLength ? b[nextPos].dom : null);
-                    }
-                }
-            }
-        }
-    }
-}
-// // https://en.wikipedia.org/wiki/Longest_increasing_subsequence
-function lis_algorithm(arr) {
-    var p = arr.slice();
-    var result = [0];
-    var i;
-    var j;
-    var u;
-    var v;
-    var c;
-    var len = arr.length;
-    for (i = 0; i < len; i++) {
-        var arrI = arr[i];
-        if (arrI !== -1) {
-            j = result[result.length - 1];
-            if (arr[j] < arrI) {
-                p[i] = j;
-                result.push(i);
-                continue;
-            }
-            u = 0;
-            v = result.length - 1;
-            while (u < v) {
-                c = ((u + v) / 2) | 0;
-                if (arr[result[c]] < arrI) {
-                    u = c + 1;
-                }
-                else {
-                    v = c;
-                }
-            }
-            if (arrI < arr[result[u]]) {
-                if (u > 0) {
-                    p[i] = result[u - 1];
-                }
-                result[u] = i;
-            }
-        }
-    }
-    u = result.length;
-    v = result[u - 1];
-    while (u-- > 0) {
-        result[u] = v;
-        v = p[v];
-    }
-    return result;
-}
-
-var roots = options.roots;
-var documentBody = isBrowser ? document.body : null;
-function render(input, parentDom, callback) {
-    // Development warning
-    if (input === NO_OP) {
-        return;
-    }
-    var rootLen = roots.length;
-    var rootInput;
-    var index;
-    for (index = 0; index < rootLen; index++) {
-        if (roots[index] === parentDom) {
-            rootInput = parentDom.$V;
-            break;
-        }
-    }
-    if (isUndefined(rootInput)) {
-        if (!isInvalid(input)) {
-            if (input.dom) {
-                input = directClone(input);
-            }
-            if (isNull(parentDom.firstChild)) {
-                mount(input, parentDom, LIFECYCLE, EMPTY_OBJ, false);
-                parentDom.$V = input;
-                roots.push(parentDom);
-            }
-            else {
-                hydrate(input, parentDom);
-            }
-            rootInput = input;
-        }
-    }
-    else {
-        if (isNullOrUndef(input)) {
-            remove(rootInput, parentDom);
-            roots.splice(index, 1);
-        }
-        else {
-            if (input.dom) {
-                input = directClone(input);
-            }
-            patch(rootInput, input, parentDom, LIFECYCLE, EMPTY_OBJ, false);
-            rootInput = parentDom.$V = input;
-        }
-    }
-    if (LIFECYCLE.length > 0) {
-        callAll(LIFECYCLE);
-    }
-    if (isFunction(callback)) {
-        callback();
-    }
-    if (rootInput && rootInput.flags & 14 /* Component */) {
-        return rootInput.children;
-    }
-}
-function createRenderer(parentDom) {
-    return function renderer(lastInput, nextInput) {
-        if (!parentDom) {
-            parentDom = lastInput;
-        }
-        render(nextInput, parentDom);
-    };
-}
-function createPortal(children, container) {
-    return createVNode(1024 /* Portal */, container, null, children, 0 /* UnknownChildren */, null, isInvalid(children) ? null : children.key, null);
-}
-
-var resolvedPromise = typeof Promise === 'undefined' ? null : Promise.resolve();
-var fallbackMethod = typeof requestAnimationFrame === 'undefined' ? setTimeout : requestAnimationFrame;
-function nextTick(fn) {
-    if (resolvedPromise) {
-        return resolvedPromise.then(fn);
-    }
-    return fallbackMethod(fn);
-}
-function queueStateChanges(component, newState, callback) {
-    if (isFunction(newState)) {
-        newState = newState(component.state, component.props, component.context);
-    }
-    var pending = component.$PS;
-    if (isNullOrUndef(pending)) {
-        component.$PS = newState;
-    }
-    else {
-        for (var stateKey in newState) {
-            pending[stateKey] = newState[stateKey];
-        }
-    }
-    if (!component.$PSS && !component.$BR) {
-        if (!component.$UPD) {
-            component.$PSS = true;
-            component.$UPD = true;
-            applyState(component, false, callback);
-            component.$UPD = false;
-        }
-        else {
-            // Async
-            var queue = component.$QU;
-            if (isNull(queue)) {
-                queue = component.$QU = [];
-                nextTick(promiseCallback(component, queue));
-            }
-            if (isFunction(callback)) {
-                queue.push(callback);
-            }
-        }
-    }
-    else {
-        component.$PSS = true;
-        if (component.$BR && isFunction(callback)) {
-            LIFECYCLE.push(callback.bind(component));
-        }
-    }
-}
-function promiseCallback(component, queue) {
-    return function () {
-        component.$QU = null;
-        component.$UPD = true;
-        applyState(component, false, function () {
-            for (var i = 0, len = queue.length; i < len; i++) {
-                queue[i].call(component);
-            }
-        });
-        component.$UPD = false;
-    };
-}
-function applyState(component, force, callback) {
-    if (component.$UN) {
-        return;
-    }
-    if (force || !component.$BR) {
-        component.$PSS = false;
-        var pendingState = component.$PS;
-        var prevState = component.state;
-        var nextState = combineFrom(prevState, pendingState);
-        var props = component.props;
-        var context = component.context;
-        component.$PS = null;
-        var vNode = component.$V;
-        var lastInput = component.$LI;
-        var parentDom = lastInput.dom && lastInput.dom.parentNode;
-        updateClassComponent(component, nextState, vNode, props, parentDom, LIFECYCLE, context, (vNode.flags & 32 /* SvgElement */) > 0, force, true);
-        if (component.$UN) {
-            return;
-        }
-        if ((component.$LI.flags & 1024 /* Portal */) === 0) {
-            var dom = component.$LI.dom;
-            while (!isNull((vNode = vNode.parentVNode))) {
-                if ((vNode.flags & 14 /* Component */) > 0) {
-                    vNode.dom = dom;
-                }
-            }
-        }
-        if (LIFECYCLE.length > 0) {
-            callAll(LIFECYCLE);
-        }
-    }
-    else {
-        component.state = component.$PS;
-        component.$PS = null;
-    }
-    if (isFunction(callback)) {
-        callback.call(component);
-    }
-}
-var Component = function Component(props, context) {
-    this.state = null;
-    // Internal properties
-    this.$BR = false; // BLOCK RENDER
-    this.$BS = true; // BLOCK STATE
-    this.$PSS = false; // PENDING SET STATE
-    this.$PS = null; // PENDING STATE (PARTIAL or FULL)
-    this.$LI = null; // LAST INPUT
-    this.$V = null; // VNODE
-    this.$UN = false; // UNMOUNTED
-    this.$CX = null; // CHILDCONTEXT
-    this.$UPD = true; // UPDATING
-    this.$QU = null; // QUEUE
-    /** @type {object} */
-    this.props = props || EMPTY_OBJ;
-    /** @type {object} */
-    this.context = context || EMPTY_OBJ; // context should not be mutable
-};
-Component.prototype.forceUpdate = function forceUpdate (callback) {
-    if (this.$UN) {
-        return;
-    }
-    applyState(this, true, callback);
-};
-Component.prototype.setState = function setState (newState, callback) {
-    if (this.$UN) {
-        return;
-    }
-    if (!this.$BS) {
-        queueStateChanges(this, newState, callback);
-    }
-    else {
-        // Development warning
-        return;
-    }
-};
-// tslint:disable-next-line:no-empty
-Component.prototype.render = function render (nextProps, nextState, nextContext) { };
-// Public
-Component.defaultProps = null;
-
-var version = "4.0.3";
-
-
-
-
-/***/ }),
-/* 32 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__ = __webpack_require__(136);
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "BrowserRouter", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["a"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HashRouter", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["b"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "IndexLink", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["c"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "IndexRoute", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["d"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "Link", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["e"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "MemoryRouter", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["f"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "NavLink", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["g"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "Prompt", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["h"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "Redirect", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["i"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "Route", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["j"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "Router", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["k"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "StaticRouter", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["l"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "Switch", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["m"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "matchPath", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["n"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "withRouter", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["o"]; });
-
-
-if (process.env.NODE_ENV !== 'production') {
-  console.warn('You are running production build of Inferno-router in development mode. Use dev:module entry point.');
-}
-
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(6)))
-
-/***/ }),
-/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5244,7 +1981,7 @@ function registerTransitionListener(nodes, callback) {
 //# sourceMappingURL=utils.js.map
 
 /***/ }),
-/* 34 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5258,77 +1995,48 @@ var _inferno = __webpack_require__(0);
 
 var _inferno2 = _interopRequireDefault(_inferno);
 
-var _infernoCreateElement = __webpack_require__(3);
+var _infernoCreateElement = __webpack_require__(2);
 
 var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 var defaultProps = {
-  color: 'secondary',
-  pill: false,
-  tag: 'span'
+  tag: 'div'
 };
 
-var Badge = function Badge(props) {
+var Card = function Card(props) {
   var children = props.children,
       className = props.className,
       cssModule = props.cssModule,
       color = props.color,
-      pill = props.pill,
+      block = props.block,
+      body = props.body,
+      inverse = props.inverse,
+      outline = props.outline,
       Tag = props.tag,
-      attributes = _objectWithoutProperties(props, ['children', 'className', 'cssModule', 'color', 'pill', 'tag']);
+      attributes = _objectWithoutProperties(props, ['children', 'className', 'cssModule', 'color', 'block', 'body', 'inverse', 'outline', 'tag']);
 
-  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'badge', 'badge-' + color, pill ? 'badge-pill' : false), cssModule);
+  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'card', inverse ? 'text-white' : false, block || body ? 'card-body' : false, color ? (outline ? 'border' : 'bg') + '-' + color : false), cssModule);
 
   Object.assign(attributes, { className: classes });
 
   return (0, _infernoCreateElement.createElement)(Tag, attributes, children);
 };
 
-Badge.defaultProps = defaultProps;
+Card.defaultProps = defaultProps;
 
-exports.default = Badge;
+exports.default = Card;
 module.exports = exports['default'];
 
 /***/ }),
-/* 35 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _inferno = __webpack_require__(0);
-
-var _Dropdown = __webpack_require__(8);
-
-var _Dropdown2 = _interopRequireDefault(_Dropdown);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ButtonDropdown = function ButtonDropdown(props) {
-  return (0, _inferno.normalizeProps)((0, _inferno.createComponentVNode)(2, _Dropdown2.default, _extends({
-    'group': true
-  }, props)));
-};
-
-exports.default = ButtonDropdown;
-module.exports = exports['default'];
-
-/***/ }),
-/* 36 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5342,94 +2050,256 @@ var _inferno = __webpack_require__(0);
 
 var _inferno2 = _interopRequireDefault(_inferno);
 
-var _infernoCreateElement = __webpack_require__(3);
+var _infernoCreateElement = __webpack_require__(2);
 
 var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _utils = __webpack_require__(2);
-
-var _lodash = __webpack_require__(97);
-
-var _lodash2 = _interopRequireDefault(_lodash);
+var _utils = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-var colWidths = ['xs', 'sm', 'md', 'lg', 'xl'];
 
 var defaultProps = {
   tag: 'div',
-  widths: colWidths
+  role: 'group'
 };
 
-var getColumnSizeClass = function getColumnSizeClass(isXs, colWidth, colSize) {
-  if (colSize === true || colSize === '') {
-    return isXs ? 'col' : 'col-' + colWidth;
-  } else if (colSize === 'auto') {
-    return isXs ? 'col-auto' : 'col-' + colWidth + '-auto';
-  }
-
-  return isXs ? 'col-' + colSize : 'col-' + colWidth + '-' + colSize;
-};
-
-var Col = function Col(props) {
+var ButtonGroup = function ButtonGroup(props) {
   var children = props.children,
       className = props.className,
       cssModule = props.cssModule,
-      widths = props.widths,
+      size = props.size,
+      vertical = props.vertical,
       Tag = props.tag,
-      attributes = _objectWithoutProperties(props, ['children', 'className', 'cssModule', 'widths', 'tag']);
+      attributes = _objectWithoutProperties(props, ['children', 'className', 'cssModule', 'size', 'vertical', 'tag']);
 
-  var colClasses = [];
+  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, size ? 'btn-group-' + size : false, vertical ? 'btn-group-vertical' : 'btn-group'), cssModule);
 
-  widths.forEach(function (colWidth, i) {
-    var columnProp = props[colWidth];
+  Object.assign(attributes, { className: classes });
 
-    if (!i && columnProp === undefined) {
-      columnProp = true;
-    }
+  return (0, _infernoCreateElement.createElement)(Tag, attributes, children);
+};
 
-    delete attributes[colWidth];
+ButtonGroup.defaultProps = defaultProps;
 
-    if (!columnProp) {
-      return;
-    }
+exports.default = ButtonGroup;
+module.exports = exports['default'];
 
-    var isXs = !i;
-    var colClass = void 0;
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
 
-    if ((0, _lodash2.default)(columnProp)) {
-      var _classNames;
+"use strict";
 
-      var colSizeInterfix = isXs ? '-' : '-' + colWidth + '-';
-      colClass = getColumnSizeClass(isXs, colWidth, columnProp.size);
 
-      colClasses.push((0, _utils.mapToCssModules)((0, _classnames2.default)((_classNames = {}, _defineProperty(_classNames, colClass, columnProp.size || columnProp.size === ''), _defineProperty(_classNames, 'push' + colSizeInterfix + columnProp.push, columnProp.push || columnProp.push === 0), _defineProperty(_classNames, 'pull' + colSizeInterfix + columnProp.pull, columnProp.pull || columnProp.pull === 0), _defineProperty(_classNames, 'offset' + colSizeInterfix + columnProp.offset, columnProp.offset || columnProp.offset === 0), _classNames))), cssModule);
-    } else {
-      colClass = getColumnSizeClass(isXs, colWidth, columnProp);
-      colClasses.push(colClass);
-    }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _inferno = __webpack_require__(0);
+
+var _inferno2 = _interopRequireDefault(_inferno);
+
+var _infernoCreateElement = __webpack_require__(2);
+
+var _classnames = __webpack_require__(1);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _utils = __webpack_require__(3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var defaultProps = {
+  tag: 'div'
+};
+
+var CardBody = function CardBody(props) {
+  var children = props.children,
+      className = props.className,
+      cssModule = props.cssModule,
+      Tag = props.tag,
+      attributes = _objectWithoutProperties(props, ['children', 'className', 'cssModule', 'tag']);
+
+  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'card-body'), cssModule);
+
+  Object.assign(attributes, { className: classes });
+
+  return (0, _infernoCreateElement.createElement)(Tag, attributes, children);
+};
+
+CardBody.defaultProps = defaultProps;
+
+exports.default = CardBody;
+module.exports = exports['default'];
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _inferno = __webpack_require__(0);
+
+var _inferno2 = _interopRequireDefault(_inferno);
+
+var _infernoCreateElement = __webpack_require__(2);
+
+var _classnames = __webpack_require__(1);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _utils = __webpack_require__(3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var defaultProps = {
+  tag: 'p'
+};
+
+var CardText = function CardText(props) {
+  var children = props.children,
+      className = props.className,
+      cssModule = props.cssModule,
+      Tag = props.tag,
+      attributes = _objectWithoutProperties(props, ['children', 'className', 'cssModule', 'tag']);
+
+  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'card-text'), cssModule);
+
+  Object.assign(attributes, { className: classes });
+
+  return (0, _infernoCreateElement.createElement)(Tag, attributes, children);
+};
+
+CardText.defaultProps = defaultProps;
+
+exports.default = CardText;
+module.exports = exports['default'];
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _inferno = __webpack_require__(0);
+
+var _inferno2 = _interopRequireDefault(_inferno);
+
+var _infernoCreateElement = __webpack_require__(2);
+
+var _classnames = __webpack_require__(1);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _utils = __webpack_require__(3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var defaultProps = {
+  tag: 'h4'
+};
+
+var CardTitle = function CardTitle(props) {
+  var children = props.children,
+      className = props.className,
+      cssModule = props.cssModule,
+      Tag = props.tag,
+      attributes = _objectWithoutProperties(props, ['children', 'className', 'cssModule', 'tag']);
+
+  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'card-title'), cssModule);
+
+  Object.assign(attributes, { className: classes });
+
+  return (0, _infernoCreateElement.createElement)(Tag, attributes, children);
+};
+
+CardTitle.defaultProps = defaultProps;
+
+exports.default = CardTitle;
+module.exports = exports['default'];
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _inferno = __webpack_require__(0);
+
+var _inferno2 = _interopRequireDefault(_inferno);
+
+var _infernoCreateElement = __webpack_require__(2);
+
+var _classnames = __webpack_require__(1);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _utils = __webpack_require__(3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var defaultProps = {
+  tag: 'form'
+};
+
+/**
+ * 
+ * NOTE: I have removed the `inline`-attribute, this can be done with CSS
+ * which gives cleaner code and better separation of semantics and styling.
+ */
+
+var Form = function Form(props) {
+  var children = props.children,
+      className = props.className,
+      cssModule = props.cssModule,
+      Tag = props.tag,
+      innerRef = props.innerRef,
+      attributes = _objectWithoutProperties(props, ['children', 'className', 'cssModule', 'tag', 'innerRef']);
+
+  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className), cssModule);
+
+  Object.assign(attributes, {
+    className: classes,
+    ref: innerRef
   });
 
-  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, colClasses), cssModule);
-
-  Object.assign(attributes, { className: classes });
-
   return (0, _infernoCreateElement.createElement)(Tag, attributes, children);
 };
 
-Col.defaultProps = defaultProps;
+Form.defaultProps = defaultProps;
 
-exports.default = Col;
+exports.default = Form;
 module.exports = exports['default'];
 
 /***/ }),
-/* 37 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5443,13 +2313,13 @@ var _inferno = __webpack_require__(0);
 
 var _inferno2 = _interopRequireDefault(_inferno);
 
-var _infernoCreateElement = __webpack_require__(3);
+var _infernoCreateElement = __webpack_require__(2);
 
 var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5459,28 +2329,138 @@ var defaultProps = {
   tag: 'div'
 };
 
-var InputGroup = function InputGroup(props) {
+var FormGroup = function FormGroup(props) {
   var children = props.children,
       className = props.className,
       cssModule = props.cssModule,
+      row = props.row,
+      disabled = props.disabled,
+      check = props.check,
       Tag = props.tag,
-      size = props.size,
-      attributes = _objectWithoutProperties(props, ['children', 'className', 'cssModule', 'tag', 'size']);
+      attributes = _objectWithoutProperties(props, ['children', 'className', 'cssModule', 'row', 'disabled', 'check', 'tag']);
 
-  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'input-group', size ? 'input-group-' + size : null), cssModule);
+  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, row ? 'row' : false, check ? 'form-check' : 'form-group', check && disabled ? 'disabled' : false), cssModule);
 
   Object.assign(attributes, { className: classes });
 
   return (0, _infernoCreateElement.createElement)(Tag, attributes, children);
 };
 
-InputGroup.defaultProps = defaultProps;
+FormGroup.defaultProps = defaultProps;
 
-exports.default = InputGroup;
+exports.default = FormGroup;
 module.exports = exports['default'];
 
 /***/ }),
-/* 38 */
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _inferno = __webpack_require__(0);
+
+var _infernoCreateElement = __webpack_require__(2);
+
+var _classnames = __webpack_require__(1);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _utils = __webpack_require__(3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* eslint react/prefer-stateless-function: 0 */
+
+
+var defaultProps = {
+  tag: 'p',
+  type: 'text'
+};
+
+var Input = function (_Component) {
+  _inherits(Input, _Component);
+
+  function Input() {
+    _classCallCheck(this, Input);
+
+    return _possibleConstructorReturn(this, (Input.__proto__ || Object.getPrototypeOf(Input)).apply(this, arguments));
+  }
+
+  _createClass(Input, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          className = _props.className,
+          cssModule = _props.cssModule,
+          type = _props.type,
+          bsSize = _props.bsSize,
+          tag = _props.tag,
+          valid = _props.valid,
+          addon = _props.addon,
+          plaintext = _props.plaintext,
+          innerRef = _props.innerRef,
+          attributes = _objectWithoutProperties(_props, ['className', 'cssModule', 'type', 'bsSize', 'tag', 'valid', 'addon', 'plaintext', 'innerRef']);
+
+      var checkInput = ['radio', 'checkbox'].indexOf(type) > -1;
+
+      var fileInput = type === 'file';
+      var textareaInput = type === 'textarea';
+      var selectInput = type === 'select';
+      var Tag = selectInput || textareaInput ? type : 'input';
+
+      var formControlClass = 'form-control';
+
+      if (plaintext) {
+        formControlClass = formControlClass + '-plaintext';
+        Tag = tag;
+      } else if (fileInput) {
+        formControlClass = formControlClass + '-file';
+      } else if (checkInput) {
+        if (addon) {
+          formControlClass = null;
+        } else {
+          formControlClass = 'form-check-input';
+        }
+      }
+
+      var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, valid === false && 'is-invalid', valid && 'is-valid', bsSize ? 'form-control-' + bsSize : false, formControlClass), cssModule);
+
+      if (Tag === 'input') {
+        attributes.type = type;
+      }
+
+      Object.assign(attributes, {
+        className: classes,
+        ref: innerRef
+      });
+
+      return (0, _infernoCreateElement.createElement)(Tag, attributes);
+    }
+  }]);
+
+  return Input;
+}(_inferno.Component);
+
+Input.defaultProps = defaultProps;
+
+exports.default = Input;
+module.exports = exports['default'];
+
+/***/ }),
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5494,57 +2474,58 @@ var _inferno = __webpack_require__(0);
 
 var _inferno2 = _interopRequireDefault(_inferno);
 
-var _infernoCreateElement = __webpack_require__(3);
+var _infernoCreateElement = __webpack_require__(2);
 
 var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _utils = __webpack_require__(2);
-
-var _InputGroupText = __webpack_require__(68);
-
-var _InputGroupText2 = _interopRequireDefault(_InputGroupText);
+var _utils = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 var defaultProps = {
-  tag: 'div'
+  tag: 'label'
 };
 
-var InputGroupAddon = function InputGroupAddon(props) {
-  var className = props.className,
+/**
+ * 
+ * NOTE: I have removed the `inline`-attribute, this can be done with CSS
+ * which gives cleaner code and better separation of semantics and styling.
+ * 
+ * This affects widths property
+ */
+
+var Label = function Label(props) {
+  var children = props.children,
+      className = props.className,
       cssModule = props.cssModule,
+      hidden = props.hidden,
       Tag = props.tag,
-      addonType = props.addonType,
-      children = props.children,
-      attributes = _objectWithoutProperties(props, ['className', 'cssModule', 'tag', 'addonType', 'children']);
+      check = props.check,
+      disabled = props.disabled,
+      htmlFor = props.htmlFor,
+      attributes = _objectWithoutProperties(props, ['children', 'className', 'cssModule', 'hidden', 'tag', 'check', 'disabled', 'htmlFor']);
 
-  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'input-group-' + addonType), cssModule);
+  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, hidden ? 'sr-only' : false, check ? 'form-check-label' : 'form-control-label', check && disabled ? 'disabled' : false), cssModule);
 
-  // Convenience to assist with transition
-  if (typeof children === 'string') {
-    Object.assign(attributes, { className: classes });
-
-    return (0, _infernoCreateElement.createElement)(Tag, attributes, (0, _inferno.createComponentVNode)(2, _InputGroupText2.default, {
-      children: children
-    }));
-  }
-
-  Object.assign(attributes, { className: classes });
+  Object.assign(attributes, {
+    className: classes,
+    htmlFor: htmlFor
+  });
 
   return (0, _infernoCreateElement.createElement)(Tag, attributes, children);
 };
 
-InputGroupAddon.defaultProps = defaultProps;
+Label.defaultProps = defaultProps;
 
-exports.default = InputGroupAddon;
+exports.default = Label;
 module.exports = exports['default'];
 
 /***/ }),
-/* 39 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5564,17 +2545,17 @@ var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _utils = __webpack_require__(2);
+var _infernoPopper = __webpack_require__(6);
 
-var _compat = __webpack_require__(86);
+var _PopperTargetHelper = __webpack_require__(44);
 
-var _AnimateModal = __webpack_require__(74);
+var _PopperTargetHelper2 = _interopRequireDefault(_PopperTargetHelper);
+
+var _utils = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -5582,727 +2563,165 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var propsToOmit = ['animationPrefix', 'backgroundAnimationPrefix', 'isOpen', 'autoFocus', 'size', 'toggle', 'keyboard', 'backdrop', 'onEnter', 'onExit', 'onOpened', 'onClosed', 'children', 'className', 'wrapClassName', 'modalClassName', 'backdropClassName', 'contentClassName', 'fade', 'cssModule', 'zIndex'];
-
 var defaultProps = {
+  placement: 'auto',
   isOpen: false,
-  autoFocus: true,
-  backdrop: true,
-  keyboard: true,
-  zIndex: 1050,
-  fade: true
+  offset: 0,
+  fallbackPlacement: 'flip',
+  wrapTag: 'span',
+  flip: true
 };
 
-var Modal = function (_Component) {
-  _inherits(Modal, _Component);
+var PopperContent = function (_Component) {
+  _inherits(PopperContent, _Component);
 
-  function Modal(props) {
-    _classCallCheck(this, Modal);
+  function PopperContent(props) {
+    _classCallCheck(this, PopperContent);
 
-    var _this = _possibleConstructorReturn(this, (Modal.__proto__ || Object.getPrototypeOf(Modal)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (PopperContent.__proto__ || Object.getPrototypeOf(PopperContent)).call(this, props));
 
-    _this.originalBodyPadding = null;
-    _this.isBodyOverflowing = false;
-    _this.togglePortal = _this.togglePortal.bind(_this);
-    _this.handleBackdropClick = _this.handleBackdropClick.bind(_this);
-    _this.handleEscape = _this.handleEscape.bind(_this);
-    _this.destroy = _this.destroy.bind(_this);
-    _this.onOpened = _this.onOpened.bind(_this);
-    _this.onClosed = _this.onClosed.bind(_this);
-    _this.createEventListeners = _this.createEventListeners.bind(_this);
+    _this.handlePlacementChange = _this.handlePlacementChange.bind(_this);
+    _this.state = {};
     return _this;
   }
 
-  _createClass(Modal, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      if (this.props.isOpen) {
-        this.togglePortal();
+  _createClass(PopperContent, [{
+    key: 'handlePlacementChange',
+    value: function handlePlacementChange(data) {
+      if (this.state.placement !== data.placement) {
+        this.setState({ placement: data.placement });
       }
-      if (this.props.onEnter) {
-        this.props.onEnter();
-      }
-    }
-  }, {
-    key: 'componentDidUpdate',
-    value: function componentDidUpdate(prevProps) {
-      if (this.props.isOpen !== prevProps.isOpen) {
-        // handle portal events/dom updates
-        this.togglePortal();
-      } else if (this._element) {
-        // rerender portal
-        this.renderIntoSubtree();
-      }
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      this.destroy();
-      if (this.props.onExit) {
-        this.props.onExit();
-      }
-    }
-  }, {
-    key: 'onOpened',
-    value: function onOpened() {
-      if (this.props.onOpened) {
-        this.props.onOpened();
-      }
-    }
-  }, {
-    key: 'onClosed',
-    value: function onClosed() {
-      this.destroy();
-      if (this.props.onClosed) {
-        this.props.onClosed();
-      }
-    }
-  }, {
-    key: 'handleEscape',
-    value: function handleEscape(e) {
-      if (this._dialog && this.props.keyboard && e.keyCode === 27 && this.props.toggle) {
-        this.props.toggle();
-      }
-    }
-  }, {
-    key: 'handleBackdropClick',
-    value: function handleBackdropClick(e) {
-      if (!this._dialog || this.props.backdrop !== true) return;
-
-      var container = this._dialog;
-
-      if (e.target && !container.contains(e.target) && this.props.toggle) {
-        this.props.toggle();
-      }
-    }
-  }, {
-    key: 'togglePortal',
-    value: function togglePortal() {
-      if (this.props.isOpen) {
-        if (this.props.autoFocus) {
-          this._focus = true;
-        }
-        this.show();
-      } else {
-        this.hide();
-      }
-    }
-  }, {
-    key: 'createEventListeners',
-    value: function createEventListeners() {
-      window.addEventListener('keyup', this.handleEscape);
-      window.addEventListener('click', this.handleBackdropClick, true);
-    }
-  }, {
-    key: 'destroy',
-    value: function destroy() {
-      window.removeEventListener('keyup', this.handleEscape);
-      window.removeEventListener('click', this.handleBackdropClick, true);
-      if (this._element) {
-        (0, _compat.unmountComponentAtNode)(this._element);
-        document.body.removeChild(this._element);
-        this._element = null;
-      }
-
-      // Use regex to prevent matching `modal-open` as part of a different class, e.g. `my-modal-opened`
-      var classes = document.body.className.replace(/(^| )modal-open( |$)/, ' ');
-      document.body.className = (0, _utils.mapToCssModules)((0, _classnames2.default)(classes).trim(), this.props.cssModule);
-      (0, _utils.setScrollbarWidth)(this.originalBodyPadding);
-    }
-  }, {
-    key: 'hide',
-    value: function hide() {
-      this.renderIntoSubtree();
-
-      // Need to trigger cleanup if the animation doesn't play
-      if (!this.props.fade) {
-        this.destroy();
-      }
-    }
-  }, {
-    key: 'show',
-    value: function show() {
-      var classes = document.body.className;
-      this._element = document.createElement('div');
-      this._element.setAttribute('tabindex', '-1');
-      this._element.style.position = 'relative';
-      this._element.style.zIndex = this.props.zIndex;
-      this.originalBodyPadding = (0, _utils.getOriginalBodyPadding)();
-
-      (0, _utils.conditionallyUpdateScrollbar)();
-      this.createEventListeners();
-
-      document.body.appendChild(this._element);
-
-      document.body.className = (0, _utils.mapToCssModules)((0, _classnames2.default)(classes, 'modal-open'), this.props.cssModule);
-
-      this.renderIntoSubtree();
-    }
-  }, {
-    key: 'renderModalDialog',
-    value: function renderModalDialog() {
-      var _this2 = this;
-
-      var attributes = (0, _utils.omit)(this.props, propsToOmit);
-
-      return (0, _inferno.normalizeProps)((0, _inferno.createVNode)(1, 'div', (0, _utils.mapToCssModules)((0, _classnames2.default)('modal-dialog', this.props.className, _defineProperty({}, 'modal-' + this.props.size, this.props.size)), this.props.cssModule), (0, _inferno.createVNode)(1, 'div', (0, _utils.mapToCssModules)((0, _classnames2.default)('modal-content', this.props.contentClassName), this.props.cssModule), this.props.children, 0), 2, _extends({
-        'role': 'document'
-      }, attributes), null, function (c) {
-        return _this2._dialog = c;
-      }));
-    }
-  }, {
-    key: 'renderIntoSubtree',
-    value: function renderIntoSubtree() {
-      (0, _compat.unstable_renderSubtreeIntoContainer)(this, this.renderChildren(), this._element);
-
-      // check if modal should receive focus
-      if (this._focus) {
-        this._dialog.parentNode.focus();
-        this._focus = false;
-      }
-    }
-  }, {
-    key: 'renderChildren',
-    value: function renderChildren() {
-      var _props = this.props,
-          wrapClassName = _props.wrapClassName,
-          modalClassName = _props.modalClassName,
-          backdropClassName = _props.backdropClassName,
-          cssModule = _props.cssModule,
-          isOpen = _props.isOpen,
-          backdrop = _props.backdrop,
-          modalTransitionTimeout = _props.modalTransitionTimeout,
-          backdropTransitionTimeout = _props.backdropTransitionTimeout;
-
-
-      var modalAttributes = {
-        tabIndex: '-1'
-      };
-
-      var prefix = this.props.animationPrefix || "ModalFade";
-      var backgroundPrefix = this.props.backgroundAnimationPrefix || "ModalBackdropFade";
-
-      if (this.props.fade) {
-        var animCls = {
-          show: 'show',
-          active: 'fade',
-          hide: undefined
-        };
-
-        var backdropAnimCls = {
-          show: 'fade show',
-          active: 'fade',
-          hide: undefined
-        };
-
-        return (0, _inferno.createVNode)(1, 'div', (0, _utils.mapToCssModules)(wrapClassName), [(0, _inferno.normalizeProps)((0, _inferno.createComponentVNode)(2, AnimatedSpecial, _extends({
-          'isOpen': isOpen,
-          'cssModule': cssModule,
-          'className': (0, _utils.mapToCssModules)((0, _classnames2.default)('modal', modalClassName), cssModule),
-          'onOpened': this.onOpened,
-          'onClosed': this.onClosed
-        }, modalAttributes, {
-          children: this.renderModalDialog()
-        }), 'modal-dialog')), (0, _inferno.createComponentVNode)(2, AnimatedSpecial, {
-          'isOpen': isOpen && backdrop,
-          'cssModule': cssModule,
-          'className': (0, _utils.mapToCssModules)((0, _classnames2.default)('modal-backdrop', backdropClassName), cssModule)
-        }, 'modal-backdrop')], 8);
-      }
-
-      return (0, _inferno.createVNode)(1, 'div', (0, _utils.mapToCssModules)(wrapClassName), [isOpen && (0, _inferno.normalizeProps)((0, _inferno.createVNode)(1, 'div', (0, _utils.mapToCssModules)((0, _classnames2.default)('modal', 'show', modalClassName), cssModule), this.renderModalDialog(), 0, _extends({
-        'style': { display: 'block' }
-      }, modalAttributes))), isOpen && backdrop && (0, _inferno.createVNode)(1, 'div', (0, _utils.mapToCssModules)((0, _classnames2.default)('modal-backdrop', 'show', backdropClassName), cssModule))], 0);
+      return data;
     }
   }, {
     key: 'render',
     value: function render() {
-      return null;
+      var _props = this.props,
+          cssModule = _props.cssModule,
+          children = _props.children,
+          isOpen = _props.isOpen,
+          flip = _props.flip,
+          target = _props.target,
+          offset = _props.offset,
+          fallbackPlacement = _props.fallbackPlacement,
+          placementPrefix = _props.placementPrefix,
+          className = _props.className,
+          wrapTag = _props.wrapTag,
+          wrapClassName = _props.wrapClassName,
+          tag = _props.tag,
+          attrs = _objectWithoutProperties(_props, ['cssModule', 'children', 'isOpen', 'flip', 'target', 'offset', 'fallbackPlacement', 'placementPrefix', 'className', 'wrapTag', 'wrapClassName', 'tag']);
+
+      var arrowClassName = (0, _utils.mapToCssModules)('arrow', cssModule);
+      var placement = (this.state.placement || attrs.placement).split('-')[0];
+      var managerClass = (0, _utils.mapToCssModules)(wrapClassName, this.props.cssModule);
+      var popperClassName = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, placementPrefix ? placementPrefix + '-' + placement : placement), this.props.cssModule);
+
+      var modifiers = {
+        offset: { offset: offset },
+        flip: { enabled: flip, behavior: fallbackPlacement },
+        update: {
+          enabled: true,
+          order: 950,
+          fn: this.handlePlacementChange
+        }
+      };
+
+      return (0, _inferno.createComponentVNode)(2, _infernoPopper.Manager, {
+        'tag': wrapTag,
+        'className': managerClass,
+        children: [(0, _inferno.createComponentVNode)(2, _PopperTargetHelper2.default, {
+          'target': target
+        }), isOpen && (0, _inferno.normalizeProps)((0, _inferno.createComponentVNode)(2, _infernoPopper.Popper, _extends({
+          'modifiers': modifiers
+        }, attrs, {
+          'component': tag,
+          'className': popperClassName,
+          children: [children, (0, _inferno.createComponentVNode)(2, _infernoPopper.Arrow, {
+            'className': arrowClassName
+          })]
+        })))]
+      });
     }
   }]);
 
-  return Modal;
+  return PopperContent;
 }(_inferno.Component);
 
-Modal.defaultProps = defaultProps;
+PopperContent.defaultProps = defaultProps;
 
-var AnimatedSpecial = function (_Component2) {
-  _inherits(AnimatedSpecial, _Component2);
+exports.default = PopperContent;
+module.exports = exports['default'];
 
-  function AnimatedSpecial() {
-    _classCallCheck(this, AnimatedSpecial);
+/***/ }),
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
 
-    return _possibleConstructorReturn(this, (AnimatedSpecial.__proto__ || Object.getPrototypeOf(AnimatedSpecial)).apply(this, arguments));
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var addLeadingSlash = exports.addLeadingSlash = function addLeadingSlash(path) {
+  return path.charAt(0) === '/' ? path : '/' + path;
+};
+
+var stripLeadingSlash = exports.stripLeadingSlash = function stripLeadingSlash(path) {
+  return path.charAt(0) === '/' ? path.substr(1) : path;
+};
+
+var hasBasename = exports.hasBasename = function hasBasename(path, prefix) {
+  return new RegExp('^' + prefix + '(\\/|\\?|#|$)', 'i').test(path);
+};
+
+var stripBasename = exports.stripBasename = function stripBasename(path, prefix) {
+  return hasBasename(path, prefix) ? path.substr(prefix.length) : path;
+};
+
+var stripTrailingSlash = exports.stripTrailingSlash = function stripTrailingSlash(path) {
+  return path.charAt(path.length - 1) === '/' ? path.slice(0, -1) : path;
+};
+
+var parsePath = exports.parsePath = function parsePath(path) {
+  var pathname = path || '/';
+  var search = '';
+  var hash = '';
+
+  var hashIndex = pathname.indexOf('#');
+  if (hashIndex !== -1) {
+    hash = pathname.substr(hashIndex);
+    pathname = pathname.substr(0, hashIndex);
   }
 
-  _createClass(AnimatedSpecial, [{
-    key: 'render',
-
-    /*
-    I need to create a separate component to get unmount to work properly
-    since animations are triggered on unmount and I don't want inferno to
-    remove all the elements until the animation is completed.
-     */
-
-    value: function render(_ref) {
-      var isOpen = _ref.isOpen,
-          onClosed = _ref.onClosed,
-          onOpened = _ref.onOpened,
-          attrs = _objectWithoutProperties(_ref, ['isOpen', 'onClosed', 'onOpened']);
-
-      if (isOpen) {
-        return (0, _inferno.normalizeProps)((0, _inferno.createComponentVNode)(2, _AnimateModal.Animated, _extends({}, attrs), null, {
-          'onComponentDidMount': function onComponentDidMount(dom) {
-            return (0, _AnimateModal.animateModalOnAdd)(dom, onOpened);
-          },
-          'onComponentWillUnmount': function onComponentWillUnmount(dom) {
-            return (0, _AnimateModal.animateModalOnRemove)(dom, onClosed);
-          }
-        }));
-      } else {
-        return null;
-      }
-    }
-  }]);
-
-  return AnimatedSpecial;
-}(_inferno.Component);
-
-exports.default = Modal;
-
-/*
-  props.bootstrapCls = {
-    hide: ,
-    active: 'modal fade',
-    show: 'modal show'
-  }
-*/
-
-module.exports = exports['default'];
-
-/***/ }),
-/* 40 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _inferno = __webpack_require__(0);
-
-var _inferno2 = _interopRequireDefault(_inferno);
-
-var _infernoCreateElement = __webpack_require__(3);
-
-var _classnames = __webpack_require__(1);
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _utils = __webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-var defaultProps = {
-  tag: 'div'
-};
-
-var ModalBody = function ModalBody(props) {
-  var children = props.children,
-      className = props.className,
-      cssModule = props.cssModule,
-      Tag = props.tag,
-      attributes = _objectWithoutProperties(props, ['children', 'className', 'cssModule', 'tag']);
-
-  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'modal-body'), cssModule);
-
-  Object.assign(attributes, { className: classes });
-
-  return (0, _infernoCreateElement.createElement)(Tag, attributes, children);
-};
-
-ModalBody.defaultProps = defaultProps;
-
-exports.default = ModalBody;
-module.exports = exports['default'];
-
-/***/ }),
-/* 41 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _inferno = __webpack_require__(0);
-
-var _inferno2 = _interopRequireDefault(_inferno);
-
-var _infernoCreateElement = __webpack_require__(3);
-
-var _classnames = __webpack_require__(1);
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _utils = __webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-var defaultProps = {
-  tag: 'div'
-};
-
-var ModalFooter = function ModalFooter(props) {
-  var children = props.children,
-      className = props.className,
-      cssModule = props.cssModule,
-      Tag = props.tag,
-      attributes = _objectWithoutProperties(props, ['children', 'className', 'cssModule', 'tag']);
-
-  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'modal-footer'), cssModule);
-
-  Object.assign(attributes, { className: classes });
-
-  return (0, _infernoCreateElement.createElement)(Tag, attributes, children);
-};
-
-ModalFooter.defaultProps = defaultProps;
-
-exports.default = ModalFooter;
-module.exports = exports['default'];
-
-/***/ }),
-/* 42 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _inferno = __webpack_require__(0);
-
-var _inferno2 = _interopRequireDefault(_inferno);
-
-var _infernoCreateElement = __webpack_require__(3);
-
-var _classnames = __webpack_require__(1);
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _utils = __webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-var defaultProps = {
-  tag: 'h4',
-  wrapTag: 'div',
-  closeAriaLabel: 'Close'
-};
-
-var ModalHeader = function ModalHeader(props) {
-  var closeButton = void 0;
-
-  var className = props.className,
-      cssModule = props.cssModule,
-      children = props.children,
-      toggle = props.toggle,
-      Tag = props.tag,
-      WrapTag = props.wrapTag,
-      closeAriaLabel = props.closeAriaLabel,
-      attributes = _objectWithoutProperties(props, ['className', 'cssModule', 'children', 'toggle', 'tag', 'wrapTag', 'closeAriaLabel']);
-
-  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'modal-header'), cssModule);
-
-  if (toggle) {
-    closeButton = (0, _inferno.createVNode)(1, 'button', 'close', (0, _inferno.createVNode)(1, 'span', null, String.fromCharCode(215), 0, {
-      'aria-hidden': 'true'
-    }), 2, {
-      'type': 'button',
-      'onClick': toggle,
-      'aria-label': closeAriaLabel
-    });
+  var searchIndex = pathname.indexOf('?');
+  if (searchIndex !== -1) {
+    search = pathname.substr(searchIndex);
+    pathname = pathname.substr(0, searchIndex);
   }
 
-  var innerChildren = [(0, _infernoCreateElement.createElement)(Tag, { className: (0, _utils.mapToCssModules)('modal-title', cssModule) }, children), closeButton];
-
-  Object.assign(attributes, { className: classes });
-
-  return (0, _infernoCreateElement.createElement)(WrapTag, attributes, innerChildren);
+  return {
+    pathname: pathname,
+    search: search === '?' ? '' : search,
+    hash: hash === '#' ? '' : hash
+  };
 };
 
-ModalHeader.defaultProps = defaultProps;
+var createPath = exports.createPath = function createPath(location) {
+  var pathname = location.pathname,
+      search = location.search,
+      hash = location.hash;
 
-exports.default = ModalHeader;
-module.exports = exports['default'];
+  var path = pathname || '/';
 
-/***/ }),
-/* 43 */
-/***/ (function(module, exports, __webpack_require__) {
+  if (search && search !== '?') path += search.charAt(0) === '?' ? search : '?' + search;
 
-"use strict";
+  if (hash && hash !== '#') path += hash.charAt(0) === '#' ? hash : '#' + hash;
 
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _inferno = __webpack_require__(0);
-
-var _classnames = __webpack_require__(1);
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _utils = __webpack_require__(2);
-
-var _Dropdown = __webpack_require__(8);
-
-var _Dropdown2 = _interopRequireDefault(_Dropdown);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-var defaultProps = {
-  tag: 'li'
-};
-
-var NavDropdown = function NavDropdown(props) {
-  var className = props.className,
-      cssModule = props.cssModule,
-      Tag = props.tag,
-      attributes = _objectWithoutProperties(props, ['className', 'cssModule', 'tag']);
-
-  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'nav-item'), cssModule);
-
-  return (0, _inferno.normalizeProps)((0, _inferno.createComponentVNode)(2, _Dropdown2.default, _extends({}, attributes, {
-    'tag': Tag,
-    'className': classes
-  })));
-};
-
-NavDropdown.defaultProps = defaultProps;
-
-exports.default = NavDropdown;
-module.exports = exports['default'];
-
-/***/ }),
-/* 44 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _inferno = __webpack_require__(0);
-
-var _inferno2 = _interopRequireDefault(_inferno);
-
-var _infernoCreateElement = __webpack_require__(3);
-
-var _classnames = __webpack_require__(1);
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _utils = __webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-var defaultProps = {
-  tag: 'div'
-};
-
-var Row = function Row(props) {
-  var children = props.children,
-      className = props.className,
-      cssModule = props.cssModule,
-      noGutters = props.noGutters,
-      Tag = props.tag,
-      attributes = _objectWithoutProperties(props, ['children', 'className', 'cssModule', 'noGutters', 'tag']);
-
-  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, noGutters ? 'no-gutters' : null, 'row'), cssModule);
-
-  Object.assign(attributes, { className: classes });
-
-  return (0, _infernoCreateElement.createElement)(Tag, attributes, children);
-};
-
-Row.defaultProps = defaultProps;
-
-exports.default = Row;
-module.exports = exports['default'];
-
-/***/ }),
-/* 45 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var canUseDOM = exports.canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
-
-var addEventListener = exports.addEventListener = function addEventListener(node, event, listener) {
-  return node.addEventListener ? node.addEventListener(event, listener, false) : node.attachEvent('on' + event, listener);
-};
-
-var removeEventListener = exports.removeEventListener = function removeEventListener(node, event, listener) {
-  return node.removeEventListener ? node.removeEventListener(event, listener, false) : node.detachEvent('on' + event, listener);
-};
-
-var getConfirmation = exports.getConfirmation = function getConfirmation(message, callback) {
-  return callback(window.confirm(message));
-}; // eslint-disable-line no-alert
-
-/**
- * Returns true if the HTML5 history API is supported. Taken from Modernizr.
- *
- * https://github.com/Modernizr/Modernizr/blob/master/LICENSE
- * https://github.com/Modernizr/Modernizr/blob/master/feature-detects/history.js
- * changed to avoid false negatives for Windows Phones: https://github.com/reactjs/react-router/issues/586
- */
-var supportsHistory = exports.supportsHistory = function supportsHistory() {
-  var ua = window.navigator.userAgent;
-
-  if ((ua.indexOf('Android 2.') !== -1 || ua.indexOf('Android 4.0') !== -1) && ua.indexOf('Mobile Safari') !== -1 && ua.indexOf('Chrome') === -1 && ua.indexOf('Windows Phone') === -1) return false;
-
-  return window.history && 'pushState' in window.history;
-};
-
-/**
- * Returns true if browser fires popstate on hash change.
- * IE10 and IE11 do not.
- */
-var supportsPopStateOnHashChange = exports.supportsPopStateOnHashChange = function supportsPopStateOnHashChange() {
-  return window.navigator.userAgent.indexOf('Trident') === -1;
-};
-
-/**
- * Returns false if using go(n) with hash history causes a full page reload.
- */
-var supportsGoWithoutReloadUsingHash = exports.supportsGoWithoutReloadUsingHash = function supportsGoWithoutReloadUsingHash() {
-  return window.navigator.userAgent.indexOf('Firefox') === -1;
-};
-
-/**
- * Returns true if a given popstate event is an extraneous WebKit event.
- * Accounts for the fact that Chrome on iOS fires real popstate events
- * containing undefined state when pressing the back button.
- */
-var isExtraneousPopstateEvent = exports.isExtraneousPopstateEvent = function isExtraneousPopstateEvent(event) {
-  return event.state === undefined && navigator.userAgent.indexOf('CriOS') === -1;
+  return path;
 };
 
 /***/ }),
-/* 46 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/**
- * Copyright 2013-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
-
-
-
-/**
- * Use invariant() to assert state which your program assumes to be true.
- *
- * Provide sprintf-style format (only %s is supported) and arguments
- * to provide information about what broke and what you were
- * expecting.
- *
- * The invariant message will be stripped in production, but the invariant
- * will remain to ensure logic does not differ in production.
- */
-
-var invariant = function invariant(condition, format, a, b, c, d, e, f) {
-  if (process.env.NODE_ENV !== 'production') {
-    if (format === undefined) {
-      throw new Error('invariant requires an error message argument');
-    }
-  }
-
-  if (!condition) {
-    var error;
-    if (format === undefined) {
-      error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
-    } else {
-      var args = [a, b, c, d, e, f];
-      var argIndex = 0;
-      error = new Error(format.replace(/%s/g, function () {
-        return args[argIndex++];
-      }));
-      error.name = 'Invariant Violation';
-    }
-
-    error.framesToPop = 1; // we don't care about invariant's own frame
-    throw error;
-  }
-};
-
-module.exports = invariant;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
-
-/***/ }),
-/* 47 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var g;
-
-// This works in non-strict mode
-g = function () {
-	return this;
-}();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1, eval)("this");
-} catch (e) {
-	// This works if the window reference is available
-	if ((typeof window === "undefined" ? "undefined" : _typeof(window)) === "object") g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-/***/ }),
-/* 48 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8744,10 +5163,2193 @@ exports.default = Popper;
 //# sourceMappingURL=popper.js.map
 
 module.exports = exports['default'];
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(47)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(50)))
 
 /***/ }),
-/* 49 */
+/* 30 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Component; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return EMPTY_OBJ; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return NO_OP; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return createComponentVNode; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return createPortal; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return createRenderer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return createTextVNode; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return createVNode; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return directClone; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return getFlagsForElementVnode; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return getNumberStyleValue; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return hydrate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return linkEvent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return normalizeProps; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return options; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return version; });
+var NO_OP = '$NO_OP';
+var ERROR_MSG = 'a runtime error occured! Use Inferno in development environment to find the error.';
+// This should be boolean and not reference to window.document
+var isBrowser = !!(typeof window !== 'undefined' && window.document);
+// this is MUCH faster than .constructor === Array and instanceof Array
+// in Node 7 and the later versions of V8, slower in older versions though
+var isArray = Array.isArray;
+function isStringOrNumber(o) {
+    var type = typeof o;
+    return type === 'string' || type === 'number';
+}
+function isNullOrUndef(o) {
+    return isUndefined(o) || isNull(o);
+}
+function isInvalid(o) {
+    return isNull(o) || o === false || isTrue(o) || isUndefined(o);
+}
+function isFunction(o) {
+    return typeof o === 'function';
+}
+function isString(o) {
+    return typeof o === 'string';
+}
+function isNumber(o) {
+    return typeof o === 'number';
+}
+function isNull(o) {
+    return o === null;
+}
+function isTrue(o) {
+    return o === true;
+}
+function isUndefined(o) {
+    return o === void 0;
+}
+function isDefined(o) {
+    return o !== void 0;
+}
+function isObject(o) {
+    return typeof o === 'object';
+}
+function throwError(message) {
+    if (!message) {
+        message = ERROR_MSG;
+    }
+    throw new Error(("Inferno Error: " + message));
+}
+function combineFrom(first, second) {
+    var out = {};
+    if (first) {
+        for (var key in first) {
+            out[key] = first[key];
+        }
+    }
+    if (second) {
+        for (var key$1 in second) {
+            out[key$1] = second[key$1];
+        }
+    }
+    return out;
+}
+
+var keyPrefix = '$';
+function getVNode(childFlags, children, className, flags, key, props, ref, type) {
+    return {
+        childFlags: childFlags,
+        children: children,
+        className: className,
+        dom: null,
+        flags: flags,
+        key: key === void 0 ? null : key,
+        parentVNode: null,
+        props: props === void 0 ? null : props,
+        ref: ref === void 0 ? null : ref,
+        type: type
+    };
+}
+function createVNode(flags, type, className, children, childFlags, props, key, ref) {
+    var childFlag = childFlags === void 0 ? 1 /* HasInvalidChildren */ : childFlags;
+    var vNode = getVNode(childFlag, children, className, flags, key, props, ref, type);
+    var optsVNode = options.createVNode;
+    if (typeof optsVNode === 'function') {
+        optsVNode(vNode);
+    }
+    if (childFlag === 0 /* UnknownChildren */) {
+        normalizeChildren(vNode, vNode.children);
+    }
+    return vNode;
+}
+function createComponentVNode(flags, type, props, key, ref) {
+    if ((flags & 2 /* ComponentUnknown */) > 0) {
+        flags = isDefined(type.prototype) && isFunction(type.prototype.render) ? 4 /* ComponentClass */ : 8 /* ComponentFunction */;
+    }
+    // set default props
+    var defaultProps = type.defaultProps;
+    if (!isNullOrUndef(defaultProps)) {
+        if (!props) {
+            props = {}; // Props can be referenced and modified at application level so always create new object
+        }
+        for (var prop in defaultProps) {
+            if (isUndefined(props[prop])) {
+                props[prop] = defaultProps[prop];
+            }
+        }
+    }
+    if ((flags & 8 /* ComponentFunction */) > 0) {
+        var defaultHooks = type.defaultHooks;
+        if (!isNullOrUndef(defaultHooks)) {
+            if (!ref) {
+                // As ref cannot be referenced from application level, we can use the same refs object
+                ref = defaultHooks;
+            }
+            else {
+                for (var prop$1 in defaultHooks) {
+                    if (isUndefined(ref[prop$1])) {
+                        ref[prop$1] = defaultHooks[prop$1];
+                    }
+                }
+            }
+        }
+    }
+    var vNode = getVNode(1 /* HasInvalidChildren */, null, null, flags, key, props, ref, type);
+    var optsVNode = options.createVNode;
+    if (isFunction(optsVNode)) {
+        optsVNode(vNode);
+    }
+    return vNode;
+}
+function createTextVNode(text, key) {
+    return getVNode(1 /* HasInvalidChildren */, isNullOrUndef(text) ? '' : text, null, 16 /* Text */, key, null, null, null);
+}
+function normalizeProps(vNode) {
+    var props = vNode.props;
+    if (props) {
+        if (vNode.flags & 481 /* Element */) {
+            if (isDefined(props.children) && isNullOrUndef(vNode.children)) {
+                normalizeChildren(vNode, props.children);
+            }
+            if (isDefined(props.className)) {
+                vNode.className = props.className || null;
+                props.className = undefined;
+            }
+        }
+        if (isDefined(props.key)) {
+            vNode.key = props.key;
+            props.key = undefined;
+        }
+        if (isDefined(props.ref)) {
+            vNode.ref = props.ref;
+            props.ref = undefined;
+        }
+    }
+    return vNode;
+}
+function directClone(vNodeToClone) {
+    var newVNode;
+    var flags = vNodeToClone.flags;
+    if (flags & 14 /* Component */) {
+        var props;
+        var propsToClone = vNodeToClone.props;
+        if (!isNull(propsToClone)) {
+            props = {};
+            for (var key in propsToClone) {
+                props[key] = propsToClone[key];
+            }
+        }
+        newVNode = createComponentVNode(flags, vNodeToClone.type, props, vNodeToClone.key, vNodeToClone.ref);
+    }
+    else if (flags & 481 /* Element */) {
+        var children = vNodeToClone.children;
+        newVNode = createVNode(flags, vNodeToClone.type, vNodeToClone.className, children, 0 /* UnknownChildren */, vNodeToClone.props, vNodeToClone.key, vNodeToClone.ref);
+    }
+    else if (flags & 16 /* Text */) {
+        newVNode = createTextVNode(vNodeToClone.children, vNodeToClone.key);
+    }
+    else if (flags & 1024 /* Portal */) {
+        newVNode = vNodeToClone;
+    }
+    return newVNode;
+}
+function createVoidVNode() {
+    return createTextVNode('', null);
+}
+function _normalizeVNodes(nodes, result, index, currentKey) {
+    for (var len = nodes.length; index < len; index++) {
+        var n = nodes[index];
+        if (!isInvalid(n)) {
+            var newKey = currentKey + keyPrefix + index;
+            if (isArray(n)) {
+                _normalizeVNodes(n, result, 0, newKey);
+            }
+            else {
+                if (isStringOrNumber(n)) {
+                    n = createTextVNode(n, newKey);
+                }
+                else {
+                    var oldKey = n.key;
+                    var isPrefixedKey = isString(oldKey) && oldKey[0] === keyPrefix;
+                    if (!isNull(n.dom) || isPrefixedKey) {
+                        n = directClone(n);
+                    }
+                    if (isNull(oldKey) || isPrefixedKey) {
+                        n.key = newKey;
+                    }
+                    else {
+                        n.key = currentKey + oldKey;
+                    }
+                }
+                result.push(n);
+            }
+        }
+    }
+}
+function getFlagsForElementVnode(type) {
+    if (type === 'svg') {
+        return 32 /* SvgElement */;
+    }
+    if (type === 'input') {
+        return 64 /* InputElement */;
+    }
+    if (type === 'select') {
+        return 256 /* SelectElement */;
+    }
+    if (type === 'textarea') {
+        return 128 /* TextareaElement */;
+    }
+    return 1 /* HtmlElement */;
+}
+function normalizeChildren(vNode, children) {
+    var newChildren;
+    var newChildFlags = 1 /* HasInvalidChildren */;
+    // Don't change children to match strict equal (===) true in patching
+    if (isInvalid(children)) {
+        newChildren = children;
+    }
+    else if (isString(children)) {
+        newChildFlags = 2 /* HasVNodeChildren */;
+        newChildren = createTextVNode(children);
+    }
+    else if (isNumber(children)) {
+        newChildFlags = 2 /* HasVNodeChildren */;
+        newChildren = createTextVNode(children + '');
+    }
+    else if (isArray(children)) {
+        var len = children.length;
+        if (len === 0) {
+            newChildren = null;
+            newChildFlags = 1 /* HasInvalidChildren */;
+        }
+        else {
+            // we assign $ which basically means we've flagged this array for future note
+            // if it comes back again, we need to clone it, as people are using it
+            // in an immutable way
+            // tslint:disable-next-line
+            if (Object.isFrozen(children) || children['$'] === true) {
+                children = children.slice();
+            }
+            newChildFlags = 8 /* HasKeyedChildren */;
+            for (var i = 0; i < len; i++) {
+                var n = children[i];
+                if (isInvalid(n) || isArray(n)) {
+                    newChildren = newChildren || children.slice(0, i);
+                    _normalizeVNodes(children, newChildren, i, '');
+                    break;
+                }
+                else if (isStringOrNumber(n)) {
+                    newChildren = newChildren || children.slice(0, i);
+                    newChildren.push(createTextVNode(n, keyPrefix + i));
+                }
+                else {
+                    var key = n.key;
+                    var isNullDom = isNull(n.dom);
+                    var isNullKey = isNull(key);
+                    var isPrefixed = !isNullKey && key[0] === keyPrefix;
+                    if (!isNullDom || isNullKey || isPrefixed) {
+                        newChildren = newChildren || children.slice(0, i);
+                        if (!isNullDom || isPrefixed) {
+                            n = directClone(n);
+                        }
+                        if (isNullKey || isPrefixed) {
+                            n.key = keyPrefix + i;
+                        }
+                        newChildren.push(n);
+                    }
+                    else if (newChildren) {
+                        newChildren.push(n);
+                    }
+                }
+            }
+            newChildren = newChildren || children;
+            newChildren.$ = true;
+        }
+    }
+    else {
+        newChildren = children;
+        if (!isNull(children.dom)) {
+            newChildren = directClone(children);
+        }
+        newChildFlags = 2 /* HasVNodeChildren */;
+    }
+    vNode.children = newChildren;
+    vNode.childFlags = newChildFlags;
+    return vNode;
+}
+var options = {
+    afterMount: null,
+    afterRender: null,
+    afterUpdate: null,
+    beforeRender: null,
+    beforeUnmount: null,
+    createVNode: null,
+    roots: []
+};
+
+/**
+ * Links given data to event as first parameter
+ * @param {*} data data to be linked, it will be available in function as first parameter
+ * @param {Function} event Function to be called when event occurs
+ * @returns {{data: *, event: Function}}
+ */
+function linkEvent(data, event) {
+    if (isFunction(event)) {
+        return { data: data, event: event };
+    }
+    return null; // Return null when event is invalid, to avoid creating unnecessary event handlers
+}
+
+var xlinkNS = 'http://www.w3.org/1999/xlink';
+var xmlNS = 'http://www.w3.org/XML/1998/namespace';
+var svgNS = 'http://www.w3.org/2000/svg';
+var namespaces = {
+    'xlink:actuate': xlinkNS,
+    'xlink:arcrole': xlinkNS,
+    'xlink:href': xlinkNS,
+    'xlink:role': xlinkNS,
+    'xlink:show': xlinkNS,
+    'xlink:title': xlinkNS,
+    'xlink:type': xlinkNS,
+    'xml:base': xmlNS,
+    'xml:lang': xmlNS,
+    'xml:space': xmlNS
+};
+
+// We need EMPTY_OBJ defined in one place.
+// Its used for comparison so we cant inline it into shared
+var EMPTY_OBJ = {};
+var LIFECYCLE = [];
+function appendChild(parentDom, dom) {
+    parentDom.appendChild(dom);
+}
+function insertOrAppend(parentDom, newNode, nextNode) {
+    if (isNullOrUndef(nextNode)) {
+        appendChild(parentDom, newNode);
+    }
+    else {
+        parentDom.insertBefore(newNode, nextNode);
+    }
+}
+function documentCreateElement(tag, isSVG) {
+    if (isSVG === true) {
+        return document.createElementNS(svgNS, tag);
+    }
+    return document.createElement(tag);
+}
+function replaceChild(parentDom, newDom, lastDom) {
+    parentDom.replaceChild(newDom, lastDom);
+}
+function removeChild(parentDom, dom) {
+    parentDom.removeChild(dom);
+}
+function callAll(arrayFn) {
+    var listener;
+    while ((listener = arrayFn.shift()) !== undefined) {
+        listener();
+    }
+}
+
+var attachedEventCounts = {};
+var attachedEvents = {};
+function handleEvent(name, nextEvent, dom) {
+    var eventsLeft = attachedEventCounts[name];
+    var eventsObject = dom.$EV;
+    if (nextEvent) {
+        if (!eventsLeft) {
+            attachedEvents[name] = attachEventToDocument(name);
+            attachedEventCounts[name] = 0;
+        }
+        if (!eventsObject) {
+            eventsObject = dom.$EV = {};
+        }
+        if (!eventsObject[name]) {
+            attachedEventCounts[name]++;
+        }
+        eventsObject[name] = nextEvent;
+    }
+    else if (eventsObject && eventsObject[name]) {
+        attachedEventCounts[name]--;
+        if (eventsLeft === 1) {
+            document.removeEventListener(normalizeEventName(name), attachedEvents[name]);
+            attachedEvents[name] = null;
+        }
+        eventsObject[name] = nextEvent;
+    }
+}
+function dispatchEvents(event, target, isClick, name, eventData) {
+    var dom = target;
+    while (!isNull(dom)) {
+        // Html Nodes can be nested fe: span inside button in that scenario browser does not handle disabled attribute on parent,
+        // because the event listener is on document.body
+        // Don't process clicks on disabled elements
+        if (isClick && dom.disabled) {
+            return;
+        }
+        var eventsObject = dom.$EV;
+        if (eventsObject) {
+            var currentEvent = eventsObject[name];
+            if (currentEvent) {
+                // linkEvent object
+                eventData.dom = dom;
+                if (currentEvent.event) {
+                    currentEvent.event(currentEvent.data, event);
+                }
+                else {
+                    currentEvent(event);
+                }
+                if (event.cancelBubble) {
+                    return;
+                }
+            }
+        }
+        dom = dom.parentNode;
+    }
+}
+function normalizeEventName(name) {
+    return name.substr(2).toLowerCase();
+}
+function stopPropagation() {
+    this.cancelBubble = true;
+    this.stopImmediatePropagation();
+}
+function attachEventToDocument(name) {
+    var docEvent = function (event) {
+        var type = event.type;
+        var isClick = type === 'click' || type === 'dblclick';
+        if (isClick && event.button !== 0) {
+            // Firefox incorrectly triggers click event for mid/right mouse buttons.
+            // This bug has been active for 12 years.
+            // https://bugzilla.mozilla.org/show_bug.cgi?id=184051
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+        }
+        event.stopPropagation = stopPropagation;
+        // Event data needs to be object to save reference to currentTarget getter
+        var eventData = {
+            dom: document
+        };
+        try {
+            Object.defineProperty(event, 'currentTarget', {
+                configurable: true,
+                get: function get() {
+                    return eventData.dom;
+                }
+            });
+        }
+        catch (e) {
+            /* safari7 and phantomJS will crash */
+        }
+        dispatchEvents(event, event.target, isClick, name, eventData);
+    };
+    document.addEventListener(normalizeEventName(name), docEvent);
+    return docEvent;
+}
+
+function isSameInnerHTML(dom, innerHTML) {
+    var tempdom = document.createElement('i');
+    tempdom.innerHTML = innerHTML;
+    return tempdom.innerHTML === dom.innerHTML;
+}
+function isSamePropsInnerHTML(dom, props) {
+    return Boolean(props && props.dangerouslySetInnerHTML && props.dangerouslySetInnerHTML.__html && isSameInnerHTML(dom, props.dangerouslySetInnerHTML.__html));
+}
+
+function triggerEventListener(props, methodName, e) {
+    if (props[methodName]) {
+        var listener = props[methodName];
+        if (listener.event) {
+            listener.event(listener.data, e);
+        }
+        else {
+            listener(e);
+        }
+    }
+    else {
+        var nativeListenerName = methodName.toLowerCase();
+        if (props[nativeListenerName]) {
+            props[nativeListenerName](e);
+        }
+    }
+}
+function createWrappedFunction(methodName, applyValue) {
+    var fnMethod = function (e) {
+        e.stopPropagation();
+        var vNode = this.$V;
+        // If vNode is gone by the time event fires, no-op
+        if (!vNode) {
+            return;
+        }
+        var props = vNode.props || EMPTY_OBJ;
+        var dom = vNode.dom;
+        if (isString(methodName)) {
+            triggerEventListener(props, methodName, e);
+        }
+        else {
+            for (var i = 0; i < methodName.length; i++) {
+                triggerEventListener(props, methodName[i], e);
+            }
+        }
+        if (isFunction(applyValue)) {
+            var newVNode = this.$V;
+            var newProps = newVNode.props || EMPTY_OBJ;
+            applyValue(newProps, dom, false, newVNode);
+        }
+    };
+    Object.defineProperty(fnMethod, 'wrapped', {
+        configurable: false,
+        enumerable: false,
+        value: true,
+        writable: false
+    });
+    return fnMethod;
+}
+
+function isCheckedType(type) {
+    return type === 'checkbox' || type === 'radio';
+}
+var onTextInputChange = createWrappedFunction('onInput', applyValueInput);
+var wrappedOnChange = createWrappedFunction(['onClick', 'onChange'], applyValueInput);
+/* tslint:disable-next-line:no-empty */
+function emptywrapper(event) {
+    event.stopPropagation();
+}
+emptywrapper.wrapped = true;
+function inputEvents(dom, nextPropsOrEmpty) {
+    if (isCheckedType(nextPropsOrEmpty.type)) {
+        dom.onchange = wrappedOnChange;
+        dom.onclick = emptywrapper;
+    }
+    else {
+        dom.oninput = onTextInputChange;
+    }
+}
+function applyValueInput(nextPropsOrEmpty, dom) {
+    var type = nextPropsOrEmpty.type;
+    var value = nextPropsOrEmpty.value;
+    var checked = nextPropsOrEmpty.checked;
+    var multiple = nextPropsOrEmpty.multiple;
+    var defaultValue = nextPropsOrEmpty.defaultValue;
+    var hasValue = !isNullOrUndef(value);
+    if (type && type !== dom.type) {
+        dom.setAttribute('type', type);
+    }
+    if (!isNullOrUndef(multiple) && multiple !== dom.multiple) {
+        dom.multiple = multiple;
+    }
+    if (!isNullOrUndef(defaultValue) && !hasValue) {
+        dom.defaultValue = defaultValue + '';
+    }
+    if (isCheckedType(type)) {
+        if (hasValue) {
+            dom.value = value;
+        }
+        if (!isNullOrUndef(checked)) {
+            dom.checked = checked;
+        }
+    }
+    else {
+        if (hasValue && dom.value !== value) {
+            dom.defaultValue = value;
+            dom.value = value;
+        }
+        else if (!isNullOrUndef(checked)) {
+            dom.checked = checked;
+        }
+    }
+}
+
+function updateChildOptionGroup(vNode, value) {
+    var type = vNode.type;
+    if (type === 'optgroup') {
+        var children = vNode.children;
+        var childFlags = vNode.childFlags;
+        if (childFlags & 12 /* MultipleChildren */) {
+            for (var i = 0, len = children.length; i < len; i++) {
+                updateChildOption(children[i], value);
+            }
+        }
+        else if (childFlags === 2 /* HasVNodeChildren */) {
+            updateChildOption(children, value);
+        }
+    }
+    else {
+        updateChildOption(vNode, value);
+    }
+}
+function updateChildOption(vNode, value) {
+    var props = vNode.props || EMPTY_OBJ;
+    var dom = vNode.dom;
+    // we do this as multiple may have changed
+    dom.value = props.value;
+    if ((isArray(value) && value.indexOf(props.value) !== -1) || props.value === value) {
+        dom.selected = true;
+    }
+    else if (!isNullOrUndef(value) || !isNullOrUndef(props.selected)) {
+        dom.selected = props.selected || false;
+    }
+}
+var onSelectChange = createWrappedFunction('onChange', applyValueSelect);
+function selectEvents(dom) {
+    dom.onchange = onSelectChange;
+}
+function applyValueSelect(nextPropsOrEmpty, dom, mounting, vNode) {
+    var multiplePropInBoolean = Boolean(nextPropsOrEmpty.multiple);
+    if (!isNullOrUndef(nextPropsOrEmpty.multiple) && multiplePropInBoolean !== dom.multiple) {
+        dom.multiple = multiplePropInBoolean;
+    }
+    var childFlags = vNode.childFlags;
+    if ((childFlags & 1 /* HasInvalidChildren */) === 0) {
+        var children = vNode.children;
+        var value = nextPropsOrEmpty.value;
+        if (mounting && isNullOrUndef(value)) {
+            value = nextPropsOrEmpty.defaultValue;
+        }
+        if (childFlags & 12 /* MultipleChildren */) {
+            for (var i = 0, len = children.length; i < len; i++) {
+                updateChildOptionGroup(children[i], value);
+            }
+        }
+        else if (childFlags === 2 /* HasVNodeChildren */) {
+            updateChildOptionGroup(children, value);
+        }
+    }
+}
+
+var onTextareaInputChange = createWrappedFunction('onInput', applyValueTextArea);
+var wrappedOnChange$1 = createWrappedFunction('onChange');
+function textAreaEvents(dom, nextPropsOrEmpty) {
+    dom.oninput = onTextareaInputChange;
+    if (nextPropsOrEmpty.onChange) {
+        dom.onchange = wrappedOnChange$1;
+    }
+}
+function applyValueTextArea(nextPropsOrEmpty, dom, mounting) {
+    var value = nextPropsOrEmpty.value;
+    var domValue = dom.value;
+    if (isNullOrUndef(value)) {
+        if (mounting) {
+            var defaultValue = nextPropsOrEmpty.defaultValue;
+            if (!isNullOrUndef(defaultValue) && defaultValue !== domValue) {
+                dom.defaultValue = defaultValue;
+                dom.value = defaultValue;
+            }
+        }
+    }
+    else if (domValue !== value) {
+        /* There is value so keep it controlled */
+        dom.defaultValue = value;
+        dom.value = value;
+    }
+}
+
+/**
+ * There is currently no support for switching same input between controlled and nonControlled
+ * If that ever becomes a real issue, then re design controlled elements
+ * Currently user must choose either controlled or non-controlled and stick with that
+ */
+function processElement(flags, vNode, dom, nextPropsOrEmpty, mounting, isControlled) {
+    if (flags & 64 /* InputElement */) {
+        applyValueInput(nextPropsOrEmpty, dom);
+    }
+    else if (flags & 256 /* SelectElement */) {
+        applyValueSelect(nextPropsOrEmpty, dom, mounting, vNode);
+    }
+    else if (flags & 128 /* TextareaElement */) {
+        applyValueTextArea(nextPropsOrEmpty, dom, mounting);
+    }
+    if (isControlled) {
+        dom.$V = vNode;
+    }
+}
+function addFormElementEventHandlers(flags, dom, nextPropsOrEmpty) {
+    if (flags & 64 /* InputElement */) {
+        inputEvents(dom, nextPropsOrEmpty);
+    }
+    else if (flags & 256 /* SelectElement */) {
+        selectEvents(dom);
+    }
+    else if (flags & 128 /* TextareaElement */) {
+        textAreaEvents(dom, nextPropsOrEmpty);
+    }
+}
+function isControlledFormElement(nextPropsOrEmpty) {
+    return nextPropsOrEmpty.type && isCheckedType(nextPropsOrEmpty.type) ? !isNullOrUndef(nextPropsOrEmpty.checked) : !isNullOrUndef(nextPropsOrEmpty.value);
+}
+
+function remove(vNode, parentDom) {
+    unmount(vNode);
+    if (!isNull(parentDom)) {
+        removeChild(parentDom, vNode.dom);
+        // Let carbage collector free memory
+        vNode.dom = null;
+    }
+}
+function unmount(vNode) {
+    var flags = vNode.flags;
+    if (flags & 481 /* Element */) {
+        var ref = vNode.ref;
+        var props = vNode.props;
+        if (isFunction(ref)) {
+            ref(null);
+        }
+        var children = vNode.children;
+        var childFlags = vNode.childFlags;
+        if (childFlags & 12 /* MultipleChildren */) {
+            unmountAllChildren(children);
+        }
+        else if (childFlags === 2 /* HasVNodeChildren */) {
+            unmount(children);
+        }
+        if (!isNull(props)) {
+            for (var name in props) {
+                switch (name) {
+                    case 'onClick':
+                    case 'onDblClick':
+                    case 'onFocusIn':
+                    case 'onFocusOut':
+                    case 'onKeyDown':
+                    case 'onKeyPress':
+                    case 'onKeyUp':
+                    case 'onMouseDown':
+                    case 'onMouseMove':
+                    case 'onMouseUp':
+                    case 'onSubmit':
+                    case 'onTouchEnd':
+                    case 'onTouchMove':
+                    case 'onTouchStart':
+                        handleEvent(name, null, vNode.dom);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }
+    else if (flags & 14 /* Component */) {
+        var instance = vNode.children;
+        var ref$1 = vNode.ref;
+        if (flags & 4 /* ComponentClass */) {
+            if (isFunction(options.beforeUnmount)) {
+                options.beforeUnmount(vNode);
+            }
+            if (isFunction(instance.componentWillUnmount)) {
+                instance.componentWillUnmount();
+            }
+            if (isFunction(ref$1)) {
+                ref$1(null);
+            }
+            instance.$UN = true;
+            unmount(instance.$LI);
+        }
+        else {
+            if (!isNullOrUndef(ref$1) && isFunction(ref$1.onComponentWillUnmount)) {
+                ref$1.onComponentWillUnmount(vNode.dom, vNode.props || EMPTY_OBJ);
+            }
+            unmount(instance);
+        }
+    }
+    else if (flags & 1024 /* Portal */) {
+        var children$1 = vNode.children;
+        if (!isNull(children$1) && isObject(children$1)) {
+            remove(children$1, vNode.type);
+        }
+    }
+}
+function unmountAllChildren(children) {
+    for (var i = 0, len = children.length; i < len; i++) {
+        unmount(children[i]);
+    }
+}
+function removeAllChildren(dom, children) {
+    unmountAllChildren(children);
+    dom.textContent = '';
+}
+
+function createLinkEvent(linkEvent, nextValue) {
+    return function (e) {
+        linkEvent(nextValue.data, e);
+    };
+}
+function patchEvent(name, lastValue, nextValue, dom) {
+    var nameLowerCase = name.toLowerCase();
+    if (!isFunction(nextValue) && !isNullOrUndef(nextValue)) {
+        var linkEvent = nextValue.event;
+        if (linkEvent && isFunction(linkEvent)) {
+            dom[nameLowerCase] = createLinkEvent(linkEvent, nextValue);
+        }
+        else {
+        }
+    }
+    else {
+        var domEvent = dom[nameLowerCase];
+        // if the function is wrapped, that means it's been controlled by a wrapper
+        if (!domEvent || !domEvent.wrapped) {
+            dom[nameLowerCase] = nextValue;
+        }
+    }
+}
+function getNumberStyleValue(style, value) {
+    switch (style) {
+        case 'animationIterationCount':
+        case 'borderImageOutset':
+        case 'borderImageSlice':
+        case 'borderImageWidth':
+        case 'boxFlex':
+        case 'boxFlexGroup':
+        case 'boxOrdinalGroup':
+        case 'columnCount':
+        case 'fillOpacity':
+        case 'flex':
+        case 'flexGrow':
+        case 'flexNegative':
+        case 'flexOrder':
+        case 'flexPositive':
+        case 'flexShrink':
+        case 'floodOpacity':
+        case 'fontWeight':
+        case 'gridColumn':
+        case 'gridRow':
+        case 'lineClamp':
+        case 'lineHeight':
+        case 'opacity':
+        case 'order':
+        case 'orphans':
+        case 'stopOpacity':
+        case 'strokeDasharray':
+        case 'strokeDashoffset':
+        case 'strokeMiterlimit':
+        case 'strokeOpacity':
+        case 'strokeWidth':
+        case 'tabSize':
+        case 'widows':
+        case 'zIndex':
+        case 'zoom':
+            return value;
+        default:
+            return value + 'px';
+    }
+}
+// We are assuming here that we come from patchProp routine
+// -nextAttrValue cannot be null or undefined
+function patchStyle(lastAttrValue, nextAttrValue, dom) {
+    var domStyle = dom.style;
+    var style;
+    var value;
+    if (isString(nextAttrValue)) {
+        domStyle.cssText = nextAttrValue;
+        return;
+    }
+    if (!isNullOrUndef(lastAttrValue) && !isString(lastAttrValue)) {
+        for (style in nextAttrValue) {
+            // do not add a hasOwnProperty check here, it affects performance
+            value = nextAttrValue[style];
+            if (value !== lastAttrValue[style]) {
+                domStyle[style] = isNumber(value) ? getNumberStyleValue(style, value) : value;
+            }
+        }
+        for (style in lastAttrValue) {
+            if (isNullOrUndef(nextAttrValue[style])) {
+                domStyle[style] = '';
+            }
+        }
+    }
+    else {
+        for (style in nextAttrValue) {
+            value = nextAttrValue[style];
+            domStyle[style] = isNumber(value) ? getNumberStyleValue(style, value) : value;
+        }
+    }
+}
+function patchProp(prop, lastValue, nextValue, dom, isSVG, hasControlledValue, lastVNode) {
+    switch (prop) {
+        case 'onClick':
+        case 'onDblClick':
+        case 'onFocusIn':
+        case 'onFocusOut':
+        case 'onKeyDown':
+        case 'onKeyPress':
+        case 'onKeyUp':
+        case 'onMouseDown':
+        case 'onMouseMove':
+        case 'onMouseUp':
+        case 'onSubmit':
+        case 'onTouchEnd':
+        case 'onTouchMove':
+        case 'onTouchStart':
+            handleEvent(prop, nextValue, dom);
+            break;
+        case 'children':
+        case 'childrenType':
+        case 'className':
+        case 'defaultValue':
+        case 'key':
+        case 'multiple':
+        case 'ref':
+            return;
+        case 'allowfullscreen':
+        case 'autoFocus':
+        case 'autoplay':
+        case 'capture':
+        case 'checked':
+        case 'controls':
+        case 'default':
+        case 'disabled':
+        case 'hidden':
+        case 'indeterminate':
+        case 'loop':
+        case 'muted':
+        case 'novalidate':
+        case 'open':
+        case 'readOnly':
+        case 'required':
+        case 'reversed':
+        case 'scoped':
+        case 'seamless':
+        case 'selected':
+            prop = prop === 'autoFocus' ? prop.toLowerCase() : prop;
+            dom[prop] = !!nextValue;
+            break;
+        case 'defaultChecked':
+        case 'value':
+        case 'volume':
+            if (hasControlledValue && prop === 'value') {
+                return;
+            }
+            var value = isNullOrUndef(nextValue) ? '' : nextValue;
+            if (dom[prop] !== value) {
+                dom[prop] = value;
+            }
+            break;
+        case 'dangerouslySetInnerHTML':
+            var lastHtml = (lastValue && lastValue.__html) || '';
+            var nextHtml = (nextValue && nextValue.__html) || '';
+            if (lastHtml !== nextHtml) {
+                if (!isNullOrUndef(nextHtml) && !isSameInnerHTML(dom, nextHtml)) {
+                    if (!isNull(lastVNode)) {
+                        if (lastVNode.childFlags & 12 /* MultipleChildren */) {
+                            unmountAllChildren(lastVNode.children);
+                        }
+                        else if (lastVNode.childFlags === 2 /* HasVNodeChildren */) {
+                            unmount(lastVNode.children);
+                        }
+                        lastVNode.children = null;
+                        lastVNode.childFlags = 1 /* HasInvalidChildren */;
+                    }
+                    dom.innerHTML = nextHtml;
+                }
+            }
+            break;
+        default:
+            if (prop[0] === 'o' && prop[1] === 'n') {
+                patchEvent(prop, lastValue, nextValue, dom);
+            }
+            else if (isNullOrUndef(nextValue)) {
+                dom.removeAttribute(prop);
+            }
+            else if (prop === 'style') {
+                patchStyle(lastValue, nextValue, dom);
+            }
+            else if (isSVG && namespaces[prop]) {
+                // We optimize for NS being boolean. Its 99.9% time false
+                // If we end up in this path we can read property again
+                dom.setAttributeNS(namespaces[prop], prop, nextValue);
+            }
+            else {
+                dom.setAttribute(prop, nextValue);
+            }
+            break;
+    }
+}
+function mountProps(vNode, flags, props, dom, isSVG) {
+    var hasControlledValue = false;
+    var isFormElement = (flags & 448 /* FormElement */) > 0;
+    if (isFormElement) {
+        hasControlledValue = isControlledFormElement(props);
+        if (hasControlledValue) {
+            addFormElementEventHandlers(flags, dom, props);
+        }
+    }
+    for (var prop in props) {
+        // do not add a hasOwnProperty check here, it affects performance
+        patchProp(prop, null, props[prop], dom, isSVG, hasControlledValue, null);
+    }
+    if (isFormElement) {
+        processElement(flags, vNode, dom, props, true, hasControlledValue);
+    }
+}
+
+function createClassComponentInstance(vNode, Component, props, context) {
+    var instance = new Component(props, context);
+    vNode.children = instance;
+    instance.$V = vNode;
+    instance.$BS = false;
+    instance.context = context;
+    if (instance.props === EMPTY_OBJ) {
+        instance.props = props;
+    }
+    instance.$UN = false;
+    if (isFunction(instance.componentWillMount)) {
+        instance.$BR = true;
+        instance.componentWillMount();
+        if (instance.$PSS) {
+            var state = instance.state;
+            var pending = instance.$PS;
+            if (isNull(state)) {
+                instance.state = pending;
+            }
+            else {
+                for (var key in pending) {
+                    state[key] = pending[key];
+                }
+            }
+            instance.$PSS = false;
+            instance.$PS = null;
+        }
+        instance.$BR = false;
+    }
+    if (isFunction(options.beforeRender)) {
+        options.beforeRender(instance);
+    }
+    var input = handleComponentInput(instance.render(props, instance.state, context), vNode);
+    var childContext;
+    if (isFunction(instance.getChildContext)) {
+        childContext = instance.getChildContext();
+    }
+    if (isNullOrUndef(childContext)) {
+        instance.$CX = context;
+    }
+    else {
+        instance.$CX = combineFrom(context, childContext);
+    }
+    if (isFunction(options.afterRender)) {
+        options.afterRender(instance);
+    }
+    instance.$LI = input;
+    return instance;
+}
+function handleComponentInput(input, componentVNode) {
+    if (isInvalid(input)) {
+        input = createVoidVNode();
+    }
+    else if (isStringOrNumber(input)) {
+        input = createTextVNode(input, null);
+    }
+    else {
+        if (input.dom) {
+            input = directClone(input);
+        }
+        if (input.flags & 14 /* Component */) {
+            // if we have an input that is also a component, we run into a tricky situation
+            // where the root vNode needs to always have the correct DOM entry
+            // we can optimise this in the future, but this gets us out of a lot of issues
+            input.parentVNode = componentVNode;
+        }
+    }
+    return input;
+}
+
+function mount(vNode, parentDom, lifecycle, context, isSVG) {
+    var flags = vNode.flags;
+    if (flags & 481 /* Element */) {
+        return mountElement(vNode, parentDom, lifecycle, context, isSVG);
+    }
+    if (flags & 14 /* Component */) {
+        return mountComponent(vNode, parentDom, lifecycle, context, isSVG, (flags & 4 /* ComponentClass */) > 0);
+    }
+    if (flags & 512 /* Void */ || flags & 16 /* Text */) {
+        return mountText(vNode, parentDom);
+    }
+    if (flags & 1024 /* Portal */) {
+        mount(vNode.children, vNode.type, lifecycle, context, false);
+        return (vNode.dom = mountText(createVoidVNode(), parentDom));
+    }
+}
+function mountText(vNode, parentDom) {
+    var dom = (vNode.dom = document.createTextNode(vNode.children));
+    if (!isNull(parentDom)) {
+        appendChild(parentDom, dom);
+    }
+    return dom;
+}
+function mountElement(vNode, parentDom, lifecycle, context, isSVG) {
+    var flags = vNode.flags;
+    var children = vNode.children;
+    var props = vNode.props;
+    var className = vNode.className;
+    var ref = vNode.ref;
+    var childFlags = vNode.childFlags;
+    isSVG = isSVG || (flags & 32 /* SvgElement */) > 0;
+    var dom = documentCreateElement(vNode.type, isSVG);
+    vNode.dom = dom;
+    if (!isNullOrUndef(className) && className !== '') {
+        if (isSVG) {
+            dom.setAttribute('class', className);
+        }
+        else {
+            dom.className = className;
+        }
+    }
+    if (!isNull(parentDom)) {
+        appendChild(parentDom, dom);
+    }
+    if ((childFlags & 1 /* HasInvalidChildren */) === 0) {
+        var childrenIsSVG = isSVG === true && vNode.type !== 'foreignObject';
+        if (childFlags === 2 /* HasVNodeChildren */) {
+            mount(children, dom, lifecycle, context, childrenIsSVG);
+        }
+        else if (childFlags & 12 /* MultipleChildren */) {
+            mountArrayChildren(children, dom, lifecycle, context, childrenIsSVG);
+        }
+    }
+    if (!isNull(props)) {
+        mountProps(vNode, flags, props, dom, isSVG);
+    }
+    if (isFunction(ref)) {
+        mountRef(dom, ref, lifecycle);
+    }
+    return dom;
+}
+function mountArrayChildren(children, dom, lifecycle, context, isSVG) {
+    for (var i = 0, len = children.length; i < len; i++) {
+        var child = children[i];
+        if (!isNull(child.dom)) {
+            children[i] = child = directClone(child);
+        }
+        mount(child, dom, lifecycle, context, isSVG);
+    }
+}
+function mountComponent(vNode, parentDom, lifecycle, context, isSVG, isClass) {
+    var dom;
+    var type = vNode.type;
+    var props = vNode.props || EMPTY_OBJ;
+    var ref = vNode.ref;
+    if (isClass) {
+        var instance = createClassComponentInstance(vNode, type, props, context);
+        vNode.dom = dom = mount(instance.$LI, null, lifecycle, instance.$CX, isSVG);
+        mountClassComponentCallbacks(vNode, ref, instance, lifecycle);
+        instance.$UPD = false;
+    }
+    else {
+        var input = handleComponentInput(type(props, context), vNode);
+        vNode.children = input;
+        vNode.dom = dom = mount(input, null, lifecycle, context, isSVG);
+        mountFunctionalComponentCallbacks(props, ref, dom, lifecycle);
+    }
+    if (!isNull(parentDom)) {
+        appendChild(parentDom, dom);
+    }
+    return dom;
+}
+function createClassMountCallback(instance, hasAfterMount, afterMount, vNode, hasDidMount) {
+    return function () {
+        instance.$UPD = true;
+        if (hasAfterMount) {
+            afterMount(vNode);
+        }
+        if (hasDidMount) {
+            instance.componentDidMount();
+        }
+        instance.$UPD = false;
+    };
+}
+function mountClassComponentCallbacks(vNode, ref, instance, lifecycle) {
+    if (isFunction(ref)) {
+        ref(instance);
+    }
+    else {
+    }
+    var hasDidMount = isFunction(instance.componentDidMount);
+    var afterMount = options.afterMount;
+    var hasAfterMount = isFunction(afterMount);
+    if (hasDidMount || hasAfterMount) {
+        lifecycle.push(createClassMountCallback(instance, hasAfterMount, afterMount, vNode, hasDidMount));
+    }
+}
+// Create did mount callback lazily to avoid creating function context if not needed
+function createOnMountCallback(ref, dom, props) {
+    return function () { return ref.onComponentDidMount(dom, props); };
+}
+function mountFunctionalComponentCallbacks(props, ref, dom, lifecycle) {
+    if (!isNullOrUndef(ref)) {
+        if (isFunction(ref.onComponentWillMount)) {
+            ref.onComponentWillMount(props);
+        }
+        if (isFunction(ref.onComponentDidMount)) {
+            lifecycle.push(createOnMountCallback(ref, dom, props));
+        }
+    }
+}
+function mountRef(dom, value, lifecycle) {
+    lifecycle.push(function () { return value(dom); });
+}
+
+function hydrateComponent(vNode, dom, lifecycle, context, isSVG, isClass) {
+    var type = vNode.type;
+    var ref = vNode.ref;
+    var props = vNode.props || EMPTY_OBJ;
+    if (isClass) {
+        var instance = createClassComponentInstance(vNode, type, props, context);
+        var input = instance.$LI;
+        hydrateVNode(input, dom, lifecycle, instance.$CX, isSVG);
+        vNode.dom = input.dom;
+        mountClassComponentCallbacks(vNode, ref, instance, lifecycle);
+        instance.$UPD = false; // Mount finished allow going sync
+    }
+    else {
+        var input$1 = handleComponentInput(type(props, context), vNode);
+        hydrateVNode(input$1, dom, lifecycle, context, isSVG);
+        vNode.children = input$1;
+        vNode.dom = input$1.dom;
+        mountFunctionalComponentCallbacks(props, ref, dom, lifecycle);
+    }
+}
+function hydrateElement(vNode, dom, lifecycle, context, isSVG) {
+    var children = vNode.children;
+    var props = vNode.props;
+    var className = vNode.className;
+    var flags = vNode.flags;
+    var ref = vNode.ref;
+    isSVG = isSVG || (flags & 32 /* SvgElement */) > 0;
+    if (dom.nodeType !== 1 || dom.tagName.toLowerCase() !== vNode.type) {
+        var newDom = mountElement(vNode, null, lifecycle, context, isSVG);
+        vNode.dom = newDom;
+        replaceChild(dom.parentNode, newDom, dom);
+    }
+    else {
+        vNode.dom = dom;
+        var childNode = dom.firstChild;
+        var childFlags = vNode.childFlags;
+        if ((childFlags & 1 /* HasInvalidChildren */) === 0) {
+            var nextSibling = null;
+            while (childNode) {
+                nextSibling = childNode.nextSibling;
+                if (childNode.nodeType === 8) {
+                    if (childNode.data === '!') {
+                        dom.replaceChild(document.createTextNode(''), childNode);
+                    }
+                    else {
+                        dom.removeChild(childNode);
+                    }
+                }
+                childNode = nextSibling;
+            }
+            childNode = dom.firstChild;
+            if (childFlags === 2 /* HasVNodeChildren */) {
+                if (isNull(childNode)) {
+                    mount(children, dom, lifecycle, context, isSVG);
+                }
+                else {
+                    nextSibling = childNode.nextSibling;
+                    hydrateVNode(children, childNode, lifecycle, context, isSVG);
+                    childNode = nextSibling;
+                }
+            }
+            else if (childFlags & 12 /* MultipleChildren */) {
+                for (var i = 0, len = children.length; i < len; i++) {
+                    var child = children[i];
+                    if (isNull(childNode)) {
+                        mount(child, dom, lifecycle, context, isSVG);
+                    }
+                    else {
+                        nextSibling = childNode.nextSibling;
+                        hydrateVNode(child, childNode, lifecycle, context, isSVG);
+                        childNode = nextSibling;
+                    }
+                }
+            }
+            // clear any other DOM nodes, there should be only a single entry for the root
+            while (childNode) {
+                nextSibling = childNode.nextSibling;
+                dom.removeChild(childNode);
+                childNode = nextSibling;
+            }
+        }
+        else if (!isNull(dom.firstChild) && !isSamePropsInnerHTML(dom, props)) {
+            dom.textContent = ''; // dom has content, but VNode has no children remove everything from DOM
+            if (flags & 448 /* FormElement */) {
+                // If element is form element, we need to clear defaultValue also
+                dom.defaultValue = '';
+            }
+        }
+        if (!isNull(props)) {
+            mountProps(vNode, flags, props, dom, isSVG);
+        }
+        if (isNullOrUndef(className)) {
+            if (dom.className !== '') {
+                dom.removeAttribute('class');
+            }
+        }
+        else if (isSVG) {
+            dom.setAttribute('class', className);
+        }
+        else {
+            dom.className = className;
+        }
+        if (isFunction(ref)) {
+            mountRef(dom, ref, lifecycle);
+        }
+        else {
+        }
+    }
+}
+function hydrateText(vNode, dom) {
+    if (dom.nodeType !== 3) {
+        var newDom = mountText(vNode, null);
+        vNode.dom = newDom;
+        replaceChild(dom.parentNode, newDom, dom);
+    }
+    else {
+        var text = vNode.children;
+        if (dom.nodeValue !== text) {
+            dom.nodeValue = text;
+        }
+        vNode.dom = dom;
+    }
+}
+function hydrateVNode(vNode, dom, lifecycle, context, isSVG) {
+    var flags = vNode.flags;
+    if (flags & 14 /* Component */) {
+        hydrateComponent(vNode, dom, lifecycle, context, isSVG, (flags & 4 /* ComponentClass */) > 0);
+    }
+    else if (flags & 481 /* Element */) {
+        hydrateElement(vNode, dom, lifecycle, context, isSVG);
+    }
+    else if (flags & 16 /* Text */) {
+        hydrateText(vNode, dom);
+    }
+    else if (flags & 512 /* Void */) {
+        vNode.dom = dom;
+    }
+    else {
+        throwError();
+    }
+}
+function hydrate(input, parentDom, callback) {
+    var dom = parentDom.firstChild;
+    if (!isNull(dom)) {
+        if (!isInvalid(input)) {
+            hydrateVNode(input, dom, LIFECYCLE, EMPTY_OBJ, false);
+        }
+        dom = parentDom.firstChild;
+        // clear any other DOM nodes, there should be only a single entry for the root
+        while ((dom = dom.nextSibling)) {
+            parentDom.removeChild(dom);
+        }
+    }
+    if (LIFECYCLE.length > 0) {
+        callAll(LIFECYCLE);
+    }
+    if (!parentDom.$V) {
+        options.roots.push(parentDom);
+    }
+    parentDom.$V = input;
+    if (isFunction(callback)) {
+        callback();
+    }
+}
+
+function replaceWithNewNode(lastNode, nextNode, parentDom, lifecycle, context, isSVG) {
+    unmount(lastNode);
+    replaceChild(parentDom, mount(nextNode, null, lifecycle, context, isSVG), lastNode.dom);
+}
+function patch(lastVNode, nextVNode, parentDom, lifecycle, context, isSVG) {
+    if (lastVNode !== nextVNode) {
+        var nextFlags = nextVNode.flags | 0;
+        if (lastVNode.flags !== nextFlags || nextFlags & 2048 /* ReCreate */) {
+            replaceWithNewNode(lastVNode, nextVNode, parentDom, lifecycle, context, isSVG);
+        }
+        else if (nextFlags & 481 /* Element */) {
+            patchElement(lastVNode, nextVNode, parentDom, lifecycle, context, isSVG);
+        }
+        else if (nextFlags & 14 /* Component */) {
+            patchComponent(lastVNode, nextVNode, parentDom, lifecycle, context, isSVG, (nextFlags & 4 /* ComponentClass */) > 0);
+        }
+        else if (nextFlags & 16 /* Text */) {
+            patchText(lastVNode, nextVNode, parentDom);
+        }
+        else if (nextFlags & 512 /* Void */) {
+            nextVNode.dom = lastVNode.dom;
+        }
+        else {
+            // Portal
+            patchPortal(lastVNode, nextVNode, lifecycle, context);
+        }
+    }
+}
+function patchPortal(lastVNode, nextVNode, lifecycle, context) {
+    var lastContainer = lastVNode.type;
+    var nextContainer = nextVNode.type;
+    var nextChildren = nextVNode.children;
+    patchChildren(lastVNode.childFlags, nextVNode.childFlags, lastVNode.children, nextChildren, lastContainer, lifecycle, context, false);
+    nextVNode.dom = lastVNode.dom;
+    if (lastContainer !== nextContainer && !isInvalid(nextChildren)) {
+        var node = nextChildren.dom;
+        lastContainer.removeChild(node);
+        nextContainer.appendChild(node);
+    }
+}
+function patchElement(lastVNode, nextVNode, parentDom, lifecycle, context, isSVG) {
+    var nextTag = nextVNode.type;
+    if (lastVNode.type !== nextTag) {
+        replaceWithNewNode(lastVNode, nextVNode, parentDom, lifecycle, context, isSVG);
+    }
+    else {
+        var dom = lastVNode.dom;
+        var nextFlags = nextVNode.flags;
+        var lastProps = lastVNode.props;
+        var nextProps = nextVNode.props;
+        var isFormElement = false;
+        var hasControlledValue = false;
+        var nextPropsOrEmpty;
+        nextVNode.dom = dom;
+        isSVG = isSVG || (nextFlags & 32 /* SvgElement */) > 0;
+        // inlined patchProps  -- starts --
+        if (lastProps !== nextProps) {
+            var lastPropsOrEmpty = lastProps || EMPTY_OBJ;
+            nextPropsOrEmpty = nextProps || EMPTY_OBJ;
+            if (nextPropsOrEmpty !== EMPTY_OBJ) {
+                isFormElement = (nextFlags & 448 /* FormElement */) > 0;
+                if (isFormElement) {
+                    hasControlledValue = isControlledFormElement(nextPropsOrEmpty);
+                }
+                for (var prop in nextPropsOrEmpty) {
+                    var lastValue = lastPropsOrEmpty[prop];
+                    var nextValue = nextPropsOrEmpty[prop];
+                    if (lastValue !== nextValue) {
+                        patchProp(prop, lastValue, nextValue, dom, isSVG, hasControlledValue, lastVNode);
+                    }
+                }
+            }
+            if (lastPropsOrEmpty !== EMPTY_OBJ) {
+                for (var prop$1 in lastPropsOrEmpty) {
+                    // do not add a hasOwnProperty check here, it affects performance
+                    if (!nextPropsOrEmpty.hasOwnProperty(prop$1) && !isNullOrUndef(lastPropsOrEmpty[prop$1])) {
+                        patchProp(prop$1, lastPropsOrEmpty[prop$1], null, dom, isSVG, hasControlledValue, lastVNode);
+                    }
+                }
+            }
+        }
+        var lastChildren = lastVNode.children;
+        var nextChildren = nextVNode.children;
+        var nextRef = nextVNode.ref;
+        var lastClassName = lastVNode.className;
+        var nextClassName = nextVNode.className;
+        if (lastChildren !== nextChildren) {
+            patchChildren(lastVNode.childFlags, nextVNode.childFlags, lastChildren, nextChildren, dom, lifecycle, context, isSVG && nextTag !== 'foreignObject');
+        }
+        if (isFormElement) {
+            processElement(nextFlags, nextVNode, dom, nextPropsOrEmpty, false, hasControlledValue);
+        }
+        // inlined patchProps  -- ends --
+        if (lastClassName !== nextClassName) {
+            if (isNullOrUndef(nextClassName)) {
+                dom.removeAttribute('class');
+            }
+            else if (isSVG) {
+                dom.setAttribute('class', nextClassName);
+            }
+            else {
+                dom.className = nextClassName;
+            }
+        }
+        if (isFunction(nextRef) && lastVNode.ref !== nextRef) {
+            mountRef(dom, nextRef, lifecycle);
+        }
+        else {
+        }
+    }
+}
+function patchChildren(lastChildFlags, nextChildFlags, lastChildren, nextChildren, parentDOM, lifecycle, context, isSVG) {
+    switch (lastChildFlags) {
+        case 2 /* HasVNodeChildren */:
+            switch (nextChildFlags) {
+                case 2 /* HasVNodeChildren */:
+                    patch(lastChildren, nextChildren, parentDOM, lifecycle, context, isSVG);
+                    break;
+                case 1 /* HasInvalidChildren */:
+                    remove(lastChildren, parentDOM);
+                    break;
+                default:
+                    remove(lastChildren, parentDOM);
+                    mountArrayChildren(nextChildren, parentDOM, lifecycle, context, isSVG);
+                    break;
+            }
+            break;
+        case 1 /* HasInvalidChildren */:
+            switch (nextChildFlags) {
+                case 2 /* HasVNodeChildren */:
+                    mount(nextChildren, parentDOM, lifecycle, context, isSVG);
+                    break;
+                case 1 /* HasInvalidChildren */:
+                    break;
+                default:
+                    mountArrayChildren(nextChildren, parentDOM, lifecycle, context, isSVG);
+                    break;
+            }
+            break;
+        default:
+            if (nextChildFlags & 12 /* MultipleChildren */) {
+                var lastLength = lastChildren.length;
+                var nextLength = nextChildren.length;
+                // Fast path's for both algorithms
+                if (lastLength === 0) {
+                    if (nextLength > 0) {
+                        mountArrayChildren(nextChildren, parentDOM, lifecycle, context, isSVG);
+                    }
+                }
+                else if (nextLength === 0) {
+                    removeAllChildren(parentDOM, lastChildren);
+                }
+                else if (nextChildFlags === 8 /* HasKeyedChildren */ && lastChildFlags === 8 /* HasKeyedChildren */) {
+                    patchKeyedChildren(lastChildren, nextChildren, parentDOM, lifecycle, context, isSVG, lastLength, nextLength);
+                }
+                else {
+                    patchNonKeyedChildren(lastChildren, nextChildren, parentDOM, lifecycle, context, isSVG, lastLength, nextLength);
+                }
+            }
+            else if (nextChildFlags === 1 /* HasInvalidChildren */) {
+                removeAllChildren(parentDOM, lastChildren);
+            }
+            else {
+                removeAllChildren(parentDOM, lastChildren);
+                mount(nextChildren, parentDOM, lifecycle, context, isSVG);
+            }
+            break;
+    }
+}
+function updateClassComponent(instance, nextState, nextVNode, nextProps, parentDom, lifecycle, context, isSVG, force, fromSetState) {
+    var lastState = instance.state;
+    var lastProps = instance.props;
+    nextVNode.children = instance;
+    var lastInput = instance.$LI;
+    var renderOutput;
+    if (instance.$UN) {
+        return;
+    }
+    if (lastProps !== nextProps || nextProps === EMPTY_OBJ) {
+        if (!fromSetState && isFunction(instance.componentWillReceiveProps)) {
+            instance.$BR = true;
+            instance.componentWillReceiveProps(nextProps, context);
+            // If instance component was removed during its own update do nothing...
+            if (instance.$UN) {
+                return;
+            }
+            instance.$BR = false;
+        }
+        if (instance.$PSS) {
+            nextState = combineFrom(nextState, instance.$PS);
+            instance.$PSS = false;
+            instance.$PS = null;
+        }
+    }
+    /* Update if scu is not defined, or it returns truthy value or force */
+    var hasSCU = isFunction(instance.shouldComponentUpdate);
+    if (force || !hasSCU || (hasSCU && instance.shouldComponentUpdate(nextProps, nextState, context))) {
+        if (isFunction(instance.componentWillUpdate)) {
+            instance.$BS = true;
+            instance.componentWillUpdate(nextProps, nextState, context);
+            instance.$BS = false;
+        }
+        instance.props = nextProps;
+        instance.state = nextState;
+        instance.context = context;
+        if (isFunction(options.beforeRender)) {
+            options.beforeRender(instance);
+        }
+        renderOutput = instance.render(nextProps, nextState, context);
+        if (isFunction(options.afterRender)) {
+            options.afterRender(instance);
+        }
+        var didUpdate = renderOutput !== NO_OP;
+        var childContext;
+        if (isFunction(instance.getChildContext)) {
+            childContext = instance.getChildContext();
+        }
+        if (isNullOrUndef(childContext)) {
+            childContext = context;
+        }
+        else {
+            childContext = combineFrom(context, childContext);
+        }
+        instance.$CX = childContext;
+        if (didUpdate) {
+            var nextInput = (instance.$LI = handleComponentInput(renderOutput, nextVNode));
+            patch(lastInput, nextInput, parentDom, lifecycle, childContext, isSVG);
+            if (isFunction(instance.componentDidUpdate)) {
+                instance.componentDidUpdate(lastProps, lastState);
+            }
+            if (isFunction(options.afterUpdate)) {
+                options.afterUpdate(nextVNode);
+            }
+        }
+    }
+    else {
+        instance.props = nextProps;
+        instance.state = nextState;
+        instance.context = context;
+    }
+    nextVNode.dom = instance.$LI.dom;
+}
+function patchComponent(lastVNode, nextVNode, parentDom, lifecycle, context, isSVG, isClass) {
+    var nextType = nextVNode.type;
+    var lastKey = lastVNode.key;
+    var nextKey = nextVNode.key;
+    if (lastVNode.type !== nextType || lastKey !== nextKey) {
+        replaceWithNewNode(lastVNode, nextVNode, parentDom, lifecycle, context, isSVG);
+    }
+    else {
+        var nextProps = nextVNode.props || EMPTY_OBJ;
+        if (isClass) {
+            var instance = lastVNode.children;
+            instance.$UPD = true;
+            updateClassComponent(instance, instance.state, nextVNode, nextProps, parentDom, lifecycle, context, isSVG, false, false);
+            instance.$V = nextVNode;
+            instance.$UPD = false;
+        }
+        else {
+            var shouldUpdate = true;
+            var lastProps = lastVNode.props;
+            var nextHooks = nextVNode.ref;
+            var nextHooksDefined = !isNullOrUndef(nextHooks);
+            var lastInput = lastVNode.children;
+            nextVNode.dom = lastVNode.dom;
+            nextVNode.children = lastInput;
+            if (nextHooksDefined && isFunction(nextHooks.onComponentShouldUpdate)) {
+                shouldUpdate = nextHooks.onComponentShouldUpdate(lastProps, nextProps);
+            }
+            if (shouldUpdate !== false) {
+                if (nextHooksDefined && isFunction(nextHooks.onComponentWillUpdate)) {
+                    nextHooks.onComponentWillUpdate(lastProps, nextProps);
+                }
+                var nextInput = nextType(nextProps, context);
+                if (nextInput !== NO_OP) {
+                    nextInput = handleComponentInput(nextInput, nextVNode);
+                    patch(lastInput, nextInput, parentDom, lifecycle, context, isSVG);
+                    nextVNode.children = nextInput;
+                    nextVNode.dom = nextInput.dom;
+                    if (nextHooksDefined && isFunction(nextHooks.onComponentDidUpdate)) {
+                        nextHooks.onComponentDidUpdate(lastProps, nextProps);
+                    }
+                }
+            }
+            else if (lastInput.flags & 14 /* Component */) {
+                lastInput.parentVNode = nextVNode;
+            }
+        }
+    }
+}
+function patchText(lastVNode, nextVNode, parentDom) {
+    var nextText = nextVNode.children;
+    var textNode = parentDom.firstChild;
+    var dom;
+    // Guard against external change on DOM node.
+    if (isNull(textNode)) {
+        parentDom.textContent = nextText;
+        dom = parentDom.firstChild;
+    }
+    else {
+        dom = lastVNode.dom;
+        if (nextText !== lastVNode.children) {
+            dom.nodeValue = nextText;
+        }
+    }
+    nextVNode.dom = dom;
+}
+function patchNonKeyedChildren(lastChildren, nextChildren, dom, lifecycle, context, isSVG, lastChildrenLength, nextChildrenLength) {
+    var commonLength = lastChildrenLength > nextChildrenLength ? nextChildrenLength : lastChildrenLength;
+    var i = 0;
+    for (; i < commonLength; i++) {
+        var nextChild = nextChildren[i];
+        if (nextChild.dom) {
+            nextChild = nextChildren[i] = directClone(nextChild);
+        }
+        patch(lastChildren[i], nextChild, dom, lifecycle, context, isSVG);
+    }
+    if (lastChildrenLength < nextChildrenLength) {
+        for (i = commonLength; i < nextChildrenLength; i++) {
+            var nextChild$1 = nextChildren[i];
+            if (nextChild$1.dom) {
+                nextChild$1 = nextChildren[i] = directClone(nextChild$1);
+            }
+            mount(nextChild$1, dom, lifecycle, context, isSVG);
+        }
+    }
+    else if (lastChildrenLength > nextChildrenLength) {
+        for (i = commonLength; i < lastChildrenLength; i++) {
+            remove(lastChildren[i], dom);
+        }
+    }
+}
+function patchKeyedChildren(a, b, dom, lifecycle, context, isSVG, aLength, bLength) {
+    var aEnd = aLength - 1;
+    var bEnd = bLength - 1;
+    var aStart = 0;
+    var bStart = 0;
+    var i;
+    var j;
+    var aNode;
+    var bNode;
+    var nextNode;
+    var nextPos;
+    var node;
+    var aStartNode = a[aStart];
+    var bStartNode = b[bStart];
+    var aEndNode = a[aEnd];
+    var bEndNode = b[bEnd];
+    if (bStartNode.dom) {
+        b[bStart] = bStartNode = directClone(bStartNode);
+    }
+    if (bEndNode.dom) {
+        b[bEnd] = bEndNode = directClone(bEndNode);
+    }
+    // Step 1
+    // tslint:disable-next-line
+    outer: {
+        // Sync nodes with the same key at the beginning.
+        while (aStartNode.key === bStartNode.key) {
+            patch(aStartNode, bStartNode, dom, lifecycle, context, isSVG);
+            aStart++;
+            bStart++;
+            if (aStart > aEnd || bStart > bEnd) {
+                break outer;
+            }
+            aStartNode = a[aStart];
+            bStartNode = b[bStart];
+            if (bStartNode.dom) {
+                b[bStart] = bStartNode = directClone(bStartNode);
+            }
+        }
+        // Sync nodes with the same key at the end.
+        while (aEndNode.key === bEndNode.key) {
+            patch(aEndNode, bEndNode, dom, lifecycle, context, isSVG);
+            aEnd--;
+            bEnd--;
+            if (aStart > aEnd || bStart > bEnd) {
+                break outer;
+            }
+            aEndNode = a[aEnd];
+            bEndNode = b[bEnd];
+            if (bEndNode.dom) {
+                b[bEnd] = bEndNode = directClone(bEndNode);
+            }
+        }
+    }
+    if (aStart > aEnd) {
+        if (bStart <= bEnd) {
+            nextPos = bEnd + 1;
+            nextNode = nextPos < bLength ? b[nextPos].dom : null;
+            while (bStart <= bEnd) {
+                node = b[bStart];
+                if (node.dom) {
+                    b[bStart] = node = directClone(node);
+                }
+                bStart++;
+                insertOrAppend(dom, mount(node, null, lifecycle, context, isSVG), nextNode);
+            }
+        }
+    }
+    else if (bStart > bEnd) {
+        while (aStart <= aEnd) {
+            remove(a[aStart++], dom);
+        }
+    }
+    else {
+        var aLeft = aEnd - aStart + 1;
+        var bLeft = bEnd - bStart + 1;
+        var sources = new Array(bLeft);
+        for (i = 0; i < bLeft; i++) {
+            sources[i] = -1;
+        }
+        var moved = false;
+        var pos = 0;
+        var patched = 0;
+        // When sizes are small, just loop them through
+        if (bLeft <= 4 || aLeft * bLeft <= 16) {
+            for (i = aStart; i <= aEnd; i++) {
+                aNode = a[i];
+                if (patched < bLeft) {
+                    for (j = bStart; j <= bEnd; j++) {
+                        bNode = b[j];
+                        if (aNode.key === bNode.key) {
+                            sources[j - bStart] = i;
+                            if (pos > j) {
+                                moved = true;
+                            }
+                            else {
+                                pos = j;
+                            }
+                            if (bNode.dom) {
+                                b[j] = bNode = directClone(bNode);
+                            }
+                            patch(aNode, bNode, dom, lifecycle, context, isSVG);
+                            patched++;
+                            a[i] = null;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            var keyIndex = {};
+            // Map keys by their index in array
+            for (i = bStart; i <= bEnd; i++) {
+                keyIndex[b[i].key] = i;
+            }
+            // Try to patch same keys
+            for (i = aStart; i <= aEnd; i++) {
+                aNode = a[i];
+                if (patched < bLeft) {
+                    j = keyIndex[aNode.key];
+                    if (isDefined(j)) {
+                        bNode = b[j];
+                        sources[j - bStart] = i;
+                        if (pos > j) {
+                            moved = true;
+                        }
+                        else {
+                            pos = j;
+                        }
+                        if (bNode.dom) {
+                            b[j] = bNode = directClone(bNode);
+                        }
+                        patch(aNode, bNode, dom, lifecycle, context, isSVG);
+                        patched++;
+                        a[i] = null;
+                    }
+                }
+            }
+        }
+        // fast-path: if nothing patched remove all old and add all new
+        if (aLeft === aLength && patched === 0) {
+            removeAllChildren(dom, a);
+            mountArrayChildren(b, dom, lifecycle, context, isSVG);
+        }
+        else {
+            i = aLeft - patched;
+            while (i > 0) {
+                aNode = a[aStart++];
+                if (!isNull(aNode)) {
+                    remove(aNode, dom);
+                    i--;
+                }
+            }
+            if (moved) {
+                var seq = lis_algorithm(sources);
+                j = seq.length - 1;
+                for (i = bLeft - 1; i >= 0; i--) {
+                    if (sources[i] === -1) {
+                        pos = i + bStart;
+                        node = b[pos];
+                        if (node.dom) {
+                            b[pos] = node = directClone(node);
+                        }
+                        nextPos = pos + 1;
+                        insertOrAppend(dom, mount(node, null, lifecycle, context, isSVG), nextPos < bLength ? b[nextPos].dom : null);
+                    }
+                    else if (j < 0 || i !== seq[j]) {
+                        pos = i + bStart;
+                        node = b[pos];
+                        nextPos = pos + 1;
+                        insertOrAppend(dom, node.dom, nextPos < bLength ? b[nextPos].dom : null);
+                    }
+                    else {
+                        j--;
+                    }
+                }
+            }
+            else if (patched !== bLeft) {
+                // when patched count doesn't match b length we need to insert those new ones
+                // loop backwards so we can use insertBefore
+                for (i = bLeft - 1; i >= 0; i--) {
+                    if (sources[i] === -1) {
+                        pos = i + bStart;
+                        node = b[pos];
+                        if (node.dom) {
+                            b[pos] = node = directClone(node);
+                        }
+                        nextPos = pos + 1;
+                        insertOrAppend(dom, mount(node, null, lifecycle, context, isSVG), nextPos < bLength ? b[nextPos].dom : null);
+                    }
+                }
+            }
+        }
+    }
+}
+// // https://en.wikipedia.org/wiki/Longest_increasing_subsequence
+function lis_algorithm(arr) {
+    var p = arr.slice();
+    var result = [0];
+    var i;
+    var j;
+    var u;
+    var v;
+    var c;
+    var len = arr.length;
+    for (i = 0; i < len; i++) {
+        var arrI = arr[i];
+        if (arrI !== -1) {
+            j = result[result.length - 1];
+            if (arr[j] < arrI) {
+                p[i] = j;
+                result.push(i);
+                continue;
+            }
+            u = 0;
+            v = result.length - 1;
+            while (u < v) {
+                c = ((u + v) / 2) | 0;
+                if (arr[result[c]] < arrI) {
+                    u = c + 1;
+                }
+                else {
+                    v = c;
+                }
+            }
+            if (arrI < arr[result[u]]) {
+                if (u > 0) {
+                    p[i] = result[u - 1];
+                }
+                result[u] = i;
+            }
+        }
+    }
+    u = result.length;
+    v = result[u - 1];
+    while (u-- > 0) {
+        result[u] = v;
+        v = p[v];
+    }
+    return result;
+}
+
+var roots = options.roots;
+var documentBody = isBrowser ? document.body : null;
+function render(input, parentDom, callback) {
+    if (input === NO_OP) {
+        return;
+    }
+    var rootLen = roots.length;
+    var rootInput;
+    var index;
+    for (index = 0; index < rootLen; index++) {
+        if (roots[index] === parentDom) {
+            rootInput = parentDom.$V;
+            break;
+        }
+    }
+    if (isUndefined(rootInput)) {
+        if (!isInvalid(input)) {
+            if (input.dom) {
+                input = directClone(input);
+            }
+            if (isNull(parentDom.firstChild)) {
+                mount(input, parentDom, LIFECYCLE, EMPTY_OBJ, false);
+                parentDom.$V = input;
+                roots.push(parentDom);
+            }
+            else {
+                hydrate(input, parentDom);
+            }
+            rootInput = input;
+        }
+    }
+    else {
+        if (isNullOrUndef(input)) {
+            remove(rootInput, parentDom);
+            roots.splice(index, 1);
+        }
+        else {
+            if (input.dom) {
+                input = directClone(input);
+            }
+            patch(rootInput, input, parentDom, LIFECYCLE, EMPTY_OBJ, false);
+            rootInput = parentDom.$V = input;
+        }
+    }
+    if (LIFECYCLE.length > 0) {
+        callAll(LIFECYCLE);
+    }
+    if (isFunction(callback)) {
+        callback();
+    }
+    if (rootInput && rootInput.flags & 14 /* Component */) {
+        return rootInput.children;
+    }
+}
+function createRenderer(parentDom) {
+    return function renderer(lastInput, nextInput) {
+        if (!parentDom) {
+            parentDom = lastInput;
+        }
+        render(nextInput, parentDom);
+    };
+}
+function createPortal(children, container) {
+    return createVNode(1024 /* Portal */, container, null, children, 0 /* UnknownChildren */, null, isInvalid(children) ? null : children.key, null);
+}
+
+var resolvedPromise = typeof Promise === 'undefined' ? null : Promise.resolve();
+var fallbackMethod = typeof requestAnimationFrame === 'undefined' ? setTimeout : requestAnimationFrame;
+function nextTick(fn) {
+    if (resolvedPromise) {
+        return resolvedPromise.then(fn);
+    }
+    return fallbackMethod(fn);
+}
+function queueStateChanges(component, newState, callback) {
+    if (isFunction(newState)) {
+        newState = newState(component.state, component.props, component.context);
+    }
+    var pending = component.$PS;
+    if (isNullOrUndef(pending)) {
+        component.$PS = newState;
+    }
+    else {
+        for (var stateKey in newState) {
+            pending[stateKey] = newState[stateKey];
+        }
+    }
+    if (!component.$PSS && !component.$BR) {
+        if (!component.$UPD) {
+            component.$PSS = true;
+            component.$UPD = true;
+            applyState(component, false, callback);
+            component.$UPD = false;
+        }
+        else {
+            // Async
+            var queue = component.$QU;
+            if (isNull(queue)) {
+                queue = component.$QU = [];
+                nextTick(promiseCallback(component, queue));
+            }
+            if (isFunction(callback)) {
+                queue.push(callback);
+            }
+        }
+    }
+    else {
+        component.$PSS = true;
+        if (component.$BR && isFunction(callback)) {
+            LIFECYCLE.push(callback.bind(component));
+        }
+    }
+}
+function promiseCallback(component, queue) {
+    return function () {
+        component.$QU = null;
+        component.$UPD = true;
+        applyState(component, false, function () {
+            for (var i = 0, len = queue.length; i < len; i++) {
+                queue[i].call(component);
+            }
+        });
+        component.$UPD = false;
+    };
+}
+function applyState(component, force, callback) {
+    if (component.$UN) {
+        return;
+    }
+    if (force || !component.$BR) {
+        component.$PSS = false;
+        var pendingState = component.$PS;
+        var prevState = component.state;
+        var nextState = combineFrom(prevState, pendingState);
+        var props = component.props;
+        var context = component.context;
+        component.$PS = null;
+        var vNode = component.$V;
+        var lastInput = component.$LI;
+        var parentDom = lastInput.dom && lastInput.dom.parentNode;
+        updateClassComponent(component, nextState, vNode, props, parentDom, LIFECYCLE, context, (vNode.flags & 32 /* SvgElement */) > 0, force, true);
+        if (component.$UN) {
+            return;
+        }
+        if ((component.$LI.flags & 1024 /* Portal */) === 0) {
+            var dom = component.$LI.dom;
+            while (!isNull((vNode = vNode.parentVNode))) {
+                if ((vNode.flags & 14 /* Component */) > 0) {
+                    vNode.dom = dom;
+                }
+            }
+        }
+        if (LIFECYCLE.length > 0) {
+            callAll(LIFECYCLE);
+        }
+    }
+    else {
+        component.state = component.$PS;
+        component.$PS = null;
+    }
+    if (isFunction(callback)) {
+        callback.call(component);
+    }
+}
+var Component = function Component(props, context) {
+    this.state = null;
+    // Internal properties
+    this.$BR = false; // BLOCK RENDER
+    this.$BS = true; // BLOCK STATE
+    this.$PSS = false; // PENDING SET STATE
+    this.$PS = null; // PENDING STATE (PARTIAL or FULL)
+    this.$LI = null; // LAST INPUT
+    this.$V = null; // VNODE
+    this.$UN = false; // UNMOUNTED
+    this.$CX = null; // CHILDCONTEXT
+    this.$UPD = true; // UPDATING
+    this.$QU = null; // QUEUE
+    /** @type {object} */
+    this.props = props || EMPTY_OBJ;
+    /** @type {object} */
+    this.context = context || EMPTY_OBJ; // context should not be mutable
+};
+Component.prototype.forceUpdate = function forceUpdate (callback) {
+    if (this.$UN) {
+        return;
+    }
+    applyState(this, true, callback);
+};
+Component.prototype.setState = function setState (newState, callback) {
+    if (this.$UN) {
+        return;
+    }
+    if (!this.$BS) {
+        queueStateChanges(this, newState, callback);
+    }
+    else {
+        return;
+    }
+};
+// tslint:disable-next-line:no-empty
+Component.prototype.render = function render (nextProps, nextState, nextContext) { };
+// Public
+Component.defaultProps = null;
+
+var version = "4.0.7";
+
+
+
+
+/***/ }),
+/* 31 */
 /***/ (function(module, exports) {
 
 /* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {/* globals __webpack_amd_options__ */
@@ -8756,234 +7358,8 @@ module.exports = __webpack_amd_options__;
 /* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ }),
-/* 50 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = BasicPage;
-
-var _inferno = __webpack_require__(0);
-
-var _components = __webpack_require__(4);
-
-var _Alert = __webpack_require__(101);
-
-var _Alert2 = _interopRequireDefault(_Alert);
-
-var _Badge = __webpack_require__(102);
-
-var _Badge2 = _interopRequireDefault(_Badge);
-
-var _Breadcrumb = __webpack_require__(103);
-
-var _Breadcrumb2 = _interopRequireDefault(_Breadcrumb);
-
-var _Button = __webpack_require__(104);
-
-var _Button2 = _interopRequireDefault(_Button);
-
-var _Dropdown = __webpack_require__(106);
-
-var _Dropdown2 = _interopRequireDefault(_Dropdown);
-
-var _Jumbotron = __webpack_require__(107);
-
-var _Jumbotron2 = _interopRequireDefault(_Jumbotron);
-
-var _Progress = __webpack_require__(112);
-
-var _Progress2 = _interopRequireDefault(_Progress);
-
-var _Collapse = __webpack_require__(105);
-
-var _Collapse2 = _interopRequireDefault(_Collapse);
-
-var _Layout = __webpack_require__(108);
-
-var _Layout2 = _interopRequireDefault(_Layout);
-
-var _Tabs = __webpack_require__(113);
-
-var _Tabs2 = _interopRequireDefault(_Tabs);
-
-var _Popovers = __webpack_require__(111);
-
-var _Popovers2 = _interopRequireDefault(_Popovers);
-
-var _Pagination = __webpack_require__(110);
-
-var _Pagination2 = _interopRequireDefault(_Pagination);
-
-var _List = __webpack_require__(109);
-
-var _List2 = _interopRequireDefault(_List);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// import Modal from '../../../lib/Modal'
-
-function BasicPage(props) {
-  return (0, _inferno.createComponentVNode)(2, _components.Page, {
-    children: [(0, _inferno.createComponentVNode)(2, _Alert2.default), (0, _inferno.createComponentVNode)(2, _Badge2.default), (0, _inferno.createComponentVNode)(2, _Breadcrumb2.default), (0, _inferno.createComponentVNode)(2, _Button2.default), (0, _inferno.createComponentVNode)(2, _Dropdown2.default), (0, _inferno.createComponentVNode)(2, _Jumbotron2.default), (0, _inferno.createComponentVNode)(2, _Progress2.default), (0, _inferno.createComponentVNode)(2, _Collapse2.default), (0, _inferno.createComponentVNode)(2, _Layout2.default), (0, _inferno.createComponentVNode)(2, _List2.default), (0, _inferno.createComponentVNode)(2, _Tabs2.default), (0, _inferno.createComponentVNode)(2, _Popovers2.default), (0, _inferno.createComponentVNode)(2, _Pagination2.default)]
-  });
-}
-module.exports = exports['default'];
-
-/***/ }),
-/* 51 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = CardPage;
-
-var _inferno = __webpack_require__(0);
-
-var _components = __webpack_require__(4);
-
-var _TextCard = __webpack_require__(115);
-
-var _TextCard2 = _interopRequireDefault(_TextCard);
-
-var _HeaderCard = __webpack_require__(114);
-
-var _HeaderCard2 = _interopRequireDefault(_HeaderCard);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function CardPage(props) {
-  return (0, _inferno.createComponentVNode)(2, _components.Page, {
-    children: [(0, _inferno.createComponentVNode)(2, _TextCard2.default), (0, _inferno.createComponentVNode)(2, _HeaderCard2.default)]
-  });
-}
-module.exports = exports['default'];
-
-/***/ }),
-/* 52 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = FormPage;
-
-var _inferno = __webpack_require__(0);
-
-var _components = __webpack_require__(4);
-
-var _Input = __webpack_require__(116);
-
-var _Input2 = _interopRequireDefault(_Input);
-
-var _InputGroup = __webpack_require__(117);
-
-var _InputGroup2 = _interopRequireDefault(_InputGroup);
-
-var _InputWithButton = __webpack_require__(118);
-
-var _InputWithButton2 = _interopRequireDefault(_InputWithButton);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function FormPage(props) {
-  return (0, _inferno.createComponentVNode)(2, _components.Page, {
-    children: [(0, _inferno.createComponentVNode)(2, _Input2.default), (0, _inferno.createComponentVNode)(2, _InputGroup2.default), (0, _inferno.createComponentVNode)(2, _InputWithButton2.default)]
-  });
-}
-module.exports = exports['default'];
-
-/***/ }),
-/* 53 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = BasicPage;
-
-var _inferno = __webpack_require__(0);
-
-var _components = __webpack_require__(4);
-
-var _BasicModal = __webpack_require__(120);
-
-var _BasicModal2 = _interopRequireDefault(_BasicModal);
-
-var _Animations = __webpack_require__(119);
-
-var _Animations2 = _interopRequireDefault(_Animations);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function BasicPage(props) {
-  return (0, _inferno.createComponentVNode)(2, _components.Page, {
-    children: (0, _inferno.createComponentVNode)(2, _BasicModal2.default)
-  });
-}
-module.exports = exports['default'];
-
-/***/ }),
-/* 54 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = NavigationPage;
-
-var _inferno = __webpack_require__(0);
-
-var _components = __webpack_require__(4);
-
-var _Horizontal = __webpack_require__(121);
-
-var _Horizontal2 = _interopRequireDefault(_Horizontal);
-
-var _Vertical = __webpack_require__(124);
-
-var _Vertical2 = _interopRequireDefault(_Vertical);
-
-var _Tabbed = __webpack_require__(123);
-
-var _Tabbed2 = _interopRequireDefault(_Tabbed);
-
-var _Pills = __webpack_require__(122);
-
-var _Pills2 = _interopRequireDefault(_Pills);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// import Modal from '../../../lib/Modal'
-
-
-function NavigationPage(props) {
-  return (0, _inferno.createComponentVNode)(2, _components.Page, {
-    children: [(0, _inferno.createComponentVNode)(2, _Horizontal2.default), (0, _inferno.createComponentVNode)(2, _Vertical2.default), (0, _inferno.createComponentVNode)(2, _Tabbed2.default), (0, _inferno.createComponentVNode)(2, _Pills2.default)]
-  });
-}
-module.exports = exports['default'];
-
-/***/ }),
-/* 55 */,
-/* 56 */
+/* 32 */,
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8997,13 +7373,1390 @@ var _inferno = __webpack_require__(0);
 
 var _inferno2 = _interopRequireDefault(_inferno);
 
-var _infernoCreateElement = __webpack_require__(3);
+var _infernoCreateElement = __webpack_require__(2);
 
 var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var defaultProps = {
+  color: 'secondary',
+  pill: false,
+  tag: 'span'
+};
+
+var Badge = function Badge(props) {
+  var children = props.children,
+      className = props.className,
+      cssModule = props.cssModule,
+      color = props.color,
+      pill = props.pill,
+      Tag = props.tag,
+      attributes = _objectWithoutProperties(props, ['children', 'className', 'cssModule', 'color', 'pill', 'tag']);
+
+  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'badge', 'badge-' + color, pill ? 'badge-pill' : false), cssModule);
+
+  Object.assign(attributes, { className: classes });
+
+  return (0, _infernoCreateElement.createElement)(Tag, attributes, children);
+};
+
+Badge.defaultProps = defaultProps;
+
+exports.default = Badge;
+module.exports = exports['default'];
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _inferno = __webpack_require__(0);
+
+var _Dropdown = __webpack_require__(9);
+
+var _Dropdown2 = _interopRequireDefault(_Dropdown);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ButtonDropdown = function ButtonDropdown(props) {
+  return (0, _inferno.normalizeProps)((0, _inferno.createComponentVNode)(2, _Dropdown2.default, _extends({
+    'group': true
+  }, props)));
+};
+
+exports.default = ButtonDropdown;
+module.exports = exports['default'];
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _inferno = __webpack_require__(0);
+
+var _inferno2 = _interopRequireDefault(_inferno);
+
+var _infernoCreateElement = __webpack_require__(2);
+
+var _classnames = __webpack_require__(1);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _utils = __webpack_require__(3);
+
+var _lodash = __webpack_require__(47);
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var colWidths = ['xs', 'sm', 'md', 'lg', 'xl'];
+
+var defaultProps = {
+  tag: 'div',
+  widths: colWidths
+};
+
+var getColumnSizeClass = function getColumnSizeClass(isXs, colWidth, colSize) {
+  if (colSize === true || colSize === '') {
+    return isXs ? 'col' : 'col-' + colWidth;
+  } else if (colSize === 'auto') {
+    return isXs ? 'col-auto' : 'col-' + colWidth + '-auto';
+  }
+
+  return isXs ? 'col-' + colSize : 'col-' + colWidth + '-' + colSize;
+};
+
+var Col = function Col(props) {
+  var children = props.children,
+      className = props.className,
+      cssModule = props.cssModule,
+      widths = props.widths,
+      Tag = props.tag,
+      attributes = _objectWithoutProperties(props, ['children', 'className', 'cssModule', 'widths', 'tag']);
+
+  var colClasses = [];
+
+  widths.forEach(function (colWidth, i) {
+    var columnProp = props[colWidth];
+
+    if (!i && columnProp === undefined) {
+      columnProp = true;
+    }
+
+    delete attributes[colWidth];
+
+    if (!columnProp) {
+      return;
+    }
+
+    var isXs = !i;
+    var colClass = void 0;
+
+    if ((0, _lodash2.default)(columnProp)) {
+      var _classNames;
+
+      var colSizeInterfix = isXs ? '-' : '-' + colWidth + '-';
+      colClass = getColumnSizeClass(isXs, colWidth, columnProp.size);
+
+      colClasses.push((0, _utils.mapToCssModules)((0, _classnames2.default)((_classNames = {}, _defineProperty(_classNames, colClass, columnProp.size || columnProp.size === ''), _defineProperty(_classNames, 'push' + colSizeInterfix + columnProp.push, columnProp.push || columnProp.push === 0), _defineProperty(_classNames, 'pull' + colSizeInterfix + columnProp.pull, columnProp.pull || columnProp.pull === 0), _defineProperty(_classNames, 'offset' + colSizeInterfix + columnProp.offset, columnProp.offset || columnProp.offset === 0), _classNames))), cssModule);
+    } else {
+      colClass = getColumnSizeClass(isXs, colWidth, columnProp);
+      colClasses.push(colClass);
+    }
+  });
+
+  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, colClasses), cssModule);
+
+  Object.assign(attributes, { className: classes });
+
+  return (0, _infernoCreateElement.createElement)(Tag, attributes, children);
+};
+
+Col.defaultProps = defaultProps;
+
+exports.default = Col;
+module.exports = exports['default'];
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _inferno = __webpack_require__(0);
+
+var _inferno2 = _interopRequireDefault(_inferno);
+
+var _infernoCreateElement = __webpack_require__(2);
+
+var _classnames = __webpack_require__(1);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _utils = __webpack_require__(3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var defaultProps = {
+  tag: 'div'
+};
+
+var InputGroup = function InputGroup(props) {
+  var children = props.children,
+      className = props.className,
+      cssModule = props.cssModule,
+      Tag = props.tag,
+      size = props.size,
+      attributes = _objectWithoutProperties(props, ['children', 'className', 'cssModule', 'tag', 'size']);
+
+  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'input-group', size ? 'input-group-' + size : null), cssModule);
+
+  Object.assign(attributes, { className: classes });
+
+  return (0, _infernoCreateElement.createElement)(Tag, attributes, children);
+};
+
+InputGroup.defaultProps = defaultProps;
+
+exports.default = InputGroup;
+module.exports = exports['default'];
+
+/***/ }),
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _inferno = __webpack_require__(0);
+
+var _inferno2 = _interopRequireDefault(_inferno);
+
+var _infernoCreateElement = __webpack_require__(2);
+
+var _classnames = __webpack_require__(1);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _utils = __webpack_require__(3);
+
+var _InputGroupText = __webpack_require__(38);
+
+var _InputGroupText2 = _interopRequireDefault(_InputGroupText);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var defaultProps = {
+  tag: 'div'
+};
+
+var InputGroupAddon = function InputGroupAddon(props) {
+  var className = props.className,
+      cssModule = props.cssModule,
+      Tag = props.tag,
+      addonType = props.addonType,
+      children = props.children,
+      attributes = _objectWithoutProperties(props, ['className', 'cssModule', 'tag', 'addonType', 'children']);
+
+  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'input-group-' + addonType), cssModule);
+
+  // Convenience to assist with transition
+  if (typeof children === 'string') {
+    Object.assign(attributes, { className: classes });
+
+    return (0, _infernoCreateElement.createElement)(Tag, attributes, (0, _inferno.createComponentVNode)(2, _InputGroupText2.default, {
+      children: children
+    }));
+  }
+
+  Object.assign(attributes, { className: classes });
+
+  return (0, _infernoCreateElement.createElement)(Tag, attributes, children);
+};
+
+InputGroupAddon.defaultProps = defaultProps;
+
+exports.default = InputGroupAddon;
+module.exports = exports['default'];
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _inferno = __webpack_require__(0);
+
+var _inferno2 = _interopRequireDefault(_inferno);
+
+var _infernoCreateElement = __webpack_require__(2);
+
+var _classnames = __webpack_require__(1);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _utils = __webpack_require__(3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var defaultProps = {
+  tag: 'span'
+};
+
+var InputGroupText = function InputGroupText(props) {
+  var children = props.children,
+      className = props.className,
+      cssModule = props.cssModule,
+      Tag = props.tag,
+      attributes = _objectWithoutProperties(props, ['children', 'className', 'cssModule', 'tag']);
+
+  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'input-group-text'), cssModule);
+
+  Object.assign(attributes, { className: classes });
+
+  return (0, _infernoCreateElement.createElement)(Tag, attributes, children);
+};
+
+InputGroupText.defaultProps = defaultProps;
+
+exports.default = InputGroupText;
+module.exports = exports['default'];
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _inferno = __webpack_require__(0);
+
+var _classnames = __webpack_require__(1);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _utils = __webpack_require__(3);
+
+var _AnimateModal = __webpack_require__(69);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var propsToOmit = ['animationPrefix', 'backgroundAnimationPrefix', 'isOpen', 'autoFocus', 'size', 'toggle', 'keyboard', 'backdrop', 'onEnter', 'onExit', 'onOpened', 'onClosed', 'children', 'className', 'wrapClassName', 'modalClassName', 'backdropClassName', 'contentClassName', 'fade', 'cssModule', 'zIndex'];
+
+var defaultProps = {
+  isOpen: false,
+  autoFocus: true,
+  backdrop: true,
+  keyboard: true,
+  zIndex: 1050,
+  fade: true
+};
+
+var Modal = function (_Component) {
+  _inherits(Modal, _Component);
+
+  function Modal(props) {
+    _classCallCheck(this, Modal);
+
+    var _this = _possibleConstructorReturn(this, (Modal.__proto__ || Object.getPrototypeOf(Modal)).call(this, props));
+
+    _this.originalBodyPadding = null;
+    _this.isBodyOverflowing = false;
+    _this.togglePortal = _this.togglePortal.bind(_this);
+    _this.handleBackdropClick = _this.handleBackdropClick.bind(_this);
+    _this.handleEscape = _this.handleEscape.bind(_this);
+    _this.destroy = _this.destroy.bind(_this);
+    _this.onOpened = _this.onOpened.bind(_this);
+    _this.onClosed = _this.onClosed.bind(_this);
+    _this.createEventListeners = _this.createEventListeners.bind(_this);
+
+    _this.state = {};
+    return _this;
+  }
+
+  _createClass(Modal, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      if (this.props.isOpen) {
+        this.togglePortal();
+      }
+      if (this.props.onEnter) {
+        this.props.onEnter();
+      }
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps) {
+      if (this.props.isOpen !== prevProps.isOpen) {
+        // handle portal events/dom updates
+        this.togglePortal();
+      }
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this.destroy();
+      if (this.props.onExit) {
+        this.props.onExit();
+      }
+    }
+  }, {
+    key: 'onOpened',
+    value: function onOpened() {
+      if (this.props.onOpened) {
+        this.props.onOpened();
+      }
+    }
+  }, {
+    key: 'onClosed',
+    value: function onClosed() {
+      this.destroy();
+      if (this.props.onClosed) {
+        this.props.onClosed();
+      }
+    }
+  }, {
+    key: 'handleEscape',
+    value: function handleEscape(e) {
+      if (this._dialog && this.props.keyboard && e.keyCode === 27 && this.props.toggle) {
+        this.props.toggle();
+      }
+    }
+  }, {
+    key: 'handleBackdropClick',
+    value: function handleBackdropClick(e) {
+      if (!this._dialog || this.props.backdrop !== true) return;
+
+      var container = this._dialog;
+
+      if (e.target && !container.contains(e.target) && this.props.toggle) {
+        this.props.toggle();
+      }
+    }
+  }, {
+    key: 'togglePortal',
+    value: function togglePortal() {
+      if (this.props.isOpen) {
+        if (this.props.autoFocus) {
+          this._focus = true;
+        }
+        this.show();
+      } else {
+        this.hide();
+      }
+    }
+  }, {
+    key: 'createEventListeners',
+    value: function createEventListeners() {
+      window.addEventListener('keyup', this.handleEscape);
+      window.addEventListener('click', this.handleBackdropClick, true);
+    }
+  }, {
+    key: 'destroy',
+    value: function destroy() {
+      window.removeEventListener('keyup', this.handleEscape);
+      window.removeEventListener('click', this.handleBackdropClick, true);
+      if (this.state._element) {
+        var _element = this.state._element;
+        this.setState({
+          _element: null
+        });
+        document.body.removeChild(_element);
+      }
+
+      // Use regex to prevent matching `modal-open` as part of a different class, e.g. `my-modal-opened`
+      var classes = document.body.className.replace(/(^| )modal-open( |$)/, ' ');
+      document.body.className = (0, _utils.mapToCssModules)((0, _classnames2.default)(classes).trim(), this.props.cssModule);
+      (0, _utils.setScrollbarWidth)(this.originalBodyPadding);
+    }
+  }, {
+    key: 'hide',
+    value: function hide() {
+      // Need to trigger cleanup if the animation doesn't play
+      if (!this.props.fade) {
+        this.destroy();
+      }
+    }
+  }, {
+    key: 'show',
+    value: function show() {
+      var classes = document.body.className;
+      var _element = document.createElement('div');
+      _element.setAttribute('tabindex', '-1');
+      _element.style.position = 'relative';
+      _element.style.zIndex = this.props.zIndex;
+      this.originalBodyPadding = (0, _utils.getOriginalBodyPadding)();
+
+      (0, _utils.conditionallyUpdateScrollbar)();
+      this.createEventListeners();
+
+      document.body.appendChild(_element);
+
+      document.body.className = (0, _utils.mapToCssModules)((0, _classnames2.default)(classes, 'modal-open'), this.props.cssModule);
+
+      this.setState({
+        _element: _element
+      });
+    }
+  }, {
+    key: 'renderModalDialog',
+    value: function renderModalDialog() {
+      var _this2 = this;
+
+      var attributes = (0, _utils.omit)(this.props, propsToOmit);
+
+      return (0, _inferno.normalizeProps)((0, _inferno.createVNode)(1, 'div', (0, _utils.mapToCssModules)((0, _classnames2.default)('modal-dialog', this.props.className, _defineProperty({}, 'modal-' + this.props.size, this.props.size)), this.props.cssModule), (0, _inferno.createVNode)(1, 'div', (0, _utils.mapToCssModules)((0, _classnames2.default)('modal-content', this.props.contentClassName), this.props.cssModule), this.props.children, 0), 2, _extends({
+        'role': 'document'
+      }, attributes), null, function (c) {
+        _this2._dialog = c;
+        if (_this2._focus) {
+          c.parentNode.focus();
+          _this2._focus = false;
+        }
+      }));
+    }
+  }, {
+    key: 'renderChildren',
+    value: function renderChildren() {
+      var _props = this.props,
+          wrapClassName = _props.wrapClassName,
+          modalClassName = _props.modalClassName,
+          backdropClassName = _props.backdropClassName,
+          cssModule = _props.cssModule,
+          isOpen = _props.isOpen,
+          backdrop = _props.backdrop,
+          modalTransitionTimeout = _props.modalTransitionTimeout,
+          backdropTransitionTimeout = _props.backdropTransitionTimeout;
+
+
+      var modalAttributes = {
+        tabIndex: '-1'
+      };
+
+      var prefix = this.props.animationPrefix || "ModalFade";
+      var backgroundPrefix = this.props.backgroundAnimationPrefix || "ModalBackdropFade";
+
+      if (this.props.fade) {
+        var animCls = {
+          show: 'show',
+          active: 'fade',
+          hide: undefined
+        };
+
+        var backdropAnimCls = {
+          show: 'fade show',
+          active: 'fade',
+          hide: undefined
+        };
+
+        return (0, _inferno.createVNode)(1, 'div', (0, _utils.mapToCssModules)(wrapClassName), [(0, _inferno.normalizeProps)((0, _inferno.createComponentVNode)(2, AnimatedSpecial, _extends({
+          'isOpen': isOpen,
+          'cssModule': cssModule,
+          'className': (0, _utils.mapToCssModules)((0, _classnames2.default)('modal', modalClassName), cssModule),
+          'onOpened': this.onOpened,
+          'onClosed': this.onClosed
+        }, modalAttributes, {
+          children: this.renderModalDialog()
+        }), 'modal-dialog')), (0, _inferno.createComponentVNode)(2, AnimatedSpecial, {
+          'isOpen': isOpen && backdrop,
+          'cssModule': cssModule,
+          'className': (0, _utils.mapToCssModules)((0, _classnames2.default)('modal-backdrop', backdropClassName), cssModule)
+        }, 'modal-backdrop')], 8);
+      }
+
+      return (0, _inferno.createVNode)(1, 'div', (0, _utils.mapToCssModules)(wrapClassName), [isOpen && (0, _inferno.normalizeProps)((0, _inferno.createVNode)(1, 'div', (0, _utils.mapToCssModules)((0, _classnames2.default)('modal', 'show', modalClassName), cssModule), this.renderModalDialog(), 0, _extends({
+        'style': { display: 'block' }
+      }, modalAttributes))), isOpen && backdrop && (0, _inferno.createVNode)(1, 'div', (0, _utils.mapToCssModules)((0, _classnames2.default)('modal-backdrop', 'show', backdropClassName), cssModule))], 0);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return this.state._element ? (0, _inferno.createPortal)(this.renderChildren(), this.state._element) : null;
+    }
+  }]);
+
+  return Modal;
+}(_inferno.Component);
+
+Modal.defaultProps = defaultProps;
+
+var AnimatedSpecial = function (_Component2) {
+  _inherits(AnimatedSpecial, _Component2);
+
+  function AnimatedSpecial() {
+    _classCallCheck(this, AnimatedSpecial);
+
+    return _possibleConstructorReturn(this, (AnimatedSpecial.__proto__ || Object.getPrototypeOf(AnimatedSpecial)).apply(this, arguments));
+  }
+
+  _createClass(AnimatedSpecial, [{
+    key: 'render',
+
+    /*
+    I need to create a separate component to get unmount to work properly
+    since animations are triggered on unmount and I don't want inferno to
+    remove all the elements until the animation is completed.
+     */
+
+    value: function render(_ref) {
+      var isOpen = _ref.isOpen,
+          onClosed = _ref.onClosed,
+          onOpened = _ref.onOpened,
+          attrs = _objectWithoutProperties(_ref, ['isOpen', 'onClosed', 'onOpened']);
+
+      if (isOpen) {
+        return (0, _inferno.normalizeProps)((0, _inferno.createComponentVNode)(2, _AnimateModal.Animated, _extends({}, attrs), null, {
+          'onComponentDidMount': function onComponentDidMount(dom) {
+            return (0, _AnimateModal.animateModalOnAdd)(dom, onOpened);
+          },
+          'onComponentWillUnmount': function onComponentWillUnmount(dom) {
+            return (0, _AnimateModal.animateModalOnRemove)(dom, onClosed);
+          }
+        }));
+      } else {
+        return null;
+      }
+    }
+  }]);
+
+  return AnimatedSpecial;
+}(_inferno.Component);
+
+exports.default = Modal;
+
+/*
+  props.bootstrapCls = {
+    hide: ,
+    active: 'modal fade',
+    show: 'modal show'
+  }
+*/
+
+module.exports = exports['default'];
+
+/***/ }),
+/* 40 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _inferno = __webpack_require__(0);
+
+var _inferno2 = _interopRequireDefault(_inferno);
+
+var _infernoCreateElement = __webpack_require__(2);
+
+var _classnames = __webpack_require__(1);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _utils = __webpack_require__(3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var defaultProps = {
+  tag: 'div'
+};
+
+var ModalBody = function ModalBody(props) {
+  var children = props.children,
+      className = props.className,
+      cssModule = props.cssModule,
+      Tag = props.tag,
+      attributes = _objectWithoutProperties(props, ['children', 'className', 'cssModule', 'tag']);
+
+  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'modal-body'), cssModule);
+
+  Object.assign(attributes, { className: classes });
+
+  return (0, _infernoCreateElement.createElement)(Tag, attributes, children);
+};
+
+ModalBody.defaultProps = defaultProps;
+
+exports.default = ModalBody;
+module.exports = exports['default'];
+
+/***/ }),
+/* 41 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _inferno = __webpack_require__(0);
+
+var _inferno2 = _interopRequireDefault(_inferno);
+
+var _infernoCreateElement = __webpack_require__(2);
+
+var _classnames = __webpack_require__(1);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _utils = __webpack_require__(3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var defaultProps = {
+  tag: 'div'
+};
+
+var ModalFooter = function ModalFooter(props) {
+  var children = props.children,
+      className = props.className,
+      cssModule = props.cssModule,
+      Tag = props.tag,
+      attributes = _objectWithoutProperties(props, ['children', 'className', 'cssModule', 'tag']);
+
+  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'modal-footer'), cssModule);
+
+  Object.assign(attributes, { className: classes });
+
+  return (0, _infernoCreateElement.createElement)(Tag, attributes, children);
+};
+
+ModalFooter.defaultProps = defaultProps;
+
+exports.default = ModalFooter;
+module.exports = exports['default'];
+
+/***/ }),
+/* 42 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _inferno = __webpack_require__(0);
+
+var _inferno2 = _interopRequireDefault(_inferno);
+
+var _infernoCreateElement = __webpack_require__(2);
+
+var _classnames = __webpack_require__(1);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _utils = __webpack_require__(3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var defaultProps = {
+  tag: 'h4',
+  wrapTag: 'div',
+  closeAriaLabel: 'Close'
+};
+
+var ModalHeader = function ModalHeader(props) {
+  var closeButton = void 0;
+
+  var className = props.className,
+      cssModule = props.cssModule,
+      children = props.children,
+      toggle = props.toggle,
+      Tag = props.tag,
+      WrapTag = props.wrapTag,
+      closeAriaLabel = props.closeAriaLabel,
+      attributes = _objectWithoutProperties(props, ['className', 'cssModule', 'children', 'toggle', 'tag', 'wrapTag', 'closeAriaLabel']);
+
+  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'modal-header'), cssModule);
+
+  if (toggle) {
+    closeButton = (0, _inferno.createVNode)(1, 'button', 'close', (0, _inferno.createVNode)(1, 'span', null, String.fromCharCode(215), 0, {
+      'aria-hidden': 'true'
+    }), 2, {
+      'type': 'button',
+      'onClick': toggle,
+      'aria-label': closeAriaLabel
+    });
+  }
+
+  var innerChildren = [(0, _infernoCreateElement.createElement)(Tag, { className: (0, _utils.mapToCssModules)('modal-title', cssModule) }, children), closeButton];
+
+  Object.assign(attributes, { className: classes });
+
+  return (0, _infernoCreateElement.createElement)(WrapTag, attributes, innerChildren);
+};
+
+ModalHeader.defaultProps = defaultProps;
+
+exports.default = ModalHeader;
+module.exports = exports['default'];
+
+/***/ }),
+/* 43 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _inferno = __webpack_require__(0);
+
+var _classnames = __webpack_require__(1);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _utils = __webpack_require__(3);
+
+var _Dropdown = __webpack_require__(9);
+
+var _Dropdown2 = _interopRequireDefault(_Dropdown);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var defaultProps = {
+  tag: 'li'
+};
+
+var NavDropdown = function NavDropdown(props) {
+  var className = props.className,
+      cssModule = props.cssModule,
+      Tag = props.tag,
+      attributes = _objectWithoutProperties(props, ['className', 'cssModule', 'tag']);
+
+  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'nav-item'), cssModule);
+
+  return (0, _inferno.normalizeProps)((0, _inferno.createComponentVNode)(2, _Dropdown2.default, _extends({}, attributes, {
+    'tag': Tag,
+    'className': classes
+  })));
+};
+
+NavDropdown.defaultProps = defaultProps;
+
+exports.default = NavDropdown;
+module.exports = exports['default'];
+
+/***/ }),
+/* 44 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _utils = __webpack_require__(3);
+
+var PopperTargetHelper = function PopperTargetHelper(props, context) {
+  context.popperManager.setTargetNode((0, _utils.getTarget)(props.target));
+  return null;
+};
+
+exports.default = PopperTargetHelper;
+module.exports = exports['default'];
+
+/***/ }),
+/* 45 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _inferno = __webpack_require__(0);
+
+var _inferno2 = _interopRequireDefault(_inferno);
+
+var _infernoCreateElement = __webpack_require__(2);
+
+var _classnames = __webpack_require__(1);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _utils = __webpack_require__(3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var defaultProps = {
+  tag: 'div'
+};
+
+var Row = function Row(props) {
+  var children = props.children,
+      className = props.className,
+      cssModule = props.cssModule,
+      noGutters = props.noGutters,
+      Tag = props.tag,
+      attributes = _objectWithoutProperties(props, ['children', 'className', 'cssModule', 'noGutters', 'tag']);
+
+  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, noGutters ? 'no-gutters' : null, 'row'), cssModule);
+
+  Object.assign(attributes, { className: classes });
+
+  return (0, _infernoCreateElement.createElement)(Tag, attributes, children);
+};
+
+Row.defaultProps = defaultProps;
+
+exports.default = Row;
+module.exports = exports['default'];
+
+/***/ }),
+/* 46 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.locationsAreEqual = exports.createLocation = undefined;
+
+var _resolvePathname = __webpack_require__(188);
+
+var _resolvePathname2 = _interopRequireDefault(_resolvePathname);
+
+var _valueEqual = __webpack_require__(189);
+
+var _valueEqual2 = _interopRequireDefault(_valueEqual);
+
+var _PathUtils = __webpack_require__(28);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _extends = Object.assign || function (target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i];for (var key in source) {
+      if (Object.prototype.hasOwnProperty.call(source, key)) {
+        target[key] = source[key];
+      }
+    }
+  }return target;
+};
+
+var createLocation = exports.createLocation = function createLocation(path, state, key, currentLocation) {
+  var location = void 0;
+  if (typeof path === 'string') {
+    // Two-arg form: push(path, state)
+    location = (0, _PathUtils.parsePath)(path);
+    location.state = state;
+  } else {
+    // One-arg form: push(location)
+    location = _extends({}, path);
+
+    if (location.pathname === undefined) location.pathname = '';
+
+    if (location.search) {
+      if (location.search.charAt(0) !== '?') location.search = '?' + location.search;
+    } else {
+      location.search = '';
+    }
+
+    if (location.hash) {
+      if (location.hash.charAt(0) !== '#') location.hash = '#' + location.hash;
+    } else {
+      location.hash = '';
+    }
+
+    if (state !== undefined && location.state === undefined) location.state = state;
+  }
+
+  try {
+    location.pathname = decodeURI(location.pathname);
+  } catch (e) {
+    if (e instanceof URIError) {
+      throw new URIError('Pathname "' + location.pathname + '" could not be decoded. ' + 'This is likely caused by an invalid percent-encoding.');
+    } else {
+      throw e;
+    }
+  }
+
+  if (key) location.key = key;
+
+  if (currentLocation) {
+    // Resolve incomplete/relative pathname relative to current location.
+    if (!location.pathname) {
+      location.pathname = currentLocation.pathname;
+    } else if (location.pathname.charAt(0) !== '/') {
+      location.pathname = (0, _resolvePathname2.default)(location.pathname, currentLocation.pathname);
+    }
+  } else {
+    // When there is no prior location and pathname is empty, set it to /
+    if (!location.pathname) {
+      location.pathname = '/';
+    }
+  }
+
+  return location;
+};
+
+var locationsAreEqual = exports.locationsAreEqual = function locationsAreEqual(a, b) {
+  return a.pathname === b.pathname && a.search === b.search && a.hash === b.hash && a.key === b.key && (0, _valueEqual2.default)(a.state, b.state);
+};
+
+/***/ }),
+/* 47 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * lodash 3.0.2 (Custom Build) <https://lodash.com/>
+ * Build: `lodash modern modularize exports="npm" -o ./`
+ * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+ * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+ * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+ * Available under MIT license <https://lodash.com/license>
+ */
+
+/**
+ * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
+ * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+ *
+ * @static
+ * @memberOf _
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+ * @example
+ *
+ * _.isObject({});
+ * // => true
+ *
+ * _.isObject([1, 2, 3]);
+ * // => true
+ *
+ * _.isObject(1);
+ * // => false
+ */
+function isObject(value) {
+  // Avoid a V8 JIT bug in Chrome 19-20.
+  // See https://code.google.com/p/v8/issues/detail?id=2291 for more details.
+  var type = typeof value === 'undefined' ? 'undefined' : _typeof(value);
+  return !!value && (type == 'object' || type == 'function');
+}
+
+module.exports = isObject;
+
+/***/ }),
+/* 48 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * lodash (Custom Build) <https://lodash.com/>
+ * Build: `lodash modularize exports="npm" -o ./`
+ * Copyright jQuery Foundation and other contributors <https://jquery.org/>
+ * Released under MIT license <https://lodash.com/license>
+ * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+ * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+ */
+
+/** Used as references for various `Number` constants. */
+var NAN = 0 / 0;
+
+/** `Object#toString` result references. */
+var symbolTag = '[object Symbol]';
+
+/** Used to match leading and trailing whitespace. */
+var reTrim = /^\s+|\s+$/g;
+
+/** Used to detect bad signed hexadecimal string values. */
+var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
+
+/** Used to detect binary string values. */
+var reIsBinary = /^0b[01]+$/i;
+
+/** Used to detect octal string values. */
+var reIsOctal = /^0o[0-7]+$/i;
+
+/** Built-in method references without a dependency on `root`. */
+var freeParseInt = parseInt;
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var objectToString = objectProto.toString;
+
+/**
+ * Checks if `value` is the
+ * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
+ * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+ * @example
+ *
+ * _.isObject({});
+ * // => true
+ *
+ * _.isObject([1, 2, 3]);
+ * // => true
+ *
+ * _.isObject(_.noop);
+ * // => true
+ *
+ * _.isObject(null);
+ * // => false
+ */
+function isObject(value) {
+  var type = typeof value === 'undefined' ? 'undefined' : _typeof(value);
+  return !!value && (type == 'object' || type == 'function');
+}
+
+/**
+ * Checks if `value` is object-like. A value is object-like if it's not `null`
+ * and has a `typeof` result of "object".
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+ * @example
+ *
+ * _.isObjectLike({});
+ * // => true
+ *
+ * _.isObjectLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isObjectLike(_.noop);
+ * // => false
+ *
+ * _.isObjectLike(null);
+ * // => false
+ */
+function isObjectLike(value) {
+  return !!value && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) == 'object';
+}
+
+/**
+ * Checks if `value` is classified as a `Symbol` primitive or object.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
+ * @example
+ *
+ * _.isSymbol(Symbol.iterator);
+ * // => true
+ *
+ * _.isSymbol('abc');
+ * // => false
+ */
+function isSymbol(value) {
+  return (typeof value === 'undefined' ? 'undefined' : _typeof(value)) == 'symbol' || isObjectLike(value) && objectToString.call(value) == symbolTag;
+}
+
+/**
+ * Converts `value` to a number.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to process.
+ * @returns {number} Returns the number.
+ * @example
+ *
+ * _.toNumber(3.2);
+ * // => 3.2
+ *
+ * _.toNumber(Number.MIN_VALUE);
+ * // => 5e-324
+ *
+ * _.toNumber(Infinity);
+ * // => Infinity
+ *
+ * _.toNumber('3.2');
+ * // => 3.2
+ */
+function toNumber(value) {
+  if (typeof value == 'number') {
+    return value;
+  }
+  if (isSymbol(value)) {
+    return NAN;
+  }
+  if (isObject(value)) {
+    var other = typeof value.valueOf == 'function' ? value.valueOf() : value;
+    value = isObject(other) ? other + '' : other;
+  }
+  if (typeof value != 'string') {
+    return value === 0 ? value : +value;
+  }
+  value = value.replace(reTrim, '');
+  var isBinary = reIsBinary.test(value);
+  return isBinary || reIsOctal.test(value) ? freeParseInt(value.slice(2), isBinary ? 2 : 8) : reIsBadHex.test(value) ? NAN : +value;
+}
+
+module.exports = toNumber;
+
+/***/ }),
+/* 49 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {/**
+ * Copyright 2014-2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ */
+
+
+
+/**
+ * Similar to invariant but only logs a warning if the condition is not met.
+ * This can be used to log issues in development environments in critical
+ * paths. Removing the logging code for production environments will keep the
+ * same logic and follow the same code paths.
+ */
+
+var warning = function warning() {};
+
+if (process.env.NODE_ENV !== 'production') {
+  warning = function warning(condition, format, args) {
+    var len = arguments.length;
+    args = new Array(len > 2 ? len - 2 : 0);
+    for (var key = 2; key < len; key++) {
+      args[key - 2] = arguments[key];
+    }
+    if (format === undefined) {
+      throw new Error('`warning(condition, format, ...args)` requires a warning ' + 'message argument');
+    }
+
+    if (format.length < 10 || /^[s\W]*$/.test(format)) {
+      throw new Error('The warning format should be able to uniquely identify this ' + 'warning. Please, use a more descriptive format than: ' + format);
+    }
+
+    if (!condition) {
+      var argIndex = 0;
+      var message = 'Warning: ' + format.replace(/%s/g, function () {
+        return args[argIndex++];
+      });
+      if (typeof console !== 'undefined') {
+        console.error(message);
+      }
+      try {
+        // This error was thrown as a convenience so that you can use this stack
+        // to find the callsite that caused this warning to fire.
+        throw new Error(message);
+      } catch (x) {}
+    }
+  };
+}
+
+module.exports = warning;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
+
+/***/ }),
+/* 50 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var g;
+
+// This works in non-strict mode
+g = function () {
+	return this;
+}();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1, eval)("this");
+} catch (e) {
+	// This works if the window reference is available
+	if ((typeof window === "undefined" ? "undefined" : _typeof(window)) === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+/***/ }),
+/* 51 */,
+/* 52 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _inferno = __webpack_require__(0);
+
+var _inferno2 = _interopRequireDefault(_inferno);
+
+var _infernoCreateElement = __webpack_require__(2);
+
+var _classnames = __webpack_require__(1);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _utils = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -9049,7 +8802,7 @@ exports.default = Alert;
 module.exports = exports['default'];
 
 /***/ }),
-/* 57 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9063,13 +8816,13 @@ var _inferno = __webpack_require__(0);
 
 var _inferno2 = _interopRequireDefault(_inferno);
 
-var _infernoCreateElement = __webpack_require__(3);
+var _infernoCreateElement = __webpack_require__(2);
 
 var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -9099,7 +8852,7 @@ exports.default = Breadcrumb;
 module.exports = exports['default'];
 
 /***/ }),
-/* 58 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9113,13 +8866,13 @@ var _inferno = __webpack_require__(0);
 
 var _inferno2 = _interopRequireDefault(_inferno);
 
-var _infernoCreateElement = __webpack_require__(3);
+var _infernoCreateElement = __webpack_require__(2);
 
 var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -9150,7 +8903,7 @@ exports.default = BreadcrumbItem;
 module.exports = exports['default'];
 
 /***/ }),
-/* 59 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9164,13 +8917,13 @@ var _inferno = __webpack_require__(0);
 
 var _inferno2 = _interopRequireDefault(_inferno);
 
-var _infernoCreateElement = __webpack_require__(3);
+var _infernoCreateElement = __webpack_require__(2);
 
 var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -9201,7 +8954,7 @@ exports.default = ButtonToolbar;
 module.exports = exports['default'];
 
 /***/ }),
-/* 60 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9215,13 +8968,13 @@ var _inferno = __webpack_require__(0);
 
 var _inferno2 = _interopRequireDefault(_inferno);
 
-var _infernoCreateElement = __webpack_require__(3);
+var _infernoCreateElement = __webpack_require__(2);
 
 var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -9251,7 +9004,7 @@ exports.default = CardFooter;
 module.exports = exports['default'];
 
 /***/ }),
-/* 61 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9265,13 +9018,13 @@ var _inferno = __webpack_require__(0);
 
 var _inferno2 = _interopRequireDefault(_inferno);
 
-var _infernoCreateElement = __webpack_require__(3);
+var _infernoCreateElement = __webpack_require__(2);
 
 var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -9301,7 +9054,7 @@ exports.default = CardHeader;
 module.exports = exports['default'];
 
 /***/ }),
-/* 62 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9315,13 +9068,13 @@ var _inferno = __webpack_require__(0);
 
 var _inferno2 = _interopRequireDefault(_inferno);
 
-var _infernoCreateElement = __webpack_require__(3);
+var _infernoCreateElement = __webpack_require__(2);
 
 var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -9361,7 +9114,7 @@ exports.default = CardImg;
 module.exports = exports['default'];
 
 /***/ }),
-/* 63 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9375,13 +9128,13 @@ var _inferno = __webpack_require__(0);
 
 var _inferno2 = _interopRequireDefault(_inferno);
 
-var _infernoCreateElement = __webpack_require__(3);
+var _infernoCreateElement = __webpack_require__(2);
 
 var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -9415,7 +9168,7 @@ exports.default = CardLink;
 module.exports = exports['default'];
 
 /***/ }),
-/* 64 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9429,13 +9182,13 @@ var _inferno = __webpack_require__(0);
 
 var _inferno2 = _interopRequireDefault(_inferno);
 
-var _infernoCreateElement = __webpack_require__(3);
+var _infernoCreateElement = __webpack_require__(2);
 
 var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -9465,7 +9218,7 @@ exports.default = CardSubtitle;
 module.exports = exports['default'];
 
 /***/ }),
-/* 65 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9481,15 +9234,15 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _inferno = __webpack_require__(0);
 
-var _infernoCreateElement = __webpack_require__(3);
+var _infernoCreateElement = __webpack_require__(2);
 
 var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
-var _utils2 = __webpack_require__(33);
+var _utils2 = __webpack_require__(17);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -9514,7 +9267,7 @@ function _animateCollapseOnRemove(node, animCls, callback) {
   (0, _utils2.setDimensions)(clone, width, height);
   (0, _utils2.addClassName)(clone, 'collapse show');
   (0, _utils2.setDisplay)(node, 'none !important');
-  node.insertAdjacentElement('beforebegin', clone);
+  node.parentNode.appendChild(clone);
 
   (0, _utils2.addClassName)(clone, 'collapsing');
 
@@ -9636,7 +9389,7 @@ exports.default = Collapse;
 module.exports = exports['default'];
 
 /***/ }),
-/* 66 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9650,9 +9403,9 @@ var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _infernoCreateElement = __webpack_require__(3);
+var _infernoCreateElement = __webpack_require__(2);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -9683,7 +9436,7 @@ exports.default = Container;
 module.exports = exports['default'];
 
 /***/ }),
-/* 67 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9699,7 +9452,7 @@ var _inferno = __webpack_require__(0);
 
 var _inferno2 = _interopRequireDefault(_inferno);
 
-var _Dropdown = __webpack_require__(8);
+var _Dropdown = __webpack_require__(9);
 
 var _Dropdown2 = _interopRequireDefault(_Dropdown);
 
@@ -9713,7 +9466,7 @@ exports.default = InputGroupButtonDropdown;
 module.exports = exports['default'];
 
 /***/ }),
-/* 68 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9727,63 +9480,13 @@ var _inferno = __webpack_require__(0);
 
 var _inferno2 = _interopRequireDefault(_inferno);
 
-var _infernoCreateElement = __webpack_require__(3);
+var _infernoCreateElement = __webpack_require__(2);
 
 var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _utils = __webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-var defaultProps = {
-  tag: 'span'
-};
-
-var InputGroupText = function InputGroupText(props) {
-  var children = props.children,
-      className = props.className,
-      cssModule = props.cssModule,
-      Tag = props.tag,
-      attributes = _objectWithoutProperties(props, ['children', 'className', 'cssModule', 'tag']);
-
-  var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, 'input-group-text'), cssModule);
-
-  Object.assign(attributes, { className: classes });
-
-  return (0, _infernoCreateElement.createElement)(Tag, attributes, children);
-};
-
-InputGroupText.defaultProps = defaultProps;
-
-exports.default = InputGroupText;
-module.exports = exports['default'];
-
-/***/ }),
-/* 69 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _inferno = __webpack_require__(0);
-
-var _inferno2 = _interopRequireDefault(_inferno);
-
-var _infernoCreateElement = __webpack_require__(3);
-
-var _classnames = __webpack_require__(1);
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -9814,7 +9517,7 @@ exports.default = Jumbotron;
 module.exports = exports['default'];
 
 /***/ }),
-/* 70 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9828,13 +9531,13 @@ var _inferno = __webpack_require__(0);
 
 var _inferno2 = _interopRequireDefault(_inferno);
 
-var _infernoCreateElement = __webpack_require__(3);
+var _infernoCreateElement = __webpack_require__(2);
 
 var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -9865,7 +9568,7 @@ exports.default = ListGroup;
 module.exports = exports['default'];
 
 /***/ }),
-/* 71 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9879,13 +9582,13 @@ var _inferno = __webpack_require__(0);
 
 var _inferno2 = _interopRequireDefault(_inferno);
 
-var _infernoCreateElement = __webpack_require__(3);
+var _infernoCreateElement = __webpack_require__(2);
 
 var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -9927,7 +9630,7 @@ exports.default = ListGroupItem;
 module.exports = exports['default'];
 
 /***/ }),
-/* 72 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9941,13 +9644,13 @@ var _inferno = __webpack_require__(0);
 
 var _inferno2 = _interopRequireDefault(_inferno);
 
-var _infernoCreateElement = __webpack_require__(3);
+var _infernoCreateElement = __webpack_require__(2);
 
 var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -9976,7 +9679,7 @@ exports.default = ListGroupItemHeading;
 module.exports = exports['default'];
 
 /***/ }),
-/* 73 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9990,13 +9693,13 @@ var _inferno = __webpack_require__(0);
 
 var _inferno2 = _interopRequireDefault(_inferno);
 
-var _infernoCreateElement = __webpack_require__(3);
+var _infernoCreateElement = __webpack_require__(2);
 
 var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10025,7 +9728,7 @@ exports.default = ListGroupItemText;
 module.exports = exports['default'];
 
 /***/ }),
-/* 74 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10040,9 +9743,9 @@ exports.Animated = Animated;
 
 var _inferno = __webpack_require__(0);
 
-var _infernoCreateElement = __webpack_require__(3);
+var _infernoCreateElement = __webpack_require__(2);
 
-var _utils = __webpack_require__(33);
+var _utils = __webpack_require__(17);
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
@@ -10052,7 +9755,7 @@ function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in ob
 function animateModalOnRemove(node, callback) {
   var clone = node.cloneNode(true);
   (0, _utils.setDisplay)(node, 'none !important');
-  node.insertAdjacentElement('beforebegin', clone);
+  node.parentNode.appendChild(clone);
 
   (0, _utils.registerTransitionListener)(clone, function () {
     // *** Cleanup ***
@@ -10088,7 +9791,7 @@ function Animated(props) {
 }
 
 /***/ }),
-/* 75 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10102,9 +9805,9 @@ var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _infernoCreateElement = __webpack_require__(3);
+var _infernoCreateElement = __webpack_require__(2);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10137,7 +9840,7 @@ exports.default = Pagination;
 module.exports = exports['default'];
 
 /***/ }),
-/* 76 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10151,9 +9854,9 @@ var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _infernoCreateElement = __webpack_require__(3);
+var _infernoCreateElement = __webpack_require__(2);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10188,7 +9891,7 @@ exports.default = PaginationItem;
 module.exports = exports['default'];
 
 /***/ }),
-/* 77 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10204,9 +9907,9 @@ var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _infernoCreateElement = __webpack_require__(3);
+var _infernoCreateElement = __webpack_require__(2);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10262,7 +9965,7 @@ exports.default = PaginationLink;
 module.exports = exports['default'];
 
 /***/ }),
-/* 78 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10284,15 +9987,15 @@ var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _infernoPopper = __webpack_require__(9);
+var _infernoPopper = __webpack_require__(6);
 
-var _PopperContent = __webpack_require__(81);
+var _PopperContent = __webpack_require__(27);
 
 var _PopperContent2 = _interopRequireDefault(_PopperContent);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
-var _infernoShared = __webpack_require__(21);
+var _infernoShared = __webpack_require__(8);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10467,7 +10170,7 @@ exports.default = Popover;
 module.exports = exports['default'];
 
 /***/ }),
-/* 79 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10481,13 +10184,13 @@ var _inferno = __webpack_require__(0);
 
 var _inferno2 = _interopRequireDefault(_inferno);
 
-var _infernoCreateElement = __webpack_require__(3);
+var _infernoCreateElement = __webpack_require__(2);
 
 var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10517,7 +10220,7 @@ exports.default = PopoverBody;
 module.exports = exports['default'];
 
 /***/ }),
-/* 80 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10531,13 +10234,13 @@ var _inferno = __webpack_require__(0);
 
 var _inferno2 = _interopRequireDefault(_inferno);
 
-var _infernoCreateElement = __webpack_require__(3);
+var _infernoCreateElement = __webpack_require__(2);
 
 var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10567,156 +10270,7 @@ exports.default = PopoverHeader;
 module.exports = exports['default'];
 
 /***/ }),
-/* 81 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _inferno = __webpack_require__(0);
-
-var _classnames = __webpack_require__(1);
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _infernoPopper = __webpack_require__(9);
-
-var _PopperTargetHelper = __webpack_require__(82);
-
-var _PopperTargetHelper2 = _interopRequireDefault(_PopperTargetHelper);
-
-var _utils = __webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var defaultProps = {
-  placement: 'auto',
-  isOpen: false,
-  offset: 0,
-  fallbackPlacement: 'flip',
-  wrapTag: 'span',
-  flip: true
-};
-
-var PopperContent = function (_Component) {
-  _inherits(PopperContent, _Component);
-
-  function PopperContent(props) {
-    _classCallCheck(this, PopperContent);
-
-    var _this = _possibleConstructorReturn(this, (PopperContent.__proto__ || Object.getPrototypeOf(PopperContent)).call(this, props));
-
-    _this.handlePlacementChange = _this.handlePlacementChange.bind(_this);
-    _this.state = {};
-    return _this;
-  }
-
-  _createClass(PopperContent, [{
-    key: 'handlePlacementChange',
-    value: function handlePlacementChange(data) {
-      if (this.state.placement !== data.placement) {
-        this.setState({ placement: data.placement });
-      }
-      return data;
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          cssModule = _props.cssModule,
-          children = _props.children,
-          isOpen = _props.isOpen,
-          flip = _props.flip,
-          target = _props.target,
-          offset = _props.offset,
-          fallbackPlacement = _props.fallbackPlacement,
-          placementPrefix = _props.placementPrefix,
-          className = _props.className,
-          wrapTag = _props.wrapTag,
-          wrapClassName = _props.wrapClassName,
-          tag = _props.tag,
-          attrs = _objectWithoutProperties(_props, ['cssModule', 'children', 'isOpen', 'flip', 'target', 'offset', 'fallbackPlacement', 'placementPrefix', 'className', 'wrapTag', 'wrapClassName', 'tag']);
-
-      var arrowClassName = (0, _utils.mapToCssModules)('arrow', cssModule);
-      var placement = (this.state.placement || attrs.placement).split('-')[0];
-      var managerClass = (0, _utils.mapToCssModules)(wrapClassName, this.props.cssModule);
-      var popperClassName = (0, _utils.mapToCssModules)((0, _classnames2.default)(className, placementPrefix ? placementPrefix + '-' + placement : placement), this.props.cssModule);
-
-      var modifiers = {
-        offset: { offset: offset },
-        flip: { enabled: flip, behavior: fallbackPlacement },
-        update: {
-          enabled: true,
-          order: 950,
-          fn: this.handlePlacementChange
-        }
-      };
-
-      return (0, _inferno.createComponentVNode)(2, _infernoPopper.Manager, {
-        'tag': wrapTag,
-        'className': managerClass,
-        children: [(0, _inferno.createComponentVNode)(2, _PopperTargetHelper2.default, {
-          'target': target
-        }), isOpen && (0, _inferno.normalizeProps)((0, _inferno.createComponentVNode)(2, _infernoPopper.Popper, _extends({
-          'modifiers': modifiers
-        }, attrs, {
-          'component': tag,
-          'className': popperClassName,
-          children: [children, (0, _inferno.createComponentVNode)(2, _infernoPopper.Arrow, {
-            'className': arrowClassName
-          })]
-        })))]
-      });
-    }
-  }]);
-
-  return PopperContent;
-}(_inferno.Component);
-
-PopperContent.defaultProps = defaultProps;
-
-exports.default = PopperContent;
-module.exports = exports['default'];
-
-/***/ }),
-/* 82 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _utils = __webpack_require__(2);
-
-var PopperTargetHelper = function PopperTargetHelper(props, context) {
-  context.popperManager.setTargetNode((0, _utils.getTarget)(props.target));
-  return null;
-};
-
-exports.default = PopperTargetHelper;
-module.exports = exports['default'];
-
-/***/ }),
-/* 83 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10730,17 +10284,17 @@ var _inferno = __webpack_require__(0);
 
 var _inferno2 = _interopRequireDefault(_inferno);
 
-var _infernoCreateElement = __webpack_require__(3);
+var _infernoCreateElement = __webpack_require__(2);
 
 var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _lodash = __webpack_require__(98);
+var _lodash = __webpack_require__(48);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10796,7 +10350,7 @@ exports.default = Progress;
 module.exports = exports['default'];
 
 /***/ }),
-/* 84 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10810,13 +10364,13 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _inferno = __webpack_require__(0);
 
-var _infernoCreateElement = __webpack_require__(3);
+var _infernoCreateElement = __webpack_require__(2);
 
 var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10973,7 +10527,7 @@ TabContent.defaultProps = defaultProps;
 module.exports = exports['default'];
 
 /***/ }),
-/* 85 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10988,13 +10542,13 @@ var _inferno = __webpack_require__(0);
 
 var _inferno2 = _interopRequireDefault(_inferno);
 
-var _infernoCreateElement = __webpack_require__(3);
+var _infernoCreateElement = __webpack_require__(2);
 
 var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -11022,7 +10576,827 @@ TabPane.defaultProps = defaultProps;
 module.exports = exports['default'];
 
 /***/ }),
-/* 86 */
+/* 79 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _warning = __webpack_require__(49);
+
+var _warning2 = _interopRequireDefault(_warning);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var createTransitionManager = function createTransitionManager() {
+  var prompt = null;
+
+  var setPrompt = function setPrompt(nextPrompt) {
+    (0, _warning2.default)(prompt == null, 'A history supports only one prompt at a time');
+
+    prompt = nextPrompt;
+
+    return function () {
+      if (prompt === nextPrompt) prompt = null;
+    };
+  };
+
+  var confirmTransitionTo = function confirmTransitionTo(location, action, getUserConfirmation, callback) {
+    // TODO: If another transition starts while we're still confirming
+    // the previous one, we may end up in a weird state. Figure out the
+    // best way to handle this.
+    if (prompt != null) {
+      var result = typeof prompt === 'function' ? prompt(location, action) : prompt;
+
+      if (typeof result === 'string') {
+        if (typeof getUserConfirmation === 'function') {
+          getUserConfirmation(result, callback);
+        } else {
+          (0, _warning2.default)(false, 'A history needs a getUserConfirmation function in order to use a prompt message');
+
+          callback(true);
+        }
+      } else {
+        // Return false from a transition hook to cancel the transition.
+        callback(result !== false);
+      }
+    } else {
+      callback(true);
+    }
+  };
+
+  var listeners = [];
+
+  var appendListener = function appendListener(fn) {
+    var isActive = true;
+
+    var listener = function listener() {
+      if (isActive) fn.apply(undefined, arguments);
+    };
+
+    listeners.push(listener);
+
+    return function () {
+      isActive = false;
+      listeners = listeners.filter(function (item) {
+        return item !== listener;
+      });
+    };
+  };
+
+  var notifyListeners = function notifyListeners() {
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    listeners.forEach(function (listener) {
+      return listener.apply(undefined, args);
+    });
+  };
+
+  return {
+    setPrompt: setPrompt,
+    confirmTransitionTo: confirmTransitionTo,
+    appendListener: appendListener,
+    notifyListeners: notifyListeners
+  };
+};
+
+exports.default = createTransitionManager;
+module.exports = exports['default'];
+
+/***/ }),
+/* 80 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i];for (var key in source) {
+      if (Object.prototype.hasOwnProperty.call(source, key)) {
+        target[key] = source[key];
+      }
+    }
+  }return target;
+};
+
+var _inferno = __webpack_require__(0);
+
+var _infernoCreateElement = __webpack_require__(2);
+
+function _objectWithoutProperties(obj, keys) {
+  var target = {};for (var i in obj) {
+    if (keys.indexOf(i) >= 0) continue;if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;target[i] = obj[i];
+  }return target;
+}
+
+var Arrow = function Arrow(props, context) {
+  var _props$component = props.component,
+      component = _props$component === undefined ? 'span' : _props$component,
+      innerRef = props.innerRef,
+      children = props.children,
+      restProps = _objectWithoutProperties(props, ['component', 'innerRef', 'children']);
+
+  var popper = context.popper;
+
+  var arrowRef = function arrowRef(node) {
+    popper.setArrowNode(node);
+    if (typeof innerRef === 'function') {
+      innerRef(node);
+    }
+  };
+  var arrowStyle = popper.getArrowStyle();
+
+  if (typeof children === 'function') {
+    var arrowProps = {
+      ref: arrowRef,
+      style: arrowStyle
+    };
+    return children({ arrowProps: arrowProps, restProps: restProps });
+  }
+
+  var componentProps = _extends({}, restProps, {
+    style: _extends({}, arrowStyle, restProps.style)
+  });
+
+  if (typeof component === 'string') {
+    componentProps.ref = arrowRef;
+  } else {
+    componentProps.innerRef = arrowRef;
+  }
+
+  return (0, _infernoCreateElement.createElement)(component, componentProps, children);
+};
+
+exports.default = Arrow;
+module.exports = exports['default'];
+//# sourceMappingURL=Arrow.js.map
+
+/***/ }),
+/* 81 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+  };
+}();
+
+var _inferno = __webpack_require__(0);
+
+var _infernoCreateElement = __webpack_require__(2);
+
+function _objectWithoutProperties(obj, keys) {
+  var target = {};for (var i in obj) {
+    if (keys.indexOf(i) >= 0) continue;if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;target[i] = obj[i];
+  }return target;
+}
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+}
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+}
+
+var Manager = function (_Component) {
+  _inherits(Manager, _Component);
+
+  function Manager(props) {
+    _classCallCheck(this, Manager);
+
+    var _this = _possibleConstructorReturn(this, (Manager.__proto__ || Object.getPrototypeOf(Manager)).call(this, props));
+
+    _this._setTargetNode = function (node) {
+      _this._targetNode = node;
+    };
+
+    _this._getTargetNode = function () {
+      return _this._targetNode;
+    };
+    return _this;
+  }
+
+  _createClass(Manager, [{
+    key: 'getChildContext',
+    value: function getChildContext() {
+      return {
+        popperManager: {
+          setTargetNode: this._setTargetNode,
+          getTargetNode: this._getTargetNode
+        }
+      };
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          Tag = _props.tag,
+          children = _props.children,
+          restProps = _objectWithoutProperties(_props, ['tag', 'children']);
+
+      if (Tag !== false) {
+        return (0, _infernoCreateElement.createElement)(Tag || 'div', restProps, children);
+      } else {
+        return children;
+      }
+    }
+  }]);
+
+  return Manager;
+}(_inferno.Component);
+
+exports.default = Manager;
+module.exports = exports['default'];
+//# sourceMappingURL=Manager.js.map
+
+/***/ }),
+/* 82 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i];for (var key in source) {
+      if (Object.prototype.hasOwnProperty.call(source, key)) {
+        target[key] = source[key];
+      }
+    }
+  }return target;
+};
+
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+  };
+}();
+
+var _inferno = __webpack_require__(0);
+
+var _infernoCreateElement = __webpack_require__(2);
+
+var _popper = __webpack_require__(29);
+
+var _popper2 = _interopRequireDefault(_popper);
+
+var _isEqualShallow = __webpack_require__(86);
+
+var _isEqualShallow2 = _interopRequireDefault(_isEqualShallow);
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
+  } else {
+    obj[key] = value;
+  }return obj;
+}
+
+function _objectWithoutProperties(obj, keys) {
+  var target = {};for (var i in obj) {
+    if (keys.indexOf(i) >= 0) continue;if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;target[i] = obj[i];
+  }return target;
+}
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+}
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+}
+
+var noop = function noop() {
+  return null;
+};
+
+var Popper = function (_Component) {
+  _inherits(Popper, _Component);
+
+  function Popper(props) {
+    _classCallCheck(this, Popper);
+
+    var _this = _possibleConstructorReturn(this, (Popper.__proto__ || Object.getPrototypeOf(Popper)).call(this, props));
+
+    _this.state = {};
+
+    _this._setArrowNode = function (node) {
+      _this._arrowNode = node;
+    };
+
+    _this._getTargetNode = function () {
+      return _this.context.popperManager.getTargetNode();
+    };
+
+    _this._updateStateModifier = {
+      enabled: true,
+      order: 900,
+      fn: function fn(data) {
+        if (_this.state.data && !(0, _isEqualShallow2.default)(data.offsets, _this.state.data.offsets) || !_this.state.data) {
+          _this.setState({ data: data });
+        }
+        return data;
+      }
+    };
+    return _this;
+  }
+
+  _createClass(Popper, [{
+    key: 'getChildContext',
+    value: function getChildContext() {
+      return {
+        popper: {
+          setArrowNode: this._setArrowNode.bind(this),
+          getArrowStyle: this._getArrowStyle.bind(this)
+        }
+      };
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this._updatePopper();
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(lastProps) {
+      if (lastProps.placement !== this.props.placement || lastProps.eventsEnabled !== this.props.eventsEnabled) {
+        this._updatePopper();
+      }
+
+      if (this._popper) {
+        this._popper.scheduleUpdate();
+      }
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this._destroyPopper();
+    }
+  }, {
+    key: '_updatePopper',
+    value: function _updatePopper() {
+      this._destroyPopper();
+      if (this._node) {
+        this._createPopper();
+      }
+    }
+  }, {
+    key: '_createPopper',
+    value: function _createPopper() {
+      var _props = this.props,
+          placement = _props.placement,
+          eventsEnabled = _props.eventsEnabled;
+
+      var modifiers = _extends({}, this.props.modifiers, {
+        applyStyle: { enabled: false },
+        updateState: this._updateStateModifier
+      });
+
+      if (this._arrowNode) {
+        modifiers.arrow = {
+          element: this._arrowNode
+        };
+      }
+
+      this._popper = new _popper2.default(this._getTargetNode(), this._node, {
+        placement: placement,
+        eventsEnabled: eventsEnabled,
+        modifiers: modifiers
+      });
+
+      // schedule an update to make sure everything gets positioned correct
+      // after being instantiated
+      this._popper.scheduleUpdate();
+    }
+  }, {
+    key: '_destroyPopper',
+    value: function _destroyPopper() {
+      if (this._popper) {
+        this._popper.destroy();
+      }
+    }
+  }, {
+    key: '_getPopperStyle',
+    value: function _getPopperStyle() {
+      var data = this.state.data;
+
+      // If Popper isn't instantiated, hide the popperElement
+      // to avoid flash of unstyled content
+
+      if (!this._popper || !data) {
+        return {
+          position: 'absolute',
+          pointerEvents: 'none',
+          opacity: 0
+        };
+      }
+
+      var _data$offsets$popper = data.offsets.popper,
+          top = _data$offsets$popper.top,
+          left = _data$offsets$popper.left,
+          position = _data$offsets$popper.position;
+
+      return _extends({
+        position: position
+      }, data.styles);
+    }
+  }, {
+    key: '_getPopperPlacement',
+    value: function _getPopperPlacement() {
+      return !!this.state.data ? this.state.data.placement : undefined;
+    }
+  }, {
+    key: '_getArrowStyle',
+    value: function _getArrowStyle() {
+      if (!this.state.data || !this.state.data.offsets.arrow) {
+        return {};
+      } else {
+        var _state$data$offsets$a = this.state.data.offsets.arrow,
+            top = _state$data$offsets$a.top,
+            left = _state$data$offsets$a.left;
+
+        return { top: top, left: left };
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var _props2 = this.props,
+          component = _props2.component,
+          innerRef = _props2.innerRef,
+          placement = _props2.placement,
+          eventsEnabled = _props2.eventsEnabled,
+          modifiers = _props2.modifiers,
+          children = _props2.children,
+          restProps = _objectWithoutProperties(_props2, ['component', 'innerRef', 'placement', 'eventsEnabled', 'modifiers', 'children']);
+
+      // Default props
+
+
+      component = component || 'div';
+      placement = placement || 'bottom';
+      eventsEnabled === undefined ? true : eventsEnabled;
+      modifiers = modifiers || {};
+
+      var popperRef = function popperRef(node) {
+        _this2._node = node;
+        if (typeof innerRef === 'function') {
+          innerRef(node);
+        }
+      };
+      var popperStyle = this._getPopperStyle();
+      var popperPlacement = this._getPopperPlacement();
+
+      if (typeof children === 'function') {
+        var popperProps = _defineProperty({
+          ref: popperRef,
+          style: popperStyle
+        }, 'data-placement', popperPlacement);
+        return children({
+          popperProps: popperProps,
+          restProps: restProps,
+          scheduleUpdate: this._popper && this._popper.scheduleUpdate
+        });
+      }
+
+      var componentProps = _extends({}, restProps, {
+        style: _extends({}, restProps.style, popperStyle),
+        'data-placement': popperPlacement
+      });
+
+      if (typeof component === 'string') {
+        componentProps.ref = popperRef;
+      } else {
+        componentProps.innerRef = popperRef;
+      }
+
+      return (0, _infernoCreateElement.createElement)(component, componentProps, children);
+    }
+  }]);
+
+  return Popper;
+}(_inferno.Component);
+
+exports.default = Popper;
+module.exports = exports['default'];
+//# sourceMappingURL=Popper.js.map
+
+/***/ }),
+/* 83 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i];for (var key in source) {
+      if (Object.prototype.hasOwnProperty.call(source, key)) {
+        target[key] = source[key];
+      }
+    }
+  }return target;
+};
+
+var _inferno = __webpack_require__(0);
+
+var _infernoCreateElement = __webpack_require__(2);
+
+function _objectWithoutProperties(obj, keys) {
+  var target = {};for (var i in obj) {
+    if (keys.indexOf(i) >= 0) continue;if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;target[i] = obj[i];
+  }return target;
+}
+
+var Target = function Target(props, context) {
+  var _props$component = props.component,
+      component = _props$component === undefined ? 'div' : _props$component,
+      innerRef = props.innerRef,
+      children = props.children,
+      restProps = _objectWithoutProperties(props, ['component', 'innerRef', 'children']);
+
+  var popperManager = context.popperManager;
+
+  var targetRef = function targetRef(node) {
+    popperManager.setTargetNode(node);
+    if (typeof innerRef === 'function') {
+      innerRef(node);
+    }
+  };
+
+  if (typeof children === 'function') {
+    var targetProps = { ref: targetRef };
+    return children({ targetProps: targetProps, restProps: restProps });
+  }
+
+  var componentProps = _extends({}, restProps);
+
+  if (typeof component === 'string') {
+    componentProps.ref = targetRef;
+  } else {
+    componentProps.innerRef = targetRef;
+  }
+
+  return (0, _infernoCreateElement.createElement)(component, componentProps, children);
+};
+
+exports.default = Target;
+module.exports = exports['default'];
+//# sourceMappingURL=Target.js.map
+
+/***/ }),
+/* 84 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+  };
+}();
+
+var _inferno = __webpack_require__(0);
+
+var _infernoCreateElement = __webpack_require__(2);
+
+var _compat = __webpack_require__(85);
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+}
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+}
+
+var noop = function noop() {
+  return null;
+};
+
+var Travel = function (_Component) {
+  _inherits(Travel, _Component);
+
+  function Travel(props) {
+    _classCallCheck(this, Travel);
+
+    var _this = _possibleConstructorReturn(this, (Travel.__proto__ || Object.getPrototypeOf(Travel)).call(this, props));
+
+    _this.state = {
+      portalNode: null,
+      portalInstance: null
+    };
+    return _this;
+  }
+
+  _createClass(Travel, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this._setupPortal();
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate() {
+      this._updatePortal();
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this._destroyPortal();
+    }
+  }, {
+    key: '_getRenderToNode',
+    value: function _getRenderToNode() {
+      var renderTo = this.props.renderTo;
+
+      if (typeof renderTo === 'string') {
+        return document.querySelector(renderTo);
+      } else {
+        return renderTo || document.body;
+      }
+    }
+  }, {
+    key: '_getComponent',
+    value: function _getComponent() {
+      if (this.props.useArray) {
+        return _compat.Children.toArray(this.props.children)[1];
+      } else {
+        return _compat.Children.only(this.props.children);
+      }
+    }
+  }, {
+    key: '_setupPortal',
+    value: function _setupPortal() {
+      var _props = this.props,
+          renderTag = _props.renderTag,
+          onMount = _props.onMount;
+
+      // Default props
+
+      renderTag = renderTag || 'div';
+      onMount = onMount || noop;
+
+      var renderToNode = this._getRenderToNode();
+
+      // create a node that we can stick our component in
+      var portalNode = document.createElement(renderTag);
+
+      // append node to the render node
+      renderToNode.appendChild(portalNode);
+
+      // store the instance passed back to allow work to be done on it
+      var portalInstance = typeof onMount === 'function' ? onMount(portalNode) : portalNode;
+
+      this.setState({
+        portalNode: portalNode,
+        portalInstance: portalInstance
+      });
+    }
+  }, {
+    key: '_updatePortal',
+    value: function _updatePortal() {
+      var _this2 = this;
+
+      var _props2 = this.props,
+          id = _props2.id,
+          className = _props2.className,
+          style = _props2.style,
+          onUpdate = _props2.onUpdate;
+
+      // Default props
+
+      onUpdate = onUpdate || noop;
+
+      if (id) {
+        this._portalNode.id = id;
+      }
+
+      if (className) {
+        this._portalNode.className = className;
+      }
+
+      if (style) {
+        Object.keys(style).forEach(function (key) {
+          _this2._portalNode.style[key] = style[key];
+        });
+      }
+
+      if (typeof onUpdate === 'function') {
+        this._portalInstance = onUpdate(this._portalInstance);
+      }
+    }
+  }, {
+    key: '_destroyPortal',
+    value: function _destroyPortal() {
+      this.state.portalNode.parentNode.removeChild(this._portalNode);
+      this.setState({
+        portalNode: null,
+        portalInstance: null
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+
+      return this.state.portalNode ? (0, _inferno.createPortal)(this._getComponent(), this.state.portalNode) : null;
+    }
+  }]);
+
+  return Travel;
+}(_inferno.Component);
+
+exports.default = Travel;
+module.exports = exports['default'];
+//# sourceMappingURL=Travel.js.map
+
+/***/ }),
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11033,108 +11407,16 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Children = undefined;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-exports.unmountComponentAtNode = unmountComponentAtNode;
-exports.unstable_renderSubtreeIntoContainer = unstable_renderSubtreeIntoContainer;
-
-var _inferno = __webpack_require__(0);
-
-var _infernoShared = __webpack_require__(21);
-
-var _infernoVnodeFlags = __webpack_require__(137);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+var _infernoShared = __webpack_require__(8);
 
 /* COMPATIBILITY */
-// TODO: Rewrite implementation for Inferno
-
-function unmountComponentAtNode(container) {
-  (0, _inferno.render)(null, container);
-  return true;
-}
-
-function unstable_renderSubtreeIntoContainer(parentComponent, vNode, container, callback) {
-  var wrapperVNode = (0, _inferno.createComponentVNode)(_infernoVnodeFlags.VNodeFlags.ComponentClass, WrapperComponent, {
-    children: vNode,
-    context: parentComponent.context
-  });
-  (0, _inferno.render)(wrapperVNode, container);
-  var component = vNode.children;
-
-  if (callback) {
-    // callback gets the component as context, no other argument.
-    callback.call(component);
-  }
-  return component;
-}
-
-var WrapperComponent = function (_Component) {
-  _inherits(WrapperComponent, _Component);
-
-  function WrapperComponent() {
-    _classCallCheck(this, WrapperComponent);
-
-    return _possibleConstructorReturn(this, (WrapperComponent.__proto__ || Object.getPrototypeOf(WrapperComponent)).apply(this, arguments));
-  }
-
-  _createClass(WrapperComponent, [{
-    key: "getChildContext",
-    value: function getChildContext() {
-      // tslint:disable-next-line
-      return this.props.context;
-    }
-  }, {
-    key: "render",
-    value: function render(props) {
-      return props.children;
-    }
-  }]);
-
-  return WrapperComponent;
-}(_inferno.Component);
-
 var ARR = [];
 
 var Children = exports.Children = {
-  /*
-  map(children: Array<InfernoChildren | any>, fn: IterateChildrenFn, ctx: any): any[] {
-    if (isNullOrUndef(children)) {
-      return children;
-    }
-    children = Children.toArray(children);
-    if (ctx && ctx !== children) {
-      fn = fn.bind(ctx);
-    }
-    return children.map(fn);
-  },
-  forEach(children: Array<InfernoChildren | any>, fn: IterateChildrenFn, ctx?: any): void {
-    if (isNullOrUndef(children)) {
-      return;
-    }
-    children = Children.toArray(children);
-    if (ctx && ctx !== children) {
-      fn = fn.bind(ctx);
-    }
-    for (let i = 0, len = children.length; i < len; i++) {
-      const child = isInvalid(children[i]) ? null : children[i];
-       fn(child, i, children);
-    }
-  },
-  count(children: Array<InfernoChildren | any>): number {
-    children = Children.toArray(children);
-    return children.length;
-  },
-  */
-
   only: function only(children) {
     children = Children.toArray(children);
     if (children.length !== 1) {
-      throw new Error('Children.only() expects only one child.');
+      throw new Error("Children.only() expects only one child.");
     }
     return children[0];
   },
@@ -11157,9 +11439,770 @@ var Children = exports.Children = {
 };
 
 /* /COMPATIBILITY */
+//# sourceMappingURL=compat.js.map
+
+/***/ }),
+/* 86 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/*!
+ * is-equal-shallow <https://github.com/jonschlinkert/is-equal-shallow>
+ *
+ * Copyright (c) 2015, Jon Schlinkert.
+ * Licensed under the MIT License.
+ */
+
+
+
+var isPrimitive = __webpack_require__(87);
+
+module.exports = function isEqual(a, b) {
+  if (!a && !b) {
+    return true;
+  }
+  if (!a && b || a && !b) {
+    return false;
+  }
+
+  var numKeysA = 0,
+      numKeysB = 0,
+      key;
+  for (key in b) {
+    numKeysB++;
+    if (!isPrimitive(b[key]) || !a.hasOwnProperty(key) || a[key] !== b[key]) {
+      return false;
+    }
+  }
+  for (key in a) {
+    numKeysA++;
+  }
+  return numKeysA === numKeysB;
+};
 
 /***/ }),
 /* 87 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/*!
+ * is-primitive <https://github.com/jonschlinkert/is-primitive>
+ *
+ * Copyright (c) 2014-2015, Jon Schlinkert.
+ * Licensed under the MIT License.
+ */
+
+
+
+// see http://jsperf.com/testing-value-is-primitive/7
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+module.exports = function isPrimitive(value) {
+  return value == null || typeof value !== 'function' && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) !== 'object';
+};
+
+/***/ }),
+/* 88 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__ = __webpack_require__(218);
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "BrowserRouter", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["a"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HashRouter", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["b"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "IndexLink", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["c"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "IndexRoute", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["d"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "Link", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["e"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "MemoryRouter", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["f"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "NavLink", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["g"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "Prompt", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["h"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "Redirect", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["i"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "Route", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["j"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "Router", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["k"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "StaticRouter", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["l"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "Switch", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["m"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "matchPath", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["n"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "withRouter", function() { return __WEBPACK_IMPORTED_MODULE_0__dist_index_mjs__["o"]; });
+
+
+if (process.env.NODE_ENV !== 'production') {
+  console.warn('You are running production build of Inferno-router in development mode. Use dev:module entry point.');
+}
+
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(13)))
+
+/***/ }),
+/* 89 */,
+/* 90 */,
+/* 91 */,
+/* 92 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var canUseDOM = exports.canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
+
+var addEventListener = exports.addEventListener = function addEventListener(node, event, listener) {
+  return node.addEventListener ? node.addEventListener(event, listener, false) : node.attachEvent('on' + event, listener);
+};
+
+var removeEventListener = exports.removeEventListener = function removeEventListener(node, event, listener) {
+  return node.removeEventListener ? node.removeEventListener(event, listener, false) : node.detachEvent('on' + event, listener);
+};
+
+var getConfirmation = exports.getConfirmation = function getConfirmation(message, callback) {
+  return callback(window.confirm(message));
+}; // eslint-disable-line no-alert
+
+/**
+ * Returns true if the HTML5 history API is supported. Taken from Modernizr.
+ *
+ * https://github.com/Modernizr/Modernizr/blob/master/LICENSE
+ * https://github.com/Modernizr/Modernizr/blob/master/feature-detects/history.js
+ * changed to avoid false negatives for Windows Phones: https://github.com/reactjs/react-router/issues/586
+ */
+var supportsHistory = exports.supportsHistory = function supportsHistory() {
+  var ua = window.navigator.userAgent;
+
+  if ((ua.indexOf('Android 2.') !== -1 || ua.indexOf('Android 4.0') !== -1) && ua.indexOf('Mobile Safari') !== -1 && ua.indexOf('Chrome') === -1 && ua.indexOf('Windows Phone') === -1) return false;
+
+  return window.history && 'pushState' in window.history;
+};
+
+/**
+ * Returns true if browser fires popstate on hash change.
+ * IE10 and IE11 do not.
+ */
+var supportsPopStateOnHashChange = exports.supportsPopStateOnHashChange = function supportsPopStateOnHashChange() {
+  return window.navigator.userAgent.indexOf('Trident') === -1;
+};
+
+/**
+ * Returns false if using go(n) with hash history causes a full page reload.
+ */
+var supportsGoWithoutReloadUsingHash = exports.supportsGoWithoutReloadUsingHash = function supportsGoWithoutReloadUsingHash() {
+  return window.navigator.userAgent.indexOf('Firefox') === -1;
+};
+
+/**
+ * Returns true if a given popstate event is an extraneous WebKit event.
+ * Accounts for the fact that Chrome on iOS fires real popstate events
+ * containing undefined state when pressing the back button.
+ */
+var isExtraneousPopstateEvent = exports.isExtraneousPopstateEvent = function isExtraneousPopstateEvent(event) {
+  return event.state === undefined && navigator.userAgent.indexOf('CriOS') === -1;
+};
+
+/***/ }),
+/* 93 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+
+
+/**
+ * Use invariant() to assert state which your program assumes to be true.
+ *
+ * Provide sprintf-style format (only %s is supported) and arguments
+ * to provide information about what broke and what you were
+ * expecting.
+ *
+ * The invariant message will be stripped in production, but the invariant
+ * will remain to ensure logic does not differ in production.
+ */
+
+var invariant = function invariant(condition, format, a, b, c, d, e, f) {
+  if (process.env.NODE_ENV !== 'production') {
+    if (format === undefined) {
+      throw new Error('invariant requires an error message argument');
+    }
+  }
+
+  if (!condition) {
+    var error;
+    if (format === undefined) {
+      error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
+    } else {
+      var args = [a, b, c, d, e, f];
+      var argIndex = 0;
+      error = new Error(format.replace(/%s/g, function () {
+        return args[argIndex++];
+      }));
+      error.name = 'Invariant Violation';
+    }
+
+    error.framesToPop = 1; // we don't care about invariant's own frame
+    throw error;
+  }
+};
+
+module.exports = invariant;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
+
+/***/ }),
+/* 94 */,
+/* 95 */,
+/* 96 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = BasicPage;
+
+var _inferno = __webpack_require__(0);
+
+var _components = __webpack_require__(5);
+
+var _Alert = __webpack_require__(190);
+
+var _Alert2 = _interopRequireDefault(_Alert);
+
+var _Badge = __webpack_require__(191);
+
+var _Badge2 = _interopRequireDefault(_Badge);
+
+var _Breadcrumb = __webpack_require__(192);
+
+var _Breadcrumb2 = _interopRequireDefault(_Breadcrumb);
+
+var _Button = __webpack_require__(193);
+
+var _Button2 = _interopRequireDefault(_Button);
+
+var _Dropdown = __webpack_require__(195);
+
+var _Dropdown2 = _interopRequireDefault(_Dropdown);
+
+var _Jumbotron = __webpack_require__(196);
+
+var _Jumbotron2 = _interopRequireDefault(_Jumbotron);
+
+var _Progress = __webpack_require__(201);
+
+var _Progress2 = _interopRequireDefault(_Progress);
+
+var _Collapse = __webpack_require__(194);
+
+var _Collapse2 = _interopRequireDefault(_Collapse);
+
+var _Layout = __webpack_require__(197);
+
+var _Layout2 = _interopRequireDefault(_Layout);
+
+var _Tabs = __webpack_require__(202);
+
+var _Tabs2 = _interopRequireDefault(_Tabs);
+
+var _Popovers = __webpack_require__(200);
+
+var _Popovers2 = _interopRequireDefault(_Popovers);
+
+var _Pagination = __webpack_require__(199);
+
+var _Pagination2 = _interopRequireDefault(_Pagination);
+
+var _List = __webpack_require__(198);
+
+var _List2 = _interopRequireDefault(_List);
+
+var _Tooltip = __webpack_require__(203);
+
+var _Tooltip2 = _interopRequireDefault(_Tooltip);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// import Modal from '../../../lib/Modal'
+
+function BasicPage(props) {
+  return (0, _inferno.createComponentVNode)(2, _components.Page, {
+    children: [(0, _inferno.createComponentVNode)(2, _Alert2.default), (0, _inferno.createComponentVNode)(2, _Badge2.default), (0, _inferno.createComponentVNode)(2, _Breadcrumb2.default), (0, _inferno.createComponentVNode)(2, _Button2.default), (0, _inferno.createComponentVNode)(2, _Dropdown2.default), (0, _inferno.createComponentVNode)(2, _Jumbotron2.default), (0, _inferno.createComponentVNode)(2, _Progress2.default), (0, _inferno.createComponentVNode)(2, _Collapse2.default), (0, _inferno.createComponentVNode)(2, _Layout2.default), (0, _inferno.createComponentVNode)(2, _List2.default), (0, _inferno.createComponentVNode)(2, _Tabs2.default), (0, _inferno.createComponentVNode)(2, _Tooltip2.default), (0, _inferno.createComponentVNode)(2, _Popovers2.default), (0, _inferno.createComponentVNode)(2, _Pagination2.default)]
+  });
+}
+module.exports = exports['default'];
+
+/***/ }),
+/* 97 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = CardPage;
+
+var _inferno = __webpack_require__(0);
+
+var _components = __webpack_require__(5);
+
+var _TextCard = __webpack_require__(205);
+
+var _TextCard2 = _interopRequireDefault(_TextCard);
+
+var _HeaderCard = __webpack_require__(204);
+
+var _HeaderCard2 = _interopRequireDefault(_HeaderCard);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function CardPage(props) {
+  return (0, _inferno.createComponentVNode)(2, _components.Page, {
+    children: [(0, _inferno.createComponentVNode)(2, _TextCard2.default), (0, _inferno.createComponentVNode)(2, _HeaderCard2.default)]
+  });
+}
+module.exports = exports['default'];
+
+/***/ }),
+/* 98 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = FormPage;
+
+var _inferno = __webpack_require__(0);
+
+var _components = __webpack_require__(5);
+
+var _Input = __webpack_require__(206);
+
+var _Input2 = _interopRequireDefault(_Input);
+
+var _InputGroup = __webpack_require__(207);
+
+var _InputGroup2 = _interopRequireDefault(_InputGroup);
+
+var _InputWithButton = __webpack_require__(208);
+
+var _InputWithButton2 = _interopRequireDefault(_InputWithButton);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function FormPage(props) {
+  return (0, _inferno.createComponentVNode)(2, _components.Page, {
+    children: [(0, _inferno.createComponentVNode)(2, _Input2.default), (0, _inferno.createComponentVNode)(2, _InputGroup2.default), (0, _inferno.createComponentVNode)(2, _InputWithButton2.default)]
+  });
+}
+module.exports = exports['default'];
+
+/***/ }),
+/* 99 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = BasicPage;
+
+var _inferno = __webpack_require__(0);
+
+var _components = __webpack_require__(5);
+
+var _BasicModal = __webpack_require__(210);
+
+var _BasicModal2 = _interopRequireDefault(_BasicModal);
+
+var _Animations = __webpack_require__(209);
+
+var _Animations2 = _interopRequireDefault(_Animations);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function BasicPage(props) {
+  return (0, _inferno.createComponentVNode)(2, _components.Page, {
+    children: (0, _inferno.createComponentVNode)(2, _BasicModal2.default)
+  });
+}
+module.exports = exports['default'];
+
+/***/ }),
+/* 100 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = NavigationPage;
+
+var _inferno = __webpack_require__(0);
+
+var _components = __webpack_require__(5);
+
+var _Horizontal = __webpack_require__(211);
+
+var _Horizontal2 = _interopRequireDefault(_Horizontal);
+
+var _Vertical = __webpack_require__(214);
+
+var _Vertical2 = _interopRequireDefault(_Vertical);
+
+var _Tabbed = __webpack_require__(213);
+
+var _Tabbed2 = _interopRequireDefault(_Tabbed);
+
+var _Pills = __webpack_require__(212);
+
+var _Pills2 = _interopRequireDefault(_Pills);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// import Modal from '../../../lib/Modal'
+
+
+function NavigationPage(props) {
+  return (0, _inferno.createComponentVNode)(2, _components.Page, {
+    children: [(0, _inferno.createComponentVNode)(2, _Horizontal2.default), (0, _inferno.createComponentVNode)(2, _Vertical2.default), (0, _inferno.createComponentVNode)(2, _Tabbed2.default), (0, _inferno.createComponentVNode)(2, _Pills2.default)]
+  });
+}
+module.exports = exports['default'];
+
+/***/ }),
+/* 101 */,
+/* 102 */,
+/* 103 */,
+/* 104 */,
+/* 105 */,
+/* 106 */,
+/* 107 */,
+/* 108 */,
+/* 109 */,
+/* 110 */,
+/* 111 */,
+/* 112 */,
+/* 113 */,
+/* 114 */,
+/* 115 */,
+/* 116 */,
+/* 117 */,
+/* 118 */,
+/* 119 */,
+/* 120 */,
+/* 121 */,
+/* 122 */,
+/* 123 */,
+/* 124 */,
+/* 125 */,
+/* 126 */,
+/* 127 */,
+/* 128 */,
+/* 129 */,
+/* 130 */,
+/* 131 */,
+/* 132 */,
+/* 133 */,
+/* 134 */,
+/* 135 */,
+/* 136 */,
+/* 137 */,
+/* 138 */,
+/* 139 */,
+/* 140 */,
+/* 141 */,
+/* 142 */,
+/* 143 */,
+/* 144 */,
+/* 145 */,
+/* 146 */,
+/* 147 */,
+/* 148 */,
+/* 149 */,
+/* 150 */,
+/* 151 */,
+/* 152 */,
+/* 153 */,
+/* 154 */,
+/* 155 */,
+/* 156 */,
+/* 157 */,
+/* 158 */,
+/* 159 */,
+/* 160 */,
+/* 161 */,
+/* 162 */,
+/* 163 */,
+/* 164 */,
+/* 165 */,
+/* 166 */,
+/* 167 */,
+/* 168 */,
+/* 169 */,
+/* 170 */,
+/* 171 */,
+/* 172 */,
+/* 173 */,
+/* 174 */,
+/* 175 */,
+/* 176 */,
+/* 177 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _inferno = __webpack_require__(0);
+
+var _classnames = __webpack_require__(1);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _PopperContent = __webpack_require__(27);
+
+var _PopperContent2 = _interopRequireDefault(_PopperContent);
+
+var _utils = __webpack_require__(3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var propsToOmit = ['placement', 'target', 'container', 'isOpen', 'disabled', 'hideArrow', 'className', 'innerClassName', 'cssModule', 'toggle', 'autohide', 'placementPrefix', 'delay', 'modifiers'];
+
+var DEFAULT_DELAYS = {
+  show: 0,
+  hide: 250
+};
+
+var defaultProps = {
+  isOpen: false,
+  hideArrow: false,
+  placement: 'top',
+  placementPrefix: 'bs-tooltip',
+  delay: DEFAULT_DELAYS,
+  autohide: true,
+  toggle: function toggle() {}
+};
+
+var Tooltip = function (_Component) {
+  _inherits(Tooltip, _Component);
+
+  function Tooltip(props) {
+    _classCallCheck(this, Tooltip);
+
+    var _this = _possibleConstructorReturn(this, (Tooltip.__proto__ || Object.getPrototypeOf(Tooltip)).call(this, props));
+
+    _this.addTargetEvents = _this.addTargetEvents.bind(_this);
+    _this.handleDocumentClick = _this.handleDocumentClick.bind(_this);
+    _this.removeTargetEvents = _this.removeTargetEvents.bind(_this);
+    _this.toggle = _this.toggle.bind(_this);
+    _this.onMouseOverTooltip = _this.onMouseOverTooltip.bind(_this);
+    _this.onMouseLeaveTooltip = _this.onMouseLeaveTooltip.bind(_this);
+    _this.onMouseOverTooltipContent = _this.onMouseOverTooltipContent.bind(_this);
+    _this.onMouseLeaveTooltipContent = _this.onMouseLeaveTooltipContent.bind(_this);
+    _this.show = _this.show.bind(_this);
+    _this.hide = _this.hide.bind(_this);
+    return _this;
+  }
+
+  _createClass(Tooltip, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this._target = (0, _utils.getTarget)(this.props.target);
+      this.addTargetEvents();
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this.removeTargetEvents();
+    }
+  }, {
+    key: 'onMouseOverTooltip',
+    value: function onMouseOverTooltip() {
+      if (this._hideTimeout) {
+        this.clearHideTimeout();
+      }
+      this._showTimeout = setTimeout(this.show, this.getDelay('show'));
+    }
+  }, {
+    key: 'onMouseLeaveTooltip',
+    value: function onMouseLeaveTooltip() {
+      if (this._showTimeout) {
+        this.clearShowTimeout();
+      }
+      this._hideTimeout = setTimeout(this.hide, this.getDelay('hide'));
+    }
+  }, {
+    key: 'onMouseOverTooltipContent',
+    value: function onMouseOverTooltipContent() {
+      if (this.props.autohide) {
+        return;
+      }
+      if (this._hideTimeout) {
+        this.clearHideTimeout();
+      }
+    }
+  }, {
+    key: 'onMouseLeaveTooltipContent',
+    value: function onMouseLeaveTooltipContent() {
+      if (this.props.autohide) {
+        return;
+      }
+      if (this._showTimeout) {
+        this.clearShowTimeout();
+      }
+      this._hideTimeout = setTimeout(this.hide, this.getDelay('hide'));
+    }
+  }, {
+    key: 'getDelay',
+    value: function getDelay(key) {
+      var delay = this.props.delay;
+
+      if ((typeof delay === 'undefined' ? 'undefined' : _typeof(delay)) === 'object') {
+        return isNaN(delay[key]) ? DEFAULT_DELAYS[key] : delay[key];
+      }
+      return delay;
+    }
+  }, {
+    key: 'show',
+    value: function show() {
+      if (!this.props.isOpen) {
+        this.clearShowTimeout();
+        this.toggle();
+      }
+    }
+  }, {
+    key: 'hide',
+    value: function hide() {
+      if (this.props.isOpen) {
+        this.clearHideTimeout();
+        this.toggle();
+      }
+    }
+  }, {
+    key: 'clearShowTimeout',
+    value: function clearShowTimeout() {
+      clearTimeout(this._showTimeout);
+      this._showTimeout = undefined;
+    }
+  }, {
+    key: 'clearHideTimeout',
+    value: function clearHideTimeout() {
+      clearTimeout(this._hideTimeout);
+      this._hideTimeout = undefined;
+    }
+  }, {
+    key: 'handleDocumentClick',
+    value: function handleDocumentClick(e) {
+      if (e.target === this._target || this._target.contains(e.target)) {
+        if (this._hideTimeout) {
+          this.clearHideTimeout();
+        }
+
+        if (!this.props.isOpen) {
+          this.toggle();
+        }
+      }
+    }
+  }, {
+    key: 'addTargetEvents',
+    value: function addTargetEvents() {
+      var _this2 = this;
+
+      this._target.addEventListener('mouseover', this.onMouseOverTooltip, true);
+      this._target.addEventListener('mouseout', this.onMouseLeaveTooltip, true);
+      ['click', 'touchstart'].forEach(function (event) {
+        return document.addEventListener(event, _this2.handleDocumentClick, true);
+      });
+    }
+  }, {
+    key: 'removeTargetEvents',
+    value: function removeTargetEvents() {
+      var _this3 = this;
+
+      this._target.removeEventListener('mouseover', this.onMouseOverTooltip, true);
+      this._target.removeEventListener('mouseout', this.onMouseLeaveTooltip, true);
+      ['click', 'touchstart'].forEach(function (event) {
+        return document.removeEventListener(event, _this3.handleDocumentClick, true);
+      });
+    }
+  }, {
+    key: 'toggle',
+    value: function toggle(e) {
+      if (this.props.disabled) {
+        return e && e.preventDefault();
+      }
+
+      return this.props.toggle();
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      if (!this.props.isOpen) {
+        return null;
+      }
+
+      var attributes = (0, _utils.omit)(this.props, propsToOmit);
+      var classes = (0, _utils.mapToCssModules)((0, _classnames2.default)('tooltip-inner', this.props.innerClassName), this.props.cssModule);
+
+      var popperClasses = (0, _utils.mapToCssModules)((0, _classnames2.default)('tooltip', 'show', this.props.className), this.props.cssModule);
+
+      return (0, _inferno.createComponentVNode)(2, _PopperContent2.default, {
+        'className': popperClasses,
+        'target': this.props.target,
+        'isOpen': this.props.isOpen,
+        'hideArrow': this.props.hideArrow,
+        'placement': this.props.placement,
+        'placementPrefix': this.props.placementPrefix,
+        'container': this.props.container,
+        'modifiers': this.props.modifiers,
+        children: (0, _inferno.normalizeProps)((0, _inferno.createVNode)(1, 'div', classes, null, 1, _extends({}, attributes, {
+          'onMouseOver': this.onMouseOverTooltipContent,
+          'onMouseLeave': this.onMouseLeaveTooltipContent
+        })))
+      });
+    }
+  }]);
+
+  return Tooltip;
+}(_inferno.Component);
+
+Tooltip.defaultProps = defaultProps;
+
+exports.default = Tooltip;
+module.exports = exports['default'];
+
+/***/ }),
+/* 178 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11171,23 +12214,23 @@ Object.defineProperty(exports, "__esModule", {
 
 var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var _warning = __webpack_require__(20);
+var _warning = __webpack_require__(49);
 
 var _warning2 = _interopRequireDefault(_warning);
 
-var _invariant = __webpack_require__(46);
+var _invariant = __webpack_require__(93);
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
-var _LocationUtils = __webpack_require__(19);
+var _LocationUtils = __webpack_require__(46);
 
-var _PathUtils = __webpack_require__(16);
+var _PathUtils = __webpack_require__(28);
 
-var _createTransitionManager = __webpack_require__(30);
+var _createTransitionManager = __webpack_require__(79);
 
 var _createTransitionManager2 = _interopRequireDefault(_createTransitionManager);
 
-var _DOMUtils = __webpack_require__(45);
+var _DOMUtils = __webpack_require__(92);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -11486,7 +12529,7 @@ exports.default = createBrowserHistory;
 module.exports = exports["default"];
 
 /***/ }),
-/* 88 */
+/* 179 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11496,23 +12539,23 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _warning = __webpack_require__(20);
+var _warning = __webpack_require__(49);
 
 var _warning2 = _interopRequireDefault(_warning);
 
-var _invariant = __webpack_require__(46);
+var _invariant = __webpack_require__(93);
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
-var _LocationUtils = __webpack_require__(19);
+var _LocationUtils = __webpack_require__(46);
 
-var _PathUtils = __webpack_require__(16);
+var _PathUtils = __webpack_require__(28);
 
-var _createTransitionManager = __webpack_require__(30);
+var _createTransitionManager = __webpack_require__(79);
 
 var _createTransitionManager2 = _interopRequireDefault(_createTransitionManager);
 
-var _DOMUtils = __webpack_require__(45);
+var _DOMUtils = __webpack_require__(92);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -11826,7 +12869,7 @@ exports.default = createHashHistory;
 module.exports = exports['default'];
 
 /***/ }),
-/* 89 */
+/* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11838,15 +12881,15 @@ Object.defineProperty(exports, "__esModule", {
 
 var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var _warning = __webpack_require__(20);
+var _warning = __webpack_require__(49);
 
 var _warning2 = _interopRequireDefault(_warning);
 
-var _PathUtils = __webpack_require__(16);
+var _PathUtils = __webpack_require__(28);
 
-var _LocationUtils = __webpack_require__(19);
+var _LocationUtils = __webpack_require__(46);
 
-var _createTransitionManager = __webpack_require__(30);
+var _createTransitionManager = __webpack_require__(79);
 
 var _createTransitionManager2 = _interopRequireDefault(_createTransitionManager);
 
@@ -12018,7 +13061,7 @@ exports.default = createMemoryHistory;
 module.exports = exports["default"];
 
 /***/ }),
-/* 90 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12029,7 +13072,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.createPath = exports.parsePath = exports.locationsAreEqual = exports.createLocation = exports.createMemoryHistory = exports.createHashHistory = exports.createBrowserHistory = undefined;
 
-var _LocationUtils = __webpack_require__(19);
+var _LocationUtils = __webpack_require__(46);
 
 Object.defineProperty(exports, 'createLocation', {
   enumerable: true,
@@ -12044,7 +13087,7 @@ Object.defineProperty(exports, 'locationsAreEqual', {
   }
 });
 
-var _PathUtils = __webpack_require__(16);
+var _PathUtils = __webpack_require__(28);
 
 Object.defineProperty(exports, 'parsePath', {
   enumerable: true,
@@ -12059,15 +13102,15 @@ Object.defineProperty(exports, 'createPath', {
   }
 });
 
-var _createBrowserHistory2 = __webpack_require__(87);
+var _createBrowserHistory2 = __webpack_require__(178);
 
 var _createBrowserHistory3 = _interopRequireDefault(_createBrowserHistory2);
 
-var _createHashHistory2 = __webpack_require__(88);
+var _createHashHistory2 = __webpack_require__(179);
 
 var _createHashHistory3 = _interopRequireDefault(_createHashHistory2);
 
-var _createMemoryHistory2 = __webpack_require__(89);
+var _createMemoryHistory2 = __webpack_require__(180);
 
 var _createMemoryHistory3 = _interopRequireDefault(_createMemoryHistory2);
 
@@ -12078,146 +13121,7 @@ exports.createHashHistory = _createHashHistory3.default;
 exports.createMemoryHistory = _createMemoryHistory3.default;
 
 /***/ }),
-/* 91 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-function isAbsolute(pathname) {
-  return pathname.charAt(0) === '/';
-}
-
-// About 1.5x faster than the two-arg version of Array#splice()
-function spliceOne(list, index) {
-  for (var i = index, k = i + 1, n = list.length; k < n; i += 1, k += 1) {
-    list[i] = list[k];
-  }
-
-  list.pop();
-}
-
-// This implementation is based heavily on node's url.parse
-function resolvePathname(to) {
-  var from = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-
-  var toParts = to && to.split('/') || [];
-  var fromParts = from && from.split('/') || [];
-
-  var isToAbs = to && isAbsolute(to);
-  var isFromAbs = from && isAbsolute(from);
-  var mustEndAbs = isToAbs || isFromAbs;
-
-  if (to && isAbsolute(to)) {
-    // to is absolute
-    fromParts = toParts;
-  } else if (toParts.length) {
-    // to is relative, drop the filename
-    fromParts.pop();
-    fromParts = fromParts.concat(toParts);
-  }
-
-  if (!fromParts.length) return '/';
-
-  var hasTrailingSlash = void 0;
-  if (fromParts.length) {
-    var last = fromParts[fromParts.length - 1];
-    hasTrailingSlash = last === '.' || last === '..' || last === '';
-  } else {
-    hasTrailingSlash = false;
-  }
-
-  var up = 0;
-  for (var i = fromParts.length; i >= 0; i--) {
-    var part = fromParts[i];
-
-    if (part === '.') {
-      spliceOne(fromParts, i);
-    } else if (part === '..') {
-      spliceOne(fromParts, i);
-      up++;
-    } else if (up) {
-      spliceOne(fromParts, i);
-      up--;
-    }
-  }
-
-  if (!mustEndAbs) for (; up--; up) {
-    fromParts.unshift('..');
-  }if (mustEndAbs && fromParts[0] !== '' && (!fromParts[0] || !isAbsolute(fromParts[0]))) fromParts.unshift('');
-
-  var result = fromParts.join('/');
-
-  if (hasTrailingSlash && result.substr(-1) !== '/') result += '/';
-
-  return result;
-}
-
-exports.default = resolvePathname;
-module.exports = exports['default'];
-
-/***/ }),
-/* 92 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _typeof = typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol" ? function (obj) {
-  return typeof obj === "undefined" ? "undefined" : _typeof2(obj);
-} : function (obj) {
-  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof2(obj);
-};
-
-function valueEqual(a, b) {
-  if (a === b) return true;
-
-  if (a == null || b == null) return false;
-
-  if (Array.isArray(a)) {
-    return Array.isArray(b) && a.length === b.length && a.every(function (item, index) {
-      return valueEqual(item, b[index]);
-    });
-  }
-
-  var aType = typeof a === 'undefined' ? 'undefined' : _typeof(a);
-  var bType = typeof b === 'undefined' ? 'undefined' : _typeof(b);
-
-  if (aType !== bType) return false;
-
-  if (aType === 'object') {
-    var aValue = a.valueOf();
-    var bValue = b.valueOf();
-
-    if (aValue !== a || bValue !== b) return valueEqual(aValue, bValue);
-
-    var aKeys = Object.keys(a);
-    var bKeys = Object.keys(b);
-
-    if (aKeys.length !== bKeys.length) return false;
-
-    return aKeys.every(function (key) {
-      return valueEqual(a[key], b[key]);
-    });
-  }
-
-  return false;
-}
-
-exports.default = valueEqual;
-module.exports = exports["default"];
-
-/***/ }),
-/* 93 */
+/* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12270,24 +13174,13 @@ module.exports = hoistNonReactStatics;
 module.exports.default = module.exports;
 
 /***/ }),
-/* 94 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-module.exports = Array.isArray || function (arr) {
-  return Object.prototype.toString.call(arr) == '[object Array]';
-};
-
-/***/ }),
-/* 95 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var pathToRegExp = __webpack_require__(96);
+var pathToRegExp = __webpack_require__(185);
 
 /**
  * Expose `pathToRegexp` as ES6 module
@@ -12300,7 +13193,18 @@ module.exports.tokensToRegExp = pathToRegExp.tokensToRegExp;
 module.exports['default'] = module.exports;
 
 /***/ }),
-/* 96 */
+/* 184 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = Array.isArray || function (arr) {
+  return Object.prototype.toString.call(arr) == '[object Array]';
+};
+
+/***/ }),
+/* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12308,7 +13212,7 @@ module.exports['default'] = module.exports;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var isarray = __webpack_require__(94);
+var isarray = __webpack_require__(184);
 
 /**
  * Expose `pathToRegexp`.
@@ -12735,226 +13639,7 @@ function pathToRegexp(path, keys, options) {
 }
 
 /***/ }),
-/* 97 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-/**
- * lodash 3.0.2 (Custom Build) <https://lodash.com/>
- * Build: `lodash modern modularize exports="npm" -o ./`
- * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
- * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
- * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
- * Available under MIT license <https://lodash.com/license>
- */
-
-/**
- * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
- * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
- *
- * @static
- * @memberOf _
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is an object, else `false`.
- * @example
- *
- * _.isObject({});
- * // => true
- *
- * _.isObject([1, 2, 3]);
- * // => true
- *
- * _.isObject(1);
- * // => false
- */
-function isObject(value) {
-  // Avoid a V8 JIT bug in Chrome 19-20.
-  // See https://code.google.com/p/v8/issues/detail?id=2291 for more details.
-  var type = typeof value === 'undefined' ? 'undefined' : _typeof(value);
-  return !!value && (type == 'object' || type == 'function');
-}
-
-module.exports = isObject;
-
-/***/ }),
-/* 98 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-/**
- * lodash (Custom Build) <https://lodash.com/>
- * Build: `lodash modularize exports="npm" -o ./`
- * Copyright jQuery Foundation and other contributors <https://jquery.org/>
- * Released under MIT license <https://lodash.com/license>
- * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
- * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
- */
-
-/** Used as references for various `Number` constants. */
-var NAN = 0 / 0;
-
-/** `Object#toString` result references. */
-var symbolTag = '[object Symbol]';
-
-/** Used to match leading and trailing whitespace. */
-var reTrim = /^\s+|\s+$/g;
-
-/** Used to detect bad signed hexadecimal string values. */
-var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
-
-/** Used to detect binary string values. */
-var reIsBinary = /^0b[01]+$/i;
-
-/** Used to detect octal string values. */
-var reIsOctal = /^0o[0-7]+$/i;
-
-/** Built-in method references without a dependency on `root`. */
-var freeParseInt = parseInt;
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/**
- * Used to resolve the
- * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
- * of values.
- */
-var objectToString = objectProto.toString;
-
-/**
- * Checks if `value` is the
- * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
- * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is an object, else `false`.
- * @example
- *
- * _.isObject({});
- * // => true
- *
- * _.isObject([1, 2, 3]);
- * // => true
- *
- * _.isObject(_.noop);
- * // => true
- *
- * _.isObject(null);
- * // => false
- */
-function isObject(value) {
-  var type = typeof value === 'undefined' ? 'undefined' : _typeof(value);
-  return !!value && (type == 'object' || type == 'function');
-}
-
-/**
- * Checks if `value` is object-like. A value is object-like if it's not `null`
- * and has a `typeof` result of "object".
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
- * @example
- *
- * _.isObjectLike({});
- * // => true
- *
- * _.isObjectLike([1, 2, 3]);
- * // => true
- *
- * _.isObjectLike(_.noop);
- * // => false
- *
- * _.isObjectLike(null);
- * // => false
- */
-function isObjectLike(value) {
-  return !!value && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) == 'object';
-}
-
-/**
- * Checks if `value` is classified as a `Symbol` primitive or object.
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
- * @example
- *
- * _.isSymbol(Symbol.iterator);
- * // => true
- *
- * _.isSymbol('abc');
- * // => false
- */
-function isSymbol(value) {
-  return (typeof value === 'undefined' ? 'undefined' : _typeof(value)) == 'symbol' || isObjectLike(value) && objectToString.call(value) == symbolTag;
-}
-
-/**
- * Converts `value` to a number.
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to process.
- * @returns {number} Returns the number.
- * @example
- *
- * _.toNumber(3.2);
- * // => 3.2
- *
- * _.toNumber(Number.MIN_VALUE);
- * // => 5e-324
- *
- * _.toNumber(Infinity);
- * // => Infinity
- *
- * _.toNumber('3.2');
- * // => 3.2
- */
-function toNumber(value) {
-  if (typeof value == 'number') {
-    return value;
-  }
-  if (isSymbol(value)) {
-    return NAN;
-  }
-  if (isObject(value)) {
-    var other = typeof value.valueOf == 'function' ? value.valueOf() : value;
-    value = isObject(other) ? other + '' : other;
-  }
-  if (typeof value != 'string') {
-    return value === 0 ? value : +value;
-  }
-  value = value.replace(reTrim, '');
-  var isBinary = reIsBinary.test(value);
-  return isBinary || reIsOctal.test(value) ? freeParseInt(value.slice(2), isBinary ? 2 : 8) : reIsBadHex.test(value) ? NAN : +value;
-}
-
-module.exports = toNumber;
-
-/***/ }),
-/* 99 */
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12998,7 +13683,7 @@ module.exports = toNumber;
 })(Prism);
 
 /***/ }),
-/* 100 */
+/* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13821,10 +14506,149 @@ Prism.languages.js = Prism.languages.javascript;
 
 	document.addEventListener('DOMContentLoaded', self.Prism.fileHighlight);
 })();
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(47)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(50)))
 
 /***/ }),
-/* 101 */
+/* 188 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+function isAbsolute(pathname) {
+  return pathname.charAt(0) === '/';
+}
+
+// About 1.5x faster than the two-arg version of Array#splice()
+function spliceOne(list, index) {
+  for (var i = index, k = i + 1, n = list.length; k < n; i += 1, k += 1) {
+    list[i] = list[k];
+  }
+
+  list.pop();
+}
+
+// This implementation is based heavily on node's url.parse
+function resolvePathname(to) {
+  var from = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+
+  var toParts = to && to.split('/') || [];
+  var fromParts = from && from.split('/') || [];
+
+  var isToAbs = to && isAbsolute(to);
+  var isFromAbs = from && isAbsolute(from);
+  var mustEndAbs = isToAbs || isFromAbs;
+
+  if (to && isAbsolute(to)) {
+    // to is absolute
+    fromParts = toParts;
+  } else if (toParts.length) {
+    // to is relative, drop the filename
+    fromParts.pop();
+    fromParts = fromParts.concat(toParts);
+  }
+
+  if (!fromParts.length) return '/';
+
+  var hasTrailingSlash = void 0;
+  if (fromParts.length) {
+    var last = fromParts[fromParts.length - 1];
+    hasTrailingSlash = last === '.' || last === '..' || last === '';
+  } else {
+    hasTrailingSlash = false;
+  }
+
+  var up = 0;
+  for (var i = fromParts.length; i >= 0; i--) {
+    var part = fromParts[i];
+
+    if (part === '.') {
+      spliceOne(fromParts, i);
+    } else if (part === '..') {
+      spliceOne(fromParts, i);
+      up++;
+    } else if (up) {
+      spliceOne(fromParts, i);
+      up--;
+    }
+  }
+
+  if (!mustEndAbs) for (; up--; up) {
+    fromParts.unshift('..');
+  }if (mustEndAbs && fromParts[0] !== '' && (!fromParts[0] || !isAbsolute(fromParts[0]))) fromParts.unshift('');
+
+  var result = fromParts.join('/');
+
+  if (hasTrailingSlash && result.substr(-1) !== '/') result += '/';
+
+  return result;
+}
+
+exports.default = resolvePathname;
+module.exports = exports['default'];
+
+/***/ }),
+/* 189 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _typeof = typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol" ? function (obj) {
+  return typeof obj === "undefined" ? "undefined" : _typeof2(obj);
+} : function (obj) {
+  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof2(obj);
+};
+
+function valueEqual(a, b) {
+  if (a === b) return true;
+
+  if (a == null || b == null) return false;
+
+  if (Array.isArray(a)) {
+    return Array.isArray(b) && a.length === b.length && a.every(function (item, index) {
+      return valueEqual(item, b[index]);
+    });
+  }
+
+  var aType = typeof a === 'undefined' ? 'undefined' : _typeof(a);
+  var bType = typeof b === 'undefined' ? 'undefined' : _typeof(b);
+
+  if (aType !== bType) return false;
+
+  if (aType === 'object') {
+    var aValue = a.valueOf();
+    var bValue = b.valueOf();
+
+    if (aValue !== a || bValue !== b) return valueEqual(aValue, bValue);
+
+    var aKeys = Object.keys(a);
+    var bKeys = Object.keys(b);
+
+    if (aKeys.length !== bKeys.length) return false;
+
+    return aKeys.every(function (key) {
+      return valueEqual(a[key], b[key]);
+    });
+  }
+
+  return false;
+}
+
+exports.default = valueEqual;
+module.exports = exports["default"];
+
+/***/ }),
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13867,9 +14691,9 @@ exports.default = function () {
 
 var _inferno = __webpack_require__(0);
 
-var _components = __webpack_require__(4);
+var _components = __webpack_require__(5);
 
-var _Alert = __webpack_require__(56);
+var _Alert = __webpack_require__(52);
 
 var _Alert2 = _interopRequireDefault(_Alert);
 
@@ -13878,7 +14702,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 102 */
+/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13923,9 +14747,9 @@ exports.default = function () {
 
 var _inferno = __webpack_require__(0);
 
-var _components = __webpack_require__(4);
+var _components = __webpack_require__(5);
 
-var _Badge = __webpack_require__(34);
+var _Badge = __webpack_require__(33);
 
 var _Badge2 = _interopRequireDefault(_Badge);
 
@@ -13934,7 +14758,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 103 */
+/* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13978,13 +14802,13 @@ exports.default = function () {
 
 var _inferno = __webpack_require__(0);
 
-var _components = __webpack_require__(4);
+var _components = __webpack_require__(5);
 
-var _Breadcrumb = __webpack_require__(57);
+var _Breadcrumb = __webpack_require__(53);
 
 var _Breadcrumb2 = _interopRequireDefault(_Breadcrumb);
 
-var _BreadcrumbItem = __webpack_require__(58);
+var _BreadcrumbItem = __webpack_require__(54);
 
 var _BreadcrumbItem2 = _interopRequireDefault(_BreadcrumbItem);
 
@@ -13993,7 +14817,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 104 */
+/* 193 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14215,33 +15039,33 @@ exports.default = function () {
 
 var _inferno = __webpack_require__(0);
 
-var _components = __webpack_require__(4);
+var _components = __webpack_require__(5);
 
-var _Button = __webpack_require__(5);
+var _Button = __webpack_require__(7);
 
 var _Button2 = _interopRequireDefault(_Button);
 
-var _ButtonGroup = __webpack_require__(22);
+var _ButtonGroup = __webpack_require__(19);
 
 var _ButtonGroup2 = _interopRequireDefault(_ButtonGroup);
 
-var _ButtonToolbar = __webpack_require__(59);
+var _ButtonToolbar = __webpack_require__(55);
 
 var _ButtonToolbar2 = _interopRequireDefault(_ButtonToolbar);
 
-var _ButtonDropdown = __webpack_require__(35);
+var _ButtonDropdown = __webpack_require__(34);
 
 var _ButtonDropdown2 = _interopRequireDefault(_ButtonDropdown);
 
-var _DropdownToggle = __webpack_require__(12);
+var _DropdownToggle = __webpack_require__(16);
 
 var _DropdownToggle2 = _interopRequireDefault(_DropdownToggle);
 
-var _DropdownMenu = __webpack_require__(11);
+var _DropdownMenu = __webpack_require__(15);
 
 var _DropdownMenu2 = _interopRequireDefault(_DropdownMenu);
 
-var _DropdownItem = __webpack_require__(10);
+var _DropdownItem = __webpack_require__(14);
 
 var _DropdownItem2 = _interopRequireDefault(_DropdownItem);
 
@@ -14409,7 +15233,7 @@ var SampleDropdownButton = function (_Component2) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 105 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14446,13 +15270,13 @@ exports.default = function () {
 
 var _inferno = __webpack_require__(0);
 
-var _components = __webpack_require__(4);
+var _components = __webpack_require__(5);
 
-var _Button = __webpack_require__(5);
+var _Button = __webpack_require__(7);
 
 var _Button2 = _interopRequireDefault(_Button);
 
-var _Collapse = __webpack_require__(65);
+var _Collapse = __webpack_require__(61);
 
 var _Collapse2 = _interopRequireDefault(_Collapse);
 
@@ -14460,7 +15284,7 @@ var _Card = __webpack_require__(18);
 
 var _Card2 = _interopRequireDefault(_Card);
 
-var _CardBody = __webpack_require__(23);
+var _CardBody = __webpack_require__(20);
 
 var _CardBody2 = _interopRequireDefault(_CardBody);
 
@@ -14519,7 +15343,7 @@ var ToggleCollapse = function (_Component) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 106 */
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14548,21 +15372,21 @@ exports.default = function () {
 
 var _inferno = __webpack_require__(0);
 
-var _components = __webpack_require__(4);
+var _components = __webpack_require__(5);
 
-var _Dropdown = __webpack_require__(8);
+var _Dropdown = __webpack_require__(9);
 
 var _Dropdown2 = _interopRequireDefault(_Dropdown);
 
-var _DropdownToggle = __webpack_require__(12);
+var _DropdownToggle = __webpack_require__(16);
 
 var _DropdownToggle2 = _interopRequireDefault(_DropdownToggle);
 
-var _DropdownMenu = __webpack_require__(11);
+var _DropdownMenu = __webpack_require__(15);
 
 var _DropdownMenu2 = _interopRequireDefault(_DropdownMenu);
 
-var _DropdownItem = __webpack_require__(10);
+var _DropdownItem = __webpack_require__(14);
 
 var _DropdownItem2 = _interopRequireDefault(_DropdownItem);
 
@@ -14630,7 +15454,7 @@ var DropdownExample = function (_Component) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 107 */
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14662,13 +15486,13 @@ exports.default = function () {
 
 var _inferno = __webpack_require__(0);
 
-var _components = __webpack_require__(4);
+var _components = __webpack_require__(5);
 
-var _Jumbotron = __webpack_require__(69);
+var _Jumbotron = __webpack_require__(64);
 
 var _Jumbotron2 = _interopRequireDefault(_Jumbotron);
 
-var _Button = __webpack_require__(5);
+var _Button = __webpack_require__(7);
 
 var _Button2 = _interopRequireDefault(_Button);
 
@@ -14677,7 +15501,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 108 */
+/* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14772,17 +15596,17 @@ exports.default = function () {
 
 var _inferno = __webpack_require__(0);
 
-var _components = __webpack_require__(4);
+var _components = __webpack_require__(5);
 
-var _Container = __webpack_require__(66);
+var _Container = __webpack_require__(62);
 
 var _Container2 = _interopRequireDefault(_Container);
 
-var _Row = __webpack_require__(44);
+var _Row = __webpack_require__(45);
 
 var _Row2 = _interopRequireDefault(_Row);
 
-var _Col = __webpack_require__(36);
+var _Col = __webpack_require__(35);
 
 var _Col2 = _interopRequireDefault(_Col);
 
@@ -14791,7 +15615,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 109 */
+/* 198 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14882,25 +15706,25 @@ exports.default = function () {
 
 var _inferno = __webpack_require__(0);
 
-var _components = __webpack_require__(4);
+var _components = __webpack_require__(5);
 
-var _ListGroup = __webpack_require__(70);
+var _ListGroup = __webpack_require__(65);
 
 var _ListGroup2 = _interopRequireDefault(_ListGroup);
 
-var _ListGroupItem = __webpack_require__(71);
+var _ListGroupItem = __webpack_require__(66);
 
 var _ListGroupItem2 = _interopRequireDefault(_ListGroupItem);
 
-var _ListGroupItemHeading = __webpack_require__(72);
+var _ListGroupItemHeading = __webpack_require__(67);
 
 var _ListGroupItemHeading2 = _interopRequireDefault(_ListGroupItemHeading);
 
-var _ListGroupItemText = __webpack_require__(73);
+var _ListGroupItemText = __webpack_require__(68);
 
 var _ListGroupItemText2 = _interopRequireDefault(_ListGroupItemText);
 
-var _Badge = __webpack_require__(34);
+var _Badge = __webpack_require__(33);
 
 var _Badge2 = _interopRequireDefault(_Badge);
 
@@ -14909,7 +15733,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 110 */
+/* 199 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15046,17 +15870,17 @@ exports.default = function () {
 
 var _inferno = __webpack_require__(0);
 
-var _components = __webpack_require__(4);
+var _components = __webpack_require__(5);
 
-var _Pagination = __webpack_require__(75);
+var _Pagination = __webpack_require__(70);
 
 var _Pagination2 = _interopRequireDefault(_Pagination);
 
-var _PaginationItem = __webpack_require__(76);
+var _PaginationItem = __webpack_require__(71);
 
 var _PaginationItem2 = _interopRequireDefault(_PaginationItem);
 
-var _PaginationLink = __webpack_require__(77);
+var _PaginationLink = __webpack_require__(72);
 
 var _PaginationLink2 = _interopRequireDefault(_PaginationLink);
 
@@ -15065,7 +15889,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 111 */
+/* 200 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15098,25 +15922,25 @@ exports.default = function () {
 
 var _inferno = __webpack_require__(0);
 
-var _components = __webpack_require__(4);
+var _components = __webpack_require__(5);
 
-var _Button = __webpack_require__(5);
+var _Button = __webpack_require__(7);
 
 var _Button2 = _interopRequireDefault(_Button);
 
-var _Popover = __webpack_require__(78);
+var _Popover = __webpack_require__(73);
 
 var _Popover2 = _interopRequireDefault(_Popover);
 
-var _PopoverHeader = __webpack_require__(80);
+var _PopoverHeader = __webpack_require__(75);
 
 var _PopoverHeader2 = _interopRequireDefault(_PopoverHeader);
 
-var _PopoverBody = __webpack_require__(79);
+var _PopoverBody = __webpack_require__(74);
 
 var _PopoverBody2 = _interopRequireDefault(_PopoverBody);
 
-var _infernoPopper = __webpack_require__(9);
+var _infernoPopper = __webpack_require__(6);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15179,7 +16003,7 @@ var ExamplePopover = function (_Component) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 112 */
+/* 201 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15236,13 +16060,13 @@ exports.default = function () {
 
 var _inferno = __webpack_require__(0);
 
-var _components = __webpack_require__(4);
+var _components = __webpack_require__(5);
 
-var _Progress = __webpack_require__(83);
+var _Progress = __webpack_require__(76);
 
 var _Progress2 = _interopRequireDefault(_Progress);
 
-var _Button = __webpack_require__(5);
+var _Button = __webpack_require__(7);
 
 var _Button2 = _interopRequireDefault(_Button);
 
@@ -15251,7 +16075,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 113 */
+/* 202 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15284,33 +16108,33 @@ var _classnames = __webpack_require__(1);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _components = __webpack_require__(4);
+var _components = __webpack_require__(5);
 
-var _Nav = __webpack_require__(13);
+var _Nav = __webpack_require__(10);
 
 var _Nav2 = _interopRequireDefault(_Nav);
 
-var _NavItem = __webpack_require__(14);
+var _NavItem = __webpack_require__(11);
 
 var _NavItem2 = _interopRequireDefault(_NavItem);
 
-var _NavLink = __webpack_require__(15);
+var _NavLink = __webpack_require__(12);
 
 var _NavLink2 = _interopRequireDefault(_NavLink);
 
-var _TabContent = __webpack_require__(84);
+var _TabContent = __webpack_require__(77);
 
 var _TabContent2 = _interopRequireDefault(_TabContent);
 
-var _TabPane = __webpack_require__(85);
+var _TabPane = __webpack_require__(78);
 
 var _TabPane2 = _interopRequireDefault(_TabPane);
 
-var _Row = __webpack_require__(44);
+var _Row = __webpack_require__(45);
 
 var _Row2 = _interopRequireDefault(_Row);
 
-var _Col = __webpack_require__(36);
+var _Col = __webpack_require__(35);
 
 var _Col2 = _interopRequireDefault(_Col);
 
@@ -15318,15 +16142,15 @@ var _Card = __webpack_require__(18);
 
 var _Card2 = _interopRequireDefault(_Card);
 
-var _CardTitle = __webpack_require__(25);
+var _CardTitle = __webpack_require__(22);
 
 var _CardTitle2 = _interopRequireDefault(_CardTitle);
 
-var _CardText = __webpack_require__(24);
+var _CardText = __webpack_require__(21);
 
 var _CardText2 = _interopRequireDefault(_CardText);
 
-var _Button = __webpack_require__(5);
+var _Button = __webpack_require__(7);
 
 var _Button2 = _interopRequireDefault(_Button);
 
@@ -15438,7 +16262,98 @@ var TabExample = function (_Component) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 114 */
+/* 203 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+exports.default = function () {
+  return (0, _inferno.createComponentVNode)(2, _components.Section, {
+    'title': 'Tooltip',
+    children: (0, _inferno.createComponentVNode)(2, _components.Stage, {
+      children: [(0, _inferno.createComponentVNode)(2, _components.Scene, {
+        children: (0, _inferno.createComponentVNode)(2, TooltipExample)
+      }), (0, _inferno.createVNode)(1, 'h3', null, (0, _inferno.createTextVNode)('Example Code:'), 2), (0, _inferno.createComponentVNode)(2, _components.Scene, {
+        children: (0, _inferno.createComponentVNode)(2, _components.Code, {
+          children: 'class TooltipExample extends Component {\n  constructor(props) {\n    super(props);\n\n    this.toggle = this.toggle.bind(this);\n    this.state = {\n      tooltipOpen: false\n    };\n  }\n\n  toggle() {\n    this.setState({\n      tooltipOpen: !this.state.tooltipOpen\n    });\n  }\n\n  render() {\n    return (\n      <div>\n        <p>Somewhere in here is a <a href="#" id="TooltipExample">tooltip</a>.</p>\n        <Tooltip placement="bottom" isOpen={this.state.tooltipOpen} target="TooltipExample" toggle={this.toggle}>\n          Hello world!\n        </Tooltip>\n      </div>\n    );\n  }\n}'
+        })
+      })]
+    })
+  });
+};
+
+var _inferno = __webpack_require__(0);
+
+var _classnames = __webpack_require__(1);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _components = __webpack_require__(5);
+
+var _Tooltip = __webpack_require__(177);
+
+var _Tooltip2 = _interopRequireDefault(_Tooltip);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var TooltipExample = function (_Component) {
+  _inherits(TooltipExample, _Component);
+
+  function TooltipExample(props) {
+    _classCallCheck(this, TooltipExample);
+
+    var _this = _possibleConstructorReturn(this, (TooltipExample.__proto__ || Object.getPrototypeOf(TooltipExample)).call(this, props));
+
+    _this.toggle = _this.toggle.bind(_this);
+    _this.state = {
+      tooltipOpen: false
+    };
+    return _this;
+  }
+
+  _createClass(TooltipExample, [{
+    key: 'toggle',
+    value: function toggle() {
+      this.setState({
+        tooltipOpen: !this.state.tooltipOpen
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return (0, _inferno.createVNode)(1, 'div', null, [(0, _inferno.createVNode)(1, 'p', null, [(0, _inferno.createTextVNode)('Somewhere in here is a '), (0, _inferno.createVNode)(1, 'a', null, (0, _inferno.createTextVNode)('tooltip'), 2, {
+        'href': '#',
+        'id': 'TooltipExample'
+      }), (0, _inferno.createTextVNode)('.')], 4), (0, _inferno.createComponentVNode)(2, _Tooltip2.default, {
+        'placement': 'bottom',
+        'isOpen': this.state.tooltipOpen,
+        'target': 'TooltipExample',
+        'toggle': this.toggle,
+        children: 'Hello world!'
+      })], 4);
+    }
+  }]);
+
+  return TooltipExample;
+}(_inferno.Component);
+
+module.exports = exports['default'];
+
+/***/ }),
+/* 204 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15481,33 +16396,33 @@ exports.default = function () {
 
 var _inferno = __webpack_require__(0);
 
-var _components = __webpack_require__(4);
+var _components = __webpack_require__(5);
 
 var _Card = __webpack_require__(18);
 
 var _Card2 = _interopRequireDefault(_Card);
 
-var _CardBody = __webpack_require__(23);
+var _CardBody = __webpack_require__(20);
 
 var _CardBody2 = _interopRequireDefault(_CardBody);
 
-var _CardHeader = __webpack_require__(61);
+var _CardHeader = __webpack_require__(57);
 
 var _CardHeader2 = _interopRequireDefault(_CardHeader);
 
-var _CardFooter = __webpack_require__(60);
+var _CardFooter = __webpack_require__(56);
 
 var _CardFooter2 = _interopRequireDefault(_CardFooter);
 
-var _CardText = __webpack_require__(24);
+var _CardText = __webpack_require__(21);
 
 var _CardText2 = _interopRequireDefault(_CardText);
 
-var _CardTitle = __webpack_require__(25);
+var _CardTitle = __webpack_require__(22);
 
 var _CardTitle2 = _interopRequireDefault(_CardTitle);
 
-var _Button = __webpack_require__(5);
+var _Button = __webpack_require__(7);
 
 var _Button2 = _interopRequireDefault(_Button);
 
@@ -15516,7 +16431,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 115 */
+/* 205 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15584,37 +16499,37 @@ exports.default = function () {
 
 var _inferno = __webpack_require__(0);
 
-var _components = __webpack_require__(4);
+var _components = __webpack_require__(5);
 
 var _Card = __webpack_require__(18);
 
 var _Card2 = _interopRequireDefault(_Card);
 
-var _CardImg = __webpack_require__(62);
+var _CardImg = __webpack_require__(58);
 
 var _CardImg2 = _interopRequireDefault(_CardImg);
 
-var _CardBody = __webpack_require__(23);
+var _CardBody = __webpack_require__(20);
 
 var _CardBody2 = _interopRequireDefault(_CardBody);
 
-var _CardLink = __webpack_require__(63);
+var _CardLink = __webpack_require__(59);
 
 var _CardLink2 = _interopRequireDefault(_CardLink);
 
-var _CardSubtitle = __webpack_require__(64);
+var _CardSubtitle = __webpack_require__(60);
 
 var _CardSubtitle2 = _interopRequireDefault(_CardSubtitle);
 
-var _CardText = __webpack_require__(24);
+var _CardText = __webpack_require__(21);
 
 var _CardText2 = _interopRequireDefault(_CardText);
 
-var _CardTitle = __webpack_require__(25);
+var _CardTitle = __webpack_require__(22);
 
 var _CardTitle2 = _interopRequireDefault(_CardTitle);
 
-var _Button = __webpack_require__(5);
+var _Button = __webpack_require__(7);
 
 var _Button2 = _interopRequireDefault(_Button);
 
@@ -15623,7 +16538,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 116 */
+/* 206 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15680,21 +16595,21 @@ exports.default = function () {
 
 var _inferno = __webpack_require__(0);
 
-var _components = __webpack_require__(4);
+var _components = __webpack_require__(5);
 
-var _Form = __webpack_require__(26);
+var _Form = __webpack_require__(23);
 
 var _Form2 = _interopRequireDefault(_Form);
 
-var _FormGroup = __webpack_require__(27);
+var _FormGroup = __webpack_require__(24);
 
 var _FormGroup2 = _interopRequireDefault(_FormGroup);
 
-var _Label = __webpack_require__(29);
+var _Label = __webpack_require__(26);
 
 var _Label2 = _interopRequireDefault(_Label);
 
-var _Input = __webpack_require__(28);
+var _Input = __webpack_require__(25);
 
 var _Input2 = _interopRequireDefault(_Input);
 
@@ -15703,7 +16618,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 117 */
+/* 207 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15755,29 +16670,29 @@ exports.default = function () {
 
 var _inferno = __webpack_require__(0);
 
-var _components = __webpack_require__(4);
+var _components = __webpack_require__(5);
 
-var _Form = __webpack_require__(26);
+var _Form = __webpack_require__(23);
 
 var _Form2 = _interopRequireDefault(_Form);
 
-var _FormGroup = __webpack_require__(27);
+var _FormGroup = __webpack_require__(24);
 
 var _FormGroup2 = _interopRequireDefault(_FormGroup);
 
-var _Input = __webpack_require__(28);
+var _Input = __webpack_require__(25);
 
 var _Input2 = _interopRequireDefault(_Input);
 
-var _InputGroup = __webpack_require__(37);
+var _InputGroup = __webpack_require__(36);
 
 var _InputGroup2 = _interopRequireDefault(_InputGroup);
 
-var _InputGroupAddon = __webpack_require__(38);
+var _InputGroupAddon = __webpack_require__(37);
 
 var _InputGroupAddon2 = _interopRequireDefault(_InputGroupAddon);
 
-var _Label = __webpack_require__(29);
+var _Label = __webpack_require__(26);
 
 var _Label2 = _interopRequireDefault(_Label);
 
@@ -15786,7 +16701,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 118 */
+/* 208 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15854,53 +16769,53 @@ exports.default = function () {
 
 var _inferno = __webpack_require__(0);
 
-var _components = __webpack_require__(4);
+var _components = __webpack_require__(5);
 
-var _Form = __webpack_require__(26);
+var _Form = __webpack_require__(23);
 
 var _Form2 = _interopRequireDefault(_Form);
 
-var _FormGroup = __webpack_require__(27);
+var _FormGroup = __webpack_require__(24);
 
 var _FormGroup2 = _interopRequireDefault(_FormGroup);
 
-var _Input = __webpack_require__(28);
+var _Input = __webpack_require__(25);
 
 var _Input2 = _interopRequireDefault(_Input);
 
-var _InputGroup = __webpack_require__(37);
+var _InputGroup = __webpack_require__(36);
 
 var _InputGroup2 = _interopRequireDefault(_InputGroup);
 
-var _InputGroupAddon = __webpack_require__(38);
+var _InputGroupAddon = __webpack_require__(37);
 
 var _InputGroupAddon2 = _interopRequireDefault(_InputGroupAddon);
 
-var _InputGroupButtonDropdown = __webpack_require__(67);
+var _InputGroupButtonDropdown = __webpack_require__(63);
 
 var _InputGroupButtonDropdown2 = _interopRequireDefault(_InputGroupButtonDropdown);
 
-var _Label = __webpack_require__(29);
+var _Label = __webpack_require__(26);
 
 var _Label2 = _interopRequireDefault(_Label);
 
-var _Button = __webpack_require__(5);
+var _Button = __webpack_require__(7);
 
 var _Button2 = _interopRequireDefault(_Button);
 
-var _ButtonDropdown = __webpack_require__(35);
+var _ButtonDropdown = __webpack_require__(34);
 
 var _ButtonDropdown2 = _interopRequireDefault(_ButtonDropdown);
 
-var _DropdownToggle = __webpack_require__(12);
+var _DropdownToggle = __webpack_require__(16);
 
 var _DropdownToggle2 = _interopRequireDefault(_DropdownToggle);
 
-var _DropdownMenu = __webpack_require__(11);
+var _DropdownMenu = __webpack_require__(15);
 
 var _DropdownMenu2 = _interopRequireDefault(_DropdownMenu);
 
-var _DropdownItem = __webpack_require__(10);
+var _DropdownItem = __webpack_require__(14);
 
 var _DropdownItem2 = _interopRequireDefault(_DropdownItem);
 
@@ -15969,7 +16884,7 @@ var SampleDropdownAddonButton = function (_Component) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 119 */
+/* 209 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15998,13 +16913,13 @@ exports.default = function () {
 
 var _inferno = __webpack_require__(0);
 
-var _components = __webpack_require__(4);
+var _components = __webpack_require__(5);
 
-var _Button = __webpack_require__(5);
+var _Button = __webpack_require__(7);
 
 var _Button2 = _interopRequireDefault(_Button);
 
-var _ButtonGroup = __webpack_require__(22);
+var _ButtonGroup = __webpack_require__(19);
 
 var _ButtonGroup2 = _interopRequireDefault(_ButtonGroup);
 
@@ -16029,7 +16944,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 120 */
+/* 210 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16069,13 +16984,13 @@ exports.default = function () {
 
 var _inferno = __webpack_require__(0);
 
-var _components = __webpack_require__(4);
+var _components = __webpack_require__(5);
 
-var _Button = __webpack_require__(5);
+var _Button = __webpack_require__(7);
 
 var _Button2 = _interopRequireDefault(_Button);
 
-var _ButtonGroup = __webpack_require__(22);
+var _ButtonGroup = __webpack_require__(19);
 
 var _ButtonGroup2 = _interopRequireDefault(_ButtonGroup);
 
@@ -16164,7 +17079,7 @@ var ModalExample = function (_Component) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 121 */
+/* 211 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16231,17 +17146,17 @@ exports.default = function () {
 
 var _inferno = __webpack_require__(0);
 
-var _components = __webpack_require__(4);
+var _components = __webpack_require__(5);
 
-var _Nav = __webpack_require__(13);
+var _Nav = __webpack_require__(10);
 
 var _Nav2 = _interopRequireDefault(_Nav);
 
-var _NavItem = __webpack_require__(14);
+var _NavItem = __webpack_require__(11);
 
 var _NavItem2 = _interopRequireDefault(_NavItem);
 
-var _NavLink = __webpack_require__(15);
+var _NavLink = __webpack_require__(12);
 
 var _NavLink2 = _interopRequireDefault(_NavLink);
 
@@ -16250,7 +17165,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 122 */
+/* 212 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16277,17 +17192,17 @@ exports.default = function () {
 
 var _inferno = __webpack_require__(0);
 
-var _components = __webpack_require__(4);
+var _components = __webpack_require__(5);
 
-var _Nav = __webpack_require__(13);
+var _Nav = __webpack_require__(10);
 
 var _Nav2 = _interopRequireDefault(_Nav);
 
-var _NavItem = __webpack_require__(14);
+var _NavItem = __webpack_require__(11);
 
 var _NavItem2 = _interopRequireDefault(_NavItem);
 
-var _NavLink = __webpack_require__(15);
+var _NavLink = __webpack_require__(12);
 
 var _NavLink2 = _interopRequireDefault(_NavLink);
 
@@ -16295,19 +17210,19 @@ var _NavDropdown = __webpack_require__(43);
 
 var _NavDropdown2 = _interopRequireDefault(_NavDropdown);
 
-var _Dropdown = __webpack_require__(8);
+var _Dropdown = __webpack_require__(9);
 
 var _Dropdown2 = _interopRequireDefault(_Dropdown);
 
-var _DropdownMenu = __webpack_require__(11);
+var _DropdownMenu = __webpack_require__(15);
 
 var _DropdownMenu2 = _interopRequireDefault(_DropdownMenu);
 
-var _DropdownToggle = __webpack_require__(12);
+var _DropdownToggle = __webpack_require__(16);
 
 var _DropdownToggle2 = _interopRequireDefault(_DropdownToggle);
 
-var _DropdownItem = __webpack_require__(10);
+var _DropdownItem = __webpack_require__(14);
 
 var _DropdownItem2 = _interopRequireDefault(_DropdownItem);
 
@@ -16402,7 +17317,7 @@ var TabbedNavbar = function (_Component) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 123 */
+/* 213 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16429,17 +17344,17 @@ exports.default = function () {
 
 var _inferno = __webpack_require__(0);
 
-var _components = __webpack_require__(4);
+var _components = __webpack_require__(5);
 
-var _Nav = __webpack_require__(13);
+var _Nav = __webpack_require__(10);
 
 var _Nav2 = _interopRequireDefault(_Nav);
 
-var _NavItem = __webpack_require__(14);
+var _NavItem = __webpack_require__(11);
 
 var _NavItem2 = _interopRequireDefault(_NavItem);
 
-var _NavLink = __webpack_require__(15);
+var _NavLink = __webpack_require__(12);
 
 var _NavLink2 = _interopRequireDefault(_NavLink);
 
@@ -16447,19 +17362,19 @@ var _NavDropdown = __webpack_require__(43);
 
 var _NavDropdown2 = _interopRequireDefault(_NavDropdown);
 
-var _Dropdown = __webpack_require__(8);
+var _Dropdown = __webpack_require__(9);
 
 var _Dropdown2 = _interopRequireDefault(_Dropdown);
 
-var _DropdownMenu = __webpack_require__(11);
+var _DropdownMenu = __webpack_require__(15);
 
 var _DropdownMenu2 = _interopRequireDefault(_DropdownMenu);
 
-var _DropdownToggle = __webpack_require__(12);
+var _DropdownToggle = __webpack_require__(16);
 
 var _DropdownToggle2 = _interopRequireDefault(_DropdownToggle);
 
-var _DropdownItem = __webpack_require__(10);
+var _DropdownItem = __webpack_require__(14);
 
 var _DropdownItem2 = _interopRequireDefault(_DropdownItem);
 
@@ -16554,7 +17469,7 @@ var TabbedNavbar = function (_Component) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 124 */
+/* 214 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16623,17 +17538,17 @@ exports.default = function () {
 
 var _inferno = __webpack_require__(0);
 
-var _components = __webpack_require__(4);
+var _components = __webpack_require__(5);
 
-var _Nav = __webpack_require__(13);
+var _Nav = __webpack_require__(10);
 
 var _Nav2 = _interopRequireDefault(_Nav);
 
-var _NavItem = __webpack_require__(14);
+var _NavItem = __webpack_require__(11);
 
 var _NavItem2 = _interopRequireDefault(_NavItem);
 
-var _NavLink = __webpack_require__(15);
+var _NavLink = __webpack_require__(12);
 
 var _NavLink2 = _interopRequireDefault(_NavLink);
 
@@ -16642,7 +17557,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = exports['default'];
 
 /***/ }),
-/* 125 */
+/* 215 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16652,37 +17567,37 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _inferno = __webpack_require__(0);
 
-var _infernoRouter = __webpack_require__(32);
+var _infernoRouter = __webpack_require__(88);
 
-var _Nav = __webpack_require__(13);
+var _Nav = __webpack_require__(10);
 
 var _Nav2 = _interopRequireDefault(_Nav);
 
-var _NavItem = __webpack_require__(14);
+var _NavItem = __webpack_require__(11);
 
 var _NavItem2 = _interopRequireDefault(_NavItem);
 
-var _NavLink = __webpack_require__(15);
+var _NavLink = __webpack_require__(12);
 
 var _NavLink2 = _interopRequireDefault(_NavLink);
 
-var _BasicPage = __webpack_require__(50);
+var _BasicPage = __webpack_require__(96);
 
 var _BasicPage2 = _interopRequireDefault(_BasicPage);
 
-var _CardPage = __webpack_require__(51);
+var _CardPage = __webpack_require__(97);
 
 var _CardPage2 = _interopRequireDefault(_CardPage);
 
-var _FormPage = __webpack_require__(52);
+var _FormPage = __webpack_require__(98);
 
 var _FormPage2 = _interopRequireDefault(_FormPage);
 
-var _ModalPage = __webpack_require__(53);
+var _ModalPage = __webpack_require__(99);
 
 var _ModalPage2 = _interopRequireDefault(_ModalPage);
 
-var _NavigationPage = __webpack_require__(54);
+var _NavigationPage = __webpack_require__(100);
 
 var _NavigationPage2 = _interopRequireDefault(_NavigationPage);
 
@@ -16785,957 +17700,9 @@ if (typeof window !== 'undefined') {
 }
 
 /***/ }),
-/* 126 */,
-/* 127 */,
-/* 128 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i];for (var key in source) {
-      if (Object.prototype.hasOwnProperty.call(source, key)) {
-        target[key] = source[key];
-      }
-    }
-  }return target;
-};
-
-var _inferno = __webpack_require__(7);
-
-var _infernoCreateElement = __webpack_require__(17);
-
-function _objectWithoutProperties(obj, keys) {
-  var target = {};for (var i in obj) {
-    if (keys.indexOf(i) >= 0) continue;if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;target[i] = obj[i];
-  }return target;
-}
-
-var Arrow = function Arrow(props, context) {
-  var _props$component = props.component,
-      component = _props$component === undefined ? 'span' : _props$component,
-      innerRef = props.innerRef,
-      children = props.children,
-      restProps = _objectWithoutProperties(props, ['component', 'innerRef', 'children']);
-
-  var popper = context.popper;
-
-  var arrowRef = function arrowRef(node) {
-    popper.setArrowNode(node);
-    if (typeof innerRef === 'function') {
-      innerRef(node);
-    }
-  };
-  var arrowStyle = popper.getArrowStyle();
-
-  if (typeof children === 'function') {
-    var arrowProps = {
-      ref: arrowRef,
-      style: arrowStyle
-    };
-    return children({ arrowProps: arrowProps, restProps: restProps });
-  }
-
-  var componentProps = _extends({}, restProps, {
-    style: _extends({}, arrowStyle, restProps.style)
-  });
-
-  if (typeof component === 'string') {
-    componentProps.ref = arrowRef;
-  } else {
-    componentProps.innerRef = arrowRef;
-  }
-
-  return (0, _infernoCreateElement.createElement)(component, componentProps, children);
-};
-
-exports.default = Arrow;
-module.exports = exports['default'];
-//# sourceMappingURL=Arrow.js.map
-
-/***/ }),
-/* 129 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () {
-  function defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }return function (Constructor, protoProps, staticProps) {
-    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
-  };
-}();
-
-var _inferno = __webpack_require__(7);
-
-var _infernoCreateElement = __webpack_require__(17);
-
-function _objectWithoutProperties(obj, keys) {
-  var target = {};for (var i in obj) {
-    if (keys.indexOf(i) >= 0) continue;if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;target[i] = obj[i];
-  }return target;
-}
-
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-
-function _possibleConstructorReturn(self, call) {
-  if (!self) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
-}
-
-function _inherits(subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
-  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-}
-
-var Manager = function (_Component) {
-  _inherits(Manager, _Component);
-
-  function Manager(props) {
-    _classCallCheck(this, Manager);
-
-    var _this = _possibleConstructorReturn(this, (Manager.__proto__ || Object.getPrototypeOf(Manager)).call(this, props));
-
-    _this._setTargetNode = function (node) {
-      _this._targetNode = node;
-    };
-
-    _this._getTargetNode = function () {
-      return _this._targetNode;
-    };
-    return _this;
-  }
-
-  _createClass(Manager, [{
-    key: 'getChildContext',
-    value: function getChildContext() {
-      return {
-        popperManager: {
-          setTargetNode: this._setTargetNode,
-          getTargetNode: this._getTargetNode
-        }
-      };
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          Tag = _props.tag,
-          children = _props.children,
-          restProps = _objectWithoutProperties(_props, ['tag', 'children']);
-
-      if (Tag !== false) {
-        return (0, _infernoCreateElement.createElement)(Tag || 'div', restProps, children);
-      } else {
-        return children;
-      }
-    }
-  }]);
-
-  return Manager;
-}(_inferno.Component);
-
-exports.default = Manager;
-module.exports = exports['default'];
-//# sourceMappingURL=Manager.js.map
-
-/***/ }),
-/* 130 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i];for (var key in source) {
-      if (Object.prototype.hasOwnProperty.call(source, key)) {
-        target[key] = source[key];
-      }
-    }
-  }return target;
-};
-
-var _createClass = function () {
-  function defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }return function (Constructor, protoProps, staticProps) {
-    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
-  };
-}();
-
-var _inferno = __webpack_require__(7);
-
-var _infernoCreateElement = __webpack_require__(17);
-
-var _popper = __webpack_require__(48);
-
-var _popper2 = _interopRequireDefault(_popper);
-
-var _isEqualShallow = __webpack_require__(134);
-
-var _isEqualShallow2 = _interopRequireDefault(_isEqualShallow);
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
-}
-
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
-  } else {
-    obj[key] = value;
-  }return obj;
-}
-
-function _objectWithoutProperties(obj, keys) {
-  var target = {};for (var i in obj) {
-    if (keys.indexOf(i) >= 0) continue;if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;target[i] = obj[i];
-  }return target;
-}
-
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-
-function _possibleConstructorReturn(self, call) {
-  if (!self) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
-}
-
-function _inherits(subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
-  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-}
-
-var noop = function noop() {
-  return null;
-};
-
-var Popper = function (_Component) {
-  _inherits(Popper, _Component);
-
-  function Popper(props) {
-    _classCallCheck(this, Popper);
-
-    var _this = _possibleConstructorReturn(this, (Popper.__proto__ || Object.getPrototypeOf(Popper)).call(this, props));
-
-    _this.state = {};
-
-    _this._setArrowNode = function (node) {
-      _this._arrowNode = node;
-    };
-
-    _this._getTargetNode = function () {
-      return _this.context.popperManager.getTargetNode();
-    };
-
-    _this._updateStateModifier = {
-      enabled: true,
-      order: 900,
-      fn: function fn(data) {
-        if (_this.state.data && !(0, _isEqualShallow2.default)(data.offsets, _this.state.data.offsets) || !_this.state.data) {
-          _this.setState({ data: data });
-        }
-        return data;
-      }
-    };
-    return _this;
-  }
-
-  _createClass(Popper, [{
-    key: 'getChildContext',
-    value: function getChildContext() {
-      return {
-        popper: {
-          setArrowNode: this._setArrowNode.bind(this),
-          getArrowStyle: this._getArrowStyle.bind(this)
-        }
-      };
-    }
-  }, {
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this._updatePopper();
-    }
-  }, {
-    key: 'componentDidUpdate',
-    value: function componentDidUpdate(lastProps) {
-      if (lastProps.placement !== this.props.placement || lastProps.eventsEnabled !== this.props.eventsEnabled) {
-        this._updatePopper();
-      }
-
-      if (this._popper && lastProps.children !== this.props.children) {
-        this._popper.scheduleUpdate();
-      }
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      this._destroyPopper();
-    }
-  }, {
-    key: '_updatePopper',
-    value: function _updatePopper() {
-      this._destroyPopper();
-      if (this._node) {
-        this._createPopper();
-      }
-    }
-  }, {
-    key: '_createPopper',
-    value: function _createPopper() {
-      var _props = this.props,
-          placement = _props.placement,
-          eventsEnabled = _props.eventsEnabled;
-
-      var modifiers = _extends({}, this.props.modifiers, {
-        applyStyle: { enabled: false },
-        updateState: this._updateStateModifier
-      });
-
-      if (this._arrowNode) {
-        modifiers.arrow = {
-          element: this._arrowNode
-        };
-      }
-
-      this._popper = new _popper2.default(this._getTargetNode(), this._node, {
-        placement: placement,
-        eventsEnabled: eventsEnabled,
-        modifiers: modifiers
-      });
-
-      // schedule an update to make sure everything gets positioned correct
-      // after being instantiated
-      this._popper.scheduleUpdate();
-    }
-  }, {
-    key: '_destroyPopper',
-    value: function _destroyPopper() {
-      if (this._popper) {
-        this._popper.destroy();
-      }
-    }
-  }, {
-    key: '_getPopperStyle',
-    value: function _getPopperStyle() {
-      var data = this.state.data;
-
-      // If Popper isn't instantiated, hide the popperElement
-      // to avoid flash of unstyled content
-
-      if (!this._popper || !data) {
-        return {
-          position: 'absolute',
-          pointerEvents: 'none',
-          opacity: 0
-        };
-      }
-
-      var _data$offsets$popper = data.offsets.popper,
-          top = _data$offsets$popper.top,
-          left = _data$offsets$popper.left,
-          position = _data$offsets$popper.position;
-
-      return _extends({
-        position: position
-      }, data.styles);
-    }
-  }, {
-    key: '_getPopperPlacement',
-    value: function _getPopperPlacement() {
-      return !!this.state.data ? this.state.data.placement : undefined;
-    }
-  }, {
-    key: '_getArrowStyle',
-    value: function _getArrowStyle() {
-      if (!this.state.data || !this.state.data.offsets.arrow) {
-        return {};
-      } else {
-        var _state$data$offsets$a = this.state.data.offsets.arrow,
-            top = _state$data$offsets$a.top,
-            left = _state$data$offsets$a.left;
-
-        return { top: top, left: left };
-      }
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
-
-      var _props2 = this.props,
-          component = _props2.component,
-          innerRef = _props2.innerRef,
-          placement = _props2.placement,
-          eventsEnabled = _props2.eventsEnabled,
-          modifiers = _props2.modifiers,
-          children = _props2.children,
-          restProps = _objectWithoutProperties(_props2, ['component', 'innerRef', 'placement', 'eventsEnabled', 'modifiers', 'children']);
-
-      // Default props
-
-
-      component = component || 'div';
-      placement = placement || 'bottom';
-      eventsEnabled === undefined ? true : eventsEnabled;
-      modifiers = modifiers || {};
-
-      var popperRef = function popperRef(node) {
-        _this2._node = node;
-        if (typeof innerRef === 'function') {
-          innerRef(node);
-        }
-      };
-      var popperStyle = this._getPopperStyle();
-      var popperPlacement = this._getPopperPlacement();
-
-      if (typeof children === 'function') {
-        var popperProps = _defineProperty({
-          ref: popperRef,
-          style: popperStyle
-        }, 'data-placement', popperPlacement);
-        return children({
-          popperProps: popperProps,
-          restProps: restProps,
-          scheduleUpdate: this._popper && this._popper.scheduleUpdate
-        });
-      }
-
-      var componentProps = _extends({}, restProps, {
-        style: _extends({}, restProps.style, popperStyle),
-        'data-placement': popperPlacement
-      });
-
-      if (typeof component === 'string') {
-        componentProps.ref = popperRef;
-      } else {
-        componentProps.innerRef = popperRef;
-      }
-
-      return (0, _infernoCreateElement.createElement)(component, componentProps, children);
-    }
-  }]);
-
-  return Popper;
-}(_inferno.Component);
-
-exports.default = Popper;
-module.exports = exports['default'];
-//# sourceMappingURL=Popper.js.map
-
-/***/ }),
-/* 131 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i];for (var key in source) {
-      if (Object.prototype.hasOwnProperty.call(source, key)) {
-        target[key] = source[key];
-      }
-    }
-  }return target;
-};
-
-var _inferno = __webpack_require__(7);
-
-var _infernoCreateElement = __webpack_require__(17);
-
-function _objectWithoutProperties(obj, keys) {
-  var target = {};for (var i in obj) {
-    if (keys.indexOf(i) >= 0) continue;if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;target[i] = obj[i];
-  }return target;
-}
-
-var Target = function Target(props, context) {
-  var _props$component = props.component,
-      component = _props$component === undefined ? 'div' : _props$component,
-      innerRef = props.innerRef,
-      children = props.children,
-      restProps = _objectWithoutProperties(props, ['component', 'innerRef', 'children']);
-
-  var popperManager = context.popperManager;
-
-  var targetRef = function targetRef(node) {
-    popperManager.setTargetNode(node);
-    if (typeof innerRef === 'function') {
-      innerRef(node);
-    }
-  };
-
-  if (typeof children === 'function') {
-    var targetProps = { ref: targetRef };
-    return children({ targetProps: targetProps, restProps: restProps });
-  }
-
-  var componentProps = _extends({}, restProps);
-
-  if (typeof component === 'string') {
-    componentProps.ref = targetRef;
-  } else {
-    componentProps.innerRef = targetRef;
-  }
-
-  return (0, _infernoCreateElement.createElement)(component, componentProps, children);
-};
-
-exports.default = Target;
-module.exports = exports['default'];
-//# sourceMappingURL=Target.js.map
-
-/***/ }),
-/* 132 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () {
-  function defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }return function (Constructor, protoProps, staticProps) {
-    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
-  };
-}();
-
-var _inferno = __webpack_require__(7);
-
-var _infernoCreateElement = __webpack_require__(17);
-
-var _compat = __webpack_require__(133);
-
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-
-function _possibleConstructorReturn(self, call) {
-  if (!self) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
-}
-
-function _inherits(subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
-  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-}
-
-var noop = function noop() {
-  return null;
-};
-
-var Travel = function (_Component) {
-  _inherits(Travel, _Component);
-
-  function Travel(props) {
-    _classCallCheck(this, Travel);
-
-    var _this = _possibleConstructorReturn(this, (Travel.__proto__ || Object.getPrototypeOf(Travel)).call(this, props));
-
-    _this._portalNode = null;
-    return _this;
-  }
-
-  _createClass(Travel, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this._renderPortal();
-    }
-  }, {
-    key: 'componentDidUpdate',
-    value: function componentDidUpdate() {
-      this._renderPortal();
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      this._destroyPortal();
-    }
-  }, {
-    key: '_getRenderToNode',
-    value: function _getRenderToNode() {
-      var renderTo = this.props.renderTo;
-
-      if (typeof renderTo === 'string') {
-        return document.querySelector(renderTo);
-      } else {
-        return renderTo || document.body;
-      }
-    }
-  }, {
-    key: '_getComponent',
-    value: function _getComponent() {
-      if (this.props.useArray) {
-        return _compat.Children.toArray(this.props.children)[1];
-      } else {
-        return _compat.Children.only(this.props.children);
-      }
-    }
-  }, {
-    key: '_setupPortal',
-    value: function _setupPortal() {
-      var _props = this.props,
-          renderTag = _props.renderTag,
-          onMount = _props.onMount;
-
-      // Default props
-
-      renderTag = renderTag || 'div';
-      onMount = onMount || noop;
-
-      var renderToNode = this._getRenderToNode();
-
-      // create a node that we can stick our component in
-      this._portalNode = document.createElement(renderTag);
-
-      // append node to the render node
-      renderToNode.appendChild(this._portalNode);
-
-      // store the instance passed back to allow work to be done on it
-      this._portalInstance = typeof onMount === 'function' ? onMount(this._portalNode) : this._portalNode;
-    }
-  }, {
-    key: '_renderPortal',
-    value: function _renderPortal() {
-      var _this2 = this;
-
-      var component = this._getComponent();
-
-      // if no component, bail out
-      if (!component) {
-        this._destroyPortal();
-        return;
-      }
-
-      // if no portalNode found, create it
-      if (!this._portalNode) {
-        this._setupPortal();
-      }
-
-      // render component into the DOM
-      (0, _compat.unstable_renderSubtreeIntoContainer)(this, component, this._portalNode, function () {
-        // don't update until the subtree has finished rendering
-        _this2._updatePortal();
-      });
-    }
-  }, {
-    key: '_updatePortal',
-    value: function _updatePortal() {
-      var _this3 = this;
-
-      var _props2 = this.props,
-          id = _props2.id,
-          className = _props2.className,
-          style = _props2.style,
-          onUpdate = _props2.onUpdate;
-
-      // Default props
-
-      onUpdate = onUpdate || noop;
-
-      if (id) {
-        this._portalNode.id = id;
-      }
-
-      if (className) {
-        this._portalNode.className = className;
-      }
-
-      if (style) {
-        Object.keys(style).forEach(function (key) {
-          _this3._portalNode.style[key] = style[key];
-        });
-      }
-
-      if (typeof onUpdate === 'function') {
-        this._portalInstance = onUpdate(this._portalInstance);
-      }
-    }
-  }, {
-    key: '_destroyPortal',
-    value: function _destroyPortal() {
-      if (this._portalNode) {
-        (0, _compat.unmountComponentAtNode)(this._portalNode);
-        this._portalNode.parentNode.removeChild(this._portalNode);
-      }
-      this._portalNode = null;
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      if (this.props.useArray) {
-        return _compat.Children.toArray(this.props.children)[0];
-      } else {
-        return null;
-      }
-    }
-  }]);
-
-  return Travel;
-}(_inferno.Component);
-
-exports.default = Travel;
-module.exports = exports['default'];
-//# sourceMappingURL=Travel.js.map
-
-/***/ }),
-/* 133 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Children = exports.WrapperComponent = undefined;
-
-var _createClass = function () {
-  function defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }return function (Constructor, protoProps, staticProps) {
-    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
-  };
-}();
-
-exports.unmountComponentAtNode = unmountComponentAtNode;
-exports.unstable_renderSubtreeIntoContainer = unstable_renderSubtreeIntoContainer;
-
-var _inferno = __webpack_require__(7);
-
-var _infernoShared = __webpack_require__(138);
-
-var _infernoVnodeFlags = __webpack_require__(139);
-
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-
-function _possibleConstructorReturn(self, call) {
-  if (!self) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
-}
-
-function _inherits(subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
-  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-}
-
-/* COMPATIBILITY */
-// TODO: Rewrite implementation for Inferno
-
-function unmountComponentAtNode(container) {
-  (0, _inferno.render)(null, container);
-  return true;
-}
-
-function unstable_renderSubtreeIntoContainer(parentComponent, vNode, container, callback) {
-  var wrapperVNode = (0, _inferno.createComponentVNode)(_infernoVnodeFlags.VNodeFlags.ComponentClass, WrapperComponent, {
-    children: vNode,
-    context: parentComponent.context
-  });
-  (0, _inferno.render)(wrapperVNode, container);
-  var component = vNode.children;
-
-  if (callback) {
-    // callback gets the component as context, no other argument.
-    callback.call(component);
-  }
-  return component;
-}
-
-var WrapperComponent = exports.WrapperComponent = function (_Component) {
-  _inherits(WrapperComponent, _Component);
-
-  function WrapperComponent() {
-    _classCallCheck(this, WrapperComponent);
-
-    return _possibleConstructorReturn(this, (WrapperComponent.__proto__ || Object.getPrototypeOf(WrapperComponent)).apply(this, arguments));
-  }
-
-  _createClass(WrapperComponent, [{
-    key: 'getChildContext',
-    value: function getChildContext() {
-      // tslint:disable-next-line
-      return this.props.contex;
-    }
-  }, {
-    key: 'render',
-    value: function render(props) {
-      return props.children;
-    }
-  }]);
-
-  return WrapperComponent;
-}(_inferno.Component);
-
-function flatten(arr, result) {
-  for (var i = 0, len = arr.length; i < len; i++) {
-    var value = arr[i];
-    if ((0, _infernoShared.isArray)(value)) {
-      flatten(value, result);
-    } else {
-      result.push(value);
-    }
-  }
-  return result;
-}
-
-var ARR = [];
-
-var Children = exports.Children = {
-  only: function only(children) {
-    children = Children.toArray(children);
-    if (children.length !== 1) {
-      throw new Error("Children.only() expects only one child.");
-    }
-    return children[0];
-  },
-
-  toArray: function toArray(children) {
-    if ((0, _infernoShared.isNullOrUndef)(children)) {
-      return [];
-    }
-    // We need to flatten arrays here,
-    // because React does it also and application level code might depend on that behavior
-    if ((0, _infernoShared.isArray)(children)) {
-      var result = [];
-
-      flatten(children, result);
-
-      return result;
-    }
-    return ARR.concat(children);
-  }
-};
-
-/* /COMPATIBILITY */
-//# sourceMappingURL=compat.js.map
-
-/***/ }),
-/* 134 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/*!
- * is-equal-shallow <https://github.com/jonschlinkert/is-equal-shallow>
- *
- * Copyright (c) 2015, Jon Schlinkert.
- * Licensed under the MIT License.
- */
-
-
-
-var isPrimitive = __webpack_require__(135);
-
-module.exports = function isEqual(a, b) {
-  if (!a && !b) {
-    return true;
-  }
-  if (!a && b || a && !b) {
-    return false;
-  }
-
-  var numKeysA = 0,
-      numKeysB = 0,
-      key;
-  for (key in b) {
-    numKeysB++;
-    if (!isPrimitive(b[key]) || !a.hasOwnProperty(key) || a[key] !== b[key]) {
-      return false;
-    }
-  }
-  for (key in a) {
-    numKeysA++;
-  }
-  return numKeysA === numKeysB;
-};
-
-/***/ }),
-/* 135 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/*!
- * is-primitive <https://github.com/jonschlinkert/is-primitive>
- *
- * Copyright (c) 2014-2015, Jon Schlinkert.
- * Licensed under the MIT License.
- */
-
-
-
-// see http://jsperf.com/testing-value-is-primitive/7
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-module.exports = function isPrimitive(value) {
-  return value == null || typeof value !== 'function' && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) !== 'object';
-};
-
-/***/ }),
-/* 136 */
+/* 216 */,
+/* 217 */,
+/* 218 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17755,11 +17722,11 @@ module.exports = function isPrimitive(value) {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return matchPath; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return withRouter; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_inferno__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_history__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_history__ = __webpack_require__(181);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_history___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_history__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_path_to_regexp_es6__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_path_to_regexp_es6__ = __webpack_require__(183);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_path_to_regexp_es6___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_path_to_regexp_es6__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_hoist_non_inferno_statics__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_hoist_non_inferno_statics__ = __webpack_require__(182);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_hoist_non_inferno_statics___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_hoist_non_inferno_statics__);
 
 
@@ -17780,11 +17747,6 @@ MERCHANTABLITY OR NON-INFRINGEMENT.
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
-/* global Reflect, Promise */
-
-
-
-
 
 function __rest(s, e) {
     var t = {};
@@ -18502,2407 +18464,6 @@ function withRouter(Com) {
     C.WrappedComponent = Com;
     return __WEBPACK_IMPORTED_MODULE_3_hoist_non_inferno_statics___default()(C, Com);
 }
-
-
-
-
-/***/ }),
-/* 137 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VNodeFlags", function() { return VNodeFlags; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChildFlags", function() { return ChildFlags; });
-/* If editing these values check babel-plugin-also */
-var VNodeFlags;
-(function (VNodeFlags) {
-    /* First set of bits define shape of vNode */
-    VNodeFlags[VNodeFlags["HtmlElement"] = 1] = "HtmlElement";
-    VNodeFlags[VNodeFlags["ComponentUnknown"] = 2] = "ComponentUnknown";
-    VNodeFlags[VNodeFlags["ComponentClass"] = 4] = "ComponentClass";
-    VNodeFlags[VNodeFlags["ComponentFunction"] = 8] = "ComponentFunction";
-    VNodeFlags[VNodeFlags["Text"] = 16] = "Text";
-    /* Special flags */
-    VNodeFlags[VNodeFlags["SvgElement"] = 32] = "SvgElement";
-    VNodeFlags[VNodeFlags["InputElement"] = 64] = "InputElement";
-    VNodeFlags[VNodeFlags["TextareaElement"] = 128] = "TextareaElement";
-    VNodeFlags[VNodeFlags["SelectElement"] = 256] = "SelectElement";
-    VNodeFlags[VNodeFlags["Void"] = 512] = "Void";
-    VNodeFlags[VNodeFlags["Portal"] = 1024] = "Portal";
-    VNodeFlags[VNodeFlags["ReCreate"] = 2048] = "ReCreate";
-    /* Masks */
-    VNodeFlags[VNodeFlags["FormElement"] = 448] = "FormElement";
-    VNodeFlags[VNodeFlags["Element"] = 481] = "Element";
-    VNodeFlags[VNodeFlags["Component"] = 14] = "Component";
-    VNodeFlags[VNodeFlags["VNodeShape"] = 1565] = "VNodeShape";
-})(VNodeFlags || (VNodeFlags = {}));
-// Combinations are not possible, its bitwise only to reduce vNode size
-var ChildFlags;
-(function (ChildFlags) {
-    ChildFlags[ChildFlags["UnknownChildren"] = 0] = "UnknownChildren";
-    /* Second set of bits define shape of children */
-    ChildFlags[ChildFlags["HasInvalidChildren"] = 1] = "HasInvalidChildren";
-    ChildFlags[ChildFlags["HasVNodeChildren"] = 2] = "HasVNodeChildren";
-    ChildFlags[ChildFlags["HasNonKeyedChildren"] = 4] = "HasNonKeyedChildren";
-    ChildFlags[ChildFlags["HasKeyedChildren"] = 8] = "HasKeyedChildren";
-    ChildFlags[ChildFlags["MultipleChildren"] = 12] = "MultipleChildren";
-})(ChildFlags || (ChildFlags = {}));
-
-
-
-
-/***/ }),
-/* 138 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NO_OP", function() { return NO_OP; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ERROR_MSG", function() { return ERROR_MSG; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isBrowser", function() { return isBrowser; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toArray", function() { return toArray; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isArray", function() { return isArray; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isStringOrNumber", function() { return isStringOrNumber; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isNullOrUndef", function() { return isNullOrUndef; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isInvalid", function() { return isInvalid; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isFunction", function() { return isFunction; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isString", function() { return isString; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isNumber", function() { return isNumber; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isNull", function() { return isNull; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isTrue", function() { return isTrue; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isUndefined", function() { return isUndefined; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isDefined", function() { return isDefined; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isObject", function() { return isObject; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "throwError", function() { return throwError; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "warning", function() { return warning; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "combineFrom", function() { return combineFrom; });
-var NO_OP = '$NO_OP';
-var ERROR_MSG = 'a runtime error occured! Use Inferno in development environment to find the error.';
-// This should be boolean and not reference to window.document
-var isBrowser = !!(typeof window !== 'undefined' && window.document);
-function toArray(children) {
-    return isArray(children) ? children : children ? [children] : children;
-}
-// this is MUCH faster than .constructor === Array and instanceof Array
-// in Node 7 and the later versions of V8, slower in older versions though
-var isArray = Array.isArray;
-function isStringOrNumber(o) {
-    var type = typeof o;
-    return type === 'string' || type === 'number';
-}
-function isNullOrUndef(o) {
-    return isUndefined(o) || isNull(o);
-}
-function isInvalid(o) {
-    return isNull(o) || o === false || isTrue(o) || isUndefined(o);
-}
-function isFunction(o) {
-    return typeof o === 'function';
-}
-function isString(o) {
-    return typeof o === 'string';
-}
-function isNumber(o) {
-    return typeof o === 'number';
-}
-function isNull(o) {
-    return o === null;
-}
-function isTrue(o) {
-    return o === true;
-}
-function isUndefined(o) {
-    return o === void 0;
-}
-function isDefined(o) {
-    return o !== void 0;
-}
-function isObject(o) {
-    return typeof o === 'object';
-}
-function throwError(message) {
-    if (!message) {
-        message = ERROR_MSG;
-    }
-    throw new Error(("Inferno Error: " + message));
-}
-function warning(message) {
-    // tslint:disable-next-line:no-console
-    console.error(message);
-}
-function combineFrom(first, second) {
-    var out = {};
-    if (first) {
-        for (var key in first) {
-            out[key] = first[key];
-        }
-    }
-    if (second) {
-        for (var key$1 in second) {
-            out[key$1] = second[key$1];
-        }
-    }
-    return out;
-}
-
-
-
-
-/***/ }),
-/* 139 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VNodeFlags", function() { return VNodeFlags; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChildFlags", function() { return ChildFlags; });
-/* If editing these values check babel-plugin-also */
-var VNodeFlags;
-(function (VNodeFlags) {
-    /* First set of bits define shape of vNode */
-    VNodeFlags[VNodeFlags["HtmlElement"] = 1] = "HtmlElement";
-    VNodeFlags[VNodeFlags["ComponentUnknown"] = 2] = "ComponentUnknown";
-    VNodeFlags[VNodeFlags["ComponentClass"] = 4] = "ComponentClass";
-    VNodeFlags[VNodeFlags["ComponentFunction"] = 8] = "ComponentFunction";
-    VNodeFlags[VNodeFlags["Text"] = 16] = "Text";
-    /* Special flags */
-    VNodeFlags[VNodeFlags["SvgElement"] = 32] = "SvgElement";
-    VNodeFlags[VNodeFlags["InputElement"] = 64] = "InputElement";
-    VNodeFlags[VNodeFlags["TextareaElement"] = 128] = "TextareaElement";
-    VNodeFlags[VNodeFlags["SelectElement"] = 256] = "SelectElement";
-    VNodeFlags[VNodeFlags["Void"] = 512] = "Void";
-    VNodeFlags[VNodeFlags["Portal"] = 1024] = "Portal";
-    VNodeFlags[VNodeFlags["ReCreate"] = 2048] = "ReCreate";
-    /* Masks */
-    VNodeFlags[VNodeFlags["FormElement"] = 448] = "FormElement";
-    VNodeFlags[VNodeFlags["Element"] = 481] = "Element";
-    VNodeFlags[VNodeFlags["Component"] = 14] = "Component";
-    VNodeFlags[VNodeFlags["VNodeShape"] = 1565] = "VNodeShape";
-})(VNodeFlags || (VNodeFlags = {}));
-// Combinations are not possible, its bitwise only to reduce vNode size
-var ChildFlags;
-(function (ChildFlags) {
-    ChildFlags[ChildFlags["UnknownChildren"] = 0] = "UnknownChildren";
-    /* Second set of bits define shape of children */
-    ChildFlags[ChildFlags["HasInvalidChildren"] = 1] = "HasInvalidChildren";
-    ChildFlags[ChildFlags["HasVNodeChildren"] = 2] = "HasVNodeChildren";
-    ChildFlags[ChildFlags["HasNonKeyedChildren"] = 4] = "HasNonKeyedChildren";
-    ChildFlags[ChildFlags["HasKeyedChildren"] = 8] = "HasKeyedChildren";
-    ChildFlags[ChildFlags["MultipleChildren"] = 12] = "MultipleChildren";
-})(ChildFlags || (ChildFlags = {}));
-
-
-
-
-/***/ }),
-/* 140 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Component; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return EMPTY_OBJ; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return NO_OP; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return createComponentVNode; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return createPortal; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return createRenderer; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return createTextVNode; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return createVNode; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return directClone; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return getFlagsForElementVnode; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return getNumberStyleValue; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return hydrate; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return linkEvent; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return normalizeProps; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return options; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return version; });
-var NO_OP = '$NO_OP';
-var ERROR_MSG = 'a runtime error occured! Use Inferno in development environment to find the error.';
-// This should be boolean and not reference to window.document
-var isBrowser = !!(typeof window !== 'undefined' && window.document);
-// this is MUCH faster than .constructor === Array and instanceof Array
-// in Node 7 and the later versions of V8, slower in older versions though
-var isArray = Array.isArray;
-function isStringOrNumber(o) {
-    var type = typeof o;
-    return type === 'string' || type === 'number';
-}
-function isNullOrUndef(o) {
-    return isUndefined(o) || isNull(o);
-}
-function isInvalid(o) {
-    return isNull(o) || o === false || isTrue(o) || isUndefined(o);
-}
-function isFunction(o) {
-    return typeof o === 'function';
-}
-function isString(o) {
-    return typeof o === 'string';
-}
-function isNumber(o) {
-    return typeof o === 'number';
-}
-function isNull(o) {
-    return o === null;
-}
-function isTrue(o) {
-    return o === true;
-}
-function isUndefined(o) {
-    return o === void 0;
-}
-function isDefined(o) {
-    return o !== void 0;
-}
-function isObject(o) {
-    return typeof o === 'object';
-}
-function throwError(message) {
-    if (!message) {
-        message = ERROR_MSG;
-    }
-    throw new Error(("Inferno Error: " + message));
-}
-function combineFrom(first, second) {
-    var out = {};
-    if (first) {
-        for (var key in first) {
-            out[key] = first[key];
-        }
-    }
-    if (second) {
-        for (var key$1 in second) {
-            out[key$1] = second[key$1];
-        }
-    }
-    return out;
-}
-
-var keyPrefix = '$';
-function getVNode(childFlags, children, className, flags, key, props, ref, type) {
-    {
-        return {
-            childFlags: childFlags,
-            children: children,
-            className: className,
-            dom: null,
-            flags: flags,
-            key: key === void 0 ? null : key,
-            parentVNode: null,
-            props: props === void 0 ? null : props,
-            ref: ref === void 0 ? null : ref,
-            type: type
-        };
-    }
-    return {
-        childFlags: childFlags,
-        children: children,
-        className: className,
-        dom: null,
-        flags: flags,
-        isValidated: false,
-        key: key === void 0 ? null : key,
-        parentVNode: null,
-        props: props === void 0 ? null : props,
-        ref: ref === void 0 ? null : ref,
-        type: type
-    };
-}
-function createVNode(flags, type, className, children, childFlags, props, key, ref) {
-    var childFlag = childFlags === void 0 ? 1 /* HasInvalidChildren */ : childFlags;
-    var vNode = getVNode(childFlag, children, className, flags, key, props, ref, type);
-    var optsVNode = options.createVNode;
-    if (typeof optsVNode === 'function') {
-        optsVNode(vNode);
-    }
-    if (childFlag === 0 /* UnknownChildren */) {
-        normalizeChildren(vNode, vNode.children);
-    }
-    return vNode;
-}
-function createComponentVNode(flags, type, props, key, ref) {
-    if ((flags & 2 /* ComponentUnknown */) > 0) {
-        flags = isDefined(type.prototype) && isFunction(type.prototype.render) ? 4 /* ComponentClass */ : 8 /* ComponentFunction */;
-    }
-    // set default props
-    var defaultProps = type.defaultProps;
-    if (!isNullOrUndef(defaultProps)) {
-        if (!props) {
-            props = {}; // Props can be referenced and modified at application level so always create new object
-        }
-        for (var prop in defaultProps) {
-            if (isUndefined(props[prop])) {
-                props[prop] = defaultProps[prop];
-            }
-        }
-    }
-    if ((flags & 8 /* ComponentFunction */) > 0) {
-        var defaultHooks = type.defaultHooks;
-        if (!isNullOrUndef(defaultHooks)) {
-            if (!ref) {
-                // As ref cannot be referenced from application level, we can use the same refs object
-                ref = defaultHooks;
-            }
-            else {
-                for (var prop$1 in defaultHooks) {
-                    if (isUndefined(ref[prop$1])) {
-                        ref[prop$1] = defaultHooks[prop$1];
-                    }
-                }
-            }
-        }
-    }
-    var vNode = getVNode(1 /* HasInvalidChildren */, null, null, flags, key, props, ref, type);
-    var optsVNode = options.createVNode;
-    if (isFunction(optsVNode)) {
-        optsVNode(vNode);
-    }
-    return vNode;
-}
-function createTextVNode(text, key) {
-    return getVNode(1 /* HasInvalidChildren */, isNullOrUndef(text) ? '' : text, null, 16 /* Text */, key, null, null, null);
-}
-function normalizeProps(vNode) {
-    var props = vNode.props;
-    if (props) {
-        if (vNode.flags & 481 /* Element */) {
-            if (isDefined(props.children) && isNullOrUndef(vNode.children)) {
-                normalizeChildren(vNode, props.children);
-            }
-            if (isDefined(props.className)) {
-                vNode.className = props.className || null;
-                props.className = undefined;
-            }
-        }
-        if (isDefined(props.key)) {
-            vNode.key = props.key;
-            props.key = undefined;
-        }
-        if (isDefined(props.ref)) {
-            vNode.ref = props.ref;
-            props.ref = undefined;
-        }
-    }
-    return vNode;
-}
-function directClone(vNodeToClone) {
-    var newVNode;
-    var flags = vNodeToClone.flags;
-    if (flags & 14 /* Component */) {
-        var props;
-        var propsToClone = vNodeToClone.props;
-        if (!isNull(propsToClone)) {
-            props = {};
-            for (var key in propsToClone) {
-                props[key] = propsToClone[key];
-            }
-        }
-        newVNode = createComponentVNode(flags, vNodeToClone.type, props, vNodeToClone.key, vNodeToClone.ref);
-    }
-    else if (flags & 481 /* Element */) {
-        var children = vNodeToClone.children;
-        newVNode = createVNode(flags, vNodeToClone.type, vNodeToClone.className, children, 0 /* UnknownChildren */, vNodeToClone.props, vNodeToClone.key, vNodeToClone.ref);
-    }
-    else if (flags & 16 /* Text */) {
-        newVNode = createTextVNode(vNodeToClone.children, vNodeToClone.key);
-    }
-    else if (flags & 1024 /* Portal */) {
-        newVNode = vNodeToClone;
-    }
-    return newVNode;
-}
-function createVoidVNode() {
-    return createTextVNode('', null);
-}
-function _normalizeVNodes(nodes, result, index, currentKey) {
-    for (var len = nodes.length; index < len; index++) {
-        var n = nodes[index];
-        if (!isInvalid(n)) {
-            var newKey = currentKey + keyPrefix + index;
-            if (isArray(n)) {
-                _normalizeVNodes(n, result, 0, newKey);
-            }
-            else {
-                if (isStringOrNumber(n)) {
-                    n = createTextVNode(n, newKey);
-                }
-                else {
-                    var oldKey = n.key;
-                    var isPrefixedKey = isString(oldKey) && oldKey[0] === keyPrefix;
-                    if (!isNull(n.dom) || isPrefixedKey) {
-                        n = directClone(n);
-                    }
-                    if (isNull(oldKey) || isPrefixedKey) {
-                        n.key = newKey;
-                    }
-                    else {
-                        n.key = currentKey + oldKey;
-                    }
-                }
-                result.push(n);
-            }
-        }
-    }
-}
-function getFlagsForElementVnode(type) {
-    if (type === 'svg') {
-        return 32 /* SvgElement */;
-    }
-    if (type === 'input') {
-        return 64 /* InputElement */;
-    }
-    if (type === 'select') {
-        return 256 /* SelectElement */;
-    }
-    if (type === 'textarea') {
-        return 128 /* TextareaElement */;
-    }
-    return 1 /* HtmlElement */;
-}
-function normalizeChildren(vNode, children) {
-    var newChildren;
-    var newChildFlags;
-    // Don't change children to match strict equal (===) true in patching
-    if (isInvalid(children)) {
-        newChildFlags = 1 /* HasInvalidChildren */;
-        newChildren = children;
-    }
-    else if (isString(children)) {
-        newChildFlags = 2 /* HasVNodeChildren */;
-        newChildren = createTextVNode(children);
-    }
-    else if (isNumber(children)) {
-        newChildFlags = 2 /* HasVNodeChildren */;
-        newChildren = createTextVNode(children + '');
-    }
-    else if (isArray(children)) {
-        var len = children.length;
-        if (len === 0) {
-            newChildren = null;
-            newChildFlags = 1 /* HasInvalidChildren */;
-        }
-        else {
-            // we assign $ which basically means we've flagged this array for future note
-            // if it comes back again, we need to clone it, as people are using it
-            // in an immutable way
-            // tslint:disable-next-line
-            if (Object.isFrozen(children) || children['$'] === true) {
-                children = children.slice();
-            }
-            newChildFlags = 8 /* HasKeyedChildren */;
-            for (var i = 0; i < len; i++) {
-                var n = children[i];
-                if (isInvalid(n) || isArray(n)) {
-                    newChildren = newChildren || children.slice(0, i);
-                    _normalizeVNodes(children, newChildren, i, '');
-                    break;
-                }
-                else if (isStringOrNumber(n)) {
-                    newChildren = newChildren || children.slice(0, i);
-                    newChildren.push(createTextVNode(n, keyPrefix + i));
-                }
-                else {
-                    var key = n.key;
-                    var isNullDom = isNull(n.dom);
-                    var isNullKey = isNull(key);
-                    var isPrefixed = !isNullKey && key[0] === keyPrefix;
-                    if (!isNullDom || isNullKey || isPrefixed) {
-                        newChildren = newChildren || children.slice(0, i);
-                        if (!isNullDom || isPrefixed) {
-                            n = directClone(n);
-                        }
-                        if (isNullKey || isPrefixed) {
-                            n.key = keyPrefix + i;
-                        }
-                        newChildren.push(n);
-                    }
-                    else if (newChildren) {
-                        newChildren.push(n);
-                    }
-                }
-            }
-            newChildren = newChildren || children;
-            newChildren.$ = true;
-        }
-    }
-    else {
-        newChildren = children;
-        if (!isNull(children.dom)) {
-            newChildren = directClone(children);
-        }
-        newChildFlags = 2 /* HasVNodeChildren */;
-    }
-    vNode.children = newChildren;
-    vNode.childFlags = newChildFlags;
-    return vNode;
-}
-var options = {
-    afterMount: null,
-    afterRender: null,
-    afterUpdate: null,
-    beforeRender: null,
-    beforeUnmount: null,
-    createVNode: null,
-    roots: []
-};
-
-/**
- * Links given data to event as first parameter
- * @param {*} data data to be linked, it will be available in function as first parameter
- * @param {Function} event Function to be called when event occurs
- * @returns {{data: *, event: Function}}
- */
-function linkEvent(data, event) {
-    if (isFunction(event)) {
-        return { data: data, event: event };
-    }
-    return null; // Return null when event is invalid, to avoid creating unnecessary event handlers
-}
-
-var xlinkNS = 'http://www.w3.org/1999/xlink';
-var xmlNS = 'http://www.w3.org/XML/1998/namespace';
-var svgNS = 'http://www.w3.org/2000/svg';
-var namespaces = {
-    'xlink:actuate': xlinkNS,
-    'xlink:arcrole': xlinkNS,
-    'xlink:href': xlinkNS,
-    'xlink:role': xlinkNS,
-    'xlink:show': xlinkNS,
-    'xlink:title': xlinkNS,
-    'xlink:type': xlinkNS,
-    'xml:base': xmlNS,
-    'xml:lang': xmlNS,
-    'xml:space': xmlNS
-};
-
-// We need EMPTY_OBJ defined in one place.
-// Its used for comparison so we cant inline it into shared
-var EMPTY_OBJ = {};
-var LIFECYCLE = [];
-function appendChild(parentDom, dom) {
-    parentDom.appendChild(dom);
-}
-function insertOrAppend(parentDom, newNode, nextNode) {
-    if (isNullOrUndef(nextNode)) {
-        appendChild(parentDom, newNode);
-    }
-    else {
-        parentDom.insertBefore(newNode, nextNode);
-    }
-}
-function documentCreateElement(tag, isSVG) {
-    if (isSVG === true) {
-        return document.createElementNS(svgNS, tag);
-    }
-    return document.createElement(tag);
-}
-function replaceChild(parentDom, newDom, lastDom) {
-    parentDom.replaceChild(newDom, lastDom);
-}
-function removeChild(parentDom, dom) {
-    parentDom.removeChild(dom);
-}
-function callAll(arrayFn) {
-    var listener;
-    while ((listener = arrayFn.shift()) !== undefined) {
-        listener();
-    }
-}
-
-var attachedEventCounts = {};
-var attachedEvents = {};
-function handleEvent(name, nextEvent, dom) {
-    var eventsLeft = attachedEventCounts[name];
-    var eventsObject = dom.$EV;
-    if (nextEvent) {
-        if (!eventsLeft) {
-            attachedEvents[name] = attachEventToDocument(name);
-            attachedEventCounts[name] = 0;
-        }
-        if (!eventsObject) {
-            eventsObject = dom.$EV = {};
-        }
-        if (!eventsObject[name]) {
-            attachedEventCounts[name]++;
-        }
-        eventsObject[name] = nextEvent;
-    }
-    else if (eventsObject && eventsObject[name]) {
-        attachedEventCounts[name]--;
-        if (eventsLeft === 1) {
-            document.removeEventListener(normalizeEventName(name), attachedEvents[name]);
-            attachedEvents[name] = null;
-        }
-        eventsObject[name] = nextEvent;
-    }
-}
-function dispatchEvents(event, target, isClick, name, eventData) {
-    var dom = target;
-    while (!isNull(dom)) {
-        // Html Nodes can be nested fe: span inside button in that scenario browser does not handle disabled attribute on parent,
-        // because the event listener is on document.body
-        // Don't process clicks on disabled elements
-        if (isClick && dom.disabled) {
-            return;
-        }
-        var eventsObject = dom.$EV;
-        if (eventsObject) {
-            var currentEvent = eventsObject[name];
-            if (currentEvent) {
-                // linkEvent object
-                eventData.dom = dom;
-                if (currentEvent.event) {
-                    currentEvent.event(currentEvent.data, event);
-                }
-                else {
-                    currentEvent(event);
-                }
-                if (event.cancelBubble) {
-                    return;
-                }
-            }
-        }
-        dom = dom.parentNode;
-    }
-}
-function normalizeEventName(name) {
-    return name.substr(2).toLowerCase();
-}
-function stopPropagation() {
-    this.cancelBubble = true;
-    this.stopImmediatePropagation();
-}
-function attachEventToDocument(name) {
-    var docEvent = function (event) {
-        var type = event.type;
-        var isClick = type === 'click' || type === 'dblclick';
-        if (isClick && event.button !== 0) {
-            // Firefox incorrectly triggers click event for mid/right mouse buttons.
-            // This bug has been active for 12 years.
-            // https://bugzilla.mozilla.org/show_bug.cgi?id=184051
-            event.preventDefault();
-            event.stopPropagation();
-            return false;
-        }
-        event.stopPropagation = stopPropagation;
-        // Event data needs to be object to save reference to currentTarget getter
-        var eventData = {
-            dom: document
-        };
-        try {
-            Object.defineProperty(event, 'currentTarget', {
-                configurable: true,
-                get: function get() {
-                    return eventData.dom;
-                }
-            });
-        }
-        catch (e) {
-            /* safari7 and phantomJS will crash */
-        }
-        dispatchEvents(event, event.target, isClick, name, eventData);
-    };
-    document.addEventListener(normalizeEventName(name), docEvent);
-    return docEvent;
-}
-
-function isSameInnerHTML(dom, innerHTML) {
-    var tempdom = document.createElement('i');
-    tempdom.innerHTML = innerHTML;
-    return tempdom.innerHTML === dom.innerHTML;
-}
-function isSamePropsInnerHTML(dom, props) {
-    return Boolean(props && props.dangerouslySetInnerHTML && props.dangerouslySetInnerHTML.__html && isSameInnerHTML(dom, props.dangerouslySetInnerHTML.__html));
-}
-
-function triggerEventListener(props, methodName, e) {
-    if (props[methodName]) {
-        var listener = props[methodName];
-        if (listener.event) {
-            listener.event(listener.data, e);
-        }
-        else {
-            listener(e);
-        }
-    }
-    else {
-        var nativeListenerName = methodName.toLowerCase();
-        if (props[nativeListenerName]) {
-            props[nativeListenerName](e);
-        }
-    }
-}
-function createWrappedFunction(methodName, applyValue) {
-    var fnMethod = function (e) {
-        e.stopPropagation();
-        var vNode = this.$V;
-        // If vNode is gone by the time event fires, no-op
-        if (!vNode) {
-            return;
-        }
-        var props = vNode.props || EMPTY_OBJ;
-        var dom = vNode.dom;
-        if (isString(methodName)) {
-            triggerEventListener(props, methodName, e);
-        }
-        else {
-            for (var i = 0; i < methodName.length; i++) {
-                triggerEventListener(props, methodName[i], e);
-            }
-        }
-        if (isFunction(applyValue)) {
-            var newVNode = this.$V;
-            var newProps = newVNode.props || EMPTY_OBJ;
-            applyValue(newProps, dom, false, newVNode);
-        }
-    };
-    Object.defineProperty(fnMethod, 'wrapped', {
-        configurable: false,
-        enumerable: false,
-        value: true,
-        writable: false
-    });
-    return fnMethod;
-}
-
-function isCheckedType(type) {
-    return type === 'checkbox' || type === 'radio';
-}
-var onTextInputChange = createWrappedFunction('onInput', applyValueInput);
-var wrappedOnChange = createWrappedFunction(['onClick', 'onChange'], applyValueInput);
-/* tslint:disable-next-line:no-empty */
-function emptywrapper(event) {
-    event.stopPropagation();
-}
-emptywrapper.wrapped = true;
-function inputEvents(dom, nextPropsOrEmpty) {
-    if (isCheckedType(nextPropsOrEmpty.type)) {
-        dom.onchange = wrappedOnChange;
-        dom.onclick = emptywrapper;
-    }
-    else {
-        dom.oninput = onTextInputChange;
-    }
-}
-function applyValueInput(nextPropsOrEmpty, dom) {
-    var type = nextPropsOrEmpty.type;
-    var value = nextPropsOrEmpty.value;
-    var checked = nextPropsOrEmpty.checked;
-    var multiple = nextPropsOrEmpty.multiple;
-    var defaultValue = nextPropsOrEmpty.defaultValue;
-    var hasValue = !isNullOrUndef(value);
-    if (type && type !== dom.type) {
-        dom.setAttribute('type', type);
-    }
-    if (!isNullOrUndef(multiple) && multiple !== dom.multiple) {
-        dom.multiple = multiple;
-    }
-    if (!isNullOrUndef(defaultValue) && !hasValue) {
-        dom.defaultValue = defaultValue + '';
-    }
-    if (isCheckedType(type)) {
-        if (hasValue) {
-            dom.value = value;
-        }
-        if (!isNullOrUndef(checked)) {
-            dom.checked = checked;
-        }
-    }
-    else {
-        if (hasValue && dom.value !== value) {
-            dom.defaultValue = value;
-            dom.value = value;
-        }
-        else if (!isNullOrUndef(checked)) {
-            dom.checked = checked;
-        }
-    }
-}
-
-function updateChildOptionGroup(vNode, value) {
-    var type = vNode.type;
-    if (type === 'optgroup') {
-        var children = vNode.children;
-        var childFlags = vNode.childFlags;
-        if (childFlags & 12 /* MultipleChildren */) {
-            for (var i = 0, len = children.length; i < len; i++) {
-                updateChildOption(children[i], value);
-            }
-        }
-        else if (childFlags === 2 /* HasVNodeChildren */) {
-            updateChildOption(children, value);
-        }
-    }
-    else {
-        updateChildOption(vNode, value);
-    }
-}
-function updateChildOption(vNode, value) {
-    var props = vNode.props || EMPTY_OBJ;
-    var dom = vNode.dom;
-    // we do this as multiple may have changed
-    dom.value = props.value;
-    if ((isArray(value) && value.indexOf(props.value) !== -1) || props.value === value) {
-        dom.selected = true;
-    }
-    else if (!isNullOrUndef(value) || !isNullOrUndef(props.selected)) {
-        dom.selected = props.selected || false;
-    }
-}
-var onSelectChange = createWrappedFunction('onChange', applyValueSelect);
-function selectEvents(dom) {
-    dom.onchange = onSelectChange;
-}
-function applyValueSelect(nextPropsOrEmpty, dom, mounting, vNode) {
-    var multiplePropInBoolean = Boolean(nextPropsOrEmpty.multiple);
-    if (!isNullOrUndef(nextPropsOrEmpty.multiple) && multiplePropInBoolean !== dom.multiple) {
-        dom.multiple = multiplePropInBoolean;
-    }
-    var childFlags = vNode.childFlags;
-    if ((childFlags & 1 /* HasInvalidChildren */) === 0) {
-        var children = vNode.children;
-        var value = nextPropsOrEmpty.value;
-        if (mounting && isNullOrUndef(value)) {
-            value = nextPropsOrEmpty.defaultValue;
-        }
-        if (childFlags & 12 /* MultipleChildren */) {
-            for (var i = 0, len = children.length; i < len; i++) {
-                updateChildOptionGroup(children[i], value);
-            }
-        }
-        else if (childFlags === 2 /* HasVNodeChildren */) {
-            updateChildOptionGroup(children, value);
-        }
-    }
-}
-
-var onTextareaInputChange = createWrappedFunction('onInput', applyValueTextArea);
-var wrappedOnChange$1 = createWrappedFunction('onChange');
-function textAreaEvents(dom, nextPropsOrEmpty) {
-    dom.oninput = onTextareaInputChange;
-    if (nextPropsOrEmpty.onChange) {
-        dom.onchange = wrappedOnChange$1;
-    }
-}
-function applyValueTextArea(nextPropsOrEmpty, dom, mounting) {
-    var value = nextPropsOrEmpty.value;
-    var domValue = dom.value;
-    if (isNullOrUndef(value)) {
-        if (mounting) {
-            var defaultValue = nextPropsOrEmpty.defaultValue;
-            if (!isNullOrUndef(defaultValue) && defaultValue !== domValue) {
-                dom.defaultValue = defaultValue;
-                dom.value = defaultValue;
-            }
-        }
-    }
-    else if (domValue !== value) {
-        /* There is value so keep it controlled */
-        dom.defaultValue = value;
-        dom.value = value;
-    }
-}
-
-/**
- * There is currently no support for switching same input between controlled and nonControlled
- * If that ever becomes a real issue, then re design controlled elements
- * Currently user must choose either controlled or non-controlled and stick with that
- */
-function processElement(flags, vNode, dom, nextPropsOrEmpty, mounting, isControlled) {
-    if (flags & 64 /* InputElement */) {
-        applyValueInput(nextPropsOrEmpty, dom);
-    }
-    else if (flags & 256 /* SelectElement */) {
-        applyValueSelect(nextPropsOrEmpty, dom, mounting, vNode);
-    }
-    else if (flags & 128 /* TextareaElement */) {
-        applyValueTextArea(nextPropsOrEmpty, dom, mounting);
-    }
-    if (isControlled) {
-        dom.$V = vNode;
-    }
-}
-function addFormElementEventHandlers(flags, dom, nextPropsOrEmpty) {
-    if (flags & 64 /* InputElement */) {
-        inputEvents(dom, nextPropsOrEmpty);
-    }
-    else if (flags & 256 /* SelectElement */) {
-        selectEvents(dom);
-    }
-    else if (flags & 128 /* TextareaElement */) {
-        textAreaEvents(dom, nextPropsOrEmpty);
-    }
-}
-function isControlledFormElement(nextPropsOrEmpty) {
-    return nextPropsOrEmpty.type && isCheckedType(nextPropsOrEmpty.type) ? !isNullOrUndef(nextPropsOrEmpty.checked) : !isNullOrUndef(nextPropsOrEmpty.value);
-}
-
-function remove(vNode, parentDom) {
-    unmount(vNode);
-    if (!isNull(parentDom)) {
-        removeChild(parentDom, vNode.dom);
-        // Let carbage collector free memory
-        vNode.dom = null;
-    }
-}
-function unmount(vNode) {
-    var flags = vNode.flags;
-    if (flags & 481 /* Element */) {
-        var ref = vNode.ref;
-        var props = vNode.props;
-        if (isFunction(ref)) {
-            ref(null);
-        }
-        var children = vNode.children;
-        var childFlags = vNode.childFlags;
-        if (childFlags & 12 /* MultipleChildren */) {
-            unmountAllChildren(children);
-        }
-        else if (childFlags === 2 /* HasVNodeChildren */) {
-            unmount(children);
-        }
-        if (!isNull(props)) {
-            for (var name in props) {
-                switch (name) {
-                    case 'onClick':
-                    case 'onDblClick':
-                    case 'onFocusIn':
-                    case 'onFocusOut':
-                    case 'onKeyDown':
-                    case 'onKeyPress':
-                    case 'onKeyUp':
-                    case 'onMouseDown':
-                    case 'onMouseMove':
-                    case 'onMouseUp':
-                    case 'onSubmit':
-                    case 'onTouchEnd':
-                    case 'onTouchMove':
-                    case 'onTouchStart':
-                        handleEvent(name, null, vNode.dom);
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-    }
-    else if (flags & 14 /* Component */) {
-        var instance = vNode.children;
-        var ref$1 = vNode.ref;
-        if (flags & 4 /* ComponentClass */) {
-            if (isFunction(options.beforeUnmount)) {
-                options.beforeUnmount(vNode);
-            }
-            if (isFunction(instance.componentWillUnmount)) {
-                instance.componentWillUnmount();
-            }
-            if (isFunction(ref$1)) {
-                ref$1(null);
-            }
-            instance.$UN = true;
-            unmount(instance.$LI);
-        }
-        else {
-            if (!isNullOrUndef(ref$1) && isFunction(ref$1.onComponentWillUnmount)) {
-                ref$1.onComponentWillUnmount(vNode.dom, vNode.props || EMPTY_OBJ);
-            }
-            unmount(instance);
-        }
-    }
-    else if (flags & 1024 /* Portal */) {
-        var children$1 = vNode.children;
-        if (!isNull(children$1) && isObject(children$1)) {
-            remove(children$1, vNode.type);
-        }
-    }
-}
-function unmountAllChildren(children) {
-    for (var i = 0, len = children.length; i < len; i++) {
-        unmount(children[i]);
-    }
-}
-function removeAllChildren(dom, children) {
-    unmountAllChildren(children);
-    dom.textContent = '';
-}
-
-function createLinkEvent(linkEvent, nextValue) {
-    return function (e) {
-        linkEvent(nextValue.data, e);
-    };
-}
-function patchEvent(name, lastValue, nextValue, dom) {
-    var nameLowerCase = name.toLowerCase();
-    if (!isFunction(nextValue) && !isNullOrUndef(nextValue)) {
-        var linkEvent = nextValue.event;
-        if (linkEvent && isFunction(linkEvent)) {
-            dom[nameLowerCase] = createLinkEvent(linkEvent, nextValue);
-        }
-        else {
-            // Development warning
-            
-        }
-    }
-    else {
-        var domEvent = dom[nameLowerCase];
-        // if the function is wrapped, that means it's been controlled by a wrapper
-        if (!domEvent || !domEvent.wrapped) {
-            dom[nameLowerCase] = nextValue;
-        }
-    }
-}
-function getNumberStyleValue(style, value) {
-    switch (style) {
-        case 'animationIterationCount':
-        case 'borderImageOutset':
-        case 'borderImageSlice':
-        case 'borderImageWidth':
-        case 'boxFlex':
-        case 'boxFlexGroup':
-        case 'boxOrdinalGroup':
-        case 'columnCount':
-        case 'fillOpacity':
-        case 'flex':
-        case 'flexGrow':
-        case 'flexNegative':
-        case 'flexOrder':
-        case 'flexPositive':
-        case 'flexShrink':
-        case 'floodOpacity':
-        case 'fontWeight':
-        case 'gridColumn':
-        case 'gridRow':
-        case 'lineClamp':
-        case 'lineHeight':
-        case 'opacity':
-        case 'order':
-        case 'orphans':
-        case 'stopOpacity':
-        case 'strokeDasharray':
-        case 'strokeDashoffset':
-        case 'strokeMiterlimit':
-        case 'strokeOpacity':
-        case 'strokeWidth':
-        case 'tabSize':
-        case 'widows':
-        case 'zIndex':
-        case 'zoom':
-            return value;
-        default:
-            return value + 'px';
-    }
-}
-// We are assuming here that we come from patchProp routine
-// -nextAttrValue cannot be null or undefined
-function patchStyle(lastAttrValue, nextAttrValue, dom) {
-    var domStyle = dom.style;
-    var style;
-    var value;
-    if (isString(nextAttrValue)) {
-        domStyle.cssText = nextAttrValue;
-        return;
-    }
-    if (!isNullOrUndef(lastAttrValue) && !isString(lastAttrValue)) {
-        for (style in nextAttrValue) {
-            // do not add a hasOwnProperty check here, it affects performance
-            value = nextAttrValue[style];
-            if (value !== lastAttrValue[style]) {
-                domStyle[style] = isNumber(value) ? getNumberStyleValue(style, value) : value;
-            }
-        }
-        for (style in lastAttrValue) {
-            if (isNullOrUndef(nextAttrValue[style])) {
-                domStyle[style] = '';
-            }
-        }
-    }
-    else {
-        for (style in nextAttrValue) {
-            value = nextAttrValue[style];
-            domStyle[style] = isNumber(value) ? getNumberStyleValue(style, value) : value;
-        }
-    }
-}
-function patchProp(prop, lastValue, nextValue, dom, isSVG, hasControlledValue, lastVNode) {
-    switch (prop) {
-        case 'onClick':
-        case 'onDblClick':
-        case 'onFocusIn':
-        case 'onFocusOut':
-        case 'onKeyDown':
-        case 'onKeyPress':
-        case 'onKeyUp':
-        case 'onMouseDown':
-        case 'onMouseMove':
-        case 'onMouseUp':
-        case 'onSubmit':
-        case 'onTouchEnd':
-        case 'onTouchMove':
-        case 'onTouchStart':
-            handleEvent(prop, nextValue, dom);
-            break;
-        case 'children':
-        case 'childrenType':
-        case 'className':
-        case 'defaultValue':
-        case 'key':
-        case 'multiple':
-        case 'ref':
-            return;
-        case 'allowfullscreen':
-        case 'autoFocus':
-        case 'autoplay':
-        case 'capture':
-        case 'checked':
-        case 'controls':
-        case 'default':
-        case 'disabled':
-        case 'hidden':
-        case 'indeterminate':
-        case 'loop':
-        case 'muted':
-        case 'novalidate':
-        case 'open':
-        case 'readOnly':
-        case 'required':
-        case 'reversed':
-        case 'scoped':
-        case 'seamless':
-        case 'selected':
-            prop = prop === 'autoFocus' ? prop.toLowerCase() : prop;
-            dom[prop] = !!nextValue;
-            break;
-        case 'defaultChecked':
-        case 'value':
-        case 'volume':
-            if (hasControlledValue && prop === 'value') {
-                return;
-            }
-            var value = isNullOrUndef(nextValue) ? '' : nextValue;
-            if (dom[prop] !== value) {
-                dom[prop] = value;
-            }
-            break;
-        case 'dangerouslySetInnerHTML':
-            var lastHtml = (lastValue && lastValue.__html) || '';
-            var nextHtml = (nextValue && nextValue.__html) || '';
-            if (lastHtml !== nextHtml) {
-                if (!isNullOrUndef(nextHtml) && !isSameInnerHTML(dom, nextHtml)) {
-                    if (!isNull(lastVNode)) {
-                        if (lastVNode.childFlags & 12 /* MultipleChildren */) {
-                            unmountAllChildren(lastVNode.children);
-                        }
-                        else if (lastVNode.childFlags === 2 /* HasVNodeChildren */) {
-                            unmount(lastVNode.children);
-                        }
-                        lastVNode.children = null;
-                        lastVNode.childFlags = 1 /* HasInvalidChildren */;
-                    }
-                    dom.innerHTML = nextHtml;
-                }
-            }
-            break;
-        default:
-            if (prop[0] === 'o' && prop[1] === 'n') {
-                patchEvent(prop, lastValue, nextValue, dom);
-            }
-            else if (isNullOrUndef(nextValue)) {
-                dom.removeAttribute(prop);
-            }
-            else if (prop === 'style') {
-                patchStyle(lastValue, nextValue, dom);
-            }
-            else if (isSVG && namespaces[prop]) {
-                // We optimize for NS being boolean. Its 99.9% time false
-                // If we end up in this path we can read property again
-                dom.setAttributeNS(namespaces[prop], prop, nextValue);
-            }
-            else {
-                dom.setAttribute(prop, nextValue);
-            }
-            break;
-    }
-}
-function mountProps(vNode, flags, props, dom, isSVG) {
-    var hasControlledValue = false;
-    var isFormElement = (flags & 448 /* FormElement */) > 0;
-    if (isFormElement) {
-        hasControlledValue = isControlledFormElement(props);
-        if (hasControlledValue) {
-            addFormElementEventHandlers(flags, dom, props);
-        }
-    }
-    for (var prop in props) {
-        // do not add a hasOwnProperty check here, it affects performance
-        patchProp(prop, null, props[prop], dom, isSVG, hasControlledValue, null);
-    }
-    if (isFormElement) {
-        processElement(flags, vNode, dom, props, true, hasControlledValue);
-    }
-}
-
-function createClassComponentInstance(vNode, Component, props, context) {
-    var instance = new Component(props, context);
-    vNode.children = instance;
-    instance.$V = vNode;
-    instance.$BS = false;
-    instance.context = context;
-    if (instance.props === EMPTY_OBJ) {
-        instance.props = props;
-    }
-    instance.$UN = false;
-    if (isFunction(instance.componentWillMount)) {
-        instance.$BR = true;
-        instance.componentWillMount();
-        if (instance.$PSS) {
-            var state = instance.state;
-            var pending = instance.$PS;
-            if (isNull(state)) {
-                instance.state = pending;
-            }
-            else {
-                for (var key in pending) {
-                    state[key] = pending[key];
-                }
-            }
-            instance.$PSS = false;
-            instance.$PS = null;
-        }
-        instance.$BR = false;
-    }
-    if (isFunction(options.beforeRender)) {
-        options.beforeRender(instance);
-    }
-    var input = handleComponentInput(instance.render(props, instance.state, context), vNode);
-    var childContext;
-    if (isFunction(instance.getChildContext)) {
-        childContext = instance.getChildContext();
-    }
-    if (isNullOrUndef(childContext)) {
-        instance.$CX = context;
-    }
-    else {
-        instance.$CX = combineFrom(context, childContext);
-    }
-    if (isFunction(options.afterRender)) {
-        options.afterRender(instance);
-    }
-    instance.$LI = input;
-    return instance;
-}
-function handleComponentInput(input, componentVNode) {
-    // Development validation
-    if (isInvalid(input)) {
-        input = createVoidVNode();
-    }
-    else if (isStringOrNumber(input)) {
-        input = createTextVNode(input, null);
-    }
-    else {
-        if (input.dom) {
-            input = directClone(input);
-        }
-        if (input.flags & 14 /* Component */) {
-            // if we have an input that is also a component, we run into a tricky situation
-            // where the root vNode needs to always have the correct DOM entry
-            // we can optimise this in the future, but this gets us out of a lot of issues
-            input.parentVNode = componentVNode;
-        }
-    }
-    return input;
-}
-
-function mount(vNode, parentDom, lifecycle, context, isSVG) {
-    var flags = vNode.flags;
-    if (flags & 481 /* Element */) {
-        return mountElement(vNode, parentDom, lifecycle, context, isSVG);
-    }
-    if (flags & 14 /* Component */) {
-        return mountComponent(vNode, parentDom, lifecycle, context, isSVG, (flags & 4 /* ComponentClass */) > 0);
-    }
-    if (flags & 512 /* Void */ || flags & 16 /* Text */) {
-        return mountText(vNode, parentDom);
-    }
-    if (flags & 1024 /* Portal */) {
-        mount(vNode.children, vNode.type, lifecycle, context, false);
-        return (vNode.dom = mountText(createVoidVNode(), parentDom));
-    }
-    // Development validation, in production we don't need to throw because it crashes anyway
-    
-}
-function mountText(vNode, parentDom) {
-    var dom = (vNode.dom = document.createTextNode(vNode.children));
-    if (!isNull(parentDom)) {
-        appendChild(parentDom, dom);
-    }
-    return dom;
-}
-function mountElement(vNode, parentDom, lifecycle, context, isSVG) {
-    var flags = vNode.flags;
-    var children = vNode.children;
-    var props = vNode.props;
-    var className = vNode.className;
-    var ref = vNode.ref;
-    var childFlags = vNode.childFlags;
-    isSVG = isSVG || (flags & 32 /* SvgElement */) > 0;
-    var dom = documentCreateElement(vNode.type, isSVG);
-    vNode.dom = dom;
-    if (!isNullOrUndef(className) && className !== '') {
-        if (isSVG) {
-            dom.setAttribute('class', className);
-        }
-        else {
-            dom.className = className;
-        }
-    }
-    if (!isNull(parentDom)) {
-        appendChild(parentDom, dom);
-    }
-    if ((childFlags & 1 /* HasInvalidChildren */) === 0) {
-        var childrenIsSVG = isSVG === true && vNode.type !== 'foreignObject';
-        if (childFlags === 2 /* HasVNodeChildren */) {
-            mount(children, dom, lifecycle, context, childrenIsSVG);
-        }
-        else if (childFlags & 12 /* MultipleChildren */) {
-            mountArrayChildren(children, dom, lifecycle, context, childrenIsSVG);
-        }
-    }
-    if (!isNull(props)) {
-        mountProps(vNode, flags, props, dom, isSVG);
-    }
-    if (isFunction(ref)) {
-        mountRef(dom, ref, lifecycle);
-    }
-    return dom;
-}
-function mountArrayChildren(children, dom, lifecycle, context, isSVG) {
-    for (var i = 0, len = children.length; i < len; i++) {
-        var child = children[i];
-        if (!isNull(child.dom)) {
-            children[i] = child = directClone(child);
-        }
-        mount(child, dom, lifecycle, context, isSVG);
-    }
-}
-function mountComponent(vNode, parentDom, lifecycle, context, isSVG, isClass) {
-    var dom;
-    var type = vNode.type;
-    var props = vNode.props || EMPTY_OBJ;
-    var ref = vNode.ref;
-    if (isClass) {
-        var instance = createClassComponentInstance(vNode, type, props, context);
-        var input = instance.$LI;
-        vNode.dom = dom = mount(input, null, lifecycle, instance.$CX, isSVG);
-        mountClassComponentCallbacks(vNode, ref, instance, lifecycle);
-        instance.$UPD = false;
-    }
-    else {
-        var input$1 = handleComponentInput(type(props, context), vNode);
-        vNode.dom = dom = mount(input$1, null, lifecycle, context, isSVG);
-        vNode.children = input$1;
-        mountFunctionalComponentCallbacks(props, ref, dom, lifecycle);
-    }
-    if (!isNull(parentDom)) {
-        appendChild(parentDom, dom);
-    }
-    return dom;
-}
-function createClassMountCallback(instance, hasAfterMount, afterMount, vNode, hasDidMount) {
-    return function () {
-        instance.$UPD = true;
-        if (hasAfterMount) {
-            afterMount(vNode);
-        }
-        if (hasDidMount) {
-            instance.componentDidMount();
-        }
-        instance.$UPD = false;
-    };
-}
-function mountClassComponentCallbacks(vNode, ref, instance, lifecycle) {
-    if (isFunction(ref)) {
-        ref(instance);
-    }
-    else {
-        
-    }
-    var hasDidMount = isFunction(instance.componentDidMount);
-    var afterMount = options.afterMount;
-    var hasAfterMount = isFunction(afterMount);
-    if (hasDidMount || hasAfterMount) {
-        lifecycle.push(createClassMountCallback(instance, hasAfterMount, afterMount, vNode, hasDidMount));
-    }
-}
-// Create did mount callback lazily to avoid creating function context if not needed
-function createOnMountCallback(ref, dom, props) {
-    return function () { return ref.onComponentDidMount(dom, props); };
-}
-function mountFunctionalComponentCallbacks(props, ref, dom, lifecycle) {
-    if (!isNullOrUndef(ref)) {
-        if (isFunction(ref.onComponentWillMount)) {
-            ref.onComponentWillMount(props);
-        }
-        if (isFunction(ref.onComponentDidMount)) {
-            lifecycle.push(createOnMountCallback(ref, dom, props));
-        }
-    }
-}
-function mountRef(dom, value, lifecycle) {
-    lifecycle.push(function () { return value(dom); });
-}
-
-function hydrateComponent(vNode, dom, lifecycle, context, isSVG, isClass) {
-    var type = vNode.type;
-    var ref = vNode.ref;
-    var props = vNode.props || EMPTY_OBJ;
-    if (isClass) {
-        var instance = createClassComponentInstance(vNode, type, props, context);
-        var input = instance.$LI;
-        hydrateVNode(input, dom, lifecycle, instance.$CX, isSVG);
-        vNode.dom = input.dom;
-        mountClassComponentCallbacks(vNode, ref, instance, lifecycle);
-        instance.$UPD = false; // Mount finished allow going sync
-    }
-    else {
-        var input$1 = handleComponentInput(type(props, context), vNode);
-        hydrateVNode(input$1, dom, lifecycle, context, isSVG);
-        vNode.children = input$1;
-        vNode.dom = input$1.dom;
-        mountFunctionalComponentCallbacks(props, ref, dom, lifecycle);
-    }
-}
-function hydrateElement(vNode, dom, lifecycle, context, isSVG) {
-    var children = vNode.children;
-    var props = vNode.props;
-    var className = vNode.className;
-    var flags = vNode.flags;
-    var ref = vNode.ref;
-    isSVG = isSVG || (flags & 32 /* SvgElement */) > 0;
-    if (dom.nodeType !== 1 || dom.tagName.toLowerCase() !== vNode.type) {
-        var newDom = mountElement(vNode, null, lifecycle, context, isSVG);
-        vNode.dom = newDom;
-        replaceChild(dom.parentNode, newDom, dom);
-    }
-    else {
-        vNode.dom = dom;
-        var childNode = dom.firstChild;
-        var childFlags = vNode.childFlags;
-        if ((childFlags & 1 /* HasInvalidChildren */) === 0) {
-            var nextSibling = null;
-            while (childNode) {
-                nextSibling = childNode.nextSibling;
-                if (childNode.nodeType === 8) {
-                    if (childNode.data === '!') {
-                        dom.replaceChild(document.createTextNode(''), childNode);
-                    }
-                    else {
-                        dom.removeChild(childNode);
-                    }
-                }
-                childNode = nextSibling;
-            }
-            childNode = dom.firstChild;
-            if (childFlags === 2 /* HasVNodeChildren */) {
-                if (isNull(childNode)) {
-                    mount(children, dom, lifecycle, context, isSVG);
-                }
-                else {
-                    nextSibling = childNode.nextSibling;
-                    hydrateVNode(children, childNode, lifecycle, context, isSVG);
-                    childNode = nextSibling;
-                }
-            }
-            else if (childFlags & 12 /* MultipleChildren */) {
-                for (var i = 0, len = children.length; i < len; i++) {
-                    var child = children[i];
-                    if (isNull(childNode)) {
-                        mount(child, dom, lifecycle, context, isSVG);
-                    }
-                    else {
-                        nextSibling = childNode.nextSibling;
-                        hydrateVNode(child, childNode, lifecycle, context, isSVG);
-                        childNode = nextSibling;
-                    }
-                }
-            }
-            // clear any other DOM nodes, there should be only a single entry for the root
-            while (childNode) {
-                nextSibling = childNode.nextSibling;
-                dom.removeChild(childNode);
-                childNode = nextSibling;
-            }
-        }
-        else if (!isNull(dom.firstChild) && !isSamePropsInnerHTML(dom, props)) {
-            dom.textContent = ''; // dom has content, but VNode has no children remove everything from DOM
-            if (flags & 448 /* FormElement */) {
-                // If element is form element, we need to clear defaultValue also
-                dom.defaultValue = '';
-            }
-        }
-        if (!isNull(props)) {
-            mountProps(vNode, flags, props, dom, isSVG);
-        }
-        if (isNullOrUndef(className)) {
-            if (dom.className !== '') {
-                dom.removeAttribute('class');
-            }
-        }
-        else if (isSVG) {
-            dom.setAttribute('class', className);
-        }
-        else {
-            dom.className = className;
-        }
-        if (isFunction(ref)) {
-            mountRef(dom, ref, lifecycle);
-        }
-        else {
-            
-        }
-    }
-}
-function hydrateText(vNode, dom) {
-    if (dom.nodeType !== 3) {
-        var newDom = mountText(vNode, null);
-        vNode.dom = newDom;
-        replaceChild(dom.parentNode, newDom, dom);
-    }
-    else {
-        var text = vNode.children;
-        if (dom.nodeValue !== text) {
-            dom.nodeValue = text;
-        }
-        vNode.dom = dom;
-    }
-}
-function hydrateVNode(vNode, dom, lifecycle, context, isSVG) {
-    var flags = vNode.flags;
-    if (flags & 14 /* Component */) {
-        hydrateComponent(vNode, dom, lifecycle, context, isSVG, (flags & 4 /* ComponentClass */) > 0);
-    }
-    else if (flags & 481 /* Element */) {
-        hydrateElement(vNode, dom, lifecycle, context, isSVG);
-    }
-    else if (flags & 16 /* Text */) {
-        hydrateText(vNode, dom);
-    }
-    else if (flags & 512 /* Void */) {
-        vNode.dom = dom;
-    }
-    else {
-        throwError();
-    }
-}
-function hydrate(input, parentDom, callback) {
-    var dom = parentDom.firstChild;
-    if (!isNull(dom)) {
-        if (!isInvalid(input)) {
-            hydrateVNode(input, dom, LIFECYCLE, EMPTY_OBJ, false);
-        }
-        dom = parentDom.firstChild;
-        // clear any other DOM nodes, there should be only a single entry for the root
-        while ((dom = dom.nextSibling)) {
-            parentDom.removeChild(dom);
-        }
-    }
-    if (LIFECYCLE.length > 0) {
-        callAll(LIFECYCLE);
-    }
-    if (!parentDom.$V) {
-        options.roots.push(parentDom);
-    }
-    parentDom.$V = input;
-    if (isFunction(callback)) {
-        callback();
-    }
-}
-
-function replaceWithNewNode(lastNode, nextNode, parentDom, lifecycle, context, isSVG) {
-    unmount(lastNode);
-    replaceChild(parentDom, mount(nextNode, null, lifecycle, context, isSVG), lastNode.dom);
-}
-function patch(lastVNode, nextVNode, parentDom, lifecycle, context, isSVG) {
-    if (lastVNode !== nextVNode) {
-        var nextFlags = nextVNode.flags;
-        if (lastVNode.flags !== nextFlags || nextFlags & 2048 /* ReCreate */) {
-            replaceWithNewNode(lastVNode, nextVNode, parentDom, lifecycle, context, isSVG);
-        }
-        else if (nextFlags & 481 /* Element */) {
-            patchElement(lastVNode, nextVNode, parentDom, lifecycle, context, isSVG);
-        }
-        else if (nextFlags & 14 /* Component */) {
-            patchComponent(lastVNode, nextVNode, parentDom, lifecycle, context, isSVG, (nextFlags & 4 /* ComponentClass */) > 0);
-        }
-        else if (nextFlags & 16 /* Text */) {
-            patchText(lastVNode, nextVNode, parentDom);
-        }
-        else if (nextFlags & 512 /* Void */) {
-            nextVNode.dom = lastVNode.dom;
-        }
-        else {
-            // Portal
-            patchPortal(lastVNode, nextVNode, lifecycle, context);
-        }
-    }
-}
-function patchPortal(lastVNode, nextVNode, lifecycle, context) {
-    var lastContainer = lastVNode.type;
-    var nextContainer = nextVNode.type;
-    var nextChildren = nextVNode.children;
-    patchChildren(lastVNode.childFlags, nextVNode.childFlags, lastVNode.children, nextChildren, lastContainer, lifecycle, context, false);
-    nextVNode.dom = lastVNode.dom;
-    if (lastContainer !== nextContainer && !isInvalid(nextChildren)) {
-        var node = nextChildren.dom;
-        lastContainer.removeChild(node);
-        nextContainer.appendChild(node);
-    }
-}
-function patchElement(lastVNode, nextVNode, parentDom, lifecycle, context, isSVG) {
-    var nextTag = nextVNode.type;
-    if (lastVNode.type !== nextTag) {
-        replaceWithNewNode(lastVNode, nextVNode, parentDom, lifecycle, context, isSVG);
-    }
-    else {
-        var dom = lastVNode.dom;
-        var nextFlags = nextVNode.flags;
-        var lastProps = lastVNode.props;
-        var nextProps = nextVNode.props;
-        var isFormElement = false;
-        var hasControlledValue = false;
-        var nextPropsOrEmpty;
-        nextVNode.dom = dom;
-        isSVG = isSVG || (nextFlags & 32 /* SvgElement */) > 0;
-        // inlined patchProps  -- starts --
-        if (lastProps !== nextProps) {
-            var lastPropsOrEmpty = lastProps || EMPTY_OBJ;
-            nextPropsOrEmpty = nextProps || EMPTY_OBJ;
-            if (nextPropsOrEmpty !== EMPTY_OBJ) {
-                isFormElement = (nextFlags & 448 /* FormElement */) > 0;
-                if (isFormElement) {
-                    hasControlledValue = isControlledFormElement(nextPropsOrEmpty);
-                }
-                for (var prop in nextPropsOrEmpty) {
-                    var lastValue = lastPropsOrEmpty[prop];
-                    var nextValue = nextPropsOrEmpty[prop];
-                    if (lastValue !== nextValue) {
-                        patchProp(prop, lastValue, nextValue, dom, isSVG, hasControlledValue, lastVNode);
-                    }
-                }
-            }
-            if (lastPropsOrEmpty !== EMPTY_OBJ) {
-                for (var prop$1 in lastPropsOrEmpty) {
-                    // do not add a hasOwnProperty check here, it affects performance
-                    if (!nextPropsOrEmpty.hasOwnProperty(prop$1) && !isNullOrUndef(lastPropsOrEmpty[prop$1])) {
-                        patchProp(prop$1, lastPropsOrEmpty[prop$1], null, dom, isSVG, hasControlledValue, lastVNode);
-                    }
-                }
-            }
-        }
-        var lastChildren = lastVNode.children;
-        var nextChildren = nextVNode.children;
-        var nextRef = nextVNode.ref;
-        var lastClassName = lastVNode.className;
-        var nextClassName = nextVNode.className;
-        if (lastChildren !== nextChildren) {
-            patchChildren(lastVNode.childFlags, nextVNode.childFlags, lastChildren, nextChildren, dom, lifecycle, context, isSVG && nextTag !== 'foreignObject');
-        }
-        if (isFormElement) {
-            processElement(nextFlags, nextVNode, dom, nextPropsOrEmpty, false, hasControlledValue);
-        }
-        // inlined patchProps  -- ends --
-        if (lastClassName !== nextClassName) {
-            if (isNullOrUndef(nextClassName)) {
-                dom.removeAttribute('class');
-            }
-            else if (isSVG) {
-                dom.setAttribute('class', nextClassName);
-            }
-            else {
-                dom.className = nextClassName;
-            }
-        }
-        if (isFunction(nextRef) && lastVNode.ref !== nextRef) {
-            mountRef(dom, nextRef, lifecycle);
-        }
-        else {
-            
-        }
-    }
-}
-function patchChildren(lastChildFlags, nextChildFlags, lastChildren, nextChildren, parentDOM, lifecycle, context, isSVG) {
-    switch (lastChildFlags) {
-        case 2 /* HasVNodeChildren */:
-            switch (nextChildFlags) {
-                case 2 /* HasVNodeChildren */:
-                    patch(lastChildren, nextChildren, parentDOM, lifecycle, context, isSVG);
-                    break;
-                case 1 /* HasInvalidChildren */:
-                    remove(lastChildren, parentDOM);
-                    break;
-                default:
-                    remove(lastChildren, parentDOM);
-                    mountArrayChildren(nextChildren, parentDOM, lifecycle, context, isSVG);
-                    break;
-            }
-            break;
-        case 1 /* HasInvalidChildren */:
-            switch (nextChildFlags) {
-                case 2 /* HasVNodeChildren */:
-                    mount(nextChildren, parentDOM, lifecycle, context, isSVG);
-                    break;
-                case 1 /* HasInvalidChildren */:
-                    break;
-                default:
-                    mountArrayChildren(nextChildren, parentDOM, lifecycle, context, isSVG);
-                    break;
-            }
-            break;
-        default:
-            if (nextChildFlags & 12 /* MultipleChildren */) {
-                var lastLength = lastChildren.length;
-                var nextLength = nextChildren.length;
-                // Fast path's for both algorithms
-                if (lastLength === 0) {
-                    if (nextLength > 0) {
-                        mountArrayChildren(nextChildren, parentDOM, lifecycle, context, isSVG);
-                    }
-                }
-                else if (nextLength === 0) {
-                    removeAllChildren(parentDOM, lastChildren);
-                }
-                else {
-                    if (nextChildFlags === 8 /* HasKeyedChildren */ && lastChildFlags === 8 /* HasKeyedChildren */) {
-                        patchKeyedChildren(lastChildren, nextChildren, parentDOM, lifecycle, context, isSVG, lastLength, nextLength);
-                    }
-                    else {
-                        patchNonKeyedChildren(lastChildren, nextChildren, parentDOM, lifecycle, context, isSVG, lastLength, nextLength);
-                    }
-                }
-            }
-            else if (nextChildFlags === 1 /* HasInvalidChildren */) {
-                removeAllChildren(parentDOM, lastChildren);
-            }
-            else {
-                removeAllChildren(parentDOM, lastChildren);
-                mount(nextChildren, parentDOM, lifecycle, context, isSVG);
-            }
-            break;
-    }
-}
-function updateClassComponent(instance, nextState, nextVNode, nextProps, parentDom, lifecycle, context, isSVG, force, fromSetState) {
-    var lastState = instance.state;
-    var lastProps = instance.props;
-    nextVNode.children = instance;
-    var lastInput = instance.$LI;
-    var renderOutput;
-    if (instance.$UN) {
-        return;
-    }
-    if (lastProps !== nextProps || nextProps === EMPTY_OBJ) {
-        if (!fromSetState && isFunction(instance.componentWillReceiveProps)) {
-            instance.$BR = true;
-            instance.componentWillReceiveProps(nextProps, context);
-            // If instance component was removed during its own update do nothing...
-            if (instance.$UN) {
-                return;
-            }
-            instance.$BR = false;
-        }
-        if (instance.$PSS) {
-            nextState = combineFrom(nextState, instance.$PS);
-            instance.$PSS = false;
-            instance.$PS = null;
-        }
-    }
-    /* Update if scu is not defined, or it returns truthy value or force */
-    var hasSCU = isFunction(instance.shouldComponentUpdate);
-    if (force || !hasSCU || (hasSCU && instance.shouldComponentUpdate(nextProps, nextState, context))) {
-        if (isFunction(instance.componentWillUpdate)) {
-            instance.$BS = true;
-            instance.componentWillUpdate(nextProps, nextState, context);
-            instance.$BS = false;
-        }
-        instance.props = nextProps;
-        instance.state = nextState;
-        instance.context = context;
-        if (isFunction(options.beforeRender)) {
-            options.beforeRender(instance);
-        }
-        renderOutput = instance.render(nextProps, nextState, context);
-        if (isFunction(options.afterRender)) {
-            options.afterRender(instance);
-        }
-        var didUpdate = renderOutput !== NO_OP;
-        var childContext;
-        if (isFunction(instance.getChildContext)) {
-            childContext = instance.getChildContext();
-        }
-        if (isNullOrUndef(childContext)) {
-            childContext = context;
-        }
-        else {
-            childContext = combineFrom(context, childContext);
-        }
-        instance.$CX = childContext;
-        if (didUpdate) {
-            var nextInput = (instance.$LI = handleComponentInput(renderOutput, nextVNode));
-            patch(lastInput, nextInput, parentDom, lifecycle, childContext, isSVG);
-            if (isFunction(instance.componentDidUpdate)) {
-                instance.componentDidUpdate(lastProps, lastState);
-            }
-            if (isFunction(options.afterUpdate)) {
-                options.afterUpdate(nextVNode);
-            }
-        }
-    }
-    else {
-        instance.props = nextProps;
-        instance.state = nextState;
-        instance.context = context;
-    }
-    nextVNode.dom = instance.$LI.dom;
-}
-function patchComponent(lastVNode, nextVNode, parentDom, lifecycle, context, isSVG, isClass) {
-    var nextType = nextVNode.type;
-    var lastKey = lastVNode.key;
-    var nextKey = nextVNode.key;
-    if (lastVNode.type !== nextType || lastKey !== nextKey) {
-        replaceWithNewNode(lastVNode, nextVNode, parentDom, lifecycle, context, isSVG);
-    }
-    else {
-        var nextProps = nextVNode.props || EMPTY_OBJ;
-        if (isClass) {
-            var instance = lastVNode.children;
-            instance.$UPD = true;
-            updateClassComponent(instance, instance.state, nextVNode, nextProps, parentDom, lifecycle, context, isSVG, false, false);
-            instance.$V = nextVNode;
-            instance.$UPD = false;
-        }
-        else {
-            var shouldUpdate = true;
-            var lastProps = lastVNode.props;
-            var nextHooks = nextVNode.ref;
-            var nextHooksDefined = !isNullOrUndef(nextHooks);
-            var lastInput = lastVNode.children;
-            nextVNode.dom = lastVNode.dom;
-            nextVNode.children = lastInput;
-            if (nextHooksDefined && isFunction(nextHooks.onComponentShouldUpdate)) {
-                shouldUpdate = nextHooks.onComponentShouldUpdate(lastProps, nextProps);
-            }
-            if (shouldUpdate !== false) {
-                if (nextHooksDefined && isFunction(nextHooks.onComponentWillUpdate)) {
-                    nextHooks.onComponentWillUpdate(lastProps, nextProps);
-                }
-                var nextInput = nextType(nextProps, context);
-                if (nextInput !== NO_OP) {
-                    nextInput = handleComponentInput(nextInput, nextVNode);
-                    patch(lastInput, nextInput, parentDom, lifecycle, context, isSVG);
-                    nextVNode.children = nextInput;
-                    nextVNode.dom = nextInput.dom;
-                    if (nextHooksDefined && isFunction(nextHooks.onComponentDidUpdate)) {
-                        nextHooks.onComponentDidUpdate(lastProps, nextProps);
-                    }
-                }
-            }
-            else if (lastInput.flags & 14 /* Component */) {
-                lastInput.parentVNode = nextVNode;
-            }
-        }
-    }
-}
-function patchText(lastVNode, nextVNode, parentDom) {
-    var nextText = nextVNode.children;
-    var textNode = parentDom.firstChild;
-    var dom;
-    // Guard against external change on DOM node.
-    if (isNull(textNode)) {
-        parentDom.textContent = nextText;
-        dom = parentDom.firstChild;
-    }
-    else {
-        dom = lastVNode.dom;
-        if (nextText !== lastVNode.children) {
-            dom.nodeValue = nextText;
-        }
-    }
-    nextVNode.dom = dom;
-}
-function patchNonKeyedChildren(lastChildren, nextChildren, dom, lifecycle, context, isSVG, lastChildrenLength, nextChildrenLength) {
-    var commonLength = lastChildrenLength > nextChildrenLength ? nextChildrenLength : lastChildrenLength;
-    var i = 0;
-    for (; i < commonLength; i++) {
-        var nextChild = nextChildren[i];
-        if (nextChild.dom) {
-            nextChild = nextChildren[i] = directClone(nextChild);
-        }
-        patch(lastChildren[i], nextChild, dom, lifecycle, context, isSVG);
-    }
-    if (lastChildrenLength < nextChildrenLength) {
-        for (i = commonLength; i < nextChildrenLength; i++) {
-            var nextChild$1 = nextChildren[i];
-            if (nextChild$1.dom) {
-                nextChild$1 = nextChildren[i] = directClone(nextChild$1);
-            }
-            appendChild(dom, mount(nextChild$1, null, lifecycle, context, isSVG));
-        }
-    }
-    else if (lastChildrenLength > nextChildrenLength) {
-        for (i = commonLength; i < lastChildrenLength; i++) {
-            remove(lastChildren[i], dom);
-        }
-    }
-}
-function patchKeyedChildren(a, b, dom, lifecycle, context, isSVG, aLength, bLength) {
-    var aEnd = aLength - 1;
-    var bEnd = bLength - 1;
-    var aStart = 0;
-    var bStart = 0;
-    var i;
-    var j;
-    var aNode;
-    var bNode;
-    var nextNode;
-    var nextPos;
-    var node;
-    var aStartNode = a[aStart];
-    var bStartNode = b[bStart];
-    var aEndNode = a[aEnd];
-    var bEndNode = b[bEnd];
-    if (bStartNode.dom) {
-        b[bStart] = bStartNode = directClone(bStartNode);
-    }
-    if (bEndNode.dom) {
-        b[bEnd] = bEndNode = directClone(bEndNode);
-    }
-    // Step 1
-    // tslint:disable-next-line
-    outer: {
-        // Sync nodes with the same key at the beginning.
-        while (aStartNode.key === bStartNode.key) {
-            patch(aStartNode, bStartNode, dom, lifecycle, context, isSVG);
-            aStart++;
-            bStart++;
-            if (aStart > aEnd || bStart > bEnd) {
-                break outer;
-            }
-            aStartNode = a[aStart];
-            bStartNode = b[bStart];
-            if (bStartNode.dom) {
-                b[bStart] = bStartNode = directClone(bStartNode);
-            }
-        }
-        // Sync nodes with the same key at the end.
-        while (aEndNode.key === bEndNode.key) {
-            patch(aEndNode, bEndNode, dom, lifecycle, context, isSVG);
-            aEnd--;
-            bEnd--;
-            if (aStart > aEnd || bStart > bEnd) {
-                break outer;
-            }
-            aEndNode = a[aEnd];
-            bEndNode = b[bEnd];
-            if (bEndNode.dom) {
-                b[bEnd] = bEndNode = directClone(bEndNode);
-            }
-        }
-    }
-    if (aStart > aEnd) {
-        if (bStart <= bEnd) {
-            nextPos = bEnd + 1;
-            nextNode = nextPos < bLength ? b[nextPos].dom : null;
-            while (bStart <= bEnd) {
-                node = b[bStart];
-                if (node.dom) {
-                    b[bStart] = node = directClone(node);
-                }
-                bStart++;
-                insertOrAppend(dom, mount(node, null, lifecycle, context, isSVG), nextNode);
-            }
-        }
-    }
-    else if (bStart > bEnd) {
-        while (aStart <= aEnd) {
-            remove(a[aStart++], dom);
-        }
-    }
-    else {
-        var aLeft = aEnd - aStart + 1;
-        var bLeft = bEnd - bStart + 1;
-        var sources = new Array(bLeft);
-        for (i = 0; i < bLeft; i++) {
-            sources[i] = -1;
-        }
-        var moved = false;
-        var pos = 0;
-        var patched = 0;
-        // When sizes are small, just loop them through
-        if (bLeft <= 4 || aLeft * bLeft <= 16) {
-            for (i = aStart; i <= aEnd; i++) {
-                aNode = a[i];
-                if (patched < bLeft) {
-                    for (j = bStart; j <= bEnd; j++) {
-                        bNode = b[j];
-                        if (aNode.key === bNode.key) {
-                            sources[j - bStart] = i;
-                            if (pos > j) {
-                                moved = true;
-                            }
-                            else {
-                                pos = j;
-                            }
-                            if (bNode.dom) {
-                                b[j] = bNode = directClone(bNode);
-                            }
-                            patch(aNode, bNode, dom, lifecycle, context, isSVG);
-                            patched++;
-                            a[i] = null;
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-        else {
-            var keyIndex = {};
-            // Map keys by their index in array
-            for (i = bStart; i <= bEnd; i++) {
-                keyIndex[b[i].key] = i;
-            }
-            // Try to patch same keys
-            for (i = aStart; i <= aEnd; i++) {
-                aNode = a[i];
-                if (patched < bLeft) {
-                    j = keyIndex[aNode.key];
-                    if (isDefined(j)) {
-                        bNode = b[j];
-                        sources[j - bStart] = i;
-                        if (pos > j) {
-                            moved = true;
-                        }
-                        else {
-                            pos = j;
-                        }
-                        if (bNode.dom) {
-                            b[j] = bNode = directClone(bNode);
-                        }
-                        patch(aNode, bNode, dom, lifecycle, context, isSVG);
-                        patched++;
-                        a[i] = null;
-                    }
-                }
-            }
-        }
-        // fast-path: if nothing patched remove all old and add all new
-        if (aLeft === aLength && patched === 0) {
-            removeAllChildren(dom, a);
-            mountArrayChildren(b, dom, lifecycle, context, isSVG);
-        }
-        else {
-            i = aLeft - patched;
-            while (i > 0) {
-                aNode = a[aStart++];
-                if (!isNull(aNode)) {
-                    remove(aNode, dom);
-                    i--;
-                }
-            }
-            if (moved) {
-                var seq = lis_algorithm(sources);
-                j = seq.length - 1;
-                for (i = bLeft - 1; i >= 0; i--) {
-                    if (sources[i] === -1) {
-                        pos = i + bStart;
-                        node = b[pos];
-                        if (node.dom) {
-                            b[pos] = node = directClone(node);
-                        }
-                        nextPos = pos + 1;
-                        insertOrAppend(dom, mount(node, null, lifecycle, context, isSVG), nextPos < bLength ? b[nextPos].dom : null);
-                    }
-                    else if (j < 0 || i !== seq[j]) {
-                        pos = i + bStart;
-                        node = b[pos];
-                        nextPos = pos + 1;
-                        insertOrAppend(dom, node.dom, nextPos < bLength ? b[nextPos].dom : null);
-                    }
-                    else {
-                        j--;
-                    }
-                }
-            }
-            else if (patched !== bLeft) {
-                // when patched count doesn't match b length we need to insert those new ones
-                // loop backwards so we can use insertBefore
-                for (i = bLeft - 1; i >= 0; i--) {
-                    if (sources[i] === -1) {
-                        pos = i + bStart;
-                        node = b[pos];
-                        if (node.dom) {
-                            b[pos] = node = directClone(node);
-                        }
-                        nextPos = pos + 1;
-                        insertOrAppend(dom, mount(node, null, lifecycle, context, isSVG), nextPos < bLength ? b[nextPos].dom : null);
-                    }
-                }
-            }
-        }
-    }
-}
-// // https://en.wikipedia.org/wiki/Longest_increasing_subsequence
-function lis_algorithm(arr) {
-    var p = arr.slice();
-    var result = [0];
-    var i;
-    var j;
-    var u;
-    var v;
-    var c;
-    var len = arr.length;
-    for (i = 0; i < len; i++) {
-        var arrI = arr[i];
-        if (arrI !== -1) {
-            j = result[result.length - 1];
-            if (arr[j] < arrI) {
-                p[i] = j;
-                result.push(i);
-                continue;
-            }
-            u = 0;
-            v = result.length - 1;
-            while (u < v) {
-                c = ((u + v) / 2) | 0;
-                if (arr[result[c]] < arrI) {
-                    u = c + 1;
-                }
-                else {
-                    v = c;
-                }
-            }
-            if (arrI < arr[result[u]]) {
-                if (u > 0) {
-                    p[i] = result[u - 1];
-                }
-                result[u] = i;
-            }
-        }
-    }
-    u = result.length;
-    v = result[u - 1];
-    while (u-- > 0) {
-        result[u] = v;
-        v = p[v];
-    }
-    return result;
-}
-
-var roots = options.roots;
-var documentBody = isBrowser ? document.body : null;
-function render(input, parentDom, callback) {
-    // Development warning
-    if (input === NO_OP) {
-        return;
-    }
-    var rootLen = roots.length;
-    var rootInput;
-    var index;
-    for (index = 0; index < rootLen; index++) {
-        if (roots[index] === parentDom) {
-            rootInput = parentDom.$V;
-            break;
-        }
-    }
-    if (isUndefined(rootInput)) {
-        if (!isInvalid(input)) {
-            if (input.dom) {
-                input = directClone(input);
-            }
-            if (isNull(parentDom.firstChild)) {
-                mount(input, parentDom, LIFECYCLE, EMPTY_OBJ, false);
-                parentDom.$V = input;
-                roots.push(parentDom);
-            }
-            else {
-                hydrate(input, parentDom);
-            }
-            rootInput = input;
-        }
-    }
-    else {
-        if (isNullOrUndef(input)) {
-            remove(rootInput, parentDom);
-            roots.splice(index, 1);
-        }
-        else {
-            if (input.dom) {
-                input = directClone(input);
-            }
-            patch(rootInput, input, parentDom, LIFECYCLE, EMPTY_OBJ, false);
-            rootInput = parentDom.$V = input;
-        }
-    }
-    if (LIFECYCLE.length > 0) {
-        callAll(LIFECYCLE);
-    }
-    if (isFunction(callback)) {
-        callback();
-    }
-    if (rootInput && rootInput.flags & 14 /* Component */) {
-        return rootInput.children;
-    }
-}
-function createRenderer(parentDom) {
-    return function renderer(lastInput, nextInput) {
-        if (!parentDom) {
-            parentDom = lastInput;
-        }
-        render(nextInput, parentDom);
-    };
-}
-function createPortal(children, container) {
-    return createVNode(1024 /* Portal */, container, null, children, 0 /* UnknownChildren */, null, isInvalid(children) ? null : children.key, null);
-}
-
-var resolvedPromise = typeof Promise === 'undefined' ? null : Promise.resolve();
-var fallbackMethod = typeof requestAnimationFrame === 'undefined' ? setTimeout : requestAnimationFrame;
-function nextTick(fn) {
-    if (resolvedPromise) {
-        return resolvedPromise.then(fn);
-    }
-    return fallbackMethod(fn);
-}
-function queueStateChanges(component, newState, callback) {
-    if (isFunction(newState)) {
-        newState = newState(component.state, component.props, component.context);
-    }
-    var pending = component.$PS;
-    if (isNullOrUndef(pending)) {
-        component.$PS = newState;
-    }
-    else {
-        for (var stateKey in newState) {
-            pending[stateKey] = newState[stateKey];
-        }
-    }
-    if (!component.$PSS && !component.$BR) {
-        if (!component.$UPD) {
-            component.$PSS = true;
-            component.$UPD = true;
-            applyState(component, false, callback);
-            component.$UPD = false;
-        }
-        else {
-            // Async
-            var queue = component.$QU;
-            if (isNull(queue)) {
-                queue = component.$QU = [];
-                nextTick(promiseCallback(component, queue));
-            }
-            if (isFunction(callback)) {
-                queue.push(callback);
-            }
-        }
-    }
-    else {
-        component.$PSS = true;
-        if (component.$BR && isFunction(callback)) {
-            LIFECYCLE.push(callback.bind(component));
-        }
-    }
-}
-function promiseCallback(component, queue) {
-    return function () {
-        component.$QU = null;
-        component.$UPD = true;
-        applyState(component, false, function () {
-            for (var i = 0, len = queue.length; i < len; i++) {
-                queue[i].call(component);
-            }
-        });
-        component.$UPD = false;
-    };
-}
-function applyState(component, force, callback) {
-    if (component.$UN) {
-        return;
-    }
-    if (force || !component.$BR) {
-        component.$PSS = false;
-        var pendingState = component.$PS;
-        var prevState = component.state;
-        var nextState = combineFrom(prevState, pendingState);
-        var props = component.props;
-        var context = component.context;
-        component.$PS = null;
-        var vNode = component.$V;
-        var lastInput = component.$LI;
-        var parentDom = lastInput.dom && lastInput.dom.parentNode;
-        updateClassComponent(component, nextState, vNode, props, parentDom, LIFECYCLE, context, (vNode.flags & 32 /* SvgElement */) > 0, force, true);
-        if (component.$UN) {
-            return;
-        }
-        if ((component.$LI.flags & 1024 /* Portal */) === 0) {
-            var dom = component.$LI.dom;
-            while (!isNull((vNode = vNode.parentVNode))) {
-                if ((vNode.flags & 14 /* Component */) > 0) {
-                    vNode.dom = dom;
-                }
-            }
-        }
-        if (LIFECYCLE.length > 0) {
-            callAll(LIFECYCLE);
-        }
-    }
-    else {
-        component.state = component.$PS;
-        component.$PS = null;
-    }
-    if (isFunction(callback)) {
-        callback.call(component);
-    }
-}
-var Component = function Component(props, context) {
-    this.state = null;
-    // Internal properties
-    this.$BR = false; // BLOCK RENDER
-    this.$BS = true; // BLOCK STATE
-    this.$PSS = false; // PENDING SET STATE
-    this.$PS = null; // PENDING STATE (PARTIAL or FULL)
-    this.$LI = null; // LAST INPUT
-    this.$V = null; // VNODE
-    this.$UN = false; // UNMOUNTED
-    this.$CX = null; // CHILDCONTEXT
-    this.$UPD = true; // UPDATING
-    this.$QU = null; // QUEUE
-    /** @type {object} */
-    this.props = props || EMPTY_OBJ;
-    /** @type {object} */
-    this.context = context || EMPTY_OBJ; // context should not be mutable
-};
-Component.prototype.forceUpdate = function forceUpdate (callback) {
-    if (this.$UN) {
-        return;
-    }
-    applyState(this, true, callback);
-};
-Component.prototype.setState = function setState (newState, callback) {
-    if (this.$UN) {
-        return;
-    }
-    if (!this.$BS) {
-        queueStateChanges(this, newState, callback);
-    }
-    else {
-        // Development warning
-        return;
-    }
-};
-// tslint:disable-next-line:no-empty
-Component.prototype.render = function render (nextProps, nextState, nextContext) { };
-// Public
-Component.defaultProps = null;
-
-var version = "4.0.3";
 
 
 
